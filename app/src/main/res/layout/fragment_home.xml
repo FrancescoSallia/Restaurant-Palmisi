@@ -1,14 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeFragment">
+    tools:context=".HomeFragment" >
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/tv_greeting"
+        android:layout_width="186dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="32dp"
+        android:text="Willkommen Gast"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/tv_angeboteTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="ANGEBOTE"
+        app:layout_constraintEnd_toEndOf="@+id/tv_greeting"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="@+id/tv_greeting"
+        app:layout_constraintTop_toBottomOf="@+id/tv_greeting" />
+
+    <TextView
+        android:id="@+id/tv_angeboteTafel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="72dp"
+        android:text="pizza 5 €"
+        app:layout_constraintEnd_toEndOf="@+id/tv_angeboteTitle"
+        app:layout_constraintStart_toStartOf="@+id/tv_angeboteTitle"
+        app:layout_constraintTop_toBottomOf="@+id/tv_angeboteTitle" />
+
+    <TextView
+        android:id="@+id/tv_öffnungszeiten"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="84dp"
+        android:text="öffnungszeiten"
+        app:layout_constraintEnd_toEndOf="@+id/tv_angeboteTafel"
+        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintStart_toStartOf="@+id/tv_angeboteTafel"
+        app:layout_constraintTop_toBottomOf="@+id/tv_angeboteTafel" />
+
+    <TextView
+        android:id="@+id/tv_kontakt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="telefonnumer"
+        app:layout_constraintEnd_toEndOf="@+id/tv_öffnungszeiten"
+        app:layout_constraintStart_toStartOf="@+id/tv_öffnungszeiten"
+        app:layout_constraintTop_toBottomOf="@+id/tv_öffnungszeiten" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav"
+        android:layout_width="415dp"
+        android:layout_height="67dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,9 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RestuarantProjektApp"
         tools:targetApi="31">
-        <meta-data
-            android:name="com.google.android.actions"
-            android:resource="@xml/nav_items" />
 
         <activity
             android:name=".MainActivity"

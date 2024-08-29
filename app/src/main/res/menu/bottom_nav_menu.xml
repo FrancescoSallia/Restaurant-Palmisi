@@ -2,14 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/homeFragment"
-        android:icon="@drawable/ic_home"
+        android:icon="@drawable/restauranthomesvg"
         android:title="Home" />
     <item
         android:id="@+id/speisekartenFragment"
-        android:icon="@drawable/ic_menu"
+        android:icon="@drawable/restauranthomesvg"
         android:title="Speisekarte" />
     <item
         android:id="@+id/logoFragment"
-        android:icon="@drawable/ic_logo"
+        android:icon="@drawable/restauranthomesvg"
         android:title="Logo" />
 </menu>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <style name="BottomNavigationViewStyle" parent="@style/Widget.MaterialComponents.BottomNavigationView">
+        <item name="itemIconSize">24dp</item>
+    </style>
+
+
+</resources>

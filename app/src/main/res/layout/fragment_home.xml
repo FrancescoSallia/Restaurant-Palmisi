@@ -8,55 +8,46 @@
 
     <TextView
         android:id="@+id/tv_greeting"
-        android:layout_width="186dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="32dp"
-        android:text="Willkommen Gast"
+
+        android:layout_width="237dp"
+        android:layout_height="152dp"
+        android:layout_marginTop="44dp"
+        android:text="@string/tv_greeting"
         android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/tv_restaurant_title"
+        app:layout_constraintStart_toStartOf="@+id/tv_restaurant_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_restaurant_title" />
 
     <TextView
         android:id="@+id/tv_angeboteTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="339dp"
+        android:layout_height="221dp"
         android:layout_marginTop="36dp"
-        android:text="ANGEBOTE"
+        android:text="@string/tv_angeboteTitle"
         app:layout_constraintEnd_toEndOf="@+id/tv_greeting"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="@+id/tv_greeting"
         app:layout_constraintTop_toBottomOf="@+id/tv_greeting" />
 
     <TextView
-        android:id="@+id/tv_angeboteTafel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
-        android:text="pizza 5 €"
+        android:id="@+id/tv_öffnungszeiten"
+        android:layout_width="282dp"
+        android:layout_height="116dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/tv_kontakt"
         app:layout_constraintEnd_toEndOf="@+id/tv_angeboteTitle"
+        app:layout_constraintHorizontal_bias="0.481"
         app:layout_constraintStart_toStartOf="@+id/tv_angeboteTitle"
         app:layout_constraintTop_toBottomOf="@+id/tv_angeboteTitle" />
-
-    <TextView
-        android:id="@+id/tv_öffnungszeiten"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="84dp"
-        android:text="öffnungszeiten"
-        app:layout_constraintEnd_toEndOf="@+id/tv_angeboteTafel"
-        app:layout_constraintHorizontal_bias="0.526"
-        app:layout_constraintStart_toStartOf="@+id/tv_angeboteTafel"
-        app:layout_constraintTop_toBottomOf="@+id/tv_angeboteTafel" />
 
     <TextView
         android:id="@+id/tv_kontakt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="48dp"
         android:text="telefonnumer"
         app:layout_constraintEnd_toEndOf="@+id/tv_öffnungszeiten"
+        app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="@+id/tv_öffnungszeiten"
         app:layout_constraintTop_toBottomOf="@+id/tv_öffnungszeiten" />
 
@@ -69,4 +60,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_nav_menu" />
+
+    <TextView
+        android:id="@+id/tv_restaurant_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="@string/restaurant_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

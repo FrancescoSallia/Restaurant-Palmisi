@@ -1,3 +1,27 @@
 <resources>
+    <string name="restaurant_name">𝑹𝒆𝒔𝒕𝒂𝒖𝒓𝒂𝒏𝒕 𝑷𝒂𝒍𝒎𝒊𝒔𝒊</string>
     <string name="app_name">RestuarantProjektApp</string>
+    <string name="tv_greeting">Willkommen in unserem familiengeführten italienischen Restaurant, das seit 12 Jahren für Qualität und Zufriedenheit steht! Genießen Sie authentische italienische Küche, zubereitet mit Liebe und den besten Zutaten. Ihr Lächeln ist unser größter Erfolg – Buon Appetito!</string>
+    <string name="tv_angeboteTitle">
+        1.	Margherita Pizza - Klassische Pizza mit frischen Tomaten, Mozzarella und Basilikum.
+Preis: 9,50 €
+
+	2.	Quattro Stagioni Pizza - Vier-Jahreszeiten-Pizza, belegt mit Schinken, Artischocken, Champignons und schwarzen Oliven.
+Preis: 12,50 €
+	3.	Spaghetti Carbonara - Traditionelle Pasta mit Pancetta, Eiern, Pecorino-Käse und schwarzem Pfeffer.
+Preis: 11,00 €
+	4.	Insalata Caprese - Frischer Salat mit saftigen Tomaten, Mozzarella, Basilikum und Balsamico-Dressing.
+Preis: 8,00 €</string>
+    <string name="tv_kontakt">Ristorante Palmisi
+Via Roma 123,
+10121 Torino, Italien
+
+Telefon: +39 011 123 4567
+E-Mail: info@ristorantepalmisi.it
+Webseite: www.ristorantepalmisi.it
+
+Öffnungszeiten:
+Montag bis Samstag: 12:00 – 23:00 Uhr
+Sonntag: 12:00 – 22:00 Uhr</string>
+
 </resources>

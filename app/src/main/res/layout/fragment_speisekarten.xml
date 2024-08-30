@@ -4,16 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frameLayout3"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".SpeisekartenFragment" >
+    android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_speisekarte"
+    <SearchView
+        android:id="@+id/sv_suche"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_pizza"
+        android:layout_width="410dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="40dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintEnd_toEndOf="@+id/sv_suche"
+        app:layout_constraintStart_toStartOf="@+id/sv_suche"
+        app:layout_constraintTop_toBottomOf="@+id/sv_suche"
+        tools:listitem="@layout/pizza_karussell_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

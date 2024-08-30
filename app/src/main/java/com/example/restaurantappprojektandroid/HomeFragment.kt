@@ -17,11 +17,16 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         vb = FragmentHomeBinding.inflate(inflater, container, false)
+
+        //BottomNavigationBar einblenden auf Visible
+        (requireActivity() as MainActivity).bottomNavigation.visibility = View.VISIBLE
+
         return vb.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        bottomNavigation.setItemIconTintList(null);
+        //(requireContext() as MainActivity).bottomNavigation.visibility = View.VISIBLE
+
     }
 }

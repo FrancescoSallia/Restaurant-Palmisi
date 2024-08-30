@@ -4,10 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.VideoView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.example.restuarantprojektapp.R
 import com.example.restuarantprojektapp.databinding.FragmentLogoBinding
+import android.os.Handler
+import android.os.Looper
 
 
 class LogoFragment : Fragment() {
@@ -24,6 +27,16 @@ class LogoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //GIF einfügen im imgView
+        Glide.with(this)
+            .asGif()
+            .load(R.drawable.restaurantanimationlogo)
+            .into(vb.imageView2)
+
+        //delayed -> nach dem starten der app
+        Handler(Looper.getMainLooper()).postDelayed({
+            findNavController().navigate(R.id.action_logoFragment_to_homeFragment)
+        }, 3000)
 
 
     }

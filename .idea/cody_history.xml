@@ -220,6 +220,67 @@
                 </messages>
                 <updatedAt value="2024-08-30T13:52:04.572207" />
               </chat>
+              <chat>
+                <internalId value="1ec0b4e8-18ea-4529-a751-7af66a29054a" />
+                <llm>
+                  <llm>
+                    <model value="anthropic/claude-3-5-sonnet-20240620" />
+                    <provider value="Anthropic" />
+                    <tags>
+                      <list>
+                        <option value="gateway" />
+                        <option value="accuracy" />
+                        <option value="recommended" />
+                        <option value="free" />
+                      </list>
+                    </tags>
+                    <title value="Claude 3.5 Sonnet" />
+                    <usage>
+                      <list>
+                        <option value="chat" />
+                        <option value="edit" />
+                      </list>
+                    </usage>
+                  </llm>
+                </llm>
+              </chat>
+              <chat>
+                <internalId value="d6d228a4-9654-4d47-a5dc-c2f942689ed9" />
+                <llm>
+                  <llm>
+                    <model value="anthropic/claude-3-5-sonnet-20240620" />
+                    <provider value="Anthropic" />
+                    <tags>
+                      <list>
+                        <option value="gateway" />
+                        <option value="accuracy" />
+                        <option value="recommended" />
+                        <option value="free" />
+                      </list>
+                    </tags>
+                    <title value="Claude 3.5 Sonnet" />
+                    <usage>
+                      <list>
+                        <option value="chat" />
+                        <option value="edit" />
+                      </list>
+                    </usage>
+                  </llm>
+                </llm>
+                <messages>
+                  <list>
+                    <message>
+                      <speaker value="HUMAN" />
+                      <text value="wie kann ich im recyclerview ein karussel einbauen?" />
+                    </message>
+                    <message>
+                      <speaker value="ASSISTANT" />
+                      <text value="Um ein Karussell in einem RecyclerView einzubauen, können Sie folgende Schritte durchführen:&#10;&#10;1. Verwenden Sie einen horizontalen LinearLayoutManager für Ihren RecyclerView:&#10;&#10;```kotlin&#10;recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)&#10;```&#10;&#10;2. Implementieren Sie einen PagerSnapHelper, um das Snap-Verhalten zu erreichen:&#10;&#10;```kotlin&#10;val snapHelper = PagerSnapHelper()&#10;snapHelper.attachToRecyclerView(recyclerView)&#10;```&#10;&#10;3. Passen Sie Ihr Item-Layout an, damit es die volle Breite des RecyclerViews einnimmt:&#10;&#10;```xml&#10;&lt;FrameLayout&#10;    android:layout_width=&quot;match_parent&quot;&#10;    android:layout_height=&quot;match_parent&quot;&gt;&#10;    &lt;!-- Ihr Karussell-Item-Inhalt hier --&gt;&#10;&lt;/FrameLayout&gt;&#10;```&#10;&#10;4. Implementieren Sie einen benutzerdefinierten ItemDecoration, um Abstände zwischen den Items zu definieren:&#10;&#10;```kotlin&#10;class CarouselItemDecoration(private val margin: Int) : RecyclerView.ItemDecoration() {&#10;    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {&#10;        outRect.right = margin&#10;        outRect.left = margin&#10;    }&#10;}&#10;&#10;recyclerView.addItemDecoration(CarouselItemDecoration(resources.getDimensionPixelSize(R.dimen.carousel_item_margin)))&#10;```&#10;&#10;5. Implementieren Sie optional eine automatische Scroll-Funktion:&#10;&#10;```kotlin&#10;val handler = Handler(Looper.getMainLooper())&#10;val runnable = object : Runnable {&#10;    override fun run() {&#10;        recyclerView.smoothScrollToPosition((recyclerView.layoutManager?.findFirstVisibleItemPosition() ?: 0) + 1)&#10;        handler.postDelayed(this, 3000) // Scroll alle 3 Sekunden&#10;    }&#10;}&#10;handler.postDelayed(runnable, 3000)&#10;```&#10;&#10;Diese Schritte werden Ihnen helfen, ein Karussell-ähnliches Verhalten in Ihrem RecyclerView zu implementieren." />
+                    </message>
+                  </list>
+                </messages>
+                <updatedAt value="2024-08-30T20:56:48.266369" />
+              </chat>
             </list>
           </chats>
           <defaultLlm>

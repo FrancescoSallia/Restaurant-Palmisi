@@ -18,4 +18,8 @@
         android:id="@+id/homeFragment"
         android:name="com.example.restaurantappprojektandroid.HomeFragment"
         android:label="HomeFragment" />
+    <fragment
+        android:id="@+id/speisekartenFragment2"
+        android:name="com.example.restaurantappprojektandroid.SpeisekartenFragment"
+        android:label="SpeisekartenFragment" />
 </navigation>

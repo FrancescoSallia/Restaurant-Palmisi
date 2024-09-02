@@ -9,11 +9,12 @@
         android:icon="@drawable/menuspeisekarte"
         android:title="Speisekarte" />
     <item
-        android:id="@+id/logoFragment"
+        android:id="@+id/reservationFragment"
+        android:icon="@drawable/bookingitem"
+        android:title="Reservieren" />
+    <item
+        android:id="@+id/profilFragment"
         android:icon="@drawable/profil"
         android:title="Profil" />
-    <item
-        android:id="@+id/"
-        android:icon="@drawable/profil"
-        android:title="Reservieren" />
+
 </menu>

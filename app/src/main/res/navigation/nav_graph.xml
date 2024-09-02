@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/logoFragment">
 
@@ -22,4 +23,14 @@
         android:id="@+id/speisekartenFragment2"
         android:name="com.example.restaurantappprojektandroid.SpeisekartenFragment"
         android:label="SpeisekartenFragment" />
+    <fragment
+        android:id="@+id/reservationFragment"
+        android:name="com.example.restaurantappprojektandroid.ReservationFragment"
+        android:label="fragment_reservation"
+        tools:layout="@layout/fragment_reservation" />
+    <fragment
+        android:id="@+id/profilFragment"
+        android:name="com.example.restaurantappprojektandroid.ProfilFragment"
+        android:label="fragment_profil"
+        tools:layout="@layout/fragment_profil" />
 </navigation>

@@ -1,0 +1,114 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.restaurantappprojektandroid.RegistrierenFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/et_title_registrieren"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="176dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="159dp"
+            android:hint="Registrieren"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.666"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/et_benutzername_registrieren"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:ems="10"
+            android:hint="Benutzername"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="@+id/et_nachname_registrieren"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/et_nachname_registrieren"
+            app:layout_constraintTop_toBottomOf="@+id/et_nachname_registrieren" />
+
+        <EditText
+            android:id="@+id/et_passwort_registrieren"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:ems="10"
+            android:hint="Passwort"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="@+id/et_benutzername_registrieren"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/et_benutzername_registrieren"
+            app:layout_constraintTop_toBottomOf="@+id/et_benutzername_registrieren" />
+
+        <EditText
+            android:id="@+id/et_vorname_registrieren"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="68dp"
+            android:ems="10"
+            android:hint="Vorname"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="@+id/iv_profilbild"
+            app:layout_constraintStart_toStartOf="@+id/iv_profilbild"
+            app:layout_constraintTop_toBottomOf="@+id/iv_profilbild" />
+
+        <EditText
+            android:id="@+id/et_nachname_registrieren"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:hint="Nachname"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="@+id/et_vorname_registrieren"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/et_vorname_registrieren"
+            app:layout_constraintTop_toBottomOf="@+id/et_vorname_registrieren" />
+
+        <EditText
+            android:id="@+id/et_passwortReply_registrieren"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:hint=" Passwort wiederholen"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="@+id/et_passwort_registrieren"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/et_passwort_registrieren"
+            app:layout_constraintTop_toBottomOf="@+id/et_passwort_registrieren" />
+
+        <Button
+            android:id="@+id/btn_registrieren_registrieren"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:backgroundTint="#03A9F4"
+            android:hint="Registrieren"
+            android:textColorHint="#1F2224"
+            app:layout_constraintEnd_toEndOf="@+id/et_passwortReply_registrieren"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="@+id/et_passwortReply_registrieren"
+            app:layout_constraintTop_toBottomOf="@+id/et_passwortReply_registrieren" />
+
+        <ImageView
+            android:id="@+id/iv_profilbild"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            app:layout_constraintEnd_toEndOf="@+id/et_title_registrieren"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/et_title_registrieren"
+            app:layout_constraintTop_toBottomOf="@+id/et_title_registrieren"
+            tools:src="@tools:sample/avatars" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

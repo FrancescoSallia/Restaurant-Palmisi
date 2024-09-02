@@ -63,6 +63,10 @@ dependencies {
     //Glide -> Gift Image Loader
     implementation("com.github.bumptech.glide:glide:4.12.0")
 
+    //Lotties GIF
+    implementation("com.airbnb.android:lottie:6.1.0")
+
+
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

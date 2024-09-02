@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_rawRes="@raw/animation"
+       app:lottie_url="https://lottie.host/b3ee4930-38c2-4b39-b0b9-af04535c03e8/fAVesGkgWV.json"
         />
 
     <com.google.android.material.textfield.TextInputLayout

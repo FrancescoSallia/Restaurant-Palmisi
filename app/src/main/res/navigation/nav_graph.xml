@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/logoFragment">
+    app:startDestination="@id/logInFragment">
 
     <fragment
         android:id="@+id/logoFragment"
@@ -32,5 +32,19 @@
         android:id="@+id/profilFragment"
         android:name="com.example.restaurantappprojektandroid.ProfilFragment"
         android:label="fragment_profil"
-        tools:layout="@layout/fragment_profil" />
+        tools:layout="@layout/fragment_profil" >
+        <action
+            android:id="@+id/action_profilFragment_to_proiflSettingsFragment"
+            app:destination="@id/proiflSettingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/proiflSettingsFragment"
+        android:name="com.example.restaurantappprojektandroid.ProiflSettingsFragment"
+        android:label="fragment_proifl_settings"
+        tools:layout="@layout/fragment_proifl_settings" />
+    <fragment
+        android:id="@+id/logInFragment"
+        android:name="com.example.restaurantappprojektandroid.LogInFragment"
+        android:label="fragment_log_in"
+        tools:layout="@layout/fragment_log_in" />
 </navigation>

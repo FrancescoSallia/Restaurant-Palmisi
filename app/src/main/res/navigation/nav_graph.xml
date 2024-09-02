@@ -47,4 +47,9 @@
         android:name="com.example.restaurantappprojektandroid.LogInFragment"
         android:label="fragment_log_in"
         tools:layout="@layout/fragment_log_in" />
+    <fragment
+        android:id="@+id/registrierenFragment"
+        android:name="com.example.restaurantappprojektandroid.RegistrierenFragment"
+        android:label="fragment_registrieren"
+        tools:layout="@layout/fragment_registrieren" />
 </navigation>

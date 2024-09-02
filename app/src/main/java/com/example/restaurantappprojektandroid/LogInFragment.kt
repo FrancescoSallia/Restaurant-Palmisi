@@ -22,11 +22,17 @@ class LogInFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+//
+//        with(vb){
+//            animationView.setAnimation(R.raw.animation)
+//            animationView.playAnimation()
+//            animationView.loop(true)
+//        }
 
         Glide.with(this)
             .asGif()
-            .load(R.drawable.login_animation)
-            .into(vb.imageView8)
+            .load(R.raw.animation)
+            .into(vb.animationView)
 
     }
 }

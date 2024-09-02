@@ -27,18 +27,19 @@
             android:id="@+id/btn_save"
             android:layout_width="166dp"
             android:layout_height="51dp"
+            android:layout_marginTop="8dp"
             android:backgroundTint="#0663EB"
             android:text="Save"
-            tools:layout_editor_absoluteX="122dp"
-            tools:layout_editor_absoluteY="816dp" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_kontolöschen"
+            tools:layout_editor_absoluteX="122dp" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout"
             android:layout_width="263dp"
             android:layout_height="38dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="52dp"
             app:layout_constraintEnd_toEndOf="@+id/imageView4"
-            app:layout_constraintHorizontal_bias="0.481"
+            app:layout_constraintHorizontal_bias="0.474"
             app:layout_constraintStart_toStartOf="@+id/imageView4"
             app:layout_constraintTop_toBottomOf="@+id/imageView4">
 
@@ -49,6 +50,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout4"
             android:layout_width="264dp"
             android:layout_height="47dp"
             android:layout_marginTop="16dp"
@@ -72,6 +74,18 @@
             app:layout_constraintStart_toStartOf="@+id/tv_Settings_title"
             app:layout_constraintTop_toBottomOf="@+id/tv_Settings_title"
             tools:src="@tools:sample/avatars" />
+
+        <Button
+            android:id="@+id/btn_kontolöschen"
+            android:layout_width="166dp"
+            android:layout_height="51dp"
+            android:layout_marginTop="216dp"
+            android:backgroundTint="#FF0000"
+            android:text="Konto Löschen"
+            app:layout_constraintEnd_toEndOf="@+id/textInputLayout4"
+            app:layout_constraintHorizontal_bias="0.448"
+            app:layout_constraintStart_toStartOf="@+id/textInputLayout4"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout4" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

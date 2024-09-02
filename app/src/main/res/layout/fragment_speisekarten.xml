@@ -7,14 +7,11 @@
     android:layout_height="match_parent">
 
     <SearchView
-        android:id="@+id/sv_suche"
+        android:id="@+id/searchBar"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="10dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,13 +19,13 @@
         android:id="@+id/rv_kategorie"
         android:layout_width="413dp"
         android:layout_height="70dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="36dp"
         android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintEnd_toEndOf="@+id/sv_suche"
-        app:layout_constraintStart_toStartOf="@+id/sv_suche"
-        app:layout_constraintTop_toBottomOf="@+id/sv_suche"
-        tools:listitem="@layout/kategorie_karussell_item" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchBar"
+        tools:listitem="@layout/item_karussell" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_gericht_liste"

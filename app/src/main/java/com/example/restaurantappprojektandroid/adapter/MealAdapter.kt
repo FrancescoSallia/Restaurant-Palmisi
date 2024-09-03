@@ -6,11 +6,13 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.restaurantappprojektandroid.model.Meal
+import com.example.restaurantappprojektandroid.ui.MainViewModel
 import com.example.restuarantprojektapp.R
 import com.example.restuarantprojektapp.databinding.GerichtItemBinding
 
 class MealAdapter(
-    private val dataset: List<Meal>
+    private val dataset: List<Meal>,
+    private val viewModel: MainViewModel
 ):RecyclerView.Adapter<MealAdapter.MealViewHolder>() {
    inner class MealViewHolder(val binding:GerichtItemBinding):RecyclerView.ViewHolder(binding.root)
 
@@ -31,9 +33,12 @@ class MealAdapter(
         holder.binding.tvMealName.text = meal.mealName
         holder.binding.ivMeal.load(meal.mealImg)
 
+        viewModel.getMealById(meal.idMeal)
         holder.itemView.setOnClickListener {
 
-           var navController =  holder.itemView.findNavController()
+            viewModel.getMealById(meal.idMeal)
+
+            var navController =  holder.itemView.findNavController()
             navController.navigate(R.id.mealDetailFragment)
         }
     }

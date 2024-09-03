@@ -28,12 +28,13 @@ class SpeisekartenFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getCategories()
 
+
         viewModel.repositoryCategory.observe(viewLifecycleOwner) {
             vb.rvKategorie.adapter = KategorieAdapter(it,viewModel)
         }
 
         viewModel.repositoryMeals.observe(viewLifecycleOwner) {
-            vb.rvGerichtListe.adapter = MealAdapter(it)
+            vb.rvGerichtListe.adapter = MealAdapter(it,viewModel)
             Log.i("INFO", "getMealsByCategory aufgerufen im fragment")
 
         }

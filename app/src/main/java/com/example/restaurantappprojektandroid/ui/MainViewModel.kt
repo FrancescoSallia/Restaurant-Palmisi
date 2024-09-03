@@ -12,8 +12,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository = Repository(MealdbApi)
 
+      lateinit var selectedMealId : String
+
     val repositoryCategory = repository.category
     val repositoryMeals = repository.meals
+    val repositoryMealDetail = repository.mealDetail
 
     fun getCategories() {
         viewModelScope.launch {
@@ -28,6 +31,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch {
 
             repository.getMealsByCategory(categorieName)
+        }
+    }
+
+    fun getMealById(mealId: String) {
+        viewModelScope.launch {
+             selectedMealId = mealId
+            repository.getMealById(selectedMealId)
         }
     }
 

@@ -30,6 +30,7 @@ class KategorieAdapter(
         val categorie = dataset[position]
 
         holder.binding.tvKategorieName.text = categorie.categorieName
+        viewModel.getMealsByCategory("Beef")
 
         holder.binding.root.setOnClickListener {
             viewModel.getMealsByCategory(categorie.categorieName)

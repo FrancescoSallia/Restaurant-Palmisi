@@ -1,6 +1,7 @@
 package com.example.restaurantappprojektandroid.remote
 
 import com.example.restaurantappprojektandroid.model.CategorieResponse
+import com.example.restaurantappprojektandroid.model.MealDetail
 import com.example.restaurantappprojektandroid.model.MealResponse
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -38,6 +39,9 @@ interface MealdbApiService {
 
     @GET("filter.php?c={categorieName}")
     suspend fun getMealsByCategory(@Path("categorieName") categorieName: String): MealResponse
+
+    @GET("lookup.php?i={mealId}")
+    suspend fun getMealById(@Path("mealId") mealId: String): MealDetail
 
 }
 

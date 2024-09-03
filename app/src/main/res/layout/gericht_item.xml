@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="407dp"
+        android:layout_height="118dp"
+        app:cardBackgroundColor="#F6CABD"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="410dp"
+            android:layout_height="116dp">
+
+            <ImageView
+                android:id="@+id/iv_meal"
+                android:layout_width="71dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="36dp"
+                android:layout_marginTop="23dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/tv_meal_name"
+                android:layout_width="111dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="28dp"
+                android:layout_marginEnd="110dp"
+                android:text="TextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_preis"
+                android:layout_width="79dp"
+                android:layout_height="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="140dp"
+                android:text="TextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_meal_name" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

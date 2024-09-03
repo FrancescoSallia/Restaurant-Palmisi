@@ -14,6 +14,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     val repositoryCategory = repository.category
     val repositoryMeals = repository.meals
+    val repositoryMealDetail = repository.mealDetail
 
     fun getCategories() {
         viewModelScope.launch {
@@ -28,4 +29,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             repository.getMealsByCategory(categorieName)
         }
     }
+
+    //diese funktion muss noch im fragmentDetail stehen was erstellt werden muss!!
+    fun getMealById(mealId: String) {
+        viewModelScope.launch {
+
+            repository.getMealById(mealId)
+
+        }
+}
 }

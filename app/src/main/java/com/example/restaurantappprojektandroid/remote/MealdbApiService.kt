@@ -6,10 +6,10 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.http.GET
 
 
-
-const val BASE_URL = "http://81.169.201.230:8080"
+const val BASE_URL = "https://www.themealdb.com/api/json/v1/1/"
 
 private val logger = HttpLoggingInterceptor().apply {
     level = HttpLoggingInterceptor.Level.BODY
@@ -29,7 +29,10 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface MealdbApiService {
-//hier kommen die get funktionen rein
+
+    @GET("categories.php")
+    suspend fun getCategories()
+
 }
 
 object MealdbApi {

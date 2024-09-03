@@ -1,5 +1,6 @@
 package com.example.restaurantappprojektandroid.remote
 
+import com.example.restaurantappprojektandroid.model.Category
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
@@ -31,7 +32,7 @@ private val retrofit = Retrofit.Builder()
 interface MealdbApiService {
 
     @GET("categories.php")
-    suspend fun getCategories()
+    suspend fun getCategories(): List<Category>
 
 }
 

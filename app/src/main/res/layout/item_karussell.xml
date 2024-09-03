@@ -6,14 +6,15 @@
     android:layout_width="110dp"
     android:layout_height="60dp"
     android:layout_marginLeft="10dp"
-    android:layout_marginTop="5dp"
-    android:layout_marginRight="10dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginRight="7dp"
     android:backgroundTint="#C26262"
-    app:cardCornerRadius="30dp" >
+    app:cardCornerRadius="30dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:clipToPadding="false">
 
         <TextView
             android:id="@+id/tv_kategorie_name"

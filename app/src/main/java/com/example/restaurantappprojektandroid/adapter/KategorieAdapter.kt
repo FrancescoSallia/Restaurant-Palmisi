@@ -1,23 +1,32 @@
 package com.example.restaurantappprojektandroid.adapter
 
+import android.util.Log
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.restaurantappprojektandroid.model.Category
 import com.example.restuarantprojektapp.databinding.ItemKarussellBinding
 
-class KategorieAdapter():RecyclerView.Adapter<KategorieAdapter.KategorieViewHolder>() {
+class KategorieAdapter(
+    private val dataset: List<Category>
+):RecyclerView.Adapter<KategorieAdapter.CategorieViewHolder>() {
 
-    inner class KategorieViewHolder(val binding:ItemKarussellBinding):RecyclerView.ViewHolder(binding.root)
+    inner class CategorieViewHolder(val binding:ItemKarussellBinding):RecyclerView.ViewHolder(binding.root)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): KategorieViewHolder {
-        TODO("Not yet implemented")
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategorieViewHolder {
+
+        val binding = ItemKarussellBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
+        return CategorieViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+       return dataset.size
     }
 
-    override fun onBindViewHolder(holder: KategorieViewHolder, position: Int) {
-        TODO("Not yet implemented")
+    override fun onBindViewHolder(holder: CategorieViewHolder, position: Int) {
+        holder.binding.tvKategorieName.text = dataset[position].strCategory
+        Log.i("TAG", dataset[position].strCategory)
     }
 
 }

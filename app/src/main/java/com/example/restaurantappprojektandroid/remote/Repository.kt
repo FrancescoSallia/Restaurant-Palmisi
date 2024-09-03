@@ -14,6 +14,7 @@ class Repository(private val api: MealdbApi) {
 
 
     suspend fun getCategories(){
+        Log.i("TAG", category.value.toString())
 
         try {
             val result = api.retrofitService.getCategories()

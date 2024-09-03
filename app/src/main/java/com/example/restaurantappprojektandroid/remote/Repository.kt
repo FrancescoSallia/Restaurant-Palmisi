@@ -22,6 +22,10 @@ class Repository(private val api: MealdbApi) {
     val mealDetail: LiveData<List<MealX>>
         get() = _mealDetail
 
+    private val _searchMeal = MutableLiveData<List<Meal>>()
+    val searchMeal: LiveData<List<Meal>>
+        get() = _searchMeal
+
 
     suspend fun getCategories(){
         try {
@@ -48,6 +52,16 @@ class Repository(private val api: MealdbApi) {
         }catch(e: Exception) {
                 Log.i("INFO", "schau im Repository nach bei getMealById : $e")
             }
+    }
+
+
+    suspend fun searchMeal(search: String) {
+        try {
+            val result = api.retrofitService.searchMeal(search)
+            _searchMeal.postValue(result.meals)
+        } catch (e: Exception) {
+            Log.i("INFO", "schau im Repository nach bei getMealBySearch : $e")
+        }
     }
 
 

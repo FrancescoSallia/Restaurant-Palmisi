@@ -13,8 +13,8 @@ import com.example.restaurantappprojektandroid.ui.MainViewModel
 import com.example.restuarantprojektapp.databinding.FragmentSpeisekartenBinding
 
 class SpeisekartenFragment : Fragment() {
-  private lateinit var vb : FragmentSpeisekartenBinding
-  private val viewModel: MainViewModel by activityViewModels()
+    private lateinit var vb: FragmentSpeisekartenBinding
+    private val viewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,16 +29,24 @@ class SpeisekartenFragment : Fragment() {
         viewModel.getCategories()
 
 
+        ///die searchbar funktioniert nicht,
+
+
+
         viewModel.repositoryCategory.observe(viewLifecycleOwner) {
-            vb.rvKategorie.adapter = KategorieAdapter(it,viewModel)
+            vb.rvKategorie.adapter = KategorieAdapter(it, viewModel)
         }
 
         viewModel.repositoryMeals.observe(viewLifecycleOwner) {
-            vb.rvGerichtListe.adapter = MealAdapter(it,viewModel)
+            vb.rvGerichtListe.adapter = MealAdapter(it, viewModel)
             Log.i("INFO", "getMealsByCategory aufgerufen im fragment")
 
         }
 
+        viewModel.repositorySearchMeal.observe(viewLifecycleOwner) {
 
+
+
+        }
     }
 }

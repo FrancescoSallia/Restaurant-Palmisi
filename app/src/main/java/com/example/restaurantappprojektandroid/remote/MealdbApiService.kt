@@ -46,6 +46,9 @@ interface MealdbApiService {
     @GET("lookup.php")
     suspend fun getMealById(@Query("i") mealId: String): MealDetail
 
+    @GET("search.php")
+    suspend fun searchMeal(@Query("s") mealName: String): MealResponse
+
 
 }
 

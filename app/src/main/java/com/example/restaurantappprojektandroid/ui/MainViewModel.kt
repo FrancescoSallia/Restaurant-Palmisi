@@ -17,6 +17,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val repositoryCategory = repository.category
     val repositoryMeals = repository.meals
     val repositoryMealDetail = repository.mealDetail
+    val repositorySearchMeal = repository.searchMeal
 
     fun getCategories() {
         viewModelScope.launch {
@@ -38,6 +39,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch {
              selectedMealId = mealId
             repository.getMealById(selectedMealId)
+        }
+    }
+
+    fun searchMeal(mealName: String) {
+        viewModelScope.launch {
+            repository.searchMeal(mealName)
         }
     }
 

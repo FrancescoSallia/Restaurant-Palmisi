@@ -14,7 +14,7 @@ class MealAdapter(
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MealViewHolder {
-        val binding = GerichtItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = GerichtItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
 
         return MealViewHolder(binding)
     }

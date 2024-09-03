@@ -17,15 +17,14 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun getCategories() {
         viewModelScope.launch {
-            Log.i("TAG", repositoryCategory.value.toString())
 
             repository.getCategories()
         }
-
     }
 
     fun getMealsByCategory(categorieName: String) {
         viewModelScope.launch {
+
             repository.getMealsByCategory(categorieName)
         }
     }

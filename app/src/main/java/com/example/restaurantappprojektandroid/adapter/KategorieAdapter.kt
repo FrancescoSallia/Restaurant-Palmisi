@@ -5,10 +5,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.restaurantappprojektandroid.model.Category
+import com.example.restaurantappprojektandroid.ui.MainViewModel
 import com.example.restuarantprojektapp.databinding.ItemKarussellBinding
 
 class KategorieAdapter(
-    private val dataset: List<Category>
+    private val dataset: List<Category>,
+    private val viewModel: MainViewModel
 ):RecyclerView.Adapter<KategorieAdapter.CategorieViewHolder>() {
 
     inner class CategorieViewHolder(val binding:ItemKarussellBinding):RecyclerView.ViewHolder(binding.root)
@@ -25,8 +27,14 @@ class KategorieAdapter(
     }
 
     override fun onBindViewHolder(holder: CategorieViewHolder, position: Int) {
-        holder.binding.tvKategorieName.text = dataset[position].strCategory
-        Log.i("TAG", dataset[position].strCategory)
+        val categorie = dataset[position]
+
+        holder.binding.tvKategorieName.text = categorie.categorieName
+
+        holder.binding.root.setOnClickListener {
+            viewModel.getMealsByCategory(categorie.categorieName)
+        }
+
     }
 
 }

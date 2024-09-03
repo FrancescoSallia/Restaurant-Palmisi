@@ -4,9 +4,9 @@ import com.squareup.moshi.Json
 
 data class Category(
     val idCategory: String,
-    @Json(name = "categorieName")
-    val strCategory: String,
+    @Json(name = "strCategory")
+    val categorieName: String,
     val strCategoryDescription: String,
-    @Json(name = "categorieImg")
-    val strCategoryThumb: String
+    @Json(name = "strCategoryThumb")
+    val categorieImg: String
 )

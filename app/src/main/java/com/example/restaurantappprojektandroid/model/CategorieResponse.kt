@@ -1,5 +1,5 @@
 package com.example.restaurantappprojektandroid.model
 
-data class categorie(
+data class CategorieResponse(
     val categories: List<Category>
 )

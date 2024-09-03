@@ -13,13 +13,20 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val repository = Repository(MealdbApi)
 
     val repositoryCategory = repository.category
+    val repositoryMeals = repository.meals
 
     fun getCategories() {
         viewModelScope.launch {
             Log.i("TAG", repositoryCategory.value.toString())
 
-            repository.category
+            repository.getCategories()
         }
 
+    }
+
+    fun getMealsByCategory(categorieName: String) {
+        viewModelScope.launch {
+            repository.getMealsByCategory(categorieName)
+        }
     }
 }

@@ -2,9 +2,11 @@ package com.example.restaurantappprojektandroid.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.restaurantappprojektandroid.model.Meal
+import com.example.restuarantprojektapp.R
 import com.example.restuarantprojektapp.databinding.GerichtItemBinding
 
 class MealAdapter(
@@ -28,5 +30,11 @@ class MealAdapter(
 
         holder.binding.tvMealName.text = meal.mealName
         holder.binding.ivMeal.load(meal.mealImg)
+
+        holder.itemView.setOnClickListener {
+
+           var navController =  holder.itemView.findNavController()
+            navController.navigate(R.id.mealDetailFragment)
+        }
     }
 }

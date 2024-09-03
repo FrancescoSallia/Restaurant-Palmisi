@@ -32,7 +32,7 @@ class Repository(private val api: MealdbApi) {
             val result = api.retrofitService.getMealsByCategory(categorieName)
             _meals.postValue(result.meals)
         } catch (e: Exception) {
-            Log.i("INFO", "schau im Repository nach bei getMealsByCategory")
+            Log.i("INFO", "schau im Repository nach bei getMealsByCategory : $e")
         }
     }
 

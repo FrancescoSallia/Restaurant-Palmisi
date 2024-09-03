@@ -12,6 +12,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 
 const val BASE_URL = "https://www.themealdb.com/api/json/v1/1/"
@@ -38,14 +39,16 @@ interface MealdbApiService {
     @GET("categories.php")
     suspend fun getCategories(): CategorieResponse
 
-    @GET("filter.php?c={categorieName}")
-    suspend fun getMealsByCategory(@Path("categorieName") categorieName: String): MealResponse
+    @GET("filter.php")
+    suspend fun getMealsByCategory(@Query("c") categorieName: String): MealResponse
+
+
 
     @GET("list.php?a=list")
     suspend fun getCountries(): CountryResponse
 
-    @GET("filter.php?a={countryName}")
-    suspend fun getMealsByCountry(@Path("countryName") countryName: String): CountryMealResponse
+    @GET("filter.php")
+    suspend fun getMealsByCountry(@Query("a") countryName: String): CountryMealResponse
 
 
 

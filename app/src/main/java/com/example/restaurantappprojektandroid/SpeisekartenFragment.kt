@@ -1,6 +1,7 @@
 package com.example.restaurantappprojektandroid
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -30,8 +31,11 @@ class SpeisekartenFragment : Fragment() {
         viewModel.repositoryCategory.observe(viewLifecycleOwner) {
             vb.rvKategorie.adapter = KategorieAdapter(it,viewModel)
         }
+
         viewModel.repositoryMeals.observe(viewLifecycleOwner) {
             vb.rvGerichtListe.adapter = MealAdapter(it)
+            Log.i("INFO", "getMealsByCategory aufgerufen im fragment")
+
         }
 
 

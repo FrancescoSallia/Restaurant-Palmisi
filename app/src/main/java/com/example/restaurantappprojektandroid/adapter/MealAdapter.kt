@@ -32,14 +32,16 @@ class MealAdapter(
 
         holder.binding.tvMealName.text = meal.mealName
         holder.binding.ivMeal.load(meal.mealImg)
+        holder.binding.tvPrice.text = meal.price.toString() + "€"
 
-        viewModel.getMealById(meal.idMeal)
+
         holder.itemView.setOnClickListener {
 
-            viewModel.getMealById(meal.idMeal)
+            viewModel.setSelectedMealId(meal.idMeal)
 
             var navController =  holder.itemView.findNavController()
             navController.navigate(R.id.mealDetailFragment)
+            
         }
     }
 }

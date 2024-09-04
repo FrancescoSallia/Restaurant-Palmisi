@@ -42,17 +42,11 @@ class SpeisekartenFragment : Fragment() {
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 newText?.let {
-                    if (it.length >= 3) {
-                        viewModel.searchMeal(it)
-                    }
+                    viewModel.searchMeal(it)
                 }
                 return true
             }
         })
-
-
-
-
 
 
         viewModel.repositoryCategory.observe(viewLifecycleOwner) {
@@ -66,8 +60,7 @@ class SpeisekartenFragment : Fragment() {
         }
 
         viewModel.repositorySearchMeal.observe(viewLifecycleOwner) {
-
-
+            vb.rvGerichtListe.adapter = MealAdapter(it, viewModel)
 
         }
     }

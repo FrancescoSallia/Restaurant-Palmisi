@@ -18,8 +18,8 @@ class Repository(private val api: MealdbApi) {
     val meals : LiveData<List<Meal>>
         get() = _meals
 
-    private val _mealDetail = MutableLiveData<List<MealX>>()
-    val mealDetail: LiveData<List<MealX>>
+    private val _mealDetail = MutableLiveData<List<Meal>>()
+    val mealDetail: LiveData<List<Meal>>
         get() = _mealDetail
 
     private val _searchMeal = MutableLiveData<List<Meal>>()

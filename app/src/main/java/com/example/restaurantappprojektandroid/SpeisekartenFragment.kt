@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.fragment.app.activityViewModels
 import com.example.restaurantappprojektandroid.adapter.KategorieAdapter
 import com.example.restaurantappprojektandroid.adapter.MealAdapter
@@ -30,6 +31,27 @@ class SpeisekartenFragment : Fragment() {
 
 
         ///die searchbar funktioniert nicht,
+
+        vb.searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let {
+                    viewModel.searchMeal(it)
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.let {
+                    if (it.length >= 3) {
+                        viewModel.searchMeal(it)
+                    }
+                }
+                return true
+            }
+        })
+
+
+
 
 
 

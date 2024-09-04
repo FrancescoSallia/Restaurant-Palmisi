@@ -29,11 +29,9 @@ class MealDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("MealDetailFragment", "observer: ${viewModel.selectedMealID}")
 
         viewModel.repositoryMealDetail.observe(viewLifecycleOwner) {
 
-            Log.d("MealDetailFragment", "observer: viemodel")
             vb.ivMealDetail.load(it.first().mealImg)
             vb.tvMealDetailTitle.text = it.first().mealName
             vb.tvPreisDetail.text = it.first().priceasString

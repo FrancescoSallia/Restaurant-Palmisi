@@ -30,10 +30,22 @@ class MealAdapter(
     override fun onBindViewHolder(holder: MealViewHolder, position: Int) {
         val meal = dataset[position]
 
+        var heartIsFilled = true
+
         holder.binding.tvMealName.text = meal.mealName
         holder.binding.ivMeal.load(meal.mealImg)
         holder.binding.tvPrice.text = meal.price.toString() + "€"
+        holder.binding.ivHeart.setOnClickListener {
 
+
+            if (!heartIsFilled) {
+                holder.binding.ivHeart.setImageResource(R.drawable.heart)
+                heartIsFilled = true
+        }else {
+                holder.binding.ivHeart.setImageResource(R.drawable.save)
+                heartIsFilled = false
+            }
+        }
 
         holder.itemView.setOnClickListener {
 

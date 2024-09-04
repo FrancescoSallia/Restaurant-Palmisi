@@ -29,9 +29,6 @@ class SpeisekartenFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getCategories()
 
-
-        ///die searchbar funktioniert nicht,
-
         vb.searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 query?.let {
@@ -55,7 +52,6 @@ class SpeisekartenFragment : Fragment() {
 
         viewModel.repositoryMeals.observe(viewLifecycleOwner) {
             vb.rvGerichtListe.adapter = MealAdapter(it, viewModel)
-            Log.i("INFO", "getMealsByCategory aufgerufen im fragment")
 
         }
 

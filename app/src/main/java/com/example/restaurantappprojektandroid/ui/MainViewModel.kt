@@ -13,6 +13,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val repository = Repository(MealdbApi)
 
        var selectedMealID = ""
+       var heartFilledout = false
+    var recyclerViewPosition = 0
+
 
     val repositoryCategory = repository.category
     val repositoryMeals = repository.meals
@@ -27,7 +30,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun getMealsByCategory(categorieName: String) {
-        Log.i("INFO", "getMealsByCategory aufgerufen")
 
         viewModelScope.launch {
 
@@ -49,6 +51,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun setSelectedMealId(mealId: String) {
         selectedMealID = mealId
+    }
+
+    //um die herzen zu ändern , zwischen die fragmente auch wie im MealDetail zb
+    fun setHeartFilled(filled: Boolean) {
+        heartFilledout = filled
+        heartFilledout != heartFilledout
+
     }
 
 

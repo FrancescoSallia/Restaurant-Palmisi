@@ -49,6 +49,10 @@ class MealAdapter(
 
         holder.itemView.setOnClickListener {
 
+            // das soll die position speichern um wieder in der selben position zu sein nachdem man zurück navigiert, funktioniert aber noch nicht
+                val position = holder.adapterPosition
+                viewModel.recyclerViewPosition = position
+
             viewModel.setSelectedMealId(meal.idMeal)
 
             var navController =  holder.itemView.findNavController()

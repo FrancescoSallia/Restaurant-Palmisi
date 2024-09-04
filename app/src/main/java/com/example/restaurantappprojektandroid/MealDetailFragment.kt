@@ -35,6 +35,16 @@ class MealDetailFragment : Fragment() {
             vb.ivMealDetail.load(it.first().mealImg)
             vb.tvMealDetailTitle.text = it.first().mealName
             vb.tvPreisDetail.text = it.first().priceasString
+            vb.ivHearth.setOnClickListener {
+
+                if (!viewModel.heartFilledout) {
+                    vb.ivHearth.setImageResource(R.drawable.heart)
+                    viewModel.heartFilledout = true
+                } else {
+                    vb.ivHearth.setImageResource(R.drawable.save)
+                    viewModel.heartFilledout = false
+                }
+            }
 
         }
 

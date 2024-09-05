@@ -12,8 +12,6 @@ import com.bumptech.glide.Glide
 import com.example.restaurantappprojektandroid.ui.MainViewModel
 import com.example.restuarantprojektapp.R
 import com.example.restuarantprojektapp.databinding.FragmentLogInBinding
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 
 
 class LogInFragment : Fragment() {
@@ -43,9 +41,12 @@ class LogInFragment : Fragment() {
             .into(vb.animationView)
 
         vb.btnLogIn.setOnClickListener {
+            val email = vb.etBenutzername.text.toString()
+            val password = vb.etPasswort.text.toString()
 
-            if (vb.etBenutzername.text.toString().isNotEmpty() && vb.etPasswort.text.toString().isNotEmpty()) {
-                viewModel.logIn(vb.etBenutzername.text.toString(), vb.etPasswort.text.toString())
+            if (email.isNotEmpty() && password.isNotEmpty()) {
+                viewModel.logIn(email, password)
+
                 findNavController().navigate(LogInFragmentDirections.actionLogInFragmentToHomeFragment())
             }else{
                 Toast.makeText(requireActivity(),"Füll die Felder aus", Toast.LENGTH_SHORT).show()

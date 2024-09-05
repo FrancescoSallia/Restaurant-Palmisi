@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/logoFragment">
+    app:startDestination="@id/logInFragment">
 
     <fragment
         android:id="@+id/logoFragment"
@@ -40,6 +40,9 @@
         <action
             android:id="@+id/action_profilFragment_to_proiflSettingsFragment"
             app:destination="@id/proiflSettingsFragment" />
+        <action
+            android:id="@+id/action_profilFragment_to_logInFragment"
+            app:destination="@id/logInFragment" />
     </fragment>
     <fragment
         android:id="@+id/proiflSettingsFragment"
@@ -54,6 +57,9 @@
         <action
             android:id="@+id/action_logInFragment_to_registrierenFragment"
             app:destination="@id/registrierenFragment" />
+        <action
+            android:id="@+id/action_logInFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/registrierenFragment"

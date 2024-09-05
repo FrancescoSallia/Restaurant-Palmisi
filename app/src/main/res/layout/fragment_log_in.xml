@@ -10,7 +10,7 @@
         android:id="@+id/animationView"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,12 +24,12 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="55dp"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="56dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/animationView">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_benutzername"
@@ -62,21 +62,21 @@
         android:layout_marginTop="12dp"
         android:backgroundTint="#989595"
         android:text="Registrieren"
-        app:layout_constraintEnd_toEndOf="@+id/tv_passwort_vergessen"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/tv_passwort_vergessen"
-        app:layout_constraintTop_toBottomOf="@+id/tv_passwort_vergessen" />
+        app:layout_constraintEnd_toEndOf="@+id/btn_continue_as_gast"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/btn_continue_as_gast"
+        app:layout_constraintTop_toBottomOf="@+id/btn_continue_as_gast" />
 
     <Button
         android:id="@+id/btn_LogIn"
         android:layout_width="134dp"
         android:layout_height="46dp"
-        android:layout_marginStart="36dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="12dp"
         android:backgroundTint="#0A69F8"
         android:text="Log in"
         app:layout_constraintStart_toEndOf="@+id/btn_registrieren"
-        app:layout_constraintTop_toBottomOf="@+id/tv_passwort_vergessen" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_continue_as_gast" />
 
     <TextView
         android:id="@+id/tv_passwort_vergessen"
@@ -88,5 +88,17 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textInputLayout3"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout3" />
+
+    <Button
+        android:id="@+id/btn_continue_as_gast"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#126CF4"
+        android:text="Als Gast Fortfahren"
+        app:layout_constraintEnd_toEndOf="@+id/tv_passwort_vergessen"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tv_passwort_vergessen"
+        app:layout_constraintTop_toBottomOf="@+id/tv_passwort_vergessen" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

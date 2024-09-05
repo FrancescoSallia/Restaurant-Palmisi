@@ -45,6 +45,7 @@ android {
 
 dependencies {
 
+    implementation(libs.firebase.auth.ktx)
     val retrofitVersion = "2.9.0"
     val roomVersion = "2.6.0"
 

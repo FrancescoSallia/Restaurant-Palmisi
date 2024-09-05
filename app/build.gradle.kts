@@ -46,6 +46,8 @@ android {
 dependencies {
 
     implementation(libs.firebase.auth.ktx)
+    implementation(libs.firebase.database.ktx)
+    implementation(libs.firebase.firestore)
     val retrofitVersion = "2.9.0"
     val roomVersion = "2.6.0"
 
@@ -76,6 +78,8 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.2.0"))
     implementation("com.google.firebase:firebase-analytics")
 
+  //Firebase Cloud
+    implementation ("com.google.firebase:firebase-firestore-ktx")
 
 
     implementation(libs.androidx.core.ktx)

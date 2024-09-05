@@ -1,9 +1,8 @@
 package com.example.restaurantappprojektandroid.ui
 
 import android.app.Application
-import android.widget.EditText
+import android.util.Log
 import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -12,14 +11,58 @@ import com.example.restaurantappprojektandroid.remote.MealdbApi
 import com.example.restaurantappprojektandroid.remote.Repository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
-
 
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository = Repository(MealdbApi)
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
+    //Firebase datenbank (cloud)
+    val db = Firebase.firestore
+
+    // ein User erstellen
+    fun createUser(vorname:String,nachname:String):HashMap<String, String> {
+
+        val nutzer = hashMapOf(
+            "vorname" to  vorname,
+            "nachname" to nachname,
+        )
+        return nutzer
+    }
+
+//ein User speichern in die datenbank
+    fun postDokument(user:HashMap<String, String> ){
+    db.collection("users")
+        .add(user).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                Log.d("Firestore", "Dokument erstellt -> ID : ${task.result.id}")
+                Toast.makeText(getApplication(), "Dokument erstellt", Toast.LENGTH_SHORT).show()
+            }else{
+                Log.d("Firestore", "Dokument nicht erstellt, schau in ViewModel -> ID : ${task.result.id}")
+
+                Toast.makeText(getApplication(), "Fehler beim erstellen", Toast.LENGTH_SHORT).show()
+            }
+        }
+}
+
+    // User auslesen
+    fun getDokument(){
+        db.collection("users")
+            .get()
+            .addOnCompleteListener { result ->
+                for (document in result.result) {
+                    Log.d("Firestore", "Dokument: ${document.id} => ${document.data}")
+                }
+            }
+    }
+
+
+
+
 
     //Firebase logik START!!
 
@@ -60,6 +103,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             if (newUser.isSuccessful) {
 
                 _currentUser.postValue(auth.currentUser)
+                val user = auth.currentUser
+
 
             }else{
                 Toast.makeText(getApplication(), "Error", Toast.LENGTH_SHORT).show()

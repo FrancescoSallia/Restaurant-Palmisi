@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.example.restaurantappprojektandroid.ui.MainViewModel
 import com.example.restuarantprojektapp.databinding.FragmentRegistrierenBinding
 
@@ -28,13 +29,21 @@ class RegistrierenFragment : Fragment() {
 
         vb.btnRegistrierenRegistrieren.setOnClickListener {
 
+            val vorname = vb.etVornameRegistrieren.text.toString()
+            val nachname = vb.etNachnameRegistrieren.text.toString()
 
             val benutzername = vb.etBenutzernameRegistrieren.text.toString()
             val firstPasswort = vb.etPasswortRegistrieren.text.toString()
-            val secondPasswort = vb.etPasswortReplyRegistrieren.text.toString()
+//            val secondPasswort = vb.etPasswortReplyRegistrieren.text.toString()
 
-            if (benutzername.isNotEmpty() || firstPasswort.isNotEmpty()) {
+            if (benutzername.isNotEmpty() || firstPasswort.isNotEmpty() || vorname.isNotEmpty() || nachname.isNotEmpty()) {
                 viewModel.registration(benutzername,firstPasswort)
+
+//                User erstellen und im Firebase speichern
+                diese beiden zeilen unten funktionieren nicht , weil man nicht die erlaubnis von firestore hat : (PERMISSION_DENIED) schau im logcat nach
+//              val newUser =  viewModel.createUser(vorname, nachname)
+//                viewModel.postDokument(newUser)
+                findNavController().navigate(RegistrierenFragmentDirections.actionRegistrierenFragmentToHomeFragment())
             }else{
                 Toast.makeText(requireContext(),"Fülle alle Felder aus!",Toast.LENGTH_SHORT).show()
             }

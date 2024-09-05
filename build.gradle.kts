@@ -10,6 +10,8 @@ buildscript {
     }
     dependencies {
 
+        //Firebase Cloud
+        classpath("com.google.gms:google-services:4.3.10")
         classpath(libs.androidx.navigation.safe.args.gradle.plugin)
     }
 }

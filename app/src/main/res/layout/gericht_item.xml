@@ -7,7 +7,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="376dp"
-        android:layout_height="100dp"
+        android:layout_height="80dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="10dp"
@@ -27,7 +27,7 @@
                 android:layout_width="81dp"
                 android:layout_height="69dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="4dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@tools:sample/avatars" />
@@ -36,8 +36,8 @@
                 android:id="@+id/tv_meal_name"
                 android:layout_width="171dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="16dp"
                 android:text="TextView"
                 android:textSize="14sp"
                 app:layout_constraintStart_toEndOf="@+id/iv_meal"

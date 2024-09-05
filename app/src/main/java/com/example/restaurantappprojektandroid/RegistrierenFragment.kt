@@ -33,7 +33,7 @@ class RegistrierenFragment : Fragment() {
             val firstPasswort = vb.etPasswortRegistrieren.text.toString()
             val secondPasswort = vb.etPasswortReplyRegistrieren.text.toString()
 
-            if (benutzername.isNotEmpty() && firstPasswort.isNotEmpty()) {
+            if (benutzername.isNotEmpty() || firstPasswort.isNotEmpty()) {
                 viewModel.registration(benutzername,firstPasswort)
             }else{
                 Toast.makeText(requireContext(),"Fülle alle Felder aus!",Toast.LENGTH_SHORT).show()

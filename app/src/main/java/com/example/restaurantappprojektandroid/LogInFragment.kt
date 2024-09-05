@@ -44,7 +44,7 @@ class LogInFragment : Fragment() {
             val email = vb.etBenutzername.text.toString()
             val password = vb.etPasswort.text.toString()
 
-            if (email.isNotEmpty() && password.isNotEmpty()) {
+            if (email.isNotEmpty() || password.isNotEmpty()) {
                 viewModel.logIn(email, password)
 
                 findNavController().navigate(LogInFragmentDirections.actionLogInFragmentToHomeFragment())

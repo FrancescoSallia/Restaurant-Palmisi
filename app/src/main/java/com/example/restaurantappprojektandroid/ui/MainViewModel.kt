@@ -32,21 +32,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         get() = _currentUser
 
 
-    // dieser code funktioniert nicht !!!!!!
-//    fun isPasswortCorrect(passwort1: String, passwort2: String):String{
-//
-//        if (passwort1 == passwort2) {
-//            return passwort1
-//        } else {
-//            Toast.makeText(
-//                getApplication(), "passwort stimmt nicht überein",Toast.LENGTH_SHORT).show()
-//            return error("error")
-//
-//        }
-//    }
 
     fun logIn(email: String, password: String) {
-
 
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener {
@@ -68,10 +55,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun registration(Email: String, password: String){
-        auth.signInAnonymously()
+
         auth.createUserWithEmailAndPassword(Email, password).addOnCompleteListener { newUser ->
             if (newUser.isSuccessful) {
+
                 _currentUser.postValue(auth.currentUser)
+
             }else{
                 Toast.makeText(getApplication(), "Error", Toast.LENGTH_SHORT).show()
             }

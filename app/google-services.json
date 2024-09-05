@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "482747957830",
+    "project_id": "restuarantprojektapp",
+    "storage_bucket": "restuarantprojektapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:482747957830:android:cc68486da49c8ca8950047",
+        "android_client_info": {
+          "package_name": "com.example.restuarantprojektapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnxvOKS6PG8w8nUBs6zarckhRA_nnd40g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -3,6 +3,8 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     id("kotlin-kapt")
     id("androidx.navigation.safeargs")
+    //Google services Gradle
+    id("com.google.gms.google-services")
 
 }
 
@@ -68,6 +70,10 @@ dependencies {
 
     //Lotties GIF
     implementation("com.airbnb.android:lottie:6.1.0")
+
+    //Firebase
+    implementation(platform("com.google.firebase:firebase-bom:33.2.0"))
+    implementation("com.google.firebase:firebase-analytics")
 
 
 

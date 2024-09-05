@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/speisekartenFragment2">
+    app:startDestination="@id/logInFragment">
 
     <fragment
         android:id="@+id/logoFragment"
@@ -22,7 +22,11 @@
     <fragment
         android:id="@+id/speisekartenFragment2"
         android:name="com.example.restaurantappprojektandroid.SpeisekartenFragment"
-        android:label="SpeisekartenFragment" />
+        android:label="SpeisekartenFragment" >
+        <action
+            android:id="@+id/action_speisekartenFragment2_to_mealDetailFragment"
+            app:destination="@id/mealDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/reservationFragment"
         android:name="com.example.restaurantappprojektandroid.ReservationFragment"
@@ -46,7 +50,11 @@
         android:id="@+id/logInFragment"
         android:name="com.example.restaurantappprojektandroid.LogInFragment"
         android:label="fragment_log_in"
-        tools:layout="@layout/fragment_log_in" />
+        tools:layout="@layout/fragment_log_in" >
+        <action
+            android:id="@+id/action_logInFragment_to_registrierenFragment"
+            app:destination="@id/registrierenFragment" />
+    </fragment>
     <fragment
         android:id="@+id/registrierenFragment"
         android:name="com.example.restaurantappprojektandroid.RegistrierenFragment"

@@ -16,7 +16,7 @@
                     <tags>
                       <list>
                         <option value="gateway" />
-                        <option value="accuracy" />
+                        <option value="power" />
                         <option value="recommended" />
                         <option value="free" />
                       </list>
@@ -40,7 +40,7 @@
                     <tags>
                       <list>
                         <option value="gateway" />
-                        <option value="accuracy" />
+                        <option value="power" />
                         <option value="recommended" />
                         <option value="free" />
                       </list>
@@ -96,7 +96,7 @@
                     <tags>
                       <list>
                         <option value="gateway" />
-                        <option value="accuracy" />
+                        <option value="power" />
                         <option value="recommended" />
                         <option value="free" />
                       </list>
@@ -120,7 +120,7 @@
                     <tags>
                       <list>
                         <option value="gateway" />
-                        <option value="accuracy" />
+                        <option value="power" />
                         <option value="recommended" />
                         <option value="free" />
                       </list>
@@ -229,7 +229,7 @@
                     <tags>
                       <list>
                         <option value="gateway" />
-                        <option value="accuracy" />
+                        <option value="power" />
                         <option value="recommended" />
                         <option value="free" />
                       </list>
@@ -253,7 +253,7 @@
                     <tags>
                       <list>
                         <option value="gateway" />
-                        <option value="accuracy" />
+                        <option value="power" />
                         <option value="recommended" />
                         <option value="free" />
                       </list>
@@ -290,7 +290,7 @@
                     <tags>
                       <list>
                         <option value="gateway" />
-                        <option value="accuracy" />
+                        <option value="power" />
                         <option value="recommended" />
                         <option value="free" />
                       </list>
@@ -314,7 +314,7 @@
                     <tags>
                       <list>
                         <option value="gateway" />
-                        <option value="accuracy" />
+                        <option value="power" />
                         <option value="recommended" />
                         <option value="free" />
                       </list>
@@ -344,7 +344,7 @@
                     <tags>
                       <list>
                         <option value="gateway" />
-                        <option value="accuracy" />
+                        <option value="power" />
                         <option value="recommended" />
                         <option value="free" />
                       </list>
@@ -368,7 +368,7 @@
                     <tags>
                       <list>
                         <option value="gateway" />
-                        <option value="accuracy" />
+                        <option value="power" />
                         <option value="recommended" />
                         <option value="free" />
                       </list>
@@ -465,7 +465,7 @@
                     <tags>
                       <list>
                         <option value="gateway" />
-                        <option value="accuracy" />
+                        <option value="power" />
                         <option value="recommended" />
                         <option value="free" />
                       </list>
@@ -489,7 +489,7 @@
                     <tags>
                       <list>
                         <option value="gateway" />
-                        <option value="accuracy" />
+                        <option value="power" />
                         <option value="recommended" />
                         <option value="free" />
                       </list>
@@ -606,7 +606,7 @@
                     <tags>
                       <list>
                         <option value="gateway" />
-                        <option value="accuracy" />
+                        <option value="power" />
                         <option value="recommended" />
                         <option value="free" />
                       </list>
@@ -630,7 +630,7 @@
                     <tags>
                       <list>
                         <option value="gateway" />
-                        <option value="accuracy" />
+                        <option value="power" />
                         <option value="recommended" />
                         <option value="free" />
                       </list>
@@ -675,7 +675,7 @@
                     <tags>
                       <list>
                         <option value="gateway" />
-                        <option value="accuracy" />
+                        <option value="power" />
                         <option value="recommended" />
                         <option value="free" />
                       </list>
@@ -699,7 +699,76 @@
                     <tags>
                       <list>
                         <option value="gateway" />
-                        <option value="accuracy" />
+                        <option value="power" />
+                        <option value="recommended" />
+                        <option value="free" />
+                      </list>
+                    </tags>
+                    <title value="Claude 3.5 Sonnet" />
+                    <usage>
+                      <list>
+                        <option value="chat" />
+                        <option value="edit" />
+                      </list>
+                    </usage>
+                  </llm>
+                </llm>
+                <messages>
+                  <list>
+                    <message>
+                      <speaker value="HUMAN" />
+                      <text value="wenn ich etwas suche im searchview ein item anklicke und wieder zurück navigiere, denn möchte ich bei der gleichen position wieder sein und nicht  wieder ganz oben im recyclerview wie mache ich das?" />
+                    </message>
+                    <message>
+                      <speaker value="ASSISTANT" />
+                      <text value="Um die Position im RecyclerView beizubehalten, wenn Sie zurück navigieren, können Sie folgende Schritte implementieren:&#10;&#10;1. Speichern Sie die aktuelle Position des RecyclerViews, bevor Sie zu einem anderen Fragment navigieren.&#10;&#10;2. Verwenden Sie einen ViewModel, um diese Position über Fragmentwechsel hinweg zu behalten.&#10;&#10;3. Wenn Sie zum Fragment mit dem RecyclerView zurückkehren, scrollen Sie zu der gespeicherten Position.&#10;&#10;Hier ist ein Beispiel, wie Sie das umsetzen könnten:&#10;&#10;1. Im ViewModel:&#10;```kotlin&#10;class MainViewModel : ViewModel() {&#10;    var recyclerViewPosition = 0&#10;}&#10;```&#10;&#10;2. Bevor Sie navigieren, speichern Sie die Position:&#10;```kotlin&#10;val layoutManager = recyclerView.layoutManager as LinearLayoutManager&#10;viewModel.recyclerViewPosition = layoutManager.findFirstVisibleItemPosition()&#10;```&#10;&#10;3. Wenn Sie zum Fragment zurückkehren, scrollen Sie zur gespeicherten Position:&#10;```kotlin&#10;override fun onViewCreated(view: View, savedInstanceState: Bundle?) {&#10;    super.onViewCreated(view, savedInstanceState)&#10;    recyclerView.layoutManager?.scrollToPosition(viewModel.recyclerViewPosition)&#10;}&#10;```&#10;&#10;Diese Lösung ermöglicht es Ihnen, die Position im RecyclerView beizubehalten und nach der Rücknavigation an derselben Stelle fortzufahren." />
+                    </message>
+                    <message>
+                      <speaker value="HUMAN" />
+                      <text value="wo genau speichere ich die position?" />
+                    </message>
+                    <message>
+                      <speaker value="ASSISTANT" />
+                      <text value="Basierend auf dem bereitgestellten Codekontext würden Sie die Position am besten in der MealAdapter-Klasse speichern. Konkret könnten Sie dies in der setOnClickListener-Methode des ViewHolders tun, bevor Sie zur Detailansicht navigieren. &#10;&#10;Hier ein Beispiel, wie Sie das implementieren könnten:&#10;&#10;```kotlin&#10;holder.binding.root.setOnClickListener {&#10;    val position = holder.adapterPosition&#10;    viewModel.recyclerViewPosition = position&#10;    // Hier folgt dann Ihre Navigation zur Detailansicht&#10;}&#10;```&#10;&#10;Stellen Sie sicher, dass Sie das ViewModel in Ihrem Adapter verfügbar haben, um die Position zu speichern. Diese Methode ermöglicht es Ihnen, die aktuelle Position zu erfassen und für spätere Verwendung zu speichern, wenn der Benutzer zur Liste zurückkehrt." />
+                    </message>
+                  </list>
+                </messages>
+                <updatedAt value="2024-09-04T21:02:00.518588" />
+              </chat>
+              <chat>
+                <internalId value="adbf5cbd-3a1b-466e-8b25-526c05e5f2b4" />
+                <llm>
+                  <llm>
+                    <model value="anthropic/claude-3-5-sonnet-20240620" />
+                    <provider value="Anthropic" />
+                    <tags>
+                      <list>
+                        <option value="gateway" />
+                        <option value="power" />
+                        <option value="recommended" />
+                        <option value="free" />
+                      </list>
+                    </tags>
+                    <title value="Claude 3.5 Sonnet" />
+                    <usage>
+                      <list>
+                        <option value="chat" />
+                        <option value="edit" />
+                      </list>
+                    </usage>
+                  </llm>
+                </llm>
+              </chat>
+              <chat>
+                <internalId value="8461ae96-21e8-4140-b496-9229f559bf9a" />
+                <llm>
+                  <llm>
+                    <model value="anthropic/claude-3-5-sonnet-20240620" />
+                    <provider value="Anthropic" />
+                    <tags>
+                      <list>
+                        <option value="gateway" />
+                        <option value="power" />
                         <option value="recommended" />
                         <option value="free" />
                       </list>
@@ -723,7 +792,7 @@
               <tags>
                 <list>
                   <option value="gateway" />
-                  <option value="accuracy" />
+                  <option value="power" />
                   <option value="recommended" />
                   <option value="free" />
                 </list>

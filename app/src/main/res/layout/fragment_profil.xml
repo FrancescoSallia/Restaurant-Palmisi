@@ -70,36 +70,41 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_profil_reservation_title" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="343dp"
-            android:layout_height="120dp"
-            android:layout_marginTop="12dp"
+            android:id="@+id/rv_favorite"
+            android:layout_width="375dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintEnd_toEndOf="@+id/tv_profil_favoriten_title"
-            app:layout_constraintHorizontal_bias="0.504"
+            app:layout_constraintHorizontal_bias="0.509"
             app:layout_constraintStart_toStartOf="@+id/tv_profil_favoriten_title"
-            app:layout_constraintTop_toBottomOf="@+id/tv_profil_favoriten_title" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_profil_favoriten_title"
+            tools:listitem="@layout/favorited_item" />
 
         <Button
             android:id="@+id/btn_ausloggen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="44dp"
             android:backgroundTint="#FA0606"
             android:text="Ausloggen"
-            app:layout_constraintEnd_toEndOf="@+id/recyclerView"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+            app:layout_constraintEnd_toStartOf="@+id/btn_profil_setting"
+            app:layout_constraintHorizontal_bias="0.227"
+            app:layout_constraintStart_toStartOf="@+id/rv_favorite"
+            app:layout_constraintTop_toBottomOf="@+id/rv_favorite" />
 
         <Button
             android:id="@+id/btn_profil_setting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="44dp"
+            android:layout_marginEnd="32dp"
             android:backgroundTint="#286BF4"
             android:text="Profil Bearbeiten"
-            app:layout_constraintStart_toStartOf="@+id/recyclerView"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+            app:layout_constraintEnd_toEndOf="@+id/rv_favorite"
+            app:layout_constraintTop_toBottomOf="@+id/rv_favorite" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

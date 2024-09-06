@@ -33,6 +33,8 @@ class MainActivity : AppCompatActivity() {
         bottomNavigation.setupWithNavController(navHost.navController)
 
 
+
+
     }
 
 

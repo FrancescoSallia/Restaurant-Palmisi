@@ -47,8 +47,6 @@ class MealDetailFragment : Fragment() {
             vb.ivHearth.setOnClickListener {
                 handleFavoriteMealState(isLiked, meal)
             }
-        }
-    }
 
     private fun handleFavoriteMealState(isLiked: Boolean, meal: Meal) {
         if (isLiked) {

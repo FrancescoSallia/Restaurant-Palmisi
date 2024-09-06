@@ -30,7 +30,6 @@ private val retrofit = Retrofit.Builder()
     .baseUrl(BASE_URL)
     .client(client)
     .build()
-
 interface MealdbApiService {
 
     @GET("categories.php")

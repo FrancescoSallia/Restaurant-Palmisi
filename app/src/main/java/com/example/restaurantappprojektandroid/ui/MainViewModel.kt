@@ -242,14 +242,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         userRef.update("likedGerichteIds", FieldValue.arrayUnion(meal.idMeal))
         userRef.update("likedGerichte", FieldValue.arrayUnion(meal))
 
-        Log.i("DEBUG", "addToFavorites: ${_likedMeals.value}")
     }
 
     fun removeFromFavorites(meal: Meal) {
         userRef.update("likedGerichteIds", FieldValue.arrayRemove(meal.idMeal))
         userRef.update("likedGerichte", FieldValue.arrayRemove(meal))
+//        _likedMeals.value = _likedMeals.value?.filter { it.idMeal != meal.idMeal }?.toMutableList()
 
-        Log.i("DEBUG", "removeFromFavorites: ${_likedMeals.value}")
+
     }
+
 }
 

@@ -30,15 +30,6 @@ class SpeisekartenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //val layoutManager = vb.rvGerichtListe.layoutManager
-        //if (layoutManager is LinearLayoutManager) {
-        //    val firstVisiblePosition = layoutManager.findFirstVisibleItemPosition()
-        //    layoutManager.scrollToPositionWithOffset(firstVisiblePosition, 0)
-        //}
-
-        vb.rvGerichtListe.adapter?.stateRestorationPolicy =
-            RecyclerView.Adapter.StateRestorationPolicy.ALLOW
-
 
         viewModel.getCategories()
 

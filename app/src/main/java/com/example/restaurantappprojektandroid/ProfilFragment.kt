@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.example.restaurantappprojektandroid.adapter.FavoriteAdapter
 import com.example.restaurantappprojektandroid.ui.MainViewModel
 import com.example.restuarantprojektapp.R
 import com.example.restuarantprojektapp.databinding.FragmentProfilBinding
@@ -26,6 +27,13 @@ class ProfilFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+        viewModel.likedMeals.observe(viewLifecycleOwner) {
+
+            vb.rvFavorite.adapter = FavoriteAdapter(it,viewModel)
+
+        }
 
         vb.btnAusloggen.setOnClickListener {
             viewModel.logOut()

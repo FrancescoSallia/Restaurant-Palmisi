@@ -33,10 +33,7 @@ class MealDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.likedMealIds.observe(viewLifecycleOwner) { userLikedMeals ->
-            Log.i(
-                "DEBUG",
-                "likedMeals: $userLikedMeals\nselectedMealID: ${viewModel.selectedMealID}"
-            )
+
             isLiked = userLikedMeals.contains(viewModel.selectedMealID)
             vb.ivHearth.load(if (isLiked) R.drawable.save else R.drawable.heart)
         }

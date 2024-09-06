@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.restaurantappprojektandroid.model.User
 import com.example.restaurantappprojektandroid.remote.MealdbApi
 import com.example.restaurantappprojektandroid.remote.Repository
 import com.google.firebase.auth.FirebaseAuth
@@ -24,25 +25,30 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     //Firebase datenbank (cloud)
     val db = Firebase.firestore
 
-    // ein User erstellen
-    fun createUser(vorname:String,nachname:String):HashMap<String, String> {
+    //Firebase logik START!!
 
-        val nutzer = hashMapOf(
-            "vorname" to  vorname,
-            "nachname" to nachname,
-        )
-        return nutzer
+
+    private val _currentUser = MutableLiveData<FirebaseUser?>(auth.currentUser)
+    val currentUser: LiveData<FirebaseUser?>
+        get() = _currentUser
+
+    // ein User erstellen
+    fun createUser(vorname:String,nachname:String):User {
+
+      var user = User(vorname = vorname, nachname= nachname)
+        return user
+
     }
 
 //ein User speichern in die datenbank
-    fun postDokument(user:HashMap<String, String> ){
-    db.collection("users")
-        .add(user).addOnCompleteListener { task ->
+    fun postDokument(user:User) {
+    db.collection("users").document(auth.currentUser!!.uid)
+        .set(user).addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                Log.d("Firestore", "Dokument erstellt -> ID : ${task.result.id}")
+                Log.d("Firestore", "Dokument erstellt -> ID : ${task.result}")
                 Toast.makeText(getApplication(), "Dokument erstellt", Toast.LENGTH_SHORT).show()
             }else{
-                Log.d("Firestore", "Dokument nicht erstellt, schau in ViewModel -> ID : ${task.result.id}")
+                Log.d("Firestore", "Dokument nicht erstellt, schau in ViewModel -> ID : ${task.result}")
 
                 Toast.makeText(getApplication(), "Fehler beim erstellen", Toast.LENGTH_SHORT).show()
             }
@@ -63,28 +69,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
 
 
-
-    //Firebase logik START!!
-
-    private val _logInResult = MutableLiveData<Boolean>()
-    val logInResult: LiveData<Boolean>
-    get() = _logInResult
-
-    private val _currentUser = MutableLiveData<FirebaseUser?>()
-    val currentUser: LiveData<FirebaseUser?>
-        get() = _currentUser
-
-
-
     fun logIn(email: String, password: String) {
 
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener {
                 if (it.isSuccessful) {
-                    _logInResult.postValue(true)
-                    _currentUser.postValue(auth.currentUser)
+
+                    _currentUser.value = it.result.user
+
                 }else{
-                    _logInResult.postValue(false)
                     Toast.makeText(getApplication(),
                         "Deine angegebenen daten sind falsch, oder du musst dich Registrieren.",
                         Toast.LENGTH_SHORT).show()
@@ -97,14 +90,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         _currentUser.postValue(null)
     }
 
-    fun registration(Email: String, password: String){
+    fun registration(Email: String, password: String,vorname: String,nachname: String){
 
         auth.createUserWithEmailAndPassword(Email, password).addOnCompleteListener { newUser ->
             if (newUser.isSuccessful) {
 
-                _currentUser.postValue(auth.currentUser)
-                val user = auth.currentUser
-
+                _currentUser.value = newUser.result.user
+                postDokument(createUser(vorname, nachname))
 
             }else{
                 Toast.makeText(getApplication(), "Error", Toast.LENGTH_SHORT).show()

@@ -37,12 +37,8 @@ class RegistrierenFragment : Fragment() {
 //            val secondPasswort = vb.etPasswortReplyRegistrieren.text.toString()
 
             if (benutzername.isNotEmpty() || firstPasswort.isNotEmpty() || vorname.isNotEmpty() || nachname.isNotEmpty()) {
-                viewModel.registration(benutzername,firstPasswort)
+                viewModel.registration(benutzername,firstPasswort, vorname, nachname)
 
-//                User erstellen und im Firebase speichern
-                diese beiden zeilen unten funktionieren nicht , weil man nicht die erlaubnis von firestore hat : (PERMISSION_DENIED) schau im logcat nach
-//              val newUser =  viewModel.createUser(vorname, nachname)
-//                viewModel.postDokument(newUser)
                 findNavController().navigate(RegistrierenFragmentDirections.actionRegistrierenFragmentToHomeFragment())
             }else{
                 Toast.makeText(requireContext(),"Fülle alle Felder aus!",Toast.LENGTH_SHORT).show()

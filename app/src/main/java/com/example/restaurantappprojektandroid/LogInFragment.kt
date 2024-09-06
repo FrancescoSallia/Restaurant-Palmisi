@@ -28,6 +28,11 @@ class LogInFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.currentUser.observe(viewLifecycleOwner) {
+            if (it != null) {
+                findNavController().navigate(LogInFragmentDirections.actionLogInFragmentToHomeFragment())
+            }
+        }
 //
 //        with(vb){
 //            animationView.setAnimation(R.raw.animation)

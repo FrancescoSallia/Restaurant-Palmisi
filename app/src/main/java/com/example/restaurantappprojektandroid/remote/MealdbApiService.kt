@@ -1,9 +1,6 @@
 package com.example.restaurantappprojektandroid.remote
 
-import com.example.restaurantappprojektandroid.model.CountryResponse
-import com.example.restaurantappprojektandroid.model.CountryMealResponse
 import com.example.restaurantappprojektandroid.model.CategorieResponse
-import com.example.restaurantappprojektandroid.model.MealDetail
 import com.example.restaurantappprojektandroid.model.MealResponse
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -12,7 +9,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 

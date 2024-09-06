@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import coil.load
 import com.example.restaurantappprojektandroid.model.Meal
+import com.example.restaurantappprojektandroid.model.User
 import com.example.restaurantappprojektandroid.ui.MainViewModel
 import com.example.restuarantprojektapp.R
 import com.example.restuarantprojektapp.databinding.FragmentMealDetailBinding
@@ -16,6 +17,7 @@ import com.example.restuarantprojektapp.databinding.FragmentMealDetailBinding
 class MealDetailFragment : Fragment() {
     private lateinit var vb: FragmentMealDetailBinding
     private val viewModel: MainViewModel by activityViewModels()
+    private var isLiked = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,34 +33,28 @@ class MealDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.repositoryMealDetail.observe(viewLifecycleOwner) { meal ->
+        viewModel.likedMeals.observe(viewLifecycleOwner) { userLikedMeals ->
+            Log.i("DEBUG", "likedMeals: $userLikedMeals\nselectedMealID: ${viewModel.selectedMealID}")
+            isLiked = userLikedMeals.contains(viewModel.selectedMealID)
+            vb.ivHearth.load(if (isLiked) R.drawable.save else R.drawable.heart)
+        }
 
-            vb.ivMealDetail.load(meal.first().mealImg)
-            vb.tvMealDetailTitle.text = meal.first().mealName
-            vb.tvPreisDetail.text = meal.first().priceasString
-
-            viewModel.isFavorited(meal.first()){ isLiked ->
-
-                favorised(isLiked, meal)
-
-                vb.ivHearth.setOnClickListener {
-
-                    favorised(isLiked, meal)
-                }
+        viewModel.repositoryMealDetail.observe(viewLifecycleOwner) { meals: List<Meal> ->
+            val meal = meals.first()
+            vb.ivMealDetail.load(meal.mealImg)
+            vb.tvMealDetailTitle.text = meal.mealName
+            vb.tvPreisDetail.text = meal.priceasString
+            vb.ivHearth.setOnClickListener {
+                handleFavoriteMealState(isLiked, meal)
             }
         }
     }
 
-    private fun favorised(
-        isLiked: Boolean,
-        meal: List<Meal>
-    ) {
+    private fun handleFavoriteMealState(isLiked: Boolean, meal: Meal) {
         if (isLiked) {
-            vb.ivHearth.setImageResource(R.drawable.heart)
-            viewModel.removeFromFavorites(meal.first())
+            viewModel.removeFromFavorites(meal)
         } else {
-            vb.ivHearth.setImageResource(R.drawable.save)
-            viewModel.addToFavorites(meal.first())
+            viewModel.addToFavorites(meal)
         }
     }
 }

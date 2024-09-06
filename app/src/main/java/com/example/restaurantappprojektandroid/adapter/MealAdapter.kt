@@ -13,12 +13,13 @@ import com.example.restuarantprojektapp.databinding.GerichtItemBinding
 class MealAdapter(
     private val dataset: List<Meal>,
     private val viewModel: MainViewModel
-):RecyclerView.Adapter<MealAdapter.MealViewHolder>() {
-   inner class MealViewHolder(val binding:GerichtItemBinding):RecyclerView.ViewHolder(binding.root)
+) : RecyclerView.Adapter<MealAdapter.MealViewHolder>() {
+    inner class MealViewHolder(val binding: GerichtItemBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MealViewHolder {
-        val binding = GerichtItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding = GerichtItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         return MealViewHolder(binding)
     }
@@ -30,36 +31,31 @@ class MealAdapter(
     override fun onBindViewHolder(holder: MealViewHolder, position: Int) {
         val meal = dataset[position]
 
-        var heartIsFilled = true
-
+        var isLiked = viewModel.likedMeals.value?.contains(meal.idMeal) ?: false
+        holder.binding.ivHeart.load(if (isLiked) R.drawable.save else R.drawable.heart)
         holder.binding.tvMealName.text = meal.mealName
         holder.binding.ivMeal.load(meal.mealImg)
         holder.binding.tvPrice.text = meal.price.toString() + "€"
         holder.binding.ivHeart.setOnClickListener {
-
-
-            if (!heartIsFilled ) {
-                holder.binding.ivHeart.setImageResource(R.drawable.heart)
-                heartIsFilled = true
+            if (isLiked) {
                 viewModel.removeFromFavorites(meal)
-        }else {
-                holder.binding.ivHeart.setImageResource(R.drawable.save)
-                heartIsFilled = false
+            } else {
                 viewModel.addToFavorites(meal)
             }
+            isLiked = !isLiked
+            holder.binding.ivHeart.load(if (isLiked) R.drawable.save else R.drawable.heart)
         }
 
         holder.itemView.setOnClickListener {
 
             // das soll die position speichern um wieder in der selben position zu sein nachdem man zurück navigiert, funktioniert aber noch nicht
-                val position = holder.adapterPosition
-                viewModel.recyclerViewPosition = position
+            viewModel.recyclerViewPosition = position
 
             viewModel.setSelectedMealId(meal.idMeal)
 
-            val navController =  holder.itemView.findNavController()
+            val navController = holder.itemView.findNavController()
             navController.navigate(R.id.mealDetailFragment)
-            
+
         }
     }
 }

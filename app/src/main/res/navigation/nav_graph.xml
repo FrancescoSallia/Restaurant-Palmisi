@@ -48,7 +48,14 @@
         android:id="@+id/proiflSettingsFragment"
         android:name="com.example.restaurantappprojektandroid.ProiflSettingsFragment"
         android:label="fragment_proifl_settings"
-        tools:layout="@layout/fragment_proifl_settings" />
+        tools:layout="@layout/fragment_proifl_settings" >
+        <action
+            android:id="@+id/action_proiflSettingsFragment_to_profilFragment"
+            app:destination="@id/profilFragment" />
+        <action
+            android:id="@+id/action_proiflSettingsFragment_to_logInFragment"
+            app:destination="@id/logInFragment" />
+    </fragment>
     <fragment
         android:id="@+id/logInFragment"
         android:name="com.example.restaurantappprojektandroid.LogInFragment"

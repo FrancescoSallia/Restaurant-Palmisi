@@ -25,7 +25,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     //Firebase datenbank (cloud)
     val db = Firebase.firestore
 
-    //Firebase logik START!!
+    //Firebase START!!
 
 
     private val _currentUser = MutableLiveData<FirebaseUser?>(auth.currentUser)
@@ -38,6 +38,50 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
       var user = User(vorname = vorname, nachname= nachname)
         return user
 
+    }
+
+    fun updateUser(vorname: String, nachname: String) {
+        val userId = auth.currentUser?.uid
+        if (userId != null) {
+            val userRef = db.collection("users").document(userId)
+
+            userRef.update(
+                "vorname", vorname,
+                "nachname", nachname
+            ).addOnSuccessListener {
+                Log.d("Firestore", "Benutzerdaten erfolgreich aktualisiert")
+                Toast.makeText(getApplication(), "Benutzerdaten aktualisiert", Toast.LENGTH_SHORT).show()
+            }.addOnFailureListener { e ->
+                Log.w("Firestore", "Fehler beim Aktualisieren der Benutzerdaten", e)
+                Toast.makeText(getApplication(), "Fehler beim Aktualisieren der Daten", Toast.LENGTH_SHORT).show()
+            }
+        } else {
+            Log.w("Firestore", "Kein angemeldeter Benutzer gefunden")
+            Toast.makeText(getApplication(), "Kein angemeldeter Benutzer", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+
+    diese funktion funktioniert nicht!! userRef wird nicht gelöscht
+    fun deleteUser() {
+        val userId = auth.currentUser?.uid
+        if (userId != null) {
+            val userRef = db.collection("users").document(userId)
+            userRef.delete().addOnSuccessListener {
+                Log.d("Firestore", "userRef: $userRef")
+                auth.currentUser?.delete()
+                    ?.addOnSuccessListener {
+                        Toast.makeText(getApplication(), "Benutzer gelöscht", Toast.LENGTH_SHORT).show()
+                        logOut()
+                }
+                    ?.addOnFailureListener {
+
+                        Toast.makeText(getApplication(), "Fehler beim Löschen des Benutzers", Toast.LENGTH_SHORT).show()
+                    }
+            }
+        }else{
+            Toast.makeText(getApplication(), "Kein angemeldeter Benutzer", Toast.LENGTH_SHORT).show()
+        }
     }
 
 //ein User speichern in die datenbank
@@ -109,7 +153,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         _currentUser.postValue(auth.currentUser)
     }
 
-    //Firebase logik ENDE!!
+    //Firebase ENDE!!
 
     var selectedMealID = ""
        var heartFilledout = false

@@ -29,7 +29,12 @@ class ProfilFragment : Fragment() {
 
         vb.btnAusloggen.setOnClickListener {
             viewModel.logOut()
+            (requireActivity() as MainActivity).bottomNavigation.visibility = View.INVISIBLE
             findNavController().navigate(ProfilFragmentDirections.actionProfilFragmentToLogInFragment())
+        }
+
+        vb.btnProfilSetting.setOnClickListener {
+            findNavController().navigate(ProfilFragmentDirections.actionProfilFragmentToProiflSettingsFragment())
         }
 
     }

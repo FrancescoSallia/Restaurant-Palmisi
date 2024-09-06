@@ -38,12 +38,14 @@ class MealAdapter(
         holder.binding.ivHeart.setOnClickListener {
 
 
-            if (!heartIsFilled) {
+            if (!heartIsFilled ) {
                 holder.binding.ivHeart.setImageResource(R.drawable.heart)
                 heartIsFilled = true
+                viewModel.removeFromFavorites(meal)
         }else {
                 holder.binding.ivHeart.setImageResource(R.drawable.save)
                 heartIsFilled = false
+                viewModel.addToFavorites(meal)
             }
         }
 

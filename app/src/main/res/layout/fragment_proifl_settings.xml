@@ -35,8 +35,8 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout"
-            android:layout_width="264dp"
-            android:layout_height="47dp"
+            android:layout_width="265dp"
+            android:layout_height="61dp"
             android:layout_marginTop="52dp"
             app:layout_constraintEnd_toEndOf="@+id/imageView4"
             app:layout_constraintHorizontal_bias="0.474"
@@ -52,8 +52,8 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout4"
-            android:layout_width="264dp"
-            android:layout_height="47dp"
+            android:layout_width="268dp"
+            android:layout_height="63dp"
             android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
             app:layout_constraintHorizontal_bias="0.0"

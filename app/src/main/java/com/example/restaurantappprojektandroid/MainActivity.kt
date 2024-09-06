@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(vb.root)
 
         bottomNavigation = vb.bottomNav
-        bottomNavigation.setItemIconTintList(null);
+        bottomNavigation.setItemIconTintList(null)
 
         val navHost = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         bottomNavigation.setupWithNavController(navHost.navController)

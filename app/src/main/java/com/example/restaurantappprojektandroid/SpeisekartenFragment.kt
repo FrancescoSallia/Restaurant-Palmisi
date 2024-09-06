@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.restaurantappprojektandroid.adapter.KategorieAdapter
 import com.example.restaurantappprojektandroid.adapter.MealAdapter
 import com.example.restaurantappprojektandroid.ui.MainViewModel
@@ -27,6 +29,16 @@ class SpeisekartenFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+//        val layoutManager = vb.rvGerichtListe.layoutManager
+//        if (layoutManager is LinearLayoutManager) {
+//            val firstVisiblePosition = layoutManager.findFirstVisibleItemPosition()
+//            layoutManager.scrollToPositionWithOffset(firstVisiblePosition, 0)
+//        }
+
+        vb.rvGerichtListe.adapter?.stateRestorationPolicy =
+            RecyclerView.Adapter.StateRestorationPolicy.ALLOW
+
+
         viewModel.getCategories()
 
         vb.searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -59,5 +71,6 @@ class SpeisekartenFragment : Fragment() {
             vb.rvGerichtListe.adapter = MealAdapter(it, viewModel)
 
         }
+
     }
 }

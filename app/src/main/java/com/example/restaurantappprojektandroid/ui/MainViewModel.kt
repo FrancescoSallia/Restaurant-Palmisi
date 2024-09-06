@@ -13,11 +13,9 @@ import com.example.restaurantappprojektandroid.remote.MealdbApi
 import com.example.restaurantappprojektandroid.remote.Repository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.model.mutation.ArrayTransformOperation.Union
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
 
@@ -31,8 +29,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val currentUser: LiveData<FirebaseUser?>
         get() = _currentUser
 
-    private val _likedMeals = MutableLiveData<MutableList<String>>()
-    val likedMeals: LiveData<MutableList<String>>
+    private val _likedMealIds = MutableLiveData<MutableList<String>>()
+    val likedMealIds: LiveData<MutableList<String>>
+        get() = _likedMealIds
+
+    private val _likedMeals = MutableLiveData<MutableList<Meal>>()
+    val likedMeal: LiveData<MutableList<Meal>>
         get() = _likedMeals
 
 
@@ -53,13 +55,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private fun addSnapshotListenerForCurrentUser() {
         userRef = db.collection("users").document(auth.currentUser!!.uid)
         userRef.addSnapshotListener { value, error ->
-            Log.i("DEBUG", "addSnapshotListenerForCurrentUser\nvalue: $value")
             if (error == null && value != null && value.exists()) {
                 val user = value.toObject(User::class.java)
                 if (user != null) {
-                    Log.i("DEBUG", "addSnapshotListenerForCurrentUser\nuser: $value")
+                    _likedMealIds.value = user.likedGerichteIds
                     _likedMeals.value = user.likedGerichte
-                    Log.i("DEBUG", "addSnapshotListenerForCurrentUser\nlikedMeals: ${_likedMeals.value}")
                 }
             }
         }
@@ -256,21 +256,17 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun addToFavorites(meal: Meal) {
-        userRef.update("likedGerichte", FieldValue.arrayUnion(meal.idMeal))
-            .addOnSuccessListener {
-                Log.i("DEBUG", "addToFavorites SUCCESSFULLY!\nmeal: $meal")
-            }.addOnFailureListener { exception ->
-                Log.i("DEBUG", "addToFavorites FAILED!\nmeal: $meal\nException: $exception")
-            }
+        userRef.update("likedGerichteIds", FieldValue.arrayUnion(meal.idMeal))
+        userRef.update("likedGerichte", FieldValue.arrayUnion(meal))
+
+        Log.i("DEBUG", "addToFavorites: ${_likedMeals.value}")
     }
 
     fun removeFromFavorites(meal: Meal) {
-        userRef.update("likedGerichte", FieldValue.arrayRemove(meal.idMeal))
-            .addOnSuccessListener {
-                Log.i("DEBUG", "removeFromFavorites SUCCESSFULLY!\nmeal: $meal")
-            }.addOnFailureListener { exception ->
-                Log.i("DEBUG", "removeFromFavorites FAILED!\nmeal: $meal\nException: $exception")
-            }
+        userRef.update("likedGerichteIds", FieldValue.arrayRemove(meal.idMeal))
+        userRef.update("likedGerichte", FieldValue.arrayRemove(meal))
+
+        Log.i("DEBUG", "removeFromFavorites: ${_likedMeals.value}")
     }
 }
 

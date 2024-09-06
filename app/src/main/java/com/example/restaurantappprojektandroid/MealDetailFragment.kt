@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import coil.load
 import com.example.restaurantappprojektandroid.model.Meal
-import com.example.restaurantappprojektandroid.model.User
 import com.example.restaurantappprojektandroid.ui.MainViewModel
 import com.example.restuarantprojektapp.R
 import com.example.restuarantprojektapp.databinding.FragmentMealDetailBinding
@@ -33,8 +32,11 @@ class MealDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.likedMeals.observe(viewLifecycleOwner) { userLikedMeals ->
-            Log.i("DEBUG", "likedMeals: $userLikedMeals\nselectedMealID: ${viewModel.selectedMealID}")
+        viewModel.likedMealIds.observe(viewLifecycleOwner) { userLikedMeals ->
+            Log.i(
+                "DEBUG",
+                "likedMeals: $userLikedMeals\nselectedMealID: ${viewModel.selectedMealID}"
+            )
             isLiked = userLikedMeals.contains(viewModel.selectedMealID)
             vb.ivHearth.load(if (isLiked) R.drawable.save else R.drawable.heart)
         }
@@ -47,6 +49,8 @@ class MealDetailFragment : Fragment() {
             vb.ivHearth.setOnClickListener {
                 handleFavoriteMealState(isLiked, meal)
             }
+        }
+    }
 
     private fun handleFavoriteMealState(isLiked: Boolean, meal: Meal) {
         if (isLiked) {

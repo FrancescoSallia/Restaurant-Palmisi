@@ -31,7 +31,7 @@ class MealAdapter(
     override fun onBindViewHolder(holder: MealViewHolder, position: Int) {
         val meal = dataset[position]
 
-        var isLiked = viewModel.likedMeals.value?.contains(meal.idMeal) ?: false
+        var isLiked = viewModel.likedMealIds.value?.contains(meal.idMeal) ?: false
         holder.binding.ivHeart.load(if (isLiked) R.drawable.save else R.drawable.heart)
         holder.binding.tvMealName.text = meal.mealName
         holder.binding.ivMeal.load(meal.mealImg)

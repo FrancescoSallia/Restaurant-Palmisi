@@ -4,15 +4,15 @@ import android.util.Log
 import com.squareup.moshi.Json
 
 data class Meal(
-    val idMeal: String,
+    val idMeal: String = "",
     @Json(name = "strMeal")
-    val mealName: String,
+    val mealName: String = "",
     @Json(name = "strMealThumb")
-    val mealImg: String
-)
-{
-    val price: Double
+    val mealImg: String = ""
+) {
 
+
+    val price: Double
         get() = randomPrice()
 
     val priceasString: String
@@ -24,3 +24,4 @@ data class Meal(
         return "$euro.$cent".toDouble()
     }
 }
+

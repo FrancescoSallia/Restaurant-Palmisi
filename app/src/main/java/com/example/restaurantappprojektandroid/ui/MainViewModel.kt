@@ -34,7 +34,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         get() = _likedMealIds
 
     private val _likedMeals = MutableLiveData<MutableList<Meal>>()
-    val likedMeal: LiveData<MutableList<Meal>>
+    val likedMeals: LiveData<MutableList<Meal>>
         get() = _likedMeals
 
 
@@ -64,7 +64,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             }
         }
     }
-
 
     // ein User erstellen
     private fun createUser(vorname: String, nachname: String): User {
@@ -198,7 +197,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     //Firebase ENDE!!
 
     var selectedMealID = ""
-    var heartFilledout = false
     var recyclerViewPosition = 0
 
 
@@ -239,21 +237,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         selectedMealID = mealId
     }
 
-    fun isFavorited(mealId: String? = null, callback: (Boolean) -> Unit) {
-
-        userRef.get().addOnSuccessListener {
-
-            val likedGerichte = it.get("likedGerichte") as? List<String>
-            if (likedGerichte != null) {
-                callback(likedGerichte.contains(mealId ?: selectedMealID))
-
-            } else {
-
-                callback(false)
-
-            }
-        }
-    }
 
     fun addToFavorites(meal: Meal) {
         userRef.update("likedGerichteIds", FieldValue.arrayUnion(meal.idMeal))

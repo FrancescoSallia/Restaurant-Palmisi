@@ -31,6 +31,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val currentUser: LiveData<FirebaseUser?>
         get() = _currentUser
 
+    private val _likedMeals = MutableLiveData<MutableList<String>>()
+    val likedMeals: LiveData<MutableList<String>>
+        get() = _likedMeals
+
 
     //Firebase datenbank (cloud)
     val db = Firebase.firestore
@@ -40,26 +44,35 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     init {
         getMealsByCategory("Beef")
+
         if (auth.currentUser != null) {
-            userRef = db.collection("users").document(auth.currentUser!!.uid)
+            addSnapshotListenerForCurrentUser()
+        }
+    }
+
+    private fun addSnapshotListenerForCurrentUser() {
+        userRef = db.collection("users").document(auth.currentUser!!.uid)
+        userRef.addSnapshotListener { value, error ->
+            Log.i("DEBUG", "addSnapshotListenerForCurrentUser\nvalue: $value")
+            if (error == null && value != null && value.exists()) {
+                val user = value.toObject(User::class.java)
+                if (user != null) {
+                    Log.i("DEBUG", "addSnapshotListenerForCurrentUser\nuser: $value")
+                    _likedMeals.value = user.likedGerichte
+                    Log.i("DEBUG", "addSnapshotListenerForCurrentUser\nlikedMeals: ${_likedMeals.value}")
+                }
+            }
         }
     }
 
 
-
     // ein User erstellen
-    fun createUser(vorname: String, nachname: String): User {
-
-        var user = User(vorname = vorname, nachname = nachname)
-        return user
-
+    private fun createUser(vorname: String, nachname: String): User {
+        return User(vorname = vorname, nachname = nachname)
     }
 
     fun updateUser(vorname: String, nachname: String) {
-        val userId = auth.currentUser?.uid
-        if (userId != null) {
-            userRef = db.collection("users").document(userId)
-
+        if (auth.currentUser?.uid != null) {
             userRef.update(
                 "vorname", vorname,
                 "nachname", nachname
@@ -112,8 +125,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     //ein User speichern in die datenbank
     fun postDokument(user: User) {
-
-        userRef = db.collection("users").document(auth.currentUser!!.uid)
         userRef.set(user).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 Log.d("Firestore", "Dokument erstellt -> ID : ${task.result}")
@@ -148,7 +159,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 if (it.isSuccessful) {
 
                     _currentUser.value = it.result.user
-
+                    addSnapshotListenerForCurrentUser()
                 } else {
                     Toast.makeText(
                         getApplication(),
@@ -170,6 +181,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             if (newUser.isSuccessful) {
 
                 _currentUser.value = newUser.result.user
+                addSnapshotListenerForCurrentUser()
                 postDokument(createUser(vorname, nachname))
 
             } else {
@@ -227,16 +239,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         selectedMealID = mealId
     }
 
-    fun isFavorited(meal: Meal,callback: (Boolean)-> Unit) {
+    fun isFavorited(mealId: String? = null, callback: (Boolean) -> Unit) {
 
         userRef.get().addOnSuccessListener {
 
             val likedGerichte = it.get("likedGerichte") as? List<String>
             if (likedGerichte != null) {
+                callback(likedGerichte.contains(mealId ?: selectedMealID))
 
-                callback(likedGerichte.contains(meal.idMeal))
-
-            }else {
+            } else {
 
                 callback(false)
 
@@ -246,12 +257,20 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun addToFavorites(meal: Meal) {
         userRef.update("likedGerichte", FieldValue.arrayUnion(meal.idMeal))
+            .addOnSuccessListener {
+                Log.i("DEBUG", "addToFavorites SUCCESSFULLY!\nmeal: $meal")
+            }.addOnFailureListener { exception ->
+                Log.i("DEBUG", "addToFavorites FAILED!\nmeal: $meal\nException: $exception")
+            }
     }
 
     fun removeFromFavorites(meal: Meal) {
         userRef.update("likedGerichte", FieldValue.arrayRemove(meal.idMeal))
+            .addOnSuccessListener {
+                Log.i("DEBUG", "removeFromFavorites SUCCESSFULLY!\nmeal: $meal")
+            }.addOnFailureListener { exception ->
+                Log.i("DEBUG", "removeFromFavorites FAILED!\nmeal: $meal\nException: $exception")
+            }
     }
-
-
 }
 

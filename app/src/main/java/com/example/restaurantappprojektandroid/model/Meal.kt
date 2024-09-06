@@ -9,7 +9,6 @@ data class Meal(
     val mealName: String,
     @Json(name = "strMealThumb")
     val mealImg: String
-
 )
 {
     val price: Double

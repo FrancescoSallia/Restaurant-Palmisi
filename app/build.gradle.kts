@@ -96,3 +96,7 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }
+
+  val retrofitVersion = "2.9.0"
+      val roomVersion = "2.6.0"
+

@@ -151,6 +151,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
 
+
     fun logIn(email: String, password: String) {
 
         auth.signInWithEmailAndPassword(email, password)
@@ -245,9 +246,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun removeFromFavorites(meal: Meal) {
+
         userRef.update("likedGerichteIds", FieldValue.arrayRemove(meal.idMeal))
         userRef.update("likedGerichte", FieldValue.arrayRemove(meal))
-//        _likedMeals.value = _likedMeals.value?.filter { it.idMeal != meal.idMeal }?.toMutableList()
+
+        hier weitermachen !!!!!!!!!!
+        _likedMeals.value
+
 
 
     }

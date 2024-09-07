@@ -25,20 +25,22 @@ class FavoriteAdapter(
     }
 
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
+
         val meal = dataset[position]
 
+        val filteredMeals = viewModel.favoriteMealFilterTEST(meal)
+
+        var filteredName = filteredMeals?.mealName
+        var filteredPrice = filteredMeals?.price.toString() + "€"
+        var filteredImg = filteredMeals?.mealImg
 
         Log.d("TAG", "onBindViewHolder: ${viewModel.likedMeals.value}")
-        holder.binding.tvFavoriteName.text = meal.mealName
-        holder.binding.tvFavoritePrice.text = meal.price.toString() + "€"
-        holder.binding.ivFavoriteProfil.load(meal.mealImg)
+        holder.binding.tvFavoriteName.text = filteredName
+        holder.binding.tvFavoritePrice.text = filteredPrice
+        holder.binding.ivFavoriteProfil.load(filteredImg)
 
 
-        if (viewModel.likedMeals.value != null){
-        meal.idMeal.filter { it.toString() == viewModel.likedMealIds.value.toString() }
 }
-    }
-
-    }
+}
 
 

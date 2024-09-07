@@ -41,6 +41,7 @@ class MealAdapter(
                 viewModel.removeFromFavorites(meal)
             } else {
                 viewModel.addToFavorites(meal)
+
             }
             isLiked = !isLiked
             holder.binding.ivHeart.load(if (isLiked) R.drawable.save else R.drawable.heart)

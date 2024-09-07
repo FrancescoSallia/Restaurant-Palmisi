@@ -18,6 +18,7 @@ import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
+import kotlin.reflect.jvm.internal.impl.incremental.components.Position
 
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
@@ -64,6 +65,31 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             }
         }
     }
+
+    // Funktion die abstürzt
+    fun favoriteMealFilter(meal: Meal, position: Int): Meal {
+
+        var gefiltert = likedMeals.value!!.filter { likedMeals -> likedMeals.idMeal == meal.idMeal }
+
+        return gefiltert[position]
+
+    }
+
+    //Funktion zum ausprobieren!!
+    fun favoriteMealFilterTEST(meal: Meal): Meal? {
+        val gefiltert = likedMeals.value?.filter { likedMeal -> likedMeal.idMeal == meal.idMeal }
+
+        return if (gefiltert != null && gefiltert.isNotEmpty()) {
+            // Gib das erste gefundene Meal zurück, ignoriere die Position
+            gefiltert.firstOrNull()
+        } else {
+            // Wenn kein passendes Meal gefunden wurde, gib null zurück
+            null
+        }
+    }
+
+
+
 
     // ein User erstellen
     private fun createUser(vorname: String, nachname: String): User {
@@ -138,18 +164,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             }
         }
     }
-
-    // User auslesen
-    fun getDokument() {
-        db.collection("users")
-            .get()
-            .addOnCompleteListener { result ->
-                for (document in result.result) {
-                    Log.d("Firestore", "Dokument: ${document.id} => ${document.data}")
-                }
-            }
-    }
-
 
 
     fun logIn(email: String, password: String) {
@@ -249,9 +263,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
         userRef.update("likedGerichteIds", FieldValue.arrayRemove(meal.idMeal))
         userRef.update("likedGerichte", FieldValue.arrayRemove(meal))
-
-        hier weitermachen !!!!!!!!!!
-        _likedMeals.value
 
 
 

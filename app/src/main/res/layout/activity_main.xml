@@ -34,6 +34,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:itemActiveIndicatorStyle="@style/CustomActiveIndicator"
+        app:itemIconTint="@null"
         app:menu="@menu/bottom_nav_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,18 +6,18 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.restaurantappprojektandroid.model.Category
 import com.example.restaurantappprojektandroid.ui.MainViewModel
-import com.example.restuarantprojektapp.databinding.ItemKarussellBinding
+import com.example.restuarantprojektapp.databinding.ItemCategorieBinding
 
 class KategorieAdapter(
     private val dataset: List<Category>,
     private val viewModel: MainViewModel
 ):RecyclerView.Adapter<KategorieAdapter.CategorieViewHolder>() {
 
-    inner class CategorieViewHolder(val binding:ItemKarussellBinding):RecyclerView.ViewHolder(binding.root)
+    inner class CategorieViewHolder(val binding:ItemCategorieBinding):RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategorieViewHolder {
 
-        val binding = ItemKarussellBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemCategorieBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         return CategorieViewHolder(binding)
     }

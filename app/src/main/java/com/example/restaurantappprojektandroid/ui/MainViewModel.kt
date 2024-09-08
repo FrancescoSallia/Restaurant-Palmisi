@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.restaurantappprojektandroid.model.Meal
 import com.example.restaurantappprojektandroid.model.User
@@ -22,6 +23,7 @@ import kotlin.reflect.jvm.internal.impl.incremental.components.Position
 
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
+
 
     private val repository = Repository(MealdbApi)
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
@@ -43,9 +45,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val db = Firebase.firestore
     lateinit var userRef: DocumentReference
 
+
     //Firebase START!!
 
     init {
+
         getMealsByCategory("Beef")
 
         if (auth.currentUser != null) {

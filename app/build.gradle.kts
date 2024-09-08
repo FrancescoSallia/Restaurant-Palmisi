@@ -84,6 +84,8 @@ dependencies {
     //RecyclerView
     implementation("androidx.recyclerview:recyclerview:1.3.2")
 
+// Material Design ShapeableImageView (Titelbild)
+    implementation ("com.google.android.material:material:1.5.0")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -97,6 +99,6 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 }
 
-  val retrofitVersion = "2.9.0"
-      val roomVersion = "2.6.0"
+//  val retrofitVersion = "2.9.0"
+//      val roomVersion = "2.6.0"
 

@@ -10,62 +10,52 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
         <TextView
             android:id="@+id/tv_oeffnungszeiten"
-            android:layout_width="282dp"
+            android:layout_width="332dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/neuigkeiten_shape"
             android:text="@string/tv_kontakt"
             android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="@+id/tv_angeboteTitle"
-            app:layout_constraintHorizontal_bias="0.06"
-            app:layout_constraintStart_toStartOf="@+id/tv_angeboteTitle"
-            app:layout_constraintTop_toBottomOf="@+id/tv_angeboteTitle" />
+            android:layout_marginBottom="20dp"
+            app:layout_constraintEnd_toEndOf="@+id/tv_kontakt"
+            app:layout_constraintStart_toStartOf="@+id/tv_kontakt"
+            app:layout_constraintTop_toBottomOf="@+id/tv_kontakt" />
 
         <TextView
             android:id="@+id/tv_kontakt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
-            android:text="telefonnumer"
-            app:layout_constraintEnd_toEndOf="@+id/tv_oeffnungszeiten"
-            app:layout_constraintHorizontal_bias="0.512"
-            app:layout_constraintStart_toStartOf="@+id/tv_oeffnungszeiten"
-            app:layout_constraintTop_toBottomOf="@+id/tv_oeffnungszeiten" />
-
+            android:layout_marginTop="12dp"
+            android:text="𝗞𝗼𝗻𝘁𝗮𝗸𝘁"
+            android:textSize="18dp"
+            app:layout_constraintEnd_toEndOf="@+id/tv_info_musikabend"
+            app:layout_constraintHorizontal_bias="0.484"
+            app:layout_constraintStart_toStartOf="@+id/tv_info_musikabend"
+            app:layout_constraintTop_toBottomOf="@+id/tv_info_musikabend" />
 
         <TextView
             android:id="@+id/tv_restaurant_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="64dp"
+            android:layout_marginTop="12dp"
             android:text="@string/restaurant_name"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_greeting"
-
-            android:layout_width="327dp"
-            android:layout_height="149dp"
-            android:layout_marginTop="12dp"
-            android:text="@string/tv_greeting"
-            android:textAlignment="center"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="@+id/tv_restaurant_title"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="@+id/tv_restaurant_title"
-            app:layout_constraintTop_toBottomOf="@+id/tv_restaurant_title" />
+            app:layout_constraintTop_toBottomOf="@+id/shapeableImageView" />
 
         <TextView
             android:id="@+id/tv_angeboteTitle"
             android:layout_width="332dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/neuigkeiten_shape"
             android:text="@string/tv_angeboteTitle"
             app:layout_constraintEnd_toEndOf="@+id/tv_angebot_title"
+            app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="@+id/tv_angebot_title"
             app:layout_constraintTop_toBottomOf="@+id/tv_angebot_title" />
 
@@ -73,14 +63,66 @@
             android:id="@+id/tv_angebot_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="20dp"
             android:text="𝐌𝐢𝐭𝐭𝐚𝐠𝐬𝐭𝐢𝐬𝐜𝐡"
             android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@+id/tv_greeting"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="@+id/tv_greeting"
-            app:layout_constraintTop_toBottomOf="@+id/tv_greeting" />
+            app:layout_constraintEnd_toEndOf="@+id/tv_info_urlaub"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintStart_toStartOf="@+id/tv_info_urlaub"
+            app:layout_constraintTop_toBottomOf="@+id/tv_info_urlaub" />
 
+        <TextView
+            android:id="@+id/tv_title_Veranstaltung_neuigkeiten"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="𝐕𝐞𝐫𝐚𝐧𝐬𝐭𝐚𝐥𝐭𝐮𝐧𝐠𝐞𝐧"
+            android:textSize="18dp"
+            app:layout_constraintEnd_toEndOf="@+id/tv_angeboteTitle"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="@+id/tv_angeboteTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tv_angeboteTitle" />
+
+        <TextView
+            android:id="@+id/tv_info_urlaub"
+            android:layout_width="332dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/neuigkeiten_shape"
+            android:text="@string/veranstaltung_neuigkeiten"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="@+id/tv_restaurant_title"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintStart_toStartOf="@+id/tv_restaurant_title"
+            app:layout_constraintTop_toBottomOf="@+id/tv_restaurant_title" />
+
+        <TextView
+            android:id="@+id/tv_info_musikabend"
+            android:layout_width="332dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/neuigkeiten_shape"
+            android:text="@string/musikAbend"
+            android:textAlignment="center"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/tv_title_Veranstaltung_neuigkeiten"
+            app:layout_constraintHorizontal_bias="0.48"
+            app:layout_constraintStart_toStartOf="@+id/tv_title_Veranstaltung_neuigkeiten"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title_Veranstaltung_neuigkeiten" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/shapeableImageView"
+            android:layout_width="match_parent"
+            android:layout_height="273dp"
+            android:src="@drawable/restaurant_titlebild"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/Restaurant_BilderRahmen_shape_style"
+            app:strokeColor="#CCCBCA" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

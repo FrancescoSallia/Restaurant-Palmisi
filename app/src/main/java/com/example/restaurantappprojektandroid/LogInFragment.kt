@@ -28,22 +28,12 @@ class LogInFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         viewModel.currentUser.observe(viewLifecycleOwner) {
             if (it != null) {
                 findNavController().navigate(LogInFragmentDirections.actionLogInFragmentToHomeFragment())
             }
         }
-//
-//        with(vb){
-//            animationView.setAnimation(R.raw.animation)
-//            animationView.playAnimation()
-//            animationView.loop(true)
-//        }
-
-        Glide.with(this)
-            .asGif()
-            .load(R.raw.animation)
-            .into(vb.animationView)
 
         vb.btnLogIn.setOnClickListener {
             val email = vb.etBenutzername.text.toString()
@@ -56,7 +46,6 @@ class LogInFragment : Fragment() {
             }else{
                 Toast.makeText(requireActivity(),"Füll die Felder aus", Toast.LENGTH_SHORT).show()
             }
-
 
         }
 

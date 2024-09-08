@@ -16,6 +16,7 @@ import android.os.Looper
 class LogoFragment : Fragment() {
   private lateinit var vb: FragmentLogoBinding
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

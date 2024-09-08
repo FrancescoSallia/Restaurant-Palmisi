@@ -1,17 +1,14 @@
 package com.example.restaurantappprojektandroid
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.fragment.app.activityViewModels
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.restaurantappprojektandroid.adapter.KategorieAdapter
-import com.example.restaurantappprojektandroid.adapter.MealAdapter
+import com.example.restaurantappprojektandroid.adapter.MealAdapterTwo
 import com.example.restaurantappprojektandroid.ui.MainViewModel
 import com.example.restuarantprojektapp.databinding.FragmentSpeisekartenBinding
 
@@ -55,12 +52,14 @@ class SpeisekartenFragment : Fragment() {
         }
 
         viewModel.repositoryMeals.observe(viewLifecycleOwner) {
-            vb.rvGerichtListe.adapter = MealAdapter(it, viewModel)
+            //vb.rvGerichtListe.adapter = MealAdapter(it, viewModel)
+            vb.rvGerichtListe.adapter = MealAdapterTwo(it, viewModel)
 
         }
 
         viewModel.repositorySearchMeal.observe(viewLifecycleOwner) {
-            vb.rvGerichtListe.adapter = MealAdapter(it, viewModel)
+            // vb.rvGerichtListe.adapter = MealAdapter(it, viewModel)
+            vb.rvGerichtListe.adapter = MealAdapterTwo(it, viewModel)
 
         }
 

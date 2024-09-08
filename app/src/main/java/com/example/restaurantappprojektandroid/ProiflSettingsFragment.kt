@@ -26,6 +26,7 @@ class ProiflSettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         vb.btnSave.setOnClickListener {
             if (vb.etBenutzernameSettings.text.toString()
                     .isNotEmpty() || vb.etPasswordSettings.text.toString().isNotEmpty()
@@ -40,7 +41,7 @@ class ProiflSettingsFragment : Fragment() {
 
         }
 
-        viewModel.userRef.addSnapshotListener { snapshot, error ->
+        viewModel.userRef?.addSnapshotListener { snapshot, error ->
             if (snapshot != null && snapshot.exists()) {
                 val user = snapshot.toObject(User::class.java)
 

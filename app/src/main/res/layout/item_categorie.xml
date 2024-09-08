@@ -4,10 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="110dp"
-    android:layout_height="60dp"
-    android:layout_marginLeft="10dp"
-    android:layout_marginTop="0dp"
-    android:layout_marginRight="7dp"
+    android:layout_margin="5dp"
+    android:layout_height="50dp"
+
     android:backgroundTint="#F0FF5722"
     app:cardCornerRadius="30dp">
 
@@ -21,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
-            android:textColor="#F6E8E8"
+            android:textColor="#161515"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

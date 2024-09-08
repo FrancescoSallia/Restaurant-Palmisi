@@ -20,7 +20,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_kategorie"
-        android:layout_width="413dp"
+        android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_marginTop="6dp"
         android:orientation="horizontal"
@@ -35,7 +35,6 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
         android:layout_marginEnd="1dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"

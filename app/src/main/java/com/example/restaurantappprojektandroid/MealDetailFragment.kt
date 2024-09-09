@@ -32,10 +32,10 @@ class MealDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.likedMealIds.observe(viewLifecycleOwner) { userLikedMeals ->
+        viewModel.likedMeals.observe(viewLifecycleOwner) { userLikedMeals ->
+            var findMeal = userLikedMeals.find { it.idMeal == viewModel.selectedMealID}
 
-            isLiked = userLikedMeals.contains(viewModel.selectedMealID)
-            vb.ivHearth.load(if (isLiked) R.drawable.save else R.drawable.heart)
+            vb.ivHearth.load(if (findMeal != null) R.drawable.save else R.drawable.heart)
         }
 
         viewModel.repositoryMealDetail.observe(viewLifecycleOwner) { meals: List<Meal> ->

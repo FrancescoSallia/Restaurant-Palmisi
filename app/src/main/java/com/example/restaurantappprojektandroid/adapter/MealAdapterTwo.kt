@@ -33,18 +33,18 @@ class MealAdapterTwo(
 
         val meal = dataset[position]
 
-        var isLiked = viewModel.likedMealIds.value?.contains(meal.idMeal) ?: false
+        var likedMeal = viewModel.likedMeals.value?.find { it.idMeal == meal.idMeal }
+        var isLiked = likedMeal != null
         holder.binding.likeButton.load(if (isLiked) R.drawable.save else R.drawable.heart)
         holder.binding.itemName.text = meal.mealName
         holder.binding.itemImage.load(meal.mealImg)
         holder.binding.itemPrice.text = meal.price.toString() + "€"
+
         holder.binding.likeButton.setOnClickListener {
 
             if (isLiked) {
-                Log.d("test", "mealAdapterTwo meal remove: ${meal.idMeal}")
                 viewModel.removeFromFavorites(meal)
             } else {
-                Log.d("test", "mealAdapterTwo meal added: ${meal.idMeal}")
 
                 viewModel.addToFavorites(meal)
 

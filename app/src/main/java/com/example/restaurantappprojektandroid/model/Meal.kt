@@ -8,15 +8,8 @@ data class Meal(
     @Json(name = "strMeal")
     var mealName: String = "",
     @Json(name = "strMealThumb")
-    var mealImg: String = ""
+    var mealImg: String = "",
 ) {
-
-    constructor(map: Map<String, Any>):this(){
-        idMeal = map["idMeal"] as String
-        mealName = map["mealName"] as String
-        mealImg = map["mealImg"] as String
-
-    }
 
     val price: Double
         get() = randomPrice()
@@ -34,7 +27,7 @@ data class Meal(
         return mapOf(
             "idMeal" to idMeal,
             "mealName" to mealName,
-            "mealImg" to mealImg
+            "mealImg" to mealImg,
         )
     }
 }

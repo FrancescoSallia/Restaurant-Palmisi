@@ -32,9 +32,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val currentUser: LiveData<FirebaseUser?>
         get() = _currentUser
 
-    private val _likedMealIds = MutableLiveData<MutableList<String>>()
-    val likedMealIds: LiveData<MutableList<String>>
-        get() = _likedMealIds
 
     private val _likedMeals = MutableLiveData<MutableList<Meal>>()
     val likedMeals: LiveData<MutableList<Meal>>
@@ -49,7 +46,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     //Firebase START!!
 
     init {
-
         getMealsByCategory("Beef")
 
         if (auth.currentUser != null) {
@@ -64,14 +60,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             if (error == null && value != null && value.exists()) {
                 val user = value.toObject(User::class.java)
                 if (user != null) {
-                    _likedMealIds.postValue(user.likedGerichteIds)
                     _likedMeals.postValue(user.likedGerichte)
                 }
             }
         }
     }
-
-
 
     // ein User erstellen
     private fun createUser(vorname: String, nachname: String): User {
@@ -237,23 +230,21 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
 
     fun addToFavorites(meal: Meal) {
-//        userRef.update("likedGerichteIds", FieldValue.arrayUnion(meal.idMeal))
-//        userRef.update("likedGerichte", FieldValue.arrayUnion(meal))
-        likedMeals.value?.add(meal)
-        updateMealFromFirestore()
+
+        if (!likedMeals.value!!.contains(meal)) {
+            likedMeals.value?.add(meal)
+            updateMealFromFirestore()
+        }
     }
 
     fun removeFromFavorites(meal: Meal) {
 
-//        userRef.update("likedGerichteIds", FieldValue.arrayRemove(meal.idMeal))
-//        userRef.update("likedGerichte", FieldValue.arrayRemove(meal))
-
         likedMeals.value?.remove(meal)
-         updateMealFromFirestore()
+        updateMealFromFirestore()
     }
 
 
-   private fun updateMealFromFirestore(){
+    private fun updateMealFromFirestore() {
 
         var newMap = mutableListOf<Map<String, Any>>()
 
@@ -262,7 +253,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
         var upToDate = mapOf(
             "likedGerichte" to newMap,
-            "likedGerichteIds" to likedMealIds.value
         )
         db.collection("users").document(auth.currentUser!!.uid).set(upToDate)
 

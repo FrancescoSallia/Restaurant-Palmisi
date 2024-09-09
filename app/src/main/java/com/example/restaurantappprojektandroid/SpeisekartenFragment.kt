@@ -52,13 +52,11 @@ class SpeisekartenFragment : Fragment() {
         }
 
         viewModel.repositoryMeals.observe(viewLifecycleOwner) {
-            //vb.rvGerichtListe.adapter = MealAdapter(it, viewModel)
             vb.rvGerichtListe.adapter = MealAdapterTwo(it, viewModel)
 
         }
 
         viewModel.repositorySearchMeal.observe(viewLifecycleOwner) {
-            // vb.rvGerichtListe.adapter = MealAdapter(it, viewModel)
             vb.rvGerichtListe.adapter = MealAdapterTwo(it, viewModel)
 
         }

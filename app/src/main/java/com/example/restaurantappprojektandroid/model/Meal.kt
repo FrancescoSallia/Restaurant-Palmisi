@@ -4,13 +4,19 @@ import android.util.Log
 import com.squareup.moshi.Json
 
 data class Meal(
-    val idMeal: String = "",
+    var idMeal: String = "",
     @Json(name = "strMeal")
-    val mealName: String = "",
+    var mealName: String = "",
     @Json(name = "strMealThumb")
-    val mealImg: String = ""
+    var mealImg: String = ""
 ) {
 
+    constructor(map: Map<String, Any>):this(){
+        idMeal = map["idMeal"] as String
+        mealName = map["mealName"] as String
+        mealImg = map["mealImg"] as String
+
+    }
 
     val price: Double
         get() = randomPrice()
@@ -23,5 +29,15 @@ data class Meal(
         val cent = (0..99).random()
         return "$euro.$cent".toDouble()
     }
+
+    fun toMap():Map<String, Any> {
+        return mapOf(
+            "idMeal" to idMeal,
+            "mealName" to mealName,
+            "mealImg" to mealImg
+        )
+    }
 }
+
+
 

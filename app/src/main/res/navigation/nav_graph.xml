@@ -10,10 +10,8 @@
         android:name="com.example.restaurantappprojektandroid.LogoFragment"
         android:label="LogoFragment" >
         <action
-            android:id="@+id/action_logoFragment_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:enterAnim="@anim/slide_in_right"
-             />
+            android:id="@+id/action_logoFragment_to_logInFragment"
+            app:destination="@id/logInFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"

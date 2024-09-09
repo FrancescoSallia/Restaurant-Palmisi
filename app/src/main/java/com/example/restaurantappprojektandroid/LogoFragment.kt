@@ -36,7 +36,7 @@ class LogoFragment : Fragment() {
 
         //delayed -> nach dem starten der app
         Handler(Looper.getMainLooper()).postDelayed({
-            findNavController().navigate(R.id.action_logoFragment_to_homeFragment)
+            findNavController().navigate(LogoFragmentDirections.actionLogoFragmentToLogInFragment())
         }, 3000)
 
 

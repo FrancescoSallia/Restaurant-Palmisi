@@ -28,16 +28,11 @@ class FavoriteAdapter(
 
         val meal = dataset[position]
 
-        val filteredMeals = viewModel.favoriteMealFilterTEST(meal)
-
-        var filteredName = filteredMeals?.mealName
-        var filteredPrice = filteredMeals?.price.toString() + "€"
-        var filteredImg = filteredMeals?.mealImg
 
         Log.d("TAG", "onBindViewHolder: ${viewModel.likedMeals.value}")
-        holder.binding.tvFavoriteName.text = filteredName
-        holder.binding.tvFavoritePrice.text = filteredPrice
-        holder.binding.ivFavoriteProfil.load(filteredImg)
+        holder.binding.tvFavoriteName.text = meal.mealName
+        holder.binding.tvFavoritePrice.text = meal.price.toString()+ "€"
+        holder.binding.ivFavoriteProfil.load(meal.mealImg)
 
 
 }

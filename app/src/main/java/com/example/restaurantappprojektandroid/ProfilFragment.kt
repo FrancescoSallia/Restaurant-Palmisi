@@ -45,15 +45,11 @@ class ProfilFragment : Fragment() {
             findNavController().navigate(ProfilFragmentDirections.actionProfilFragmentToLogInFragment())
         }
 
-        try {
+
             vb.btnProfilSetting.setOnClickListener {
                 Log.d("TAG", "currentUser BearbeitenBTN: ${viewModel.currentUser}")
 
                 findNavController().navigate(ProfilFragmentDirections.actionProfilFragmentToProiflSettingsFragment())
-            }
-        }catch (e: Exception) {
-            Log.d("TAG", "try catch: ${e.message}")
 
-
-    }
 }}
+}

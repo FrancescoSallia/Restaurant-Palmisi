@@ -53,6 +53,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         getMealsByCategory("Beef")
 
         if (auth.currentUser != null) {
+            Log.d("DEBUG", "User is logged in: ${auth.currentUser?.uid}")
             addSnapshotListenerForCurrentUser()
         }
     }
@@ -63,35 +64,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             if (error == null && value != null && value.exists()) {
                 val user = value.toObject(User::class.java)
                 if (user != null) {
-                    _likedMealIds.value = user.likedGerichteIds
-                    _likedMeals.value = user.likedGerichte
+                    _likedMealIds.postValue(user.likedGerichteIds)
+                    _likedMeals.postValue(user.likedGerichte)
                 }
             }
         }
     }
-
-    // Funktion die abstürzt
-    fun favoriteMealFilter(meal: Meal, position: Int): Meal {
-
-        var gefiltert = likedMeals.value!!.filter { likedMeals -> likedMeals.idMeal == meal.idMeal }
-
-        return gefiltert[position]
-
-    }
-
-    //Funktion zum ausprobieren!!
-    fun favoriteMealFilterTEST(meal: Meal): Meal? {
-        val gefiltert = likedMeals.value?.filter { likedMeal -> likedMeal.idMeal == meal.idMeal }
-
-        return if (gefiltert != null && gefiltert.isNotEmpty()) {
-            // Gib das erste gefundene Meal zurück, ignoriere die Position
-            gefiltert.firstOrNull()
-        } else {
-            // Wenn kein passendes Meal gefunden wurde, gib null zurück
-            null
-        }
-    }
-
 
 
 
@@ -171,12 +149,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
 
     fun logIn(email: String, password: String) {
+        Log.d("DEBUG", "logInFunktion: ${auth.currentUser?.uid}")
 
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener {
                 if (it.isSuccessful) {
 
-                    _currentUser.value = it.result.user
+                    _currentUser.postValue(it.result.user)
                     addSnapshotListenerForCurrentUser()
                 } else {
                     Toast.makeText(
@@ -258,17 +237,34 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
 
     fun addToFavorites(meal: Meal) {
-        userRef.update("likedGerichteIds", FieldValue.arrayUnion(meal.idMeal))
-        userRef.update("likedGerichte", FieldValue.arrayUnion(meal))
-
+//        userRef.update("likedGerichteIds", FieldValue.arrayUnion(meal.idMeal))
+//        userRef.update("likedGerichte", FieldValue.arrayUnion(meal))
+        likedMeals.value?.add(meal)
+        updateMealFromFirestore()
     }
 
     fun removeFromFavorites(meal: Meal) {
 
-        userRef.update("likedGerichteIds", FieldValue.arrayRemove(meal.idMeal))
-        userRef.update("likedGerichte", FieldValue.arrayRemove(meal))
+//        userRef.update("likedGerichteIds", FieldValue.arrayRemove(meal.idMeal))
+//        userRef.update("likedGerichte", FieldValue.arrayRemove(meal))
+
+        likedMeals.value?.remove(meal)
+         updateMealFromFirestore()
+    }
 
 
+   private fun updateMealFromFirestore(){
+
+        var newMap = mutableListOf<Map<String, Any>>()
+
+        likedMeals.value?.forEach {
+            newMap.add(it.toMap())
+        }
+        var upToDate = mapOf(
+            "likedGerichte" to newMap,
+            "likedGerichteIds" to likedMealIds.value
+        )
+        db.collection("users").document(auth.currentUser!!.uid).set(upToDate)
 
     }
 

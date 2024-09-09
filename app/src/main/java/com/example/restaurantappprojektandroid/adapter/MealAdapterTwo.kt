@@ -1,5 +1,6 @@
 package com.example.restaurantappprojektandroid.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
@@ -38,9 +39,13 @@ class MealAdapterTwo(
         holder.binding.itemImage.load(meal.mealImg)
         holder.binding.itemPrice.text = meal.price.toString() + "€"
         holder.binding.likeButton.setOnClickListener {
+
             if (isLiked) {
+                Log.d("test", "mealAdapterTwo meal remove: ${meal.idMeal}")
                 viewModel.removeFromFavorites(meal)
             } else {
+                Log.d("test", "mealAdapterTwo meal added: ${meal.idMeal}")
+
                 viewModel.addToFavorites(meal)
 
             }

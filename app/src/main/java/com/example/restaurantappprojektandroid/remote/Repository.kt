@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.restaurantappprojektandroid.model.Category
 import com.example.restaurantappprojektandroid.model.Meal
-import com.example.restaurantappprojektandroid.model.MealX
 
 class Repository(private val api: MealdbApi) {
 

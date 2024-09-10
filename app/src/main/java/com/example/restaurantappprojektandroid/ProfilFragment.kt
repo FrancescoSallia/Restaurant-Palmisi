@@ -33,12 +33,11 @@ class ProfilFragment : Fragment() {
         Log.d("TAG", "currentUser: ${viewModel.currentUser}")
         viewModel.likedMeals.observe(viewLifecycleOwner) {
 
-            vb.rvFavorite.adapter = FavoriteAdapter(it,viewModel)
+            vb.rvFavorite.adapter = FavoriteAdapter(it.reversed(),viewModel)
 
         }
 
         vb.btnAusloggen.setOnClickListener {
-            Log.d("TAG", "currentUserAusloggen: ${viewModel.currentUser}")
 
             viewModel.logOut()
             (requireActivity() as MainActivity).bottomNavigation.visibility = View.INVISIBLE
@@ -46,9 +45,17 @@ class ProfilFragment : Fragment() {
         }
 
             vb.btnProfilSetting.setOnClickListener {
-                Log.d("TAG", "currentUser BearbeitenBTN: ${viewModel.currentUser}")
 
                 findNavController().navigate(ProfilFragmentDirections.actionProfilFragmentToProiflSettingsFragment())
 
-}}
+}
+
+        viewModel.reservations.observe(viewLifecycleOwner) {
+           vb.tvTestProbe.text = it.first().kommentarGast
+            vb.tvTest2.text = it.first().datumFormatiert
+            vb.tvTest3.text = it.first().gaeste.toString()
+        }
+
+    }
+
 }

@@ -69,12 +69,12 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_profil_reservation_title" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:paddingTop="2dp"
             android:id="@+id/rv_favorite"
             android:layout_width="386dp"
             android:layout_height="208dp"
             android:layout_marginTop="24dp"
             android:orientation="horizontal"
+            android:paddingTop="2dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintEnd_toEndOf="@+id/tv_profil_favoriten_title"
             app:layout_constraintHorizontal_bias="0.509"
@@ -131,6 +131,37 @@
             app:layout_constraintEnd_toEndOf="@+id/btn_ausloggen"
             app:layout_constraintStart_toStartOf="@+id/btn_ausloggen"
             app:layout_constraintTop_toBottomOf="@+id/btn_ausloggen" />
+
+        <TextView
+            android:id="@+id/tv_test_probe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="@+id/rv_favorite"
+            app:layout_constraintHorizontal_bias="0.503"
+            app:layout_constraintStart_toStartOf="@+id/rv_favorite"
+            app:layout_constraintTop_toBottomOf="@+id/rv_favorite" />
+
+        <TextView
+            android:id="@+id/tv_test2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="@+id/tv_test_probe"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tv_test_probe"
+            app:layout_constraintTop_toBottomOf="@+id/tv_test_probe" />
+
+        <TextView
+            android:id="@+id/tv_test3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="@+id/rv_favorite"
+            app:layout_constraintStart_toEndOf="@+id/tv_test_probe"
+            tools:layout_editor_absoluteY="772dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

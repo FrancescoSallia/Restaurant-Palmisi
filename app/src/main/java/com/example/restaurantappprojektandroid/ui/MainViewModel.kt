@@ -26,169 +26,49 @@ import kotlinx.coroutines.launch
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
-
+    //
     private val repository = Repository(MealdbApi)
-    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
+    private var firestore = FirestoreRepository(getApplication())
+    val userRef = firestore.userRef
 
+    val currentUser = firestore.currentUser
 
-    private val _currentUser = MutableLiveData<FirebaseUser?>(auth.currentUser)
-    val currentUser: LiveData<FirebaseUser?>
-        get() = _currentUser
+    val likedMeals = firestore.likedMeals
 
+    val reservations = firestore.reservations
 
-    private val _likedMeals = MutableLiveData<MutableList<Meal>>()
-    val likedMeals: LiveData<MutableList<Meal>>
-        get() = _likedMeals
-
-
-    //Firebase datenbank (cloud)
-    val db = Firebase.firestore
-    lateinit var userRef: DocumentReference
-
-
-    //Firebase START!!
 
     init {
         getMealsByCategory("Beef")
-
-        if (auth.currentUser != null) {
-            Log.d("DEBUG", "User is logged in: ${auth.currentUser?.uid}")
-            addSnapshotListenerForCurrentUser()
-        }
-    }
-
-    private fun addSnapshotListenerForCurrentUser() {
-        userRef = db.collection("users").document(auth.currentUser!!.uid)
-        userRef.addSnapshotListener { value, error ->
-            if (error == null && value != null && value.exists()) {
-                val user = value.toObject(User::class.java)
-                if (user != null) {
-                    _likedMeals.postValue(user.likedGerichte)
-                }
-            }
-        }
-    }
-
-    // ein User erstellen
-    private fun createUser(vorname: String, nachname: String): User {
-        return User(vorname = vorname, nachname = nachname)
     }
 
     fun updateUser(vorname: String, nachname: String) {
-        if (auth.currentUser?.uid != null) {
-            userRef.update(
-                "vorname", vorname,
-                "nachname", nachname
-            ).addOnSuccessListener {
-                Log.d("Firestore", "Benutzerdaten erfolgreich aktualisiert")
-                Toast.makeText(getApplication(), "Benutzerdaten aktualisiert", Toast.LENGTH_SHORT)
-                    .show()
-            }.addOnFailureListener { e ->
-                Log.w("Firestore", "Fehler beim Aktualisieren der Benutzerdaten", e)
-                Toast.makeText(
-                    getApplication(),
-                    "Fehler beim Aktualisieren der Daten",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        } else {
-            Log.w("Firestore", "Kein angemeldeter Benutzer gefunden")
-            Toast.makeText(getApplication(), "Kein angemeldeter Benutzer", Toast.LENGTH_SHORT)
-                .show()
-        }
-    }
 
+        firestore.updateUser(vorname, nachname)
+    }
 
     fun deleteUser() {
-        val userId = auth.currentUser?.uid
-        if (userId != null) {
-            userRef = db.collection("users").document(userId)
-            userRef.delete().addOnSuccessListener {
-                Log.d("Firestore", "userRef: $userRef")
-                auth.currentUser?.delete()
-                    ?.addOnSuccessListener {
-                        Toast.makeText(getApplication(), "Benutzer gelöscht", Toast.LENGTH_SHORT)
-                            .show()
-                        logOut()
-                    }
-                    ?.addOnFailureListener {
-
-                        Toast.makeText(
-                            getApplication(),
-                            "Fehler beim Löschen des Benutzers",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-            }
-        } else {
-            Toast.makeText(getApplication(), "Kein angemeldeter Benutzer", Toast.LENGTH_SHORT)
-                .show()
-        }
-    }
-
-    //ein User speichern in die datenbank
-    fun postDokument(user: User) {
-        userRef.set(user).addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                Log.d("Firestore", "Dokument erstellt -> ID : ${task.result}")
-                Toast.makeText(getApplication(), "Dokument erstellt", Toast.LENGTH_SHORT).show()
-            } else {
-                Log.d(
-                    "Firestore",
-                    "Dokument nicht erstellt, schau in ViewModel -> ID : ${task.result}"
-                )
-
-                Toast.makeText(getApplication(), "Fehler beim erstellen", Toast.LENGTH_SHORT).show()
-            }
-        }
+        firestore.deleteUser()
     }
 
 
     fun logIn(email: String, password: String) {
-        Log.d("DEBUG", "logInFunktion: ${auth.currentUser?.uid}")
-
-        auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener {
-                if (it.isSuccessful) {
-
-                    _currentUser.postValue(it.result.user)
-                    addSnapshotListenerForCurrentUser()
-                } else {
-                    Toast.makeText(
-                        getApplication(),
-                        "Deine angegebenen daten sind falsch, oder du musst dich Registrieren.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
+        firestore.logIn(email, password)
     }
 
+
     fun logOut() {
-        auth.signOut()
-        _currentUser.postValue(null)
+        firestore.logOut()
     }
 
     fun registration(Email: String, password: String, vorname: String, nachname: String) {
-
-        auth.createUserWithEmailAndPassword(Email, password).addOnCompleteListener { newUser ->
-            if (newUser.isSuccessful) {
-
-                _currentUser.value = newUser.result.user
-                addSnapshotListenerForCurrentUser()
-                postDokument(createUser(vorname, nachname))
-
-            } else {
-                Toast.makeText(getApplication(), "Error", Toast.LENGTH_SHORT).show()
-            }
-        }
+        firestore.registration(Email, password, vorname, nachname)
     }
 
     fun continueAsGuest() {
-        auth.signInAnonymously()
-        _currentUser.postValue(auth.currentUser)
+        firestore.continueAsGuest()
     }
-
     //Firebase ENDE!!
 
     var selectedMealID = ""
@@ -234,34 +114,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
 
     fun addToFavorites(meal: Meal) {
-
-        if (!likedMeals.value!!.contains(meal)) {
-            likedMeals.value?.add(meal)
-            updateMealFromFirestore()
-        }
+        firestore.addToFavorites(meal)
     }
-
 
     fun removeFromFavorites(meal: Meal) {
-
-        likedMeals.value?.remove(meal)
-        updateMealFromFirestore()
+        firestore.removeFromFavorites(meal)
     }
 
-
-    private fun updateMealFromFirestore() {
-
-        var newMap = mutableListOf<Map<String, Any>>()
-
-        likedMeals.value?.forEach {
-            newMap.add(it.toMap())
-        }
-        var upToDate = mapOf(
-            "likedGerichte" to newMap,
-        )
-        db.collection("users").document(auth.currentUser!!.uid).set(upToDate)
-
-    }
 
 }
 

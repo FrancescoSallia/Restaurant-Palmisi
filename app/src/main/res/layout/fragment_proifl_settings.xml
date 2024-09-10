@@ -14,24 +14,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="143dp"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="36dp"
             android:layout_marginEnd="144dp"
             android:text="Settings"
             android:textSize="34sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.333"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/btn_save"
-            android:layout_width="166dp"
-            android:layout_height="51dp"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:backgroundTint="#0663EB"
             android:text="Save"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/btn_kontolöschen"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/btn_kontolöschen"
             app:layout_constraintTop_toBottomOf="@+id/btn_kontolöschen"
-            tools:layout_editor_absoluteX="122dp" />
+            app:strokeColor="#898888"
+            app:strokeWidth="1dp" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout"
@@ -69,25 +75,39 @@
 
         <ImageView
             android:id="@+id/imageView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="92dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="36dp"
+            android:background="@drawable/profilbild_circle"
             app:layout_constraintEnd_toEndOf="@+id/tv_Settings_title"
             app:layout_constraintStart_toStartOf="@+id/tv_Settings_title"
             app:layout_constraintTop_toBottomOf="@+id/tv_Settings_title"
-            tools:src="@tools:sample/avatars" />
+            tools:src="@drawable/profil" />
 
         <Button
             android:id="@+id/btn_kontolöschen"
-            android:layout_width="166dp"
-            android:layout_height="51dp"
-            android:layout_marginTop="216dp"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="68dp"
             android:backgroundTint="#FF0000"
             android:text="Konto Löschen"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="@+id/textInputLayout4"
-            app:layout_constraintHorizontal_bias="0.448"
+            app:layout_constraintHorizontal_bias="0.625"
             app:layout_constraintStart_toStartOf="@+id/textInputLayout4"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout4" />
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout4"
+            app:strokeColor="#898888"
+            app:strokeWidth="1dp" />
+
+        <TextView
+            android:id="@+id/placeholder_settings"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="TextView"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="@+id/btn_save"
+            app:layout_constraintStart_toStartOf="@+id/btn_save"
+            app:layout_constraintTop_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

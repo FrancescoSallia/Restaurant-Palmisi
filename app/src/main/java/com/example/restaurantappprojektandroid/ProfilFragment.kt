@@ -45,7 +45,6 @@ class ProfilFragment : Fragment() {
             findNavController().navigate(ProfilFragmentDirections.actionProfilFragmentToLogInFragment())
         }
 
-
             vb.btnProfilSetting.setOnClickListener {
                 Log.d("TAG", "currentUser BearbeitenBTN: ${viewModel.currentUser}")
 

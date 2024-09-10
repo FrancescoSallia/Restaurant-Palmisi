@@ -23,15 +23,14 @@
 
         <ImageView
             android:id="@+id/imageView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="141dp"
-            android:layout_marginTop="82dp"
-            android:layout_marginEnd="142dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/avatars" />
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="28dp"
+            android:background="@drawable/profilbild_circle"
+            app:layout_constraintEnd_toEndOf="@+id/tv_title_profil"
+            app:layout_constraintStart_toStartOf="@+id/tv_title_profil"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title_profil"
+            tools:src="@drawable/profil" />
 
         <TextView
             android:id="@+id/tv_profil_favoriten_title"
@@ -70,9 +69,10 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_profil_reservation_title" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:paddingTop="2dp"
             android:id="@+id/rv_favorite"
-            android:layout_width="375dp"
-            android:layout_height="wrap_content"
+            android:layout_width="386dp"
+            android:layout_height="208dp"
             android:layout_marginTop="24dp"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
@@ -84,27 +84,53 @@
 
         <Button
             android:id="@+id/btn_ausloggen"
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="44dp"
-            android:backgroundTint="#FA0606"
+            android:layout_marginTop="3dp"
+            android:backgroundTint="#ADFA0606"
             android:text="Ausloggen"
-            app:layout_constraintEnd_toStartOf="@+id/btn_profil_setting"
-            app:layout_constraintHorizontal_bias="0.227"
-            app:layout_constraintStart_toStartOf="@+id/rv_favorite"
-            app:layout_constraintTop_toBottomOf="@+id/rv_favorite" />
+            app:layout_constraintEnd_toEndOf="@+id/btn_profil_setting"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/btn_profil_setting"
+            app:layout_constraintTop_toBottomOf="@+id/btn_profil_setting"
+            app:strokeColor="#C9C6C6"
+            app:strokeWidth="1dp" />
 
         <Button
             android:id="@+id/btn_profil_setting"
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="44dp"
-            android:layout_marginEnd="32dp"
-            android:backgroundTint="#286BF4"
+            android:layout_marginTop="76dp"
+            android:backgroundTint="#B4286BF4"
             android:text="Profil Bearbeiten"
             app:layout_constraintEnd_toEndOf="@+id/rv_favorite"
-            app:layout_constraintTop_toBottomOf="@+id/rv_favorite" />
+            app:layout_constraintHorizontal_bias="0.509"
+            app:layout_constraintStart_toStartOf="@+id/rv_favorite"
+            app:layout_constraintTop_toBottomOf="@+id/rv_favorite"
+            app:strokeColor="#C9C6C6"
+            app:strokeWidth="1dp" />
+
+        <TextView
+            android:id="@+id/tv_title_profil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:text="Profil"
+            android:textSize="34sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/placeholder_profil"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:text="placeholder!"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="@+id/btn_ausloggen"
+            app:layout_constraintStart_toStartOf="@+id/btn_ausloggen"
+            app:layout_constraintTop_toBottomOf="@+id/btn_ausloggen" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

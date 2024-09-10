@@ -1,12 +1,16 @@
 package com.example.restaurantappprojektandroid.ui
 
+import android.app.Activity
 import android.app.Application
+import android.content.Intent
+import android.net.Uri
+import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
+import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.restaurantappprojektandroid.model.Meal
 import com.example.restaurantappprojektandroid.model.User
@@ -15,11 +19,9 @@ import com.example.restaurantappprojektandroid.remote.Repository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
-import kotlin.reflect.jvm.internal.impl.incremental.components.Position
 
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
@@ -27,6 +29,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository = Repository(MealdbApi)
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
+
+
 
     private val _currentUser = MutableLiveData<FirebaseUser?>(auth.currentUser)
     val currentUser: LiveData<FirebaseUser?>
@@ -236,6 +240,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             updateMealFromFirestore()
         }
     }
+
 
     fun removeFromFavorites(meal: Meal) {
 

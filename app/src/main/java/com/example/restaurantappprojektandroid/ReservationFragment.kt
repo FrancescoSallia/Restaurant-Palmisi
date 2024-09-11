@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.example.restaurantappprojektandroid.adapter.PersonenanzahlAdapter
+import com.example.restaurantappprojektandroid.adapter.UhrzeitenVorschlägeAdapter
 import com.example.restaurantappprojektandroid.ui.FirestoreRepository
 import com.example.restaurantappprojektandroid.ui.MainViewModel
 import com.example.restuarantprojektapp.R
@@ -29,6 +30,7 @@ class ReservationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         vb.rvPersonenanzahl.adapter = PersonenanzahlAdapter(viewModel.ReservationDatasources.loadAnzahlAnGaesten(), viewModel)
+        vb.rvUhrzeitenVorschlGe.adapter = UhrzeitenVorschlägeAdapter(viewModel.ReservationDatasources.loadUhrzeiten(),viewModel)
         viewModel.reservations.observe(viewLifecycleOwner) {
 
 

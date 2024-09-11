@@ -3,7 +3,6 @@ package com.example.restaurantappprojektandroid.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.restaurantappprojektandroid.model.Personenanzahl
 import com.example.restaurantappprojektandroid.ui.MainViewModel
 import com.example.restuarantprojektapp.databinding.PersonenanzahlItemBinding
 

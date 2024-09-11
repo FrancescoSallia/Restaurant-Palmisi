@@ -1,6 +1,7 @@
 package com.example.restaurantappprojektandroid.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.restaurantappprojektandroid.ui.MainViewModel
@@ -28,6 +29,14 @@ class PersonenanzahlAdapter(
     override fun onBindViewHolder(holder: AnzahlGaeste, position: Int) {
 
         val anzahl = dataset[position]
+        val itemSelected = holder.itemView
+
+
+        holder.itemView.setOnClickListener {
+
+            itemSelected.isSelected = !itemSelected.isSelected
+
+        }
 
         holder.vb.tvPersonenanzahlNumber.text = anzahl.toString()
     }

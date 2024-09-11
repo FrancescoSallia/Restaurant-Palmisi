@@ -6,6 +6,8 @@ import android.content.Intent
 import android.net.Uri
 import android.provider.MediaStore
 import android.util.Log
+import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.lifecycle.AndroidViewModel
@@ -40,6 +42,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val likedMeals = firestore.likedMeals
 
     val reservations = firestore.reservations
+
 
 
     init {

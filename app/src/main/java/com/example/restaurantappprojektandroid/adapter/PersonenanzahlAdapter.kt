@@ -12,6 +12,8 @@ class PersonenanzahlAdapter(
     val viewModel: MainViewModel
 ):RecyclerView.Adapter<PersonenanzahlAdapter.AnzahlGaeste>() {
 
+    var selectedPosition = RecyclerView.NO_POSITION
+
     inner class AnzahlGaeste(val vb: PersonenanzahlItemBinding):RecyclerView.ViewHolder(vb.root)
 
 
@@ -31,13 +33,15 @@ class PersonenanzahlAdapter(
         val anzahl = dataset[position]
         val itemSelected = holder.itemView
 
+       itemSelected.isSelected = position == selectedPosition
 
+hier muss noch was bearbeitet werden!!!
         holder.itemView.setOnClickListener {
 
             itemSelected.isSelected = !itemSelected.isSelected
 
-
         }
+
 
         holder.vb.tvPersonenanzahlNumber.text = anzahl.toString()
     }

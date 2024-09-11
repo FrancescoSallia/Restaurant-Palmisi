@@ -44,6 +44,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val reservations = firestore.reservations
 
 
+    fun selectedItem(){
+
+    }
 
     init {
         getMealsByCategory("Beef")

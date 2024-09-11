@@ -11,9 +11,9 @@ class PersonenanzahlAdapter(
     val dataset : List<Int>,
     val viewModel: MainViewModel
 ):RecyclerView.Adapter<PersonenanzahlAdapter.AnzahlGaeste>() {
-    inner class AnzahlGaeste(val vb: PersonenanzahlItemBinding):RecyclerView.ViewHolder(vb.root) {
 
-    }
+    inner class AnzahlGaeste(val vb: PersonenanzahlItemBinding):RecyclerView.ViewHolder(vb.root)
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnzahlGaeste {
 
@@ -35,6 +35,7 @@ class PersonenanzahlAdapter(
         holder.itemView.setOnClickListener {
 
             itemSelected.isSelected = !itemSelected.isSelected
+
 
         }
 

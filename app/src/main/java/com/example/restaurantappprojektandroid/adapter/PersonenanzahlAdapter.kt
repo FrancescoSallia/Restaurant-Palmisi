@@ -8,7 +8,7 @@ import com.example.restaurantappprojektandroid.ui.MainViewModel
 import com.example.restuarantprojektapp.databinding.PersonenanzahlItemBinding
 
 class PersonenanzahlAdapter(
-    val dataset : List<Personenanzahl>,
+    val dataset : List<Int>,
     val viewModel: MainViewModel
 ):RecyclerView.Adapter<PersonenanzahlAdapter.AnzahlGaeste>() {
     inner class AnzahlGaeste(val vb: PersonenanzahlItemBinding):RecyclerView.ViewHolder(vb.root) {
@@ -30,6 +30,6 @@ class PersonenanzahlAdapter(
 
         val anzahl = dataset[position]
 
-        holder.vb.tvPersonenanzahlNumber.text = anzahl.anzahlAnGaesten.toString()
+        holder.vb.tvPersonenanzahlNumber.text = anzahl.toString()
     }
 }

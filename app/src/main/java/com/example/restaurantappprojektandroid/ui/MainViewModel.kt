@@ -12,7 +12,9 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.restaurantappprojektandroid.datasource.ReservationDatasource
 import com.example.restaurantappprojektandroid.model.Meal
+import com.example.restaurantappprojektandroid.model.Reservation
 import com.example.restaurantappprojektandroid.model.User
 import com.example.restaurantappprojektandroid.remote.MealdbApi
 import com.example.restaurantappprojektandroid.remote.Repository
@@ -28,6 +30,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     //
     private val repository = Repository(MealdbApi)
+    val ReservationDatasources = ReservationDatasource()
 
     private var firestore = FirestoreRepository(getApplication())
     val userRef = firestore.userRef

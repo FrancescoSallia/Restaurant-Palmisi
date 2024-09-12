@@ -35,8 +35,12 @@ class ReservationFragment : Fragment() {
         vb.rvUhrzeitenVorschlGe.adapter = UhrzeitenVorschlägeAdapter(viewModel.ReservationDatasources.loadUhrzeiten(),viewModel)
 
         //Kalender funktionen
-        vb.calendarView.date = System.currentTimeMillis()
-        vb.calendarView.minDate.times( System.currentTimeMillis())
+
+        val aktuelleZeit = System.currentTimeMillis()
+
+        vb.calendarView.date = aktuelleZeit
+        vb.calendarView.minDate = aktuelleZeit
+
 
 
         viewModel.reservations.observe(viewLifecycleOwner) {

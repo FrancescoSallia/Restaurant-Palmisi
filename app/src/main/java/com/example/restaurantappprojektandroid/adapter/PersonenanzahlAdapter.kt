@@ -31,18 +31,20 @@ class PersonenanzahlAdapter(
     override fun onBindViewHolder(holder: AnzahlGaeste, position: Int) {
 
         val anzahl = dataset[position]
-        val itemSelected = holder.itemView
 
-       itemSelected.isSelected = position == selectedPosition
-
-hier muss noch was bearbeitet werden!!!
-        holder.itemView.setOnClickListener {
-
-            itemSelected.isSelected = !itemSelected.isSelected
-
+        //Der ganze block unten , ist für die farb markierten Personenanzahlen, wenn man draufklickt
+        holder.vb.apply {
+            tvPersonenanzahlNumber.text = anzahl.toString()
+            root.isSelected = position == selectedPosition
         }
 
-
-        holder.vb.tvPersonenanzahlNumber.text = anzahl.toString()
+        holder.itemView.setOnClickListener {
+            if (selectedPosition != position) {
+                val previousSelected = selectedPosition
+                selectedPosition = position
+                notifyItemChanged(previousSelected)
+                notifyItemChanged(selectedPosition)
+            }
+        }
     }
-}
+    }

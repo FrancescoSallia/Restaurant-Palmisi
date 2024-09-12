@@ -1,6 +1,5 @@
 package com.example.restaurantappprojektandroid.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
@@ -11,12 +10,12 @@ import com.example.restaurantappprojektandroid.ui.MainViewModel
 import com.example.restuarantprojektapp.R
 import com.example.restuarantprojektapp.databinding.MealmenuItemBinding
 
-class MealAdapterTwo(
+class MealAdapter(
 
     val dataset: List<Meal>,
     val viewModel: MainViewModel
 
-): RecyclerView.Adapter<MealAdapterTwo.MealMenuViewholder>() {
+): RecyclerView.Adapter<MealAdapter.MealMenuViewholder>() {
     inner class MealMenuViewholder(val binding: MealmenuItemBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MealMenuViewholder {

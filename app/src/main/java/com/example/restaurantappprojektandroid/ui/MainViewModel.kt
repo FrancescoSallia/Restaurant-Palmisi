@@ -26,6 +26,7 @@ import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
+import kotlin.reflect.jvm.internal.impl.incremental.components.Position
 
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
@@ -44,9 +45,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val reservations = firestore.reservations
 
 
-    fun selectedItem(){
-
-    }
 
     init {
         getMealsByCategory("Beef")

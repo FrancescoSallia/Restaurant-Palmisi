@@ -12,6 +12,7 @@ class UhrzeitenVorschlägeAdapter(
 ) : RecyclerView.Adapter<UhrzeitenVorschlägeAdapter.UhrzeitenViewHolder>() {
     inner class UhrzeitenViewHolder(val vb: UhrzeitVorschlagItemBinding) :
         RecyclerView.ViewHolder(vb.root)
+    private var selectedPosition = RecyclerView.NO_POSITION
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UhrzeitenViewHolder {
         val vb: UhrzeitVorschlagItemBinding =
@@ -24,9 +25,25 @@ class UhrzeitenVorschlägeAdapter(
     }
 
     override fun onBindViewHolder(holder: UhrzeitenViewHolder, position: Int) {
+
         val uhrzeit = viewModel.ReservationDatasources.loadUhrzeiten()[position]
 
-        holder.vb.tvZeitNumber.text =  uhrzeit
+
+        //Der ganze block unten , ist für die farb markierten uhrzeiten, wenn man draufklickt
+        holder.vb.apply {
+            holder.vb.tvZeitNumber.text =  uhrzeit
+            holder.vb.root.isSelected = position == selectedPosition
+        }
+
+        holder.itemView.setOnClickListener {
+           if (selectedPosition != position){
+               val früherePosition = selectedPosition
+               notifyItemChanged(früherePosition)
+               selectedPosition = position
+               notifyItemChanged(selectedPosition)
+           }
+        }
+
 
     }
 

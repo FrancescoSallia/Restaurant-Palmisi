@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.fragment.app.activityViewModels
 import com.example.restaurantappprojektandroid.adapter.KategorieAdapter
-import com.example.restaurantappprojektandroid.adapter.MealAdapterTwo
+import com.example.restaurantappprojektandroid.adapter.MealAdapter
 import com.example.restaurantappprojektandroid.ui.MainViewModel
 import com.example.restuarantprojektapp.databinding.FragmentSpeisekartenBinding
 
@@ -52,12 +52,12 @@ class SpeisekartenFragment : Fragment() {
         }
 
         viewModel.repositoryMeals.observe(viewLifecycleOwner) {
-            vb.rvGerichtListe.adapter = MealAdapterTwo(it, viewModel)
+            vb.rvGerichtListe.adapter = MealAdapter(it, viewModel)
 
         }
 
         viewModel.repositorySearchMeal.observe(viewLifecycleOwner) {
-            vb.rvGerichtListe.adapter = MealAdapterTwo(it, viewModel)
+            vb.rvGerichtListe.adapter = MealAdapter(it, viewModel)
 
         }
 

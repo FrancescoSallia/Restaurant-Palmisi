@@ -14,7 +14,7 @@ class ReservationDatasource() {
                     (0..3).forEach { minutes ->
                             var viertelStunde = minutes * 15
                             if (minutes == 0){
-//                                var minutenString = "0"
+                                var minutenString = "0"
                             }
                            val time = "$hour:$minutes"
                             uhrzeiten.add(time)

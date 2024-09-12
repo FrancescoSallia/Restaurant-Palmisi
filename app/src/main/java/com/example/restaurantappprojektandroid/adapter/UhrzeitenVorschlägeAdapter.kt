@@ -1,5 +1,6 @@
 package com.example.restaurantappprojektandroid.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -41,6 +42,7 @@ class UhrzeitenVorschlägeAdapter(
                notifyItemChanged(früherePosition)
                selectedPosition = position
                notifyItemChanged(selectedPosition)
+               Log.i("TAG", "UhrzeitenVorschlägeAdapter Selected position: $selectedPosition")
            }
         }
 

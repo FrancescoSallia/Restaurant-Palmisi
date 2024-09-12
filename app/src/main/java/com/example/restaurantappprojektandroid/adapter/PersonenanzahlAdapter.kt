@@ -1,5 +1,6 @@
 package com.example.restaurantappprojektandroid.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -44,6 +45,8 @@ class PersonenanzahlAdapter(
                 selectedPosition = position
                 notifyItemChanged(previousSelected)
                 notifyItemChanged(selectedPosition)
+                Log.i("TAG", "PersonenanzahlAdapter Selected position: $selectedPosition")
+
             }
         }
     }

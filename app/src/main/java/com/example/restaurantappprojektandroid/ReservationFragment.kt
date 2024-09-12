@@ -1,6 +1,8 @@
 package com.example.restaurantappprojektandroid
 
+import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -35,11 +37,12 @@ class ReservationFragment : Fragment() {
         vb.rvUhrzeitenVorschlGe.adapter = UhrzeitenVorschlägeAdapter(viewModel.ReservationDatasources.loadUhrzeiten(),viewModel)
 
         //Kalender funktionen
-
         val aktuelleZeit = System.currentTimeMillis()
 
         vb.calendarView.date = aktuelleZeit
         vb.calendarView.minDate = aktuelleZeit
+        
+
 
 
 

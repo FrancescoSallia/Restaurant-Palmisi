@@ -1,32 +1,14 @@
 package com.example.restaurantappprojektandroid.ui
 
-import android.app.Activity
 import android.app.Application
-import android.content.Intent
-import android.net.Uri
-import android.provider.MediaStore
-import android.util.Log
-import android.view.View
-import android.widget.TextView
-import android.widget.Toast
-import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.restaurantappprojektandroid.datasource.ReservationDatasource
-import com.example.restaurantappprojektandroid.model.Meal
-import com.example.restaurantappprojektandroid.model.Reservation
-import com.example.restaurantappprojektandroid.model.User
-import com.example.restaurantappprojektandroid.remote.MealdbApi
-import com.example.restaurantappprojektandroid.remote.Repository
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
+import com.example.restaurantappprojektandroid.data.FirestoreRepository
+import com.example.restaurantappprojektandroid.data.datasource.ReservationDatasource
+import com.example.restaurantappprojektandroid.data.model.Meal
+import com.example.restaurantappprojektandroid.data.remote.MealdbApi
+import com.example.restaurantappprojektandroid.data.remote.Repository
 import kotlinx.coroutines.launch
-import kotlin.reflect.jvm.internal.impl.incremental.components.Position
 
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
@@ -60,8 +42,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
 
-    fun logIn(email: String, password: String) {
-        firestore.logIn(email, password)
+    fun logIn(email: String, password: String, onSuccess: () -> Unit, onFailure: () -> Unit) {
+        firestore.logIn(email, password, onSuccess, onFailure)
     }
 
 

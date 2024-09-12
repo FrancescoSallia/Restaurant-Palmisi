@@ -4,15 +4,22 @@
     android:id="@+id/frameLayout4"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.restaurantappprojektandroid.ReservationFragment">
+    tools:context="com.example.restaurantappprojektandroid.ui.reservation.ReservationFragment">
 
     <CalendarView
         android:id="@+id/calendarView"
+        style="@android:style/Widget.Material.CalendarView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:background="#F8F0D8"
+        android:focusedMonthDateColor="#673AB7"
+        android:foregroundTint="#3F51B5"
+        android:selectedWeekBackgroundColor="#A31B1B"
+        android:unfocusedMonthDateColor="#FFEB3B"
         android:weekDayTextAppearance="@color/white"
+        android:weekNumberColor="#FFEB3B"
+        android:weekSeparatorLineColor="#03A9F4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

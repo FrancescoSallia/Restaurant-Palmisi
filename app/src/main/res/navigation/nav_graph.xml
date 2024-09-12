@@ -15,11 +15,11 @@
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.restaurantappprojektandroid.HomeFragment"
+        android:name="com.example.restaurantappprojektandroid.ui.home.HomeFragment"
         android:label="HomeFragment" />
     <fragment
         android:id="@+id/speisekartenFragment2"
-        android:name="com.example.restaurantappprojektandroid.SpeisekartenFragment"
+        android:name="com.example.restaurantappprojektandroid.ui.meal.SpeisekartenFragment"
         android:label="SpeisekartenFragment">
         <action
             android:id="@+id/action_speisekartenFragment2_to_mealDetailFragment"
@@ -28,12 +28,12 @@
     </fragment>
     <fragment
         android:id="@+id/reservationFragment"
-        android:name="com.example.restaurantappprojektandroid.ReservationFragment"
+        android:name="com.example.restaurantappprojektandroid.ui.reservation.ReservationFragment"
         android:label="fragment_reservation"
         tools:layout="@layout/fragment_reservation" />
     <fragment
         android:id="@+id/profilFragment"
-        android:name="com.example.restaurantappprojektandroid.ProfilFragment"
+        android:name="com.example.restaurantappprojektandroid.ui.profile.ProfilFragment"
         android:label="fragment_profil"
         tools:layout="@layout/fragment_profil" >
         <action
@@ -45,7 +45,7 @@
     </fragment>
     <fragment
         android:id="@+id/proiflSettingsFragment"
-        android:name="com.example.restaurantappprojektandroid.ProiflSettingsFragment"
+        android:name="com.example.restaurantappprojektandroid.ui.profile.ProiflSettingsFragment"
         android:label="fragment_proifl_settings"
         tools:layout="@layout/fragment_proifl_settings" >
         <action
@@ -57,7 +57,7 @@
     </fragment>
     <fragment
         android:id="@+id/logInFragment"
-        android:name="com.example.restaurantappprojektandroid.LogInFragment"
+        android:name="com.example.restaurantappprojektandroid.ui.authentification.LogInFragment"
         android:label="fragment_log_in"
         tools:layout="@layout/fragment_log_in" >
         <action
@@ -69,7 +69,7 @@
     </fragment>
     <fragment
         android:id="@+id/registrierenFragment"
-        android:name="com.example.restaurantappprojektandroid.RegistrierenFragment"
+        android:name="com.example.restaurantappprojektandroid.ui.authentification.RegistrierenFragment"
         android:label="fragment_registrieren"
         tools:layout="@layout/fragment_registrieren" >
         <action
@@ -78,7 +78,7 @@
     </fragment>
     <fragment
         android:id="@+id/mealDetailFragment"
-        android:name="com.example.restaurantappprojektandroid.MealDetailFragment"
+        android:name="com.example.restaurantappprojektandroid.ui.meal.MealDetailFragment"
         android:label="fragment_meal_detail"
         tools:layout="@layout/fragment_meal_detail" />
 </navigation>

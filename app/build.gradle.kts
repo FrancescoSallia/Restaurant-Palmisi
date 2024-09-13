@@ -9,6 +9,10 @@ plugins {
 }
 
 android {
+    defaultConfig{
+
+        vectorDrawables.useSupportLibrary = true
+    }
     namespace = "com.example.restuarantprojektapp"
     compileSdk = 34
 

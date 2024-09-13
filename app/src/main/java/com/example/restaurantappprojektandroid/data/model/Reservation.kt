@@ -4,6 +4,7 @@ import com.google.firebase.Timestamp
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
+import java.util.Date
 
 data class Reservation(
     val reservationId: String = "",
@@ -27,7 +28,19 @@ data class Reservation(
         fun Timestamp.toLocalDateTime(): LocalDateTime {
             return LocalDateTime.ofInstant(this.toDate().toInstant(), ZoneId.systemDefault())
         }
+        fun fromLocalDateTime(localDateTime: LocalDateTime): Timestamp {
+            return Timestamp(Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant()))
+        }
     }
 
+    fun toMap(): Map<String, Any> {
+        return mapOf(
+
+            "reservationId" to reservationId,
+            "datum" to fromLocalDateTime(datum),
+            "gaeste" to gaeste,
+            "kommentarGast" to kommentarGast
+        )
+    }
 
 }

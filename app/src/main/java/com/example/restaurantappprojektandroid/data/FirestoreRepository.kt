@@ -35,6 +35,25 @@ class FirestoreRepository(val context: Context) {
     lateinit var colRef: CollectionReference
 
 
+
+    fun postUserReservation(reservation:Reservation){
+        colRef = db.collection("reservations")
+        colRef.add(reservation.toMap())
+            .addOnSuccessListener {
+                Toast.makeText(context, "Reservation erfolgreich gespeichert", Toast.LENGTH_SHORT)
+                    .show()
+            }
+            .addOnFailureListener {
+                Toast.makeText(
+                    context,
+                    "Reservation konnte nicht gespeichert werden",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
+    }
+
+
     //Firebase START!!
 
     init {

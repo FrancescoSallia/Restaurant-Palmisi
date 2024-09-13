@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.restaurantappprojektandroid.data.FirestoreRepository
 import com.example.restaurantappprojektandroid.data.datasource.ReservationDatasource
 import com.example.restaurantappprojektandroid.data.model.Meal
+import com.example.restaurantappprojektandroid.data.model.Reservation
 import com.example.restaurantappprojektandroid.data.remote.MealdbApi
 import com.example.restaurantappprojektandroid.data.remote.Repository
 import kotlinx.coroutines.launch
@@ -28,7 +29,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     val reservations = firestore.reservations
 
-    private val _selectedPersonNumber = MutableLiveData<Int>()
+    private val _selectedPersonNumber = MutableLiveData<Int>(1)
     val selectedPersonNumber: LiveData<Int>
         get() = _selectedPersonNumber
 
@@ -36,10 +37,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val selectedTime: LiveData<String>
         get() = _selectedTime
 
+
+    fun postReservation(reservation: Reservation) {
+        firestore.postUserReservation(reservation)
+    }
+
     fun selectedPersonNumber(anzahl:Int):Int{
 
         val wert = anzahl
-          _selectedPersonNumber.postValue(wert)
+        _selectedPersonNumber.postValue(wert)
         return wert
     }
 

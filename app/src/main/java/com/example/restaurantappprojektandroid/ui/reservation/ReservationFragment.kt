@@ -1,23 +1,20 @@
 package com.example.restaurantappprojektandroid.ui.reservation
 
 import android.app.AlertDialog
-import android.app.TimePickerDialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CalendarView
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.example.restaurantappprojektandroid.data.model.Reservation
+import com.example.restaurantappprojektandroid.ui.MainViewModel
 import com.example.restaurantappprojektandroid.ui.adapter.PersonenanzahlAdapter
 import com.example.restaurantappprojektandroid.ui.adapter.UhrzeitenVorschlägeAdapter
-import com.example.restaurantappprojektandroid.ui.MainViewModel
-import com.example.restuarantprojektapp.R
 import com.example.restuarantprojektapp.databinding.FragmentReservationBinding
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import java.util.Calendar
 
 class ReservationFragment : Fragment() {
 
@@ -88,9 +85,14 @@ class ReservationFragment : Fragment() {
                 """
                 )
                 builder.setPositiveButton("OK") { dialog, _ ->
+
+                    var currentDateConverted = LocalDate(10,12, 2023)
+
+
+                   var newReservation =  Reservation("",currentDateConverted,personenNumber,"")
+                    viewModel.postReservation(newReservation)
                     dialog.dismiss()
-                    Toast.makeText(requireContext(), "Reservierung erfolgreich", Toast.LENGTH_SHORT)
-                        .show()
+
                 }
                 builder.setNegativeButton("Abbrechen") { dialog, _ ->
                     dialog.dismiss()

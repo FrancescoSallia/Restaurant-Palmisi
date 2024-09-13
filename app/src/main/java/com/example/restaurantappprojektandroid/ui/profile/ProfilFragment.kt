@@ -51,9 +51,7 @@ class ProfilFragment : Fragment() {
 }
 
         viewModel.reservations.observe(viewLifecycleOwner) {
-           vb.tvTestProbe.text = it.first().kommentarGast
-            vb.tvTest2.text = it.first().datumFormatiert
-            vb.tvTest3.text = it.first().gaeste.toString()
+           hier kommt adapter rein!!
         }
 
     }

@@ -8,7 +8,7 @@ import java.util.Date
 
 data class Reservation(
     val reservationId: String = "",
-    val datum: LocalDateTime,
+    val datum: String = "",
     val gaeste :Int = 0,
     val kommentarGast: String = ""
 )
@@ -19,25 +19,17 @@ data class Reservation(
     get() = datum.format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"))
     constructor(data: Map<String, Any>) : this(
         reservationId = data["reservationId"] as String,
-        datum = (data["datum"] as Timestamp).toLocalDateTime(),
+        datum = (data["datum"] as String),
         gaeste = (data["gaeste"]as Long).toInt(),
         kommentarGast = data["kommentarGast"] as String
     )
 
-    companion object {
-        fun Timestamp.toLocalDateTime(): LocalDateTime {
-            return LocalDateTime.ofInstant(this.toDate().toInstant(), ZoneId.systemDefault())
-        }
-        fun fromLocalDateTime(localDateTime: LocalDateTime): Timestamp {
-            return Timestamp(Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant()))
-        }
-    }
 
     fun toMap(): Map<String, Any> {
         return mapOf(
 
             "reservationId" to reservationId,
-            "datum" to fromLocalDateTime(datum),
+            "datum" to datum,
             "gaeste" to gaeste,
             "kommentarGast" to kommentarGast
         )

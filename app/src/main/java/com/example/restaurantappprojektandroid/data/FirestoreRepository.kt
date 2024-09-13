@@ -37,7 +37,7 @@ class FirestoreRepository(val context: Context) {
 
 
     fun postUserReservation(reservation:Reservation){
-        colRef = db.collection("reservations")
+        colRef = db.collection("reservation").document(auth.currentUser!!.uid).collection("reservierung")
         colRef.add(reservation.toMap())
             .addOnSuccessListener {
                 Toast.makeText(context, "Reservation erfolgreich gespeichert", Toast.LENGTH_SHORT)
@@ -77,7 +77,7 @@ class FirestoreRepository(val context: Context) {
     }
 
     private fun snapShotListenerForReservation(){
-        colRef = db.collection("reservation").document("lqpQfGPPMDirxBObfydN").collection("reservierung1")
+        colRef = db.collection("reservation").document(auth.currentUser!!.uid).collection("reservierung")
         colRef.addSnapshotListener { value, error ->
             if (error == null && value != null) {
                 val tempList = mutableListOf<Reservation>()

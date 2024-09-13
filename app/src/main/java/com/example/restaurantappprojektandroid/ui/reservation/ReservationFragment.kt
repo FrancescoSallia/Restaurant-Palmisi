@@ -14,6 +14,7 @@ import com.example.restaurantappprojektandroid.ui.adapter.UhrzeitenVorschlägeAd
 import com.example.restuarantprojektapp.databinding.FragmentReservationBinding
 import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
 class ReservationFragment : Fragment() {
@@ -86,10 +87,8 @@ class ReservationFragment : Fragment() {
                 )
                 builder.setPositiveButton("OK") { dialog, _ ->
 
-                    var currentDateConverted = LocalDate(10,12, 2023)
-
-
-                   var newReservation =  Reservation("",currentDateConverted,personenNumber,"")
+                    var newTime = "$currentTime:$zeit"
+                   var newReservation =  Reservation("",newTime,personenNumber,"")
                     viewModel.postReservation(newReservation)
                     dialog.dismiss()
 

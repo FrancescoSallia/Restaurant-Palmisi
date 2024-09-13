@@ -51,7 +51,7 @@ class ProfilFragment : Fragment() {
 }
 
         viewModel.reservations.observe(viewLifecycleOwner) {
-           hier kommt adapter rein!!
+           TODO()
         }
 
     }

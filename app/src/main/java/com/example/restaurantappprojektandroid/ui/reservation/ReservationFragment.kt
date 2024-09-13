@@ -46,12 +46,17 @@ class ReservationFragment : Fragment() {
         val month = calendar.get(Calendar.MONTH)
         val year = calendar.get(Calendar.YEAR)
 
+        val test = calendar.set(year, month, datum)
+
+
+
+
 
         val aktuelleZeit = System.currentTimeMillis()
 
         vb.calendarView.date = aktuelleZeit
         vb.calendarView.minDate = aktuelleZeit
-        vb.reservationTitleDatum.text = "Datum: ${vb.calendarView.date}"
+        vb.reservationTitleDatum.text = test.toString() Hier funktioniert es nicht
 //        vb.tvDatumAktuellSelected.text = vb.calendarView.isSelected.toString()
 
         vb.alertView.visibility = View.INVISIBLE

@@ -46,7 +46,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun selectedTime(time:String):String{
 
         val zeit = time
-          _selectedTime.postValue(zeit)
+        _selectedTime.postValue(zeit)
         return zeit
     }
 

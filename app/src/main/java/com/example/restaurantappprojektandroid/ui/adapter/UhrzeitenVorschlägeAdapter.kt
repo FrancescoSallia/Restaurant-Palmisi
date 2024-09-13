@@ -34,7 +34,7 @@ class UhrzeitenVorschlägeAdapter(
             holder.vb.tvZeitNumber.text =  zeit
 
             //die zeit variable wird weitergegeben um den wert raus zunehmen und im fragment zu sehen!
-            viewModel.selectedTime(zeit)
+
 
             holder.vb.root.isSelected = position == selectedPosition
         }
@@ -45,6 +45,7 @@ class UhrzeitenVorschlägeAdapter(
                notifyItemChanged(früherePosition)
                selectedPosition = position
                notifyItemChanged(selectedPosition)
+               viewModel.selectedTime(zeit)
            }
         }
 

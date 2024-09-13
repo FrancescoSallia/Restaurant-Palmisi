@@ -19,5 +19,10 @@
         <item name="cornerSize">10%</item>
     </style>
 
+    <style name="calendar_selected_style">
+        <item name="android:state_selected">true</item>
+        <item name="android:color">#E4702C17</item>
+    </style>
+
 
 </resources>

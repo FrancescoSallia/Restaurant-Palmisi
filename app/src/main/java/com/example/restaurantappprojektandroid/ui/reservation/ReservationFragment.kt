@@ -15,6 +15,8 @@ import com.example.restaurantappprojektandroid.ui.adapter.UhrzeitenVorschlägeAd
 import com.example.restaurantappprojektandroid.ui.MainViewModel
 import com.example.restuarantprojektapp.R
 import com.example.restuarantprojektapp.databinding.FragmentReservationBinding
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.Calendar
 
 class ReservationFragment : Fragment() {
@@ -33,43 +35,35 @@ class ReservationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val loadTime = viewModel.ReservationDatasources.loadTimes(12,22)
+        val loadTime = viewModel.ReservationDatasources.loadTimes(12, 22)
 
 
-        vb.rvPersonenanzahl.adapter = PersonenanzahlAdapter(viewModel.ReservationDatasources.loadAnzahlAnGaesten(), viewModel)
-        vb.rvUhrzeitenVorschlGe.adapter = UhrzeitenVorschlägeAdapter(loadTime,viewModel)
+        vb.rvPersonenanzahl.adapter =
+            PersonenanzahlAdapter(viewModel.ReservationDatasources.loadAnzahlAnGaesten(), viewModel)
+        vb.rvUhrzeitenVorschlGe.adapter = UhrzeitenVorschlägeAdapter(loadTime, viewModel)
 
         //Kalender funktionen
 
-        val calendar = Calendar.getInstance()
-        val datum =  calendar.get(Calendar.DATE)
-        val month = calendar.get(Calendar.MONTH)
-        val year = calendar.get(Calendar.YEAR)
-
-        val test = calendar.set(year, month, datum)
-
-
-
-
-
+        val currentTime = LocalDateTime.now()
         val aktuelleZeit = System.currentTimeMillis()
 
         vb.calendarView.date = aktuelleZeit
         vb.calendarView.minDate = aktuelleZeit
-        vb.reservationTitleDatum.text = test.toString() Hier funktioniert es nicht
-//        vb.tvDatumAktuellSelected.text = vb.calendarView.isSelected.toString()
 
-        vb.alertView.visibility = View.INVISIBLE
+        var currentDate: String = currentTime.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
+        vb.reservationTitleDatum.text = currentDate
+
+        vb.calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
+            currentDate = "$dayOfMonth.$month.$year"
+            vb.reservationTitleDatum.text = currentDate
+
+        }
 
 
-        val alert = AlertDialog.Builder(requireContext())
-            .setView(vb.alertView)
-            .create()
-
-        var zeit :String = ""
+        var zeit: String = ""
         viewModel.selectedTime.observe(viewLifecycleOwner) {
             vb.tvDatumAktuellSelected.text = it
-             zeit = it
+            zeit = it
         }
         var personenNumber: Int = 0
         viewModel.selectedPersonNumber.observe(viewLifecycleOwner) {
@@ -78,28 +72,35 @@ class ReservationFragment : Fragment() {
         }
 
 
+
         vb.btnTischReservieren.setOnClickListener {
 
-           vb.alertView.visibility = View.VISIBLE
-
-            vb.tvDate.text = vb.calendarView.date.toString()
-            vb.tvPersons.text = "Personen: $personenNumber "
-            vb.tvTime.text = "Wann:  $zeit"
-
-            vb.btnCancel.setOnClickListener {
-                alert.dismiss()
-                vb.alertView.visibility = View.INVISIBLE
+            if (personenNumber != 0 && zeit != "") {
+                val builder = AlertDialog.Builder(requireContext())
+                builder.setTitle("Tisch Reservierung bestätigen")
+                builder.setMessage(
+                    """
+            Datum: $currentDate
+            Personen: $personenNumber 
+            Wann: $zeit
+            
+            Klicken sie auf OK um die Reservierung zu bestätigen
+                """
+                )
+                builder.setPositiveButton("OK") { dialog, _ ->
+                    dialog.dismiss()
+                    Toast.makeText(requireContext(), "Reservierung erfolgreich", Toast.LENGTH_SHORT)
+                        .show()
+                }
+                builder.setNegativeButton("Abbrechen") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                builder.show()
 
             }
-            vb.btnConfirm.setOnClickListener {
-                alert.dismiss()
-                vb.alertView.visibility = View.INVISIBLE
 
-            }
         }
 
-
-
-}
+    }
 
 }

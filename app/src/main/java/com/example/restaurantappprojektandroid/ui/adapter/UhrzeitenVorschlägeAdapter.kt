@@ -13,7 +13,7 @@ class UhrzeitenVorschlägeAdapter(
 ) : RecyclerView.Adapter<UhrzeitenVorschlägeAdapter.UhrzeitenViewHolder>() {
     inner class UhrzeitenViewHolder(val vb: UhrzeitVorschlagItemBinding) :
         RecyclerView.ViewHolder(vb.root)
-    private var selectedPosition = RecyclerView.NO_POSITION
+     var selectedPosition = RecyclerView.NO_POSITION
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UhrzeitenViewHolder {
         val vb: UhrzeitVorschlagItemBinding =
@@ -32,6 +32,10 @@ class UhrzeitenVorschlägeAdapter(
         //Der ganze block unten , ist für die farb markierten uhrzeiten, wenn man draufklickt
         holder.vb.apply {
             holder.vb.tvZeitNumber.text =  zeit
+
+            //die zeit variable wird weitergegeben um den wert raus zunehmen und im fragment zu sehen!
+            viewModel.selectedTime(zeit)
+
             holder.vb.root.isSelected = position == selectedPosition
         }
 
@@ -41,7 +45,6 @@ class UhrzeitenVorschlägeAdapter(
                notifyItemChanged(früherePosition)
                selectedPosition = position
                notifyItemChanged(selectedPosition)
-               Log.i("TAG", "UhrzeitenVorschlägeAdapter Selected position: $selectedPosition")
            }
         }
 

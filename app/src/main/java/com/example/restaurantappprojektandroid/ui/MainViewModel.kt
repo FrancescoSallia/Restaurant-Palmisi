@@ -2,6 +2,8 @@ package com.example.restaurantappprojektandroid.ui
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.restaurantappprojektandroid.data.FirestoreRepository
 import com.example.restaurantappprojektandroid.data.datasource.ReservationDatasource
@@ -25,6 +27,28 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val likedMeals = firestore.likedMeals
 
     val reservations = firestore.reservations
+
+    private val _selectedPersonNumber = MutableLiveData<Int>()
+    val selectedPersonNumber: LiveData<Int>
+        get() = _selectedPersonNumber
+
+    private val _selectedTime = MutableLiveData<String>()
+    val selectedTime: LiveData<String>
+        get() = _selectedTime
+
+    fun selectedPersonNumber(anzahl:Int):Int{
+
+        val wert = anzahl
+          _selectedPersonNumber.postValue(wert)
+        return wert
+    }
+
+    fun selectedTime(time:String):String{
+
+        val zeit = time
+          _selectedTime.postValue(zeit)
+        return zeit
+    }
 
 
 

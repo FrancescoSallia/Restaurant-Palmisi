@@ -43,6 +43,10 @@ class PersonenanzahlAdapter(
             if (selectedPosition != position) {
                 val previousSelected = selectedPosition
                 selectedPosition = position
+
+                //die anzahl wird weitergegeben um den wert raus zunehmen und im fragment zu sehen!
+                viewModel.selectedPersonNumber(anzahl)
+
                 notifyItemChanged(previousSelected)
                 notifyItemChanged(selectedPosition)
                 Log.i("TAG", "PersonenanzahlAdapter Selected position: $selectedPosition")

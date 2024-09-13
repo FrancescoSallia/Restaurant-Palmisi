@@ -54,11 +54,11 @@ class ReservationFragment : Fragment() {
         vb.reservationTitleDatum.text = "Datum: ${vb.calendarView.date}"
 //        vb.tvDatumAktuellSelected.text = vb.calendarView.isSelected.toString()
 
-        vb.alerView.visibility = View.INVISIBLE
+        vb.alertView.visibility = View.INVISIBLE
 
 
         val alert = AlertDialog.Builder(requireContext())
-            .setView(vb.alerView)
+            .setView(vb.alertView)
             .create()
 
         var zeit :String = ""
@@ -75,7 +75,7 @@ class ReservationFragment : Fragment() {
 
         vb.btnTischReservieren.setOnClickListener {
 
-           vb.alerView.visibility = View.VISIBLE
+           vb.alertView.visibility = View.VISIBLE
 
             vb.tvDate.text = vb.calendarView.date.toString()
             vb.tvPersons.text = "Personen: $personenNumber "
@@ -83,12 +83,12 @@ class ReservationFragment : Fragment() {
 
             vb.btnCancel.setOnClickListener {
                 alert.dismiss()
-                vb.alerView.visibility = View.INVISIBLE
+                vb.alertView.visibility = View.INVISIBLE
 
             }
             vb.btnConfirm.setOnClickListener {
                 alert.dismiss()
-                vb.alerView.visibility = View.INVISIBLE
+                vb.alertView.visibility = View.INVISIBLE
 
             }
         }

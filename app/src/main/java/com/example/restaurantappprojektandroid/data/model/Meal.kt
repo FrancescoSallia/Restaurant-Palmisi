@@ -1,6 +1,5 @@
 package com.example.restaurantappprojektandroid.data.model
 
-import android.util.Log
 import com.squareup.moshi.Json
 
 data class Meal(

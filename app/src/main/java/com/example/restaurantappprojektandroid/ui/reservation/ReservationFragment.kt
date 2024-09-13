@@ -47,15 +47,12 @@ class ReservationFragment : Fragment() {
         val year = calendar.get(Calendar.YEAR)
 
 
-
-
-
-
         val aktuelleZeit = System.currentTimeMillis()
 
         vb.calendarView.date = aktuelleZeit
         vb.calendarView.minDate = aktuelleZeit
-        vb.tvDatumAktuellSelected.text = vb.calendarView.isSelected.toString()
+        vb.reservationTitleDatum.text = "Datum: ${vb.calendarView.date}"
+//        vb.tvDatumAktuellSelected.text = vb.calendarView.isSelected.toString()
 
         vb.alerView.visibility = View.INVISIBLE
 
@@ -63,14 +60,26 @@ class ReservationFragment : Fragment() {
         val alert = AlertDialog.Builder(requireContext())
             .setView(vb.alerView)
             .create()
-        vb.btnTischReservieren.setOnClickListener {
 
+        var zeit :String = ""
+        viewModel.selectedTime.observe(viewLifecycleOwner) {
+            vb.tvDatumAktuellSelected.text = it
+             zeit = it
+        }
+        var personenNumber: Int = 0
+        viewModel.selectedPersonNumber.observe(viewLifecycleOwner) {
+            vb.tvPersonalzahlTitle.text = it.toString()
+            personenNumber = it
+        }
+
+
+        vb.btnTischReservieren.setOnClickListener {
 
            vb.alerView.visibility = View.VISIBLE
 
             vb.tvDate.text = vb.calendarView.date.toString()
-            vb.tvPersons.text = viewModel.selectedPersonNumber.toString()
-            vb.tvTime.text = viewModel.selectedTime.toString()
+            vb.tvPersons.text = "Personen: $personenNumber "
+            vb.tvTime.text = "Wann:  $zeit"
 
             vb.btnCancel.setOnClickListener {
                 alert.dismiss()
@@ -82,17 +91,9 @@ class ReservationFragment : Fragment() {
                 vb.alerView.visibility = View.INVISIBLE
 
             }
-
-
-
         }
 
-        viewModel.selectedTime.observe(viewLifecycleOwner) {
-            vb.tvDatumAktuellSelected.text = it
-        }
-        viewModel.selectedPersonNumber.observe(viewLifecycleOwner) {
-            vb.tvPersonalzahlTitle.text = it.toString()
-        }
+
 
 }
 

@@ -27,12 +27,11 @@ class UhrzeitenVorschlägeAdapter(
 
     override fun onBindViewHolder(holder: UhrzeitenViewHolder, position: Int) {
 
-        val uhrzeit = viewModel.ReservationDatasources.loadUhrzeiten(2, 10)[position]
-
+        val zeit = dataset[position]
 
         //Der ganze block unten , ist für die farb markierten uhrzeiten, wenn man draufklickt
         holder.vb.apply {
-            holder.vb.tvZeitNumber.text =  uhrzeit
+            holder.vb.tvZeitNumber.text =  zeit
             holder.vb.root.isSelected = position == selectedPosition
         }
 

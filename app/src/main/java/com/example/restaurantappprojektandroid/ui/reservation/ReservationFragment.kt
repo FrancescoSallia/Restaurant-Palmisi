@@ -27,14 +27,19 @@ class ReservationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+//        val loadUhrzeit =  viewModel.ReservationDatasources.loadUhrzeiten(12,22)
+        val loadTime = viewModel.ReservationDatasources.loadTimes(12,22)
+
+
         vb.rvPersonenanzahl.adapter = PersonenanzahlAdapter(viewModel.ReservationDatasources.loadAnzahlAnGaesten(), viewModel)
-        vb.rvUhrzeitenVorschlGe.adapter = UhrzeitenVorschlägeAdapter(viewModel.ReservationDatasources.loadUhrzeiten(12, 22),viewModel)
+        vb.rvUhrzeitenVorschlGe.adapter = UhrzeitenVorschlägeAdapter(loadTime,viewModel)
 
         //Kalender funktionen
         val aktuelleZeit = System.currentTimeMillis()
 
         vb.calendarView.date = aktuelleZeit
         vb.calendarView.minDate = aktuelleZeit
+        vb.tvDatumAktuellSelected.text = vb.calendarView.isSelected.toString()
         
 
 

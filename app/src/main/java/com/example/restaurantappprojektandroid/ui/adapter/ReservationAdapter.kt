@@ -29,11 +29,14 @@ class ReservationAdapter(
     override fun onBindViewHolder(holder: ReservationViewHolder, position: Int) {
 
         val reservation = dataset[position]
-        val reservationRandomPicture = ReservationDatasource().loadRandomPictures().random()
+        val reservationDatasoure = ReservationDatasource().loadRandomPictures()
 
         holder.vb.tvReservationId.text = reservation.reservationId
         holder.vb.tvPersonanzahl.text = reservation.gaeste.toString()
         holder.vb.tvWann.text = reservation.datum
-        holder.vb.ivRandomImg.setImageResource(reservationRandomPicture)
+
+        reservationDatasoure.forEach { picture ->
+            holder.vb.ivRandomImg.setImageResource(picture)
+        }
     }
 }

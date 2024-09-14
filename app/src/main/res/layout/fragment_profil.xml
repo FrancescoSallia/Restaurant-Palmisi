@@ -75,7 +75,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_favorite"
             android:layout_width="386dp"
-            android:layout_height="208dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:orientation="horizontal"
             android:paddingTop="2dp"

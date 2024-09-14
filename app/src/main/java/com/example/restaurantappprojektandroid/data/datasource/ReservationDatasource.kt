@@ -33,8 +33,11 @@ class ReservationDatasource() {
       return listOf(
           R.drawable.restaurant_reservation_pic_one,
           R.drawable.restaurant_reservation_pic_two,
-          R.drawable.restaurant_reservation_pic_three
-      ).shuffled()
+          R.drawable.restaurant_reservation_pic_three,
+          R.drawable.restaurant_reservation_pic_four,
+          R.drawable.restaurant_reservation_pic_five,
+          R.drawable.restaurant_reservation_pic_six,
+      )
 
     }
 }

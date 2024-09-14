@@ -60,7 +60,7 @@ class ReservationFragment : Fragment() {
 
         var zeit: String = ""
         viewModel.selectedTime.observe(viewLifecycleOwner) {
-            vb.tvDatumAktuellSelected.text = it
+            vb.tvTimeAktuellSelected.text = it
             zeit = it
         }
         var personenNumber: Int = 0
@@ -87,7 +87,7 @@ class ReservationFragment : Fragment() {
                 )
                 builder.setPositiveButton("OK") { dialog, _ ->
 
-                    var newTime = "$currentTime:$zeit"
+                    var newTime = "$currentDate    $zeit"
                    var newReservation =  Reservation("",newTime,personenNumber,"")
                     viewModel.postReservation(newReservation)
                     dialog.dismiss()

@@ -1,5 +1,6 @@
 package com.example.restaurantappprojektandroid.ui.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -34,9 +35,7 @@ class ReservationAdapter(
         holder.vb.tvReservationId.text = reservation.reservationId
         holder.vb.tvPersonanzahl.text = reservation.gaeste.toString()
         holder.vb.tvWann.text = reservation.datum
+        holder.vb.ivRandomImg.setImageResource(reservationDatasoure[position])
 
-        reservationDatasoure.forEach { picture ->
-            holder.vb.ivRandomImg.setImageResource(picture)
-        }
     }
 }

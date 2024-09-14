@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.restaurantappprojektandroid.MainActivity
 import com.example.restaurantappprojektandroid.ui.adapter.FavoriteAdapter
 import com.example.restaurantappprojektandroid.ui.MainViewModel
+import com.example.restaurantappprojektandroid.ui.adapter.ReservationAdapter
 import com.example.restuarantprojektapp.databinding.FragmentProfilBinding
 
 class ProfilFragment : Fragment() {
@@ -51,7 +52,7 @@ class ProfilFragment : Fragment() {
 }
 
         viewModel.reservations.observe(viewLifecycleOwner) {
-            //hier muss noch was rein !!
+            vb.rvReservationItem.adapter = ReservationAdapter(it.reversed(), viewModel)
         }
 
     }

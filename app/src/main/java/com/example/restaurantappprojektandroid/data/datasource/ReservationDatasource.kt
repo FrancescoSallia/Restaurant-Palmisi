@@ -1,5 +1,7 @@
 package com.example.restaurantappprojektandroid.data.datasource
 
+import com.example.restuarantprojektapp.R
+
 class ReservationDatasource() {
 
     fun loadAnzahlAnGaesten(): List<Int> {
@@ -23,6 +25,16 @@ class ReservationDatasource() {
             }
         }
         return zeit
+
+    }
+
+    fun loadRandomPictures(): List<Int> {
+
+      return listOf(
+          R.drawable.restaurant_reservation_pic_one,
+          R.drawable.restaurant_reservation_pic_two,
+          R.drawable.restaurant_reservation_pic_three
+      ).shuffled()
 
     }
 }

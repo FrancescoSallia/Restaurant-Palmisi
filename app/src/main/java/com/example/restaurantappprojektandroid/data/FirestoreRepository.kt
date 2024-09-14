@@ -12,6 +12,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.dataObjects
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -78,24 +79,6 @@ class FirestoreRepository(val context: Context) {
 
     private fun snapShotListenerForReservation(){
         colRef = db.collection("reservation").document(auth.currentUser!!.uid).collection("reservierung")
-
-
-        herraus finden wie man die ID`s von den reservierungen bekommt !!!
-//        var reservierungsNummern = colRef.document("yiqkmAVt2dNTQsgeFiop").get()
-//            .addOnSuccessListener { document ->
-//                if (document != null) {
-//                    Log.d("TEST", "DocumentSnapshot data: ${document}")
-//                } else {
-//                    Log.d("TEST", "No such document")
-//                }
-//            }
-//            .addOnFailureListener { exception ->
-//                Log.d("TEST", "get failed with ", exception)
-//            }
-//        Log.d("TEST", reservierungsNummern.toString())
-//
-
-
         colRef.addSnapshotListener { value, error ->
             if (error == null && value != null) {
                 val tempList = mutableListOf<Reservation>()
@@ -106,7 +89,6 @@ class FirestoreRepository(val context: Context) {
                     }
                 }
                 _reservations.postValue(tempList)
-
             }
         }
 

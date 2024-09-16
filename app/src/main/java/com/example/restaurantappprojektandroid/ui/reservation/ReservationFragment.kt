@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.example.restaurantappprojektandroid.data.datasource.ReservationDatasource
 import com.example.restaurantappprojektandroid.data.model.Reservation
 import com.example.restaurantappprojektandroid.ui.MainViewModel
 import com.example.restaurantappprojektandroid.ui.adapter.PersonenanzahlAdapter
@@ -88,7 +89,7 @@ class ReservationFragment : Fragment() {
                 builder.setPositiveButton("OK") { dialog, _ ->
 
                     var newTime = "$currentDate    $zeit"
-                   var newReservation =  Reservation("",newTime,personenNumber,"")
+                   var newReservation =  Reservation("",newTime,personenNumber,"", ReservationDatasource().loadRandomPictures().random())
                     viewModel.postReservation(newReservation)
                     dialog.dismiss()
 

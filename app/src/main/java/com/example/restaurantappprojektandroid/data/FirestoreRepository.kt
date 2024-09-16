@@ -12,7 +12,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.dataObjects
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -27,9 +26,13 @@ class FirestoreRepository(val context: Context) {
     val likedMeals: LiveData<MutableList<Meal>>
         get() = _likedMeals
 
-    private val _reservations = MutableLiveData<MutableList<Reservation>>()
-    val reservations: LiveData<MutableList<Reservation>>
-        get() = _reservations
+    private val _reservationsList = MutableLiveData<MutableList<Reservation>>()
+    val reservationsList: LiveData<MutableList<Reservation>>
+        get() = _reservationsList
+
+    private val _reservation = MutableLiveData<Reservation>()
+    val reservation: LiveData<Reservation>
+        get() = _reservation
 
     private val db = Firebase.firestore
     lateinit var userRef: DocumentReference
@@ -39,7 +42,7 @@ class FirestoreRepository(val context: Context) {
 
     fun postUserReservation(reservation:Reservation){
         colRef = db.collection("reservation").document(auth.currentUser!!.uid).collection("reservierung")
-        colRef.add(reservation.toMap())
+        colRef.add(reservation)
             .addOnSuccessListener {
                 Toast.makeText(context, "Reservation erfolgreich gespeichert", Toast.LENGTH_SHORT)
                     .show()
@@ -77,18 +80,29 @@ class FirestoreRepository(val context: Context) {
         }
     }
 
+    fun getData(reservierungsId: String){
+        db.collection("reservation").document(auth.currentUser!!.uid).collection("reservierung").document(reservierungsId)
+            .get().addOnSuccessListener {
+          val reservation = it.toObject(Reservation::class.java)
+                if (reservation != null){
+                _reservation.postValue(reservation!!)
+                }
+        }
+
+    }
     private fun snapShotListenerForReservation(){
         colRef = db.collection("reservation").document(auth.currentUser!!.uid).collection("reservierung")
         colRef.addSnapshotListener { value, error ->
             if (error == null && value != null) {
-                val tempList = mutableListOf<Reservation>()
-                for (dokument in value.documents){
-                    val reservation = dokument.data?.let { Reservation(it.toMap()) }
-                    if (reservation != null) {
-                        tempList.add(reservation)
-                    }
-                }
-                _reservations.postValue(tempList)
+//                val tempList = mutableListOf<Reservation>()
+//                for (dokument in value.documents){
+//                    val reservation = dokument.data?.let { Reservation(it) }
+//                    if (reservation != null) {
+//                        tempList.add(reservation)
+//                    }
+//                }
+                val newReservation = value.toObjects(Reservation::class.java)
+                _reservationsList.postValue(newReservation)
             }
         }
 

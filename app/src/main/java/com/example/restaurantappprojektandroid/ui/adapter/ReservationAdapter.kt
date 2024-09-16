@@ -3,6 +3,7 @@ package com.example.restaurantappprojektandroid.ui.adapter
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.restaurantappprojektandroid.data.datasource.ReservationDatasource
 import com.example.restaurantappprojektandroid.data.model.Reservation
@@ -30,13 +31,17 @@ class ReservationAdapter(
     override fun onBindViewHolder(holder: ReservationViewHolder, position: Int) {
 
         val reservation = dataset[position]
-        val reservationDatasoure = ReservationDatasource().loadRandomPictures()
         val datum = reservation.datum
 
         holder.vb.tvReservationId.text = "ReservierungsID: ${reservation.reservationId}"
         holder.vb.tvPersonanzahl.text = "Personen: ${reservation.gaeste}"
         holder.vb.tvWann.text =  "Wann: ${datum}"
-        holder.vb.ivRandomImg.setImageResource(reservationDatasoure[position])
+        holder.vb.ivRandomImg.setImageResource(reservation.imgId)
+
+        holder.itemView.setOnClickListener {
+            viewModel.getReservations(reservation.reservationId)
+            val navController = holder.itemView.findNavController()
+        }
 
     }
 }

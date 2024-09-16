@@ -19,6 +19,8 @@
     Bitte reservieren Sie rechtzeitig einen Tisch für diesen besonderen Abend, indem Sie auf den folgenden Link klicken: [Link zur Reservierung].
 
     \n\n Wir freuen uns auf Ihren Besuch!</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

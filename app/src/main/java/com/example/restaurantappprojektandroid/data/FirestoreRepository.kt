@@ -34,11 +34,27 @@ class FirestoreRepository(val context: Context) {
     val reservation: LiveData<Reservation>
         get() = _reservation
 
+    private val _userData = MutableLiveData<User>()
+    val userData: LiveData<User>
+        get() = _userData
+
     private val db = Firebase.firestore
     lateinit var userRef: DocumentReference
     lateinit var colRef: CollectionReference
+    lateinit var userCol : CollectionReference
 
-
+    in dieser funktion stimmt was nicht, es hat ein problem mit dem {_userData.value = user!!} schau es dir nochmal an
+fun getDataUser(){
+    userCol = db.collection("user")
+    userCol.document(auth.currentUser!!.uid).get().addOnSuccessListener {
+        if (it != null && it.exists()) {
+        val user = it.toObject(User::class.java)
+        _userData.value = user!!
+        }
+    }.addOnFailureListener {
+        Toast.makeText(context, "Fehler beim Laden der Daten vom User", Toast.LENGTH_SHORT).show()
+    }
+}
 
     fun postUserReservation(reservation:Reservation){
         colRef = db.collection("reservation").document(auth.currentUser!!.uid).collection("reservierung")

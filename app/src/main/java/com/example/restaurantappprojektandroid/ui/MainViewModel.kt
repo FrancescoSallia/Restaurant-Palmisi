@@ -31,6 +31,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     val reservation = firestore.reservation
 
+    val userData = firestore.userData
+
     private val _selectedPersonNumber = MutableLiveData<Int>(1)
     val selectedPersonNumber: LiveData<Int>
         get() = _selectedPersonNumber
@@ -38,6 +40,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val _selectedTime = MutableLiveData<String>()
     val selectedTime: LiveData<String>
         get() = _selectedTime
+
+    fun getDataUser(){
+        firestore.getDataUser()
+
+    }
 
     fun getReservations(reservationId: String){
         firestore.getData(reservationId)

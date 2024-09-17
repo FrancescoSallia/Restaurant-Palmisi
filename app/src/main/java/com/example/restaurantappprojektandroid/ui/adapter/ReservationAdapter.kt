@@ -40,6 +40,7 @@ class ReservationAdapter(
         holder.vb.ivRandomImg.setImageResource(reservation.imgId)
 
         holder.itemView.setOnClickListener {
+            viewModel.getDataUser()
             viewModel.getReservations(reservation.reservationId)
             val navController = holder.itemView.findNavController()
             navController.navigate(R.id.reservationDetailFragment)

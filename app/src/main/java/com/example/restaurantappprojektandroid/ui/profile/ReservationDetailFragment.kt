@@ -28,6 +28,10 @@ class ReservationDetailFragment : Fragment() {
 
         viewModel.reservation.observe(viewLifecycleOwner) {
 
+            val vorname = viewModel.userData.value?.vorname
+            val nachname = viewModel.userData.value?.nachname
+
+            vb.tvNameReservationDetail.text = vorname
             vb.ivReservationPictureDetail.setImageResource(it.imgId)
             vb.tvReservierungsIdDetail.text = it.reservationId
             vb.tvGaestReservationDetail.text = it.gaeste.toString()

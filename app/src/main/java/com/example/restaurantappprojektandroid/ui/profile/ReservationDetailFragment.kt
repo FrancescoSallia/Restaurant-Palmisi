@@ -28,6 +28,7 @@ class ReservationDetailFragment : Fragment() {
 
         viewModel.reservation.observe(viewLifecycleOwner) {
 
+            vb.ivReservationPictureDetail.setImageResource(it.imgId)
             vb.tvReservierungsIdDetail.text = it.reservationId
             vb.tvGaestReservationDetail.text = it.gaeste.toString()
             vb.tvUhrzeitReservationDetail.text = it.datum

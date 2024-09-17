@@ -42,6 +42,9 @@
         <action
             android:id="@+id/action_profilFragment_to_logInFragment"
             app:destination="@id/logInFragment" />
+        <action
+            android:id="@+id/action_profilFragment_to_reservationDetailFragment"
+            app:destination="@id/reservationDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/proiflSettingsFragment"
@@ -81,4 +84,9 @@
         android:name="com.example.restaurantappprojektandroid.ui.meal.MealDetailFragment"
         android:label="fragment_meal_detail"
         tools:layout="@layout/fragment_meal_detail" />
+    <fragment
+        android:id="@+id/reservationDetailFragment"
+        android:name="com.example.restaurantappprojektandroid.ui.profile.ReservationDetailFragment"
+        android:label="fragment_reservation_detail"
+        tools:layout="@layout/fragment_reservation_detail" />
 </navigation>

@@ -51,7 +51,7 @@ class ProfilFragment : Fragment() {
 
 }
 
-        viewModel.reservations.observe(viewLifecycleOwner) {
+        viewModel.reservationsList.observe(viewLifecycleOwner) {
             vb.rvReservationItem.adapter = ReservationAdapter(it.reversed(), viewModel)
         }
 

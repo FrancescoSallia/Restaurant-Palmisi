@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.restaurantappprojektandroid.data.datasource.ReservationDatasource
 import com.example.restaurantappprojektandroid.data.model.Reservation
 import com.example.restaurantappprojektandroid.ui.MainViewModel
+import com.example.restuarantprojektapp.R
 import com.example.restuarantprojektapp.databinding.ReservationItemBinding
 
 class ReservationAdapter(
@@ -41,6 +42,7 @@ class ReservationAdapter(
         holder.itemView.setOnClickListener {
             viewModel.getReservations(reservation.reservationId)
             val navController = holder.itemView.findNavController()
+            navController.navigate(R.id.reservationDetailFragment)
         }
 
     }

@@ -25,6 +25,18 @@ class ReservationDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel.reservation.observe(viewLifecycleOwner) {
+
+            vb.tvReservierungsIdDetail.text = it.reservationId
+            vb.tvGaestReservationDetail.text = it.gaeste.toString()
+            vb.tvUhrzeitReservationDetail.text = it.datum
+
+            //den value vom kommentarGast raus nehmen und anzeigen lassen!!
+            var bemerkung = vb.etBemerkungDetailText.text.toString()
+                bemerkung = it.kommentarGast
+            vb.etBemerkungDetailText.setHint(bemerkung)
+        }
     }
 
 }

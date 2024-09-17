@@ -27,7 +27,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     val likedMeals = firestore.likedMeals
 
-    val reservations = firestore.reservationsList
+    val reservationsList = firestore.reservationsList
+
+    val reservation = firestore.reservation
 
     private val _selectedPersonNumber = MutableLiveData<Int>(1)
     val selectedPersonNumber: LiveData<Int>

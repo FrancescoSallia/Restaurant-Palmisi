@@ -43,11 +43,13 @@ class FirestoreRepository(val context: Context) {
     lateinit var colRef: CollectionReference
     lateinit var userCol : CollectionReference
 
-    in dieser funktion stimmt was nicht, es hat ein problem mit dem {_userData.value = user!!} schau es dir nochmal an
+//    in dieser funktion stimmt was nicht, es hat ein problem mit dem {_userData.value = user!!} schau es dir nochmal an
 fun getDataUser(){
     userCol = db.collection("user")
     userCol.document(auth.currentUser!!.uid).get().addOnSuccessListener {
+        Log.i("FirestoreRepo", "Daten wurden geladen $it")
         if (it != null && it.exists()) {
+
         val user = it.toObject(User::class.java)
         _userData.value = user!!
         }

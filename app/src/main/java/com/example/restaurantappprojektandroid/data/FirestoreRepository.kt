@@ -219,6 +219,10 @@ class FirestoreRepository(val context: Context) {
     }
 
     fun logOut() {
+        //falls der user anonym ist, dann wird der user gelöscht beim ausloggen
+        if (auth.currentUser?.isAnonymous == true) {
+            auth.currentUser?.delete()
+        }
         _currentUser.value = null
         auth.signOut()
     }
@@ -245,7 +249,7 @@ class FirestoreRepository(val context: Context) {
     }
 
     fun addToFavorites(meal: Meal) {
-
+wenn man als user was liked , denn stürzt es ab . Laut dem logcat kommt der fehler von hier aus schau es dir nochmal an!!
         if (!likedMeals.value!!.contains(meal)) {
             likedMeals.value?.add(meal)
             updateMealFromFirestore()

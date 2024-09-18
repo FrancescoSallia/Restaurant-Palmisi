@@ -1,6 +1,7 @@
 package com.example.restaurantappprojektandroid.ui.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -30,40 +31,48 @@ class MealAdapter(
 
     override fun onBindViewHolder(holder: MealMenuViewholder, position: Int) {
 
-        val meal = dataset[position]
+        //falls der eingelogte user anonym ist, dann soll der like button nicht angezeigt werden
+        if (viewModel.currentUser.value?.isAnonymous == true) {
 
-        var likedMeal = viewModel.likedMeals.value?.find { it.idMeal == meal.idMeal }
-        var isLiked = likedMeal != null
-        holder.binding.likeButton.load(if (isLiked) R.drawable.save else R.drawable.heart)
-        holder.binding.itemName.text = meal.mealName
-        holder.binding.itemImage.load(meal.mealImg)
-        holder.binding.itemPrice.text = meal.price.toString() + "€"
+            holder.binding.likeButton.visibility = View.INVISIBLE
+        }else{
+            holder.binding.likeButton.visibility = View.VISIBLE
 
-        holder.binding.likeButton.setOnClickListener {
+        }
 
-            if (isLiked) {
-                viewModel.removeFromFavorites(meal)
-            } else {
+            val meal = dataset[position]
 
-                viewModel.addToFavorites(meal)
+            var likedMeal = viewModel.likedMeals.value?.find { it.idMeal == meal.idMeal }
+            var isLiked = likedMeal != null
+            holder.binding.likeButton.load(if (isLiked) R.drawable.save else R.drawable.heart)
+            holder.binding.itemName.text = meal.mealName
+            holder.binding.itemImage.load(meal.mealImg)
+            holder.binding.itemPrice.text = meal.price.toString() + "€"
+
+            holder.binding.likeButton.setOnClickListener {
+
+                if (isLiked) {
+                    viewModel.removeFromFavorites(meal)
+                } else {
+
+                    viewModel.addToFavorites(meal)
+
+                }
+                isLiked = !isLiked
+                holder.binding.likeButton.load(if (isLiked) R.drawable.save else R.drawable.heart)
+            }
+
+            holder.itemView.setOnClickListener {
+
+                // das soll die position speichern um wieder in der selben position zu sein nachdem man zurück navigiert, funktioniert aber noch nicht
+                viewModel.recyclerViewPosition = position
+
+                viewModel.setSelectedMealId(meal.idMeal)
+
+                val navController = holder.itemView.findNavController()
+                navController.navigate(R.id.mealDetailFragment)
 
             }
-            isLiked = !isLiked
-            holder.binding.likeButton.load(if (isLiked) R.drawable.save else R.drawable.heart)
         }
-
-        holder.itemView.setOnClickListener {
-
-            // das soll die position speichern um wieder in der selben position zu sein nachdem man zurück navigiert, funktioniert aber noch nicht
-            viewModel.recyclerViewPosition = position
-
-            viewModel.setSelectedMealId(meal.idMeal)
-
-            val navController = holder.itemView.findNavController()
-            navController.navigate(R.id.mealDetailFragment)
-
-        }
-    }
-
 
 }

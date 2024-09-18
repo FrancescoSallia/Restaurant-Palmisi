@@ -31,6 +31,12 @@ class MealDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //falls der user anonym ist, dann soll das Herz nicht sichtbar sein
+        if (viewModel.currentUser.value?.isAnonymous == true) {
+
+            vb.ivHearth.visibility = View.INVISIBLE
+        }
+
         viewModel.likedMeals.observe(viewLifecycleOwner) { userLikedMeals ->
             var findMeal = userLikedMeals.find { it.idMeal == viewModel.selectedMealID}
 

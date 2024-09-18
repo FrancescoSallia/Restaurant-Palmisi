@@ -48,41 +48,32 @@ class LogInFragment : Fragment() {
                         failureToast()
                     }
                 )
-
-
-                findNavController().navigate(LogInFragmentDirections.actionLogInFragmentToHomeFragment())
-            }else{
+            } else{
                 Toast.makeText(requireActivity(),"Füll die Felder aus", Toast.LENGTH_SHORT).show()
             }
 
         }
 
         vb.btnRegistrieren.setOnClickListener {
-            val navController = findNavController()
-            navController.navigate(LogInFragmentDirections.actionLogInFragmentToRegistrierenFragment())
+            findNavController()
+                .navigate(LogInFragmentDirections
+                    .actionLogInFragmentToRegistrierenFragment()
+                )
         }
 
         vb.btnContinueAsGast.setOnClickListener {
             viewModel.continueAsGuest()
-            val navController = findNavController()
-            navController.navigate(LogInFragmentDirections.actionLogInFragmentToHomeFragment())
-
-
         }
 
+    }
 
-
-
-
-
-        }
-        fun failureToast() {
-            Toast.makeText(
-                context,
-                "Deine angegebenen daten sind falsch, oder du musst dich Registrieren.",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
+    fun failureToast() {
+        Toast.makeText(
+            context,
+            "Deine angegebenen daten sind falsch, oder du musst dich Registrieren.",
+            Toast.LENGTH_SHORT
+        ).show()
+    }
 
     fun successToast() {
         Toast.makeText(
@@ -92,5 +83,3 @@ class LogInFragment : Fragment() {
         ).show()
     }
 }
-
-

@@ -39,25 +39,26 @@ class FirestoreRepository(val context: Context) {
         get() = _userData
 
     private val db = Firebase.firestore
-     var userRef : DocumentReference? = null
-     var colRef: CollectionReference? = null
-     var userCol : CollectionReference? = null
+    var userRef : DocumentReference? = null
+    var colRef: CollectionReference? = null
+    var userCol : CollectionReference? = null
 
-//    in dieser funktion stimmt was nicht, es hat ein problem mit dem {_userData.value = user!!} schau es dir nochmal an
-fun getDataUser(){
-    userCol = db.collection("user")
-    userCol?.document(auth.currentUser!!.uid)?.get()?.addOnSuccessListener {
-        Log.i("FirestoreRepo", "Daten wurden geladen $it")
+    //    in dieser funktion stimmt was nicht, es hat ein problem mit dem {_userData.value = user!!} schau es dir nochmal an
+    fun getDataUser(){
+        userCol = db.collection("user")
+        userCol?.document(auth.currentUser?.uid ?: "")?.get()?.addOnSuccessListener {
+            Log.i("FirestoreRepo", "Daten wurden geladen $it")
 
-        if (it != null && it.exists()) {
-        val user = it.toObject(User::class.java)
-        _userData.value = user!!
+            if (it != null && it.exists()) {
+                val user = it.toObject(User::class.java)
+                Log.e("USER", user.toString())
+                _userData.value = user!!
+            }
+
+        }?.addOnFailureListener {
+            Toast.makeText(context, "Fehler beim Laden der Daten vom User", Toast.LENGTH_SHORT).show()
         }
-
-    }?.addOnFailureListener {
-        Toast.makeText(context, "Fehler beim Laden der Daten vom User", Toast.LENGTH_SHORT).show()
     }
-}
 
     fun postUserReservation(reservation:Reservation){
         colRef = db.collection("reservation").document(auth.currentUser!!.uid).collection("reservierung")
@@ -102,11 +103,11 @@ fun getDataUser(){
     fun getData(reservierungsId: String){
         db.collection("reservation").document(auth.currentUser!!.uid).collection("reservierung").document(reservierungsId)
             .get().addOnSuccessListener {
-          val reservation = it.toObject(Reservation::class.java)
+                val reservation = it.toObject(Reservation::class.java)
                 if (reservation != null){
-                _reservation.postValue(reservation!!)
+                    _reservation.postValue(reservation!!)
                 }
-        }
+            }
 
     }
     private fun snapShotListenerForReservation(){
@@ -185,7 +186,7 @@ fun getDataUser(){
     }
 
     //ein User speichern in die datenbank
-   private fun postDokument(user: User) {
+    private fun postDokument(user: User) {
         userRef?.set(user)?.addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 Log.d("Firestore", "Dokument erstellt -> ID : ${task.result}")
@@ -218,8 +219,8 @@ fun getDataUser(){
     }
 
     fun logOut() {
+        _currentUser.value = null
         auth.signOut()
-        _currentUser.postValue(null)
     }
 
     fun registration(Email: String, password: String, vorname: String, nachname: String) {
@@ -238,8 +239,9 @@ fun getDataUser(){
     }
 
     fun continueAsGuest() {
-        auth.signInAnonymously()
-        _currentUser.postValue(auth.currentUser)
+        auth.signInAnonymously().addOnSuccessListener {
+            _currentUser.postValue(it.user)
+        }
     }
 
     fun addToFavorites(meal: Meal) {

@@ -8,6 +8,7 @@ data class Meal(
     var mealName: String = "",
     @Json(name = "strMealThumb")
     var mealImg: String = "",
+
 ) {
 
     val price: Double

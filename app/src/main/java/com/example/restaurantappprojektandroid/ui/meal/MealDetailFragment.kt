@@ -39,6 +39,7 @@ class MealDetailFragment : Fragment() {
 
         viewModel.repositoryMealDetail.observe(viewLifecycleOwner) { meals: List<Meal> ->
             val meal = meals.first()
+
             vb.ivMealDetail.load(meal.mealImg)
             vb.tvMealDetailTitle.text = meal.mealName
             vb.tvPreisDetail.text = meal.priceasString

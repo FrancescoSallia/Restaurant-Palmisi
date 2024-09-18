@@ -39,33 +39,34 @@ class FirestoreRepository(val context: Context) {
         get() = _userData
 
     private val db = Firebase.firestore
-    lateinit var userRef: DocumentReference
-    lateinit var colRef: CollectionReference
-    lateinit var userCol : CollectionReference
+     var userRef : DocumentReference? = null
+     var colRef: CollectionReference? = null
+     var userCol : CollectionReference? = null
 
 //    in dieser funktion stimmt was nicht, es hat ein problem mit dem {_userData.value = user!!} schau es dir nochmal an
 fun getDataUser(){
     userCol = db.collection("user")
-    userCol.document(auth.currentUser!!.uid).get().addOnSuccessListener {
+    userCol?.document(auth.currentUser!!.uid)?.get()?.addOnSuccessListener {
         Log.i("FirestoreRepo", "Daten wurden geladen $it")
-        if (it != null && it.exists()) {
 
+        if (it != null && it.exists()) {
         val user = it.toObject(User::class.java)
         _userData.value = user!!
         }
-    }.addOnFailureListener {
+
+    }?.addOnFailureListener {
         Toast.makeText(context, "Fehler beim Laden der Daten vom User", Toast.LENGTH_SHORT).show()
     }
 }
 
     fun postUserReservation(reservation:Reservation){
         colRef = db.collection("reservation").document(auth.currentUser!!.uid).collection("reservierung")
-        colRef.add(reservation)
-            .addOnSuccessListener {
+        colRef?.add(reservation)
+            ?.addOnSuccessListener {
                 Toast.makeText(context, "Reservation erfolgreich gespeichert", Toast.LENGTH_SHORT)
                     .show()
             }
-            .addOnFailureListener {
+            ?.addOnFailureListener {
                 Toast.makeText(
                     context,
                     "Reservation konnte nicht gespeichert werden",
@@ -88,7 +89,7 @@ fun getDataUser(){
 
     private fun addSnapshotListenerForCurrentUser() {
         userRef = db.collection("users").document(auth.currentUser!!.uid)
-        userRef.addSnapshotListener { value, error ->
+        userRef?.addSnapshotListener { value, error ->
             if (error == null && value != null && value.exists()) {
                 val user = value.toObject(User::class.java)
                 if (user != null) {
@@ -110,7 +111,7 @@ fun getDataUser(){
     }
     private fun snapShotListenerForReservation(){
         colRef = db.collection("reservation").document(auth.currentUser!!.uid).collection("reservierung")
-        colRef.addSnapshotListener { value, error ->
+        colRef?.addSnapshotListener { value, error ->
             if (error == null && value != null) {
 //                val tempList = mutableListOf<Reservation>()
 //                for (dokument in value.documents){
@@ -133,14 +134,14 @@ fun getDataUser(){
 
     fun updateUser(vorname: String, nachname: String) {
         if (auth.currentUser?.uid != null) {
-            userRef.update(
+            userRef?.update(
                 "vorname", vorname,
                 "nachname", nachname
-            ).addOnSuccessListener {
+            )?.addOnSuccessListener {
                 Log.d("Firestore", "Benutzerdaten erfolgreich aktualisiert")
                 Toast.makeText(context, "Benutzerdaten aktualisiert", Toast.LENGTH_SHORT)
                     .show()
-            }.addOnFailureListener { e ->
+            }?.addOnFailureListener { e ->
                 Log.w("Firestore", "Fehler beim Aktualisieren der Benutzerdaten", e)
                 Toast.makeText(
                     context,
@@ -160,7 +161,7 @@ fun getDataUser(){
         val userId = auth.currentUser?.uid
         if (userId != null) {
             userRef = db.collection("users").document(userId)
-            userRef.delete().addOnSuccessListener {
+            userRef?.delete()?.addOnSuccessListener {
                 Log.d("Firestore", "userRef: $userRef")
                 auth.currentUser?.delete()
                     ?.addOnSuccessListener {
@@ -185,7 +186,7 @@ fun getDataUser(){
 
     //ein User speichern in die datenbank
    private fun postDokument(user: User) {
-        userRef.set(user).addOnCompleteListener { task ->
+        userRef?.set(user)?.addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 Log.d("Firestore", "Dokument erstellt -> ID : ${task.result}")
                 Toast.makeText(context, "Dokument erstellt", Toast.LENGTH_SHORT).show()

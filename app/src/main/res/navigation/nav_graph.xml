@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/logInFragment">
+    app:startDestination="@id/anonymUserReservationFragment">
 
     <fragment
         android:id="@+id/logoFragment"
@@ -89,4 +89,9 @@
         android:name="com.example.restaurantappprojektandroid.ui.profile.ReservationDetailFragment"
         android:label="fragment_reservation_detail"
         tools:layout="@layout/fragment_reservation_detail" />
+    <fragment
+        android:id="@+id/anonymUserReservationFragment"
+        android:name="com.example.restaurantappprojektandroid.ui.reservation.AnonymUserReservationFragment"
+        android:label="fragment_anonym_user_reservation"
+        tools:layout="@layout/fragment_anonym_user_reservation" />
 </navigation>

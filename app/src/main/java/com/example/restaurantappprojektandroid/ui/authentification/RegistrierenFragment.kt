@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.example.restaurantappprojektandroid.MainActivity
 import com.example.restaurantappprojektandroid.ui.MainViewModel
 import com.example.restuarantprojektapp.databinding.FragmentRegistrierenBinding
 
@@ -21,11 +22,22 @@ class RegistrierenFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         vb = FragmentRegistrierenBinding.inflate(inflater, container, false)
+
+        //Damit die Navigationbar nicht angezeigt wird unten, beim wechseln vom Reservation -> Registrieren Fragment !!Gone lässt die stelle komlett frei, stat es nur unsichtbar zu machen!
+        (requireActivity() as MainActivity).bottomNavigation.visibility = View.GONE
+
         return vb.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        // Navigationbar wieder einblenden wenn man zurück navigiert
+        (requireActivity() as MainActivity).bottomNavigation.visibility = View.VISIBLE
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
 
         vb.btnRegistrierenRegistrieren.setOnClickListener {
 

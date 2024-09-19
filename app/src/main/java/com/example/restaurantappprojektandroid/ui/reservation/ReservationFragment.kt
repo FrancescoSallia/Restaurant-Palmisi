@@ -11,6 +11,8 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import com.example.restaurantappprojektandroid.MainActivity
 import com.example.restaurantappprojektandroid.data.datasource.ReservationDatasource
 import com.example.restaurantappprojektandroid.data.model.Reservation
 import com.example.restaurantappprojektandroid.ui.MainViewModel
@@ -18,6 +20,7 @@ import com.example.restaurantappprojektandroid.ui.adapter.PersonenanzahlAdapter
 import com.example.restaurantappprojektandroid.ui.adapter.UhrzeitenVorschlägeAdapter
 import com.example.restuarantprojektapp.R
 import com.example.restuarantprojektapp.databinding.FragmentReservationBinding
+import com.google.android.material.navigation.NavigationBarMenu
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
@@ -45,7 +48,9 @@ class ReservationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.currentUser.observe(viewLifecycleOwner) {
             if(it?.isAnonymous == true) {
-                //findNavController().navigate(R.id.logoFragment)
+
+                findNavController().navigate(R.id.anonymUserReservationFragment)
+
             } else {
                 registeredUserView()
             }

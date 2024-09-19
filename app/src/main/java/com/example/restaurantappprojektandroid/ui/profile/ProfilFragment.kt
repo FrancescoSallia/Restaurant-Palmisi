@@ -31,13 +31,16 @@ class ProfilFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (viewModel.currentUser.value?.isAnonymous == true) {
-           findNavController().navigate(R.id.anonymUserProfilFragment)
-        }else{
+        viewModel.currentUser.observe(viewLifecycleOwner) {
 
-            loggedUser()
+            if (viewModel.currentUser.value?.isAnonymous == true) {
+
+                findNavController().navigate(R.id.anonymUserProfilFragment)
+
+            }else{
+                loggedUser()
+            }
         }
-
 
     }
 

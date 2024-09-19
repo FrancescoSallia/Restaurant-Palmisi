@@ -4,7 +4,7 @@
     android:id="@+id/frameLayout8"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.restaurantappprojektandroid.ui.profile.AnonymUserProfilFragment" >
+    tools:context="com.example.restaurantappprojektandroid.ui.profile.AnonymUserProfilFragment">
 
     <TextView
         android:id="@+id/textView4"
@@ -31,6 +31,7 @@
         android:layout_marginTop="56dp"
         android:layout_marginEnd="78dp"
         android:backgroundTint="#E2FB0303"
+        android:elevation="200dp"
         android:text="Als Gast Abmelden"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"

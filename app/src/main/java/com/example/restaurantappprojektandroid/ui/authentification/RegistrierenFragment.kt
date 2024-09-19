@@ -12,10 +12,12 @@ import com.example.restaurantappprojektandroid.MainActivity
 import com.example.restaurantappprojektandroid.ui.MainViewModel
 import com.example.restuarantprojektapp.R
 import com.example.restuarantprojektapp.databinding.FragmentRegistrierenBinding
+import com.google.android.gms.tasks.Task
 
 class RegistrierenFragment : Fragment() {
     private lateinit var vb: FragmentRegistrierenBinding
     private val viewModel: MainViewModel by activityViewModels()
+    private var deleteAnonymUser : Task<Void>? = null
 
 
     override fun onCreateView(
@@ -48,10 +50,26 @@ class RegistrierenFragment : Fragment() {
         viewModel.currentUser.observe(viewLifecycleOwner) {
 
             if (it?.isAnonymous == true){
-                it.delete()
+                viewModel.logOut()
+
+            }else if (it != null){
+                findNavController().navigate(R.id.homeFragment)
+            }
+
+            vb.btnRegistrierenRegistrieren.setOnClickListener {
+
+                registrationSuccess()
+
+//        findNavController().navigate(RegistrierenFragmentDirections.actionRegistrierenFragmentToHomeFragment())
+
             }
 
         }
+
+    }
+
+
+    fun registrationSuccess() {
         val vorname = vb.etVornameRegistrieren.text.toString()
         val nachname = vb.etNachnameRegistrieren.text.toString()
 
@@ -60,9 +78,7 @@ class RegistrierenFragment : Fragment() {
         val secondPasswort = vb.etPasswortReplyRegistrieren.text.toString()
 
         if (benutzername.isNotEmpty() && firstPasswort.isNotEmpty() && vorname.isNotEmpty() && nachname.isNotEmpty() && firstPasswort == secondPasswort) {
-
             viewModel.registration(benutzername, firstPasswort, vorname, nachname)
-//        findNavController().navigate(RegistrierenFragmentDirections.actionRegistrierenFragmentToHomeFragment())
 
         }else if(firstPasswort != secondPasswort){
 
@@ -71,6 +87,5 @@ class RegistrierenFragment : Fragment() {
         }else{
             Toast.makeText(requireContext(),"Fülle alle Felder aus!",Toast.LENGTH_SHORT).show()
         }
-
     }
 }

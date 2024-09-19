@@ -38,8 +38,15 @@ class RegistrierenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        hieer hast du an codee geändert und im reservation Fragment schau sie dir an , weil du nicht mehr in die reservierungen springen kannst und profil!!
 
         vb.btnRegistrierenRegistrieren.setOnClickListener {
+
+            viewModel.currentUser.observe(viewLifecycleOwner) {
+              if (it?.isAnonymous == true){
+                  it.delete()
+              }
+            }
 
             val vorname = vb.etVornameRegistrieren.text.toString()
             val nachname = vb.etNachnameRegistrieren.text.toString()
@@ -60,6 +67,7 @@ class RegistrierenFragment : Fragment() {
             }else{
                 Toast.makeText(requireContext(),"Fülle alle Felder aus!",Toast.LENGTH_SHORT).show()
             }
+
     }
 
 

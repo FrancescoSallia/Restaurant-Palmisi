@@ -41,11 +41,11 @@ class RegistrierenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-            loggedUser()
+        loggedUser()
 
     }
 
-     private fun loggedUser(){
+    private fun loggedUser(){
 
         viewModel.currentUser.observe(viewLifecycleOwner) {
 

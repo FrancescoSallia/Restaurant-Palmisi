@@ -1,6 +1,7 @@
 package com.example.restaurantappprojektandroid.ui.authentification
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.restaurantappprojektandroid.ui.MainViewModel
 import com.example.restuarantprojektapp.databinding.FragmentLogInBinding
 
-
+//schau es dir hier an!!!!
 class LogInFragment : Fragment() {
     private lateinit var vb: FragmentLogInBinding
     private val viewModel: MainViewModel by activityViewModels()
@@ -26,6 +27,9 @@ class LogInFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val test = findNavController().currentBackStack.value
+        Log.e("LOGIN", test.toString())
 
         viewModel.currentUser.observe(viewLifecycleOwner) {
             if (it != null) {

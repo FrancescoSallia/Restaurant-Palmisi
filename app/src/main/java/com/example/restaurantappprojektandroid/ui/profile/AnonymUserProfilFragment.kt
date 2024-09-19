@@ -29,14 +29,11 @@ class AnonymUserProfilFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        if (viewModel.currentUser.value?.isAnonymous == true) {
-//           findNavController().navigate(R.id.anonymUserProfilFragment)
-//        }
+
 
         vb.btnAlsGastAbmelden.setOnClickListener {
             (requireActivity() as MainActivity).bottomNavigation.visibility = View.GONE
             viewModel.logOut()
-            findNavController().navigate(R.id.logInFragment)
         }
 
 

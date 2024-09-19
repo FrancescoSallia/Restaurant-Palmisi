@@ -16,7 +16,14 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.restaurantappprojektandroid.ui.home.HomeFragment"
-        android:label="HomeFragment" />
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_reservationFragment"
+            app:destination="@id/reservationFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_profilFragment"
+            app:destination="@id/profilFragment" />
+    </fragment>
     <fragment
         android:id="@+id/speisekartenFragment2"
         android:name="com.example.restaurantappprojektandroid.ui.meal.SpeisekartenFragment"
@@ -30,7 +37,11 @@
         android:id="@+id/reservationFragment"
         android:name="com.example.restaurantappprojektandroid.ui.reservation.ReservationFragment"
         android:label="fragment_reservation"
-        tools:layout="@layout/fragment_reservation" />
+        tools:layout="@layout/fragment_reservation" >
+        <action
+            android:id="@+id/action_reservationFragment_to_registrierenFragment"
+            app:destination="@id/registrierenFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profilFragment"
         android:name="com.example.restaurantappprojektandroid.ui.profile.ProfilFragment"
@@ -40,11 +51,11 @@
             android:id="@+id/action_profilFragment_to_proiflSettingsFragment"
             app:destination="@id/proiflSettingsFragment" />
         <action
-            android:id="@+id/action_profilFragment_to_logInFragment"
-            app:destination="@id/logInFragment" />
-        <action
             android:id="@+id/action_profilFragment_to_reservationDetailFragment"
             app:destination="@id/reservationDetailFragment" />
+        <action
+            android:id="@+id/action_profilFragment_to_logInFragment"
+            app:destination="@id/logInFragment" />
     </fragment>
     <fragment
         android:id="@+id/proiflSettingsFragment"
@@ -89,14 +100,4 @@
         android:name="com.example.restaurantappprojektandroid.ui.profile.ReservationDetailFragment"
         android:label="fragment_reservation_detail"
         tools:layout="@layout/fragment_reservation_detail" />
-    <fragment
-        android:id="@+id/anonymUserReservationFragment"
-        android:name="com.example.restaurantappprojektandroid.ui.reservation.AnonymUserReservationFragment"
-        android:label="fragment_anonym_user_reservation"
-        tools:layout="@layout/fragment_anonym_user_reservation" />
-    <fragment
-        android:id="@+id/anonymUserProfilFragment"
-        android:name="com.example.restaurantappprojektandroid.ui.profile.AnonymUserProfilFragment"
-        android:label="fragment_anonym_user_profil"
-        tools:layout="@layout/fragment_anonym_user_profil" />
 </navigation>

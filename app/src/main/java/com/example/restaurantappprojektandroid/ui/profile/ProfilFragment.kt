@@ -12,6 +12,7 @@ import com.example.restaurantappprojektandroid.MainActivity
 import com.example.restaurantappprojektandroid.ui.adapter.FavoriteAdapter
 import com.example.restaurantappprojektandroid.ui.MainViewModel
 import com.example.restaurantappprojektandroid.ui.adapter.ReservationAdapter
+import com.example.restuarantprojektapp.R
 import com.example.restuarantprojektapp.databinding.FragmentProfilBinding
 
 class ProfilFragment : Fragment() {
@@ -30,6 +31,17 @@ class ProfilFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if (viewModel.currentUser.value?.isAnonymous == true) {
+           findNavController().navigate(R.id.anonymUserProfilFragment)
+        }else{
+
+            loggedUser()
+        }
+
+
+    }
+
+    private fun loggedUser() {
 
         Log.d("TAG", "currentUser: ${viewModel.currentUser}")
         viewModel.likedMeals.observe(viewLifecycleOwner) {
@@ -45,16 +57,15 @@ class ProfilFragment : Fragment() {
             findNavController().navigate(ProfilFragmentDirections.actionProfilFragmentToLogInFragment())
         }
 
-            vb.btnProfilSetting.setOnClickListener {
+        vb.btnProfilSetting.setOnClickListener {
 
-                findNavController().navigate(ProfilFragmentDirections.actionProfilFragmentToProiflSettingsFragment())
+            findNavController().navigate(ProfilFragmentDirections.actionProfilFragmentToProiflSettingsFragment())
 
-}
+        }
 
         viewModel.reservationsList.observe(viewLifecycleOwner) {
             vb.rvReservationItem.adapter = ReservationAdapter(it.reversed(), viewModel)
         }
 
     }
-
 }

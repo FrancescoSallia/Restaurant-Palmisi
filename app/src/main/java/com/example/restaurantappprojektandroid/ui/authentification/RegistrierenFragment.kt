@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.restaurantappprojektandroid.MainActivity
 import com.example.restaurantappprojektandroid.ui.MainViewModel
+import com.example.restuarantprojektapp.R
 import com.example.restuarantprojektapp.databinding.FragmentRegistrierenBinding
 
 class RegistrierenFragment : Fragment() {
@@ -38,39 +39,38 @@ class RegistrierenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        hieer hast du an codee geändert und im reservation Fragment schau sie dir an , weil du nicht mehr in die reservierungen springen kannst und profil!!
-
-        vb.btnRegistrierenRegistrieren.setOnClickListener {
-
-            viewModel.currentUser.observe(viewLifecycleOwner) {
-              if (it?.isAnonymous == true){
-                  it.delete()
-              }
-            }
-
-            val vorname = vb.etVornameRegistrieren.text.toString()
-            val nachname = vb.etNachnameRegistrieren.text.toString()
-
-            val benutzername = vb.etBenutzernameRegistrieren.text.toString()
-            val firstPasswort = vb.etPasswortRegistrieren.text.toString()
-            val secondPasswort = vb.etPasswortReplyRegistrieren.text.toString()
-
-            if (benutzername.isNotEmpty() && firstPasswort.isNotEmpty() && vorname.isNotEmpty() && nachname.isNotEmpty() && firstPasswort == secondPasswort) {
-
-                viewModel.registration(benutzername, firstPasswort, vorname, nachname)
-                findNavController().navigate(RegistrierenFragmentDirections.actionRegistrierenFragmentToHomeFragment())
-
-            }else if(firstPasswort != secondPasswort){
-
-                Toast.makeText(requireContext(),"Passwort stimmt nicht überein!",Toast.LENGTH_SHORT).show()
-
-            }else{
-                Toast.makeText(requireContext(),"Fülle alle Felder aus!",Toast.LENGTH_SHORT).show()
-            }
+            loggedUser()
 
     }
 
+     private fun loggedUser(){
 
+        viewModel.currentUser.observe(viewLifecycleOwner) {
+
+            if (it?.isAnonymous == true){
+                it.delete()
+            }
+
+        }
+        val vorname = vb.etVornameRegistrieren.text.toString()
+        val nachname = vb.etNachnameRegistrieren.text.toString()
+
+        val benutzername = vb.etBenutzernameRegistrieren.text.toString()
+        val firstPasswort = vb.etPasswortRegistrieren.text.toString()
+        val secondPasswort = vb.etPasswortReplyRegistrieren.text.toString()
+
+        if (benutzername.isNotEmpty() && firstPasswort.isNotEmpty() && vorname.isNotEmpty() && nachname.isNotEmpty() && firstPasswort == secondPasswort) {
+
+            viewModel.registration(benutzername, firstPasswort, vorname, nachname)
+//        findNavController().navigate(RegistrierenFragmentDirections.actionRegistrierenFragmentToHomeFragment())
+
+        }else if(firstPasswort != secondPasswort){
+
+            Toast.makeText(requireContext(),"Passwort stimmt nicht überein!",Toast.LENGTH_SHORT).show()
+
+        }else{
+            Toast.makeText(requireContext(),"Fülle alle Felder aus!",Toast.LENGTH_SHORT).show()
+        }
 
     }
 }

@@ -94,4 +94,9 @@
         android:name="com.example.restaurantappprojektandroid.ui.reservation.AnonymUserReservationFragment"
         android:label="fragment_anonym_user_reservation"
         tools:layout="@layout/fragment_anonym_user_reservation" />
+    <fragment
+        android:id="@+id/anonymUserProfilFragment"
+        android:name="com.example.restaurantappprojektandroid.ui.profile.AnonymUserProfilFragment"
+        android:label="fragment_anonym_user_profil"
+        tools:layout="@layout/fragment_anonym_user_profil" />
 </navigation>

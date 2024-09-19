@@ -204,7 +204,6 @@ class FirestoreRepository(val context: Context) {
 
 
     fun logIn(email: String, password: String, onSuccess: () -> Unit, onFailure: () -> Unit) {
-        Log.d("DEBUG", "logInFunktion: ${auth.currentUser?.uid}")
 
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener {
@@ -249,7 +248,6 @@ class FirestoreRepository(val context: Context) {
     }
 
     fun addToFavorites(meal: Meal) {
-wenn man als user was liked , denn stürzt es ab . Laut dem logcat kommt der fehler von hier aus schau es dir nochmal an!!
         if (!likedMeals.value!!.contains(meal)) {
             likedMeals.value?.add(meal)
             updateMealFromFirestore()

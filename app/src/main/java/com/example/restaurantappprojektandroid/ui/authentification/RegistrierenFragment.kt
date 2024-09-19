@@ -34,12 +34,17 @@ class RegistrierenFragment : Fragment() {
 
             val benutzername = vb.etBenutzernameRegistrieren.text.toString()
             val firstPasswort = vb.etPasswortRegistrieren.text.toString()
-//            val secondPasswort = vb.etPasswortReplyRegistrieren.text.toString()
+            val secondPasswort = vb.etPasswortReplyRegistrieren.text.toString()
 
-            if (benutzername.isNotEmpty() || firstPasswort.isNotEmpty() || vorname.isNotEmpty() || nachname.isNotEmpty()) {
-                viewModel.registration(benutzername,firstPasswort, vorname, nachname)
+            if (benutzername.isNotEmpty() && firstPasswort.isNotEmpty() && vorname.isNotEmpty() && nachname.isNotEmpty() && firstPasswort == secondPasswort) {
 
+                viewModel.registration(benutzername, firstPasswort, vorname, nachname)
                 findNavController().navigate(RegistrierenFragmentDirections.actionRegistrierenFragmentToHomeFragment())
+
+            }else if(firstPasswort != secondPasswort){
+
+                Toast.makeText(requireContext(),"Passwort stimmt nicht überein!",Toast.LENGTH_SHORT).show()
+
             }else{
                 Toast.makeText(requireContext(),"Fülle alle Felder aus!",Toast.LENGTH_SHORT).show()
             }

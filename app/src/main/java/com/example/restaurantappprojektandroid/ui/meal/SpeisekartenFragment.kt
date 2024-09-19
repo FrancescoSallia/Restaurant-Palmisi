@@ -28,8 +28,6 @@ class SpeisekartenFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-
-
         viewModel.getCategories()
 
         vb.searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {

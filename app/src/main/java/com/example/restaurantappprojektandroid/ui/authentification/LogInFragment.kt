@@ -37,10 +37,8 @@ class LogInFragment : Fragment() {
             val email = vb.etBenutzername.text.toString()
             val password = vb.etPasswort.text.toString()
 
-            if (email.isNotEmpty() || password.isNotEmpty()) {
-                viewModel.logIn(
-                    email,
-                    password,
+            if (email.isNotEmpty() && password.isNotEmpty()) {
+                viewModel.logIn(email, password,
                     onSuccess = {
                         successToast()
                     },
@@ -78,7 +76,7 @@ class LogInFragment : Fragment() {
     fun successToast() {
         Toast.makeText(
             context,
-            "Deine angegebenen daten sind falsch, oder du musst dich Registrieren.",
+            "Erfolgreich eingeloggt",
             Toast.LENGTH_SHORT
         ).show()
     }

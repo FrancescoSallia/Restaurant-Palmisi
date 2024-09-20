@@ -42,6 +42,20 @@ class FirestoreRepository(val context: Context) {
     var userRef : DocumentReference? = null
     var colRef: CollectionReference? = null
     var userCol : CollectionReference? = null
+    var resRef: DocumentReference? = null
+
+
+
+
+    fun updateReservation(){
+weiter machen!!
+        resRef = db.collection("reservation").document(auth.currentUser?.uid ?: "").collection("reservierung").document("${reservation.value?.reservationId}")
+        resRef?.get()?.addOnSuccessListener {
+            it.data?.let {
+            }
+        }
+    }
+
 
     fun getDataUser(){
         userCol = db.collection("users")
@@ -116,13 +130,7 @@ class FirestoreRepository(val context: Context) {
         colRef = db.collection("reservation").document(auth.currentUser!!.uid).collection("reservierung")
         colRef?.addSnapshotListener { value, error ->
             if (error == null && value != null) {
-//                val tempList = mutableListOf<Reservation>()
-//                for (dokument in value.documents){
-//                    val reservation = dokument.data?.let { Reservation(it) }
-//                    if (reservation != null) {
-//                        tempList.add(reservation)
-//                    }
-//                }
+
                 val newReservation = value.toObjects(Reservation::class.java)
                 _reservationsList.postValue(newReservation)
             }

@@ -48,6 +48,7 @@ class ReservationDetailFragment : Fragment() {
             }else{
                 vb.etBemerkungDetailText.hint = bemerkung
 
+
             }
 
         }

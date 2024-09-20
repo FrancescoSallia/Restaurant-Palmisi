@@ -43,7 +43,6 @@ class FirestoreRepository(val context: Context) {
     var colRef: CollectionReference? = null
     var userCol : CollectionReference? = null
 
-    //    in dieser funktion stimmt was nicht, es hat ein problem mit dem {_userData.value = user!!} schau es dir nochmal an
     fun getDataUser(){
         userCol = db.collection("users")
         Log.i("FirestoreRepo", "-> ${auth.currentUser?.uid}")

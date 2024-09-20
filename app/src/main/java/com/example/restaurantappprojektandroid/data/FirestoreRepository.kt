@@ -45,7 +45,9 @@ class FirestoreRepository(val context: Context) {
 
     //    in dieser funktion stimmt was nicht, es hat ein problem mit dem {_userData.value = user!!} schau es dir nochmal an
     fun getDataUser(){
-        userCol = db.collection("user")
+        userCol = db.collection("users")
+        Log.i("FirestoreRepo", "-> ${auth.currentUser?.uid}")
+
         userCol?.document(auth.currentUser?.uid ?: "")?.get()?.addOnSuccessListener {
             Log.i("FirestoreRepo", "Daten wurden geladen $it")
 
@@ -61,6 +63,7 @@ class FirestoreRepository(val context: Context) {
     }
 
     fun postUserReservation(reservation:Reservation){
+        Log.i("FirestoreRepo", "Reservation wird gespeichert: -> $reservation")
         colRef = db.collection("reservation").document(auth.currentUser!!.uid).collection("reservierung")
         colRef?.add(reservation)
             ?.addOnSuccessListener {
@@ -171,6 +174,8 @@ class FirestoreRepository(val context: Context) {
                         logOut()
                     }
                     ?.addOnFailureListener {
+
+                        Log.d("Firestore", "im FirestoreRepository ,fehler beim Löschen des Benutzers -> userId: $userId")
 
                         Toast.makeText(
                             context,

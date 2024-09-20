@@ -61,8 +61,8 @@ class ReservationFragment : Fragment() {
             } else if(it != null){
                 registeredUserView()
             }else {
-                funktioniert immer noch nicht!!
 //                (requireActivity() as MainActivity).bottomNavigation.visibility = View.INVISIBLE
+                findNavController().popBackStack()
                 findNavController().popBackStack()
                 findNavController().navigate(R.id.reservationFragment)
             }

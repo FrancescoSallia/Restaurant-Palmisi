@@ -32,7 +32,14 @@ class MainActivity : AppCompatActivity() {
         val navHost = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         bottomNavigation.setupWithNavController(navHost.navController)
 
-
+        bottomNavigation.setOnItemSelectedListener { item ->
+            if (item.itemId == R.id.profilFragment) {
+                navHost.navController.navigate(R.id.profilFragment)
+            } else {
+                navHost.navController.navigate(item.itemId)
+            }
+            true
+        }
 
 
     }

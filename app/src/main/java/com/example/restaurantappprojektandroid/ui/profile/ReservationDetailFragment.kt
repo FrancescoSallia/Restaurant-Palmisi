@@ -43,7 +43,7 @@ class ReservationDetailFragment : Fragment() {
 
             //den value vom kommentarGast raus nehmen und anzeigen lassen!!
             var  bemerkung = reservation.kommentarGast
-            if (vb.etBemerkungDetailText.hint.isNullOrEmpty()){
+            if (bemerkung.isNullOrEmpty()){
 
                 vb.etBemerkungDetailText.hint = "Schreib hier dein Text..."
 
@@ -56,6 +56,11 @@ class ReservationDetailFragment : Fragment() {
                 viewModel.deleteReservation(reservation.reservationId)
                 findNavController().navigateUp()
 
+            }
+            vb.btnSaveReservation.setOnClickListener {
+
+                hier weitermachen mit dem save button
+                viewModel.updateReservation()
             }
         }
 

@@ -111,20 +111,19 @@ class ReservationFragment : Fragment() {
             }
 
             binding.btnTischReservieren.setOnClickListener {
+                var bemerkung = binding.etBemerkung.text.toString()
 
-                if (personenNumber != 0&&zeit != "") {
+                if (personenNumber != 0 && zeit != "") {
                     val builder = AlertDialog.Builder(requireContext())
-                    var editor = R.id.alertEditText
-                    var bemerkungUser = R.id.alertEditText.toString()
+//                    var bemerkungUser = R.id.alertEditText.toString()
                     builder.setTitle("Tisch Reservierung bestätigen")
                     builder.setMessage(
                         """
             Datum: $currentDate
             Personen: $personenNumber 
             Wann: $zeit
-            
-            Fügen Sie unten eine Bemerkung 
-            hinzu (optional):
+            Bemerkung: $bemerkung
+          
                 """
                     )
 
@@ -136,7 +135,7 @@ class ReservationFragment : Fragment() {
                             "",
                             newTime,
                             personenNumber,
-                            bemerkungUser,
+                            bemerkung,
                             ReservationDatasource().loadRandomPictures()
                                 .random()
                         )

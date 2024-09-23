@@ -41,25 +41,33 @@ class MealDetailFragment : Fragment() {
             var findMeal = userLikedMeals.find { it.idMeal == viewModel.selectedMealID}
 
             vb.ivHearth.load(if (findMeal != null) R.drawable.save else R.drawable.heart)
+
         }
 
         viewModel.repositoryMealDetail.observe(viewLifecycleOwner) { meals: List<Meal> ->
             val meal = meals.first()
 
+
             vb.ivMealDetail.load(meal.mealImg)
             vb.tvMealDetailTitle.text = meal.mealName
             vb.tvPreisDetail.text = meal.priceasString
+
             vb.ivHearth.setOnClickListener {
                 handleFavoriteMealState(isLiked, meal)
+                vb.ivHearth.load(if (isLiked) R.drawable.save else R.drawable.heart)
+                //es buggt noch wenn man im gelikten Zustand im Detailfragment reingeht und auf like klickt wiederholt !!
+                isLiked = !isLiked
             }
         }
     }
 
-    private fun handleFavoriteMealState(isLiked: Boolean, meal: Meal) {
-        if (isLiked) {
+    private fun handleFavoriteMealState(isLikedfromUser: Boolean, meal: Meal) {
+        if (isLikedfromUser) {
             viewModel.removeFromFavorites(meal)
         } else {
             viewModel.addToFavorites(meal)
         }
+
+
     }
 }

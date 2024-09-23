@@ -54,7 +54,6 @@ class MealAdapter(
                 if (isLiked) {
                     viewModel.removeFromFavorites(meal)
                 } else {
-
                     viewModel.addToFavorites(meal)
 
                 }
@@ -63,9 +62,6 @@ class MealAdapter(
             }
 
             holder.itemView.setOnClickListener {
-
-                // das soll die position speichern um wieder in der selben position zu sein nachdem man zurück navigiert, funktioniert aber noch nicht
-                viewModel.recyclerViewPosition = position
 
                 viewModel.setSelectedMealId(meal.idMeal)
 

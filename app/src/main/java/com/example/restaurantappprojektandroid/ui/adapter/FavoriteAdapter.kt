@@ -3,10 +3,12 @@ package com.example.restaurantappprojektandroid.ui.adapter
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.restaurantappprojektandroid.data.model.Meal
 import com.example.restaurantappprojektandroid.ui.MainViewModel
+import com.example.restuarantprojektapp.R
 import com.example.restuarantprojektapp.databinding.FavoritedItemBinding
 
 class FavoriteAdapter(
@@ -34,6 +36,12 @@ class FavoriteAdapter(
         holder.binding.tvFavoritePrice.text = meal.price.toString()+ "€"
         holder.binding.ivFavoriteProfil.load(meal.mealImg)
 
+        holder.itemView.setOnClickListener {
+        viewModel.setSelectedMealId(meal.idMeal)
+
+        val navController = holder.itemView.findNavController()
+        navController.navigate(R.id.mealDetailFragment)
+    }
 
 }
 }

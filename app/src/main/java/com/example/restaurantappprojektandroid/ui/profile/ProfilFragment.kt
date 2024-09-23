@@ -68,6 +68,7 @@ class ProfilFragment : Fragment() {
                 binding.rvFavorite.adapter = FavoriteAdapter(it.reversed(),viewModel)
             }
 
+
             binding.btnAusloggen.setOnClickListener {
                 viewModel.logOut()
             }

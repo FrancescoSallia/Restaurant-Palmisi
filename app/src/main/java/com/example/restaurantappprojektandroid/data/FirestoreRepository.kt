@@ -46,15 +46,14 @@ class FirestoreRepository(val context: Context) {
 
 
 
-
-    fun updateReservation(){
-        resRef = db.collection("reservation").document(auth.currentUser?.uid ?: "").collection("reservierung").document("${reservation.value?.reservationId}")
-        resRef?.get()?.addOnSuccessListener {
-            it.data?.let {
-            }
-        }
+das updaten vom kommentarGast funktioniert noch nicht!!
+    fun updateReservation(kommentarGast: String) {
+        resRef = db.collection("reservation").document(auth.currentUser?.uid ?: "")
+            .collection("reservierung").document("${reservation.value?.reservationId}")
+        resRef?.update(
+            "kommentarGast",kommentarGast
+        )
     }
-
 
     fun getDataUser(){
         userCol = db.collection("users")

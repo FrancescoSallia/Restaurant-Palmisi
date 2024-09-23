@@ -59,8 +59,8 @@ class ReservationDetailFragment : Fragment() {
             }
             vb.btnSaveReservation.setOnClickListener {
 
-                hier weitermachen mit dem save button
-                viewModel.updateReservation()
+                viewModel.updateReservation(bemerkung)
+                findNavController().navigateUp()
             }
         }
 

@@ -41,6 +41,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val selectedTime: LiveData<String>
         get() = _selectedTime
 
+    fun updateReservation(kommentarGast: String){
+        firestore.updateReservation(kommentarGast)
+    }
     fun addSnapshotListenerForCurrentUser(){
         firestore.addSnapshotListenerForCurrentUser()
     }

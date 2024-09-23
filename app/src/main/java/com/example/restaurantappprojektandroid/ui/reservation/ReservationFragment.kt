@@ -83,7 +83,6 @@ class ReservationFragment : Fragment() {
             binding.calendarView.date = aktuelleZeit
             binding.calendarView.minDate = aktuelleZeit
             currentDate = currentTime.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
-            binding.reservationTitleDatum.text = currentDate
 
             binding.rvPersonenanzahl.adapter = PersonenanzahlAdapter(
                 viewModel.ReservationDatasources.loadAnzahlAnGaesten(),
@@ -95,11 +94,9 @@ class ReservationFragment : Fragment() {
             )
 
             viewModel.selectedTime.observe(viewLifecycleOwner) {
-                binding.tvTimeAktuellSelected.text = it
                 zeit = it
             }
             viewModel.selectedPersonNumber.observe(viewLifecycleOwner) {
-                binding.tvPersonalzahlTitle.text = it.toString()
                 personenNumber = it
             }
             binding.calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
@@ -110,7 +107,7 @@ class ReservationFragment : Fragment() {
                 dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK)
                 Log.d("Calendar", "Selected day of the week: $dayOfWeek")
 
-                binding.reservationTitleDatum.text = currentDate
+                binding.tvTimeAktuellSelected.text = currentDate
             }
 
             binding.btnTischReservieren.setOnClickListener {

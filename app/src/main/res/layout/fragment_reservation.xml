@@ -1,105 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout4"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.restaurantappprojektandroid.ui.reservation.ReservationFragment">
+     android:layout_height="match_parent"
+    android:fillViewport="true">
 
 
-    <CalendarView
-        android:id="@+id/calendarView"
-        style="@android:style/Widget.Material.CalendarView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="#F8F0D8"
-        android:selectedDateVerticalBar="@drawable/angeklickt_sector"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reservation_title_datum" />
+    <androidx.constraintlayout.widget.ConstraintLayout
 
-    <TextView
-        android:id="@+id/tv_Personalzahl_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:text="Personenzahl"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.051"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/reservation_title_datum"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="Datum"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/rv_personenanzahl"
-        app:layout_constraintHorizontal_bias="0.043"
-        app:layout_constraintStart_toStartOf="@+id/rv_personenanzahl"
-        app:layout_constraintTop_toBottomOf="@+id/rv_personenanzahl" />
-
-    <TextView
-        android:id="@+id/tv_time_aktuell_selected"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="14.09.2024"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/calendarView"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/calendarView"
-        app:layout_constraintTop_toBottomOf="@+id/calendarView" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_personenanzahl"
+        android:id="@+id/frameLayout4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_Personalzahl_title"
-        tools:listitem="@layout/personenanzahl_item" />
+        tools:context="com.example.restaurantappprojektandroid.ui.reservation.ReservationFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_uhrzeiten_vorschläge"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintEnd_toEndOf="@+id/tv_time_aktuell_selected"
-        app:layout_constraintStart_toStartOf="@+id/tv_time_aktuell_selected"
-        app:layout_constraintTop_toBottomOf="@+id/tv_time_aktuell_selected"
-        tools:listitem="@layout/uhrzeit_vorschlag_item" />
 
-    <Button
-        android:id="@+id/btn_tisch_reservieren"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:backgroundTint="#FD774C"
-        android:text="Tisch Reservieren"
-        android:textColor="#22100A"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.529"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rv_uhrzeiten_vorschläge"
-        app:layout_constraintVertical_bias="0.252"
-        app:strokeColor="#5C5C5C"
-        app:strokeWidth="1dp" />
+        <CalendarView
+            android:id="@+id/calendarView"
+            style="@android:style/Widget.Material.CalendarView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:background="#F8F0D8"
+            android:selectedDateVerticalBar="@drawable/angeklickt_sector"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/reservation_title_datum" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tv_Personalzahl_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="56dp"
+            android:text="Personenzahl"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.051"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/reservation_title_datum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Datum"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/rv_personenanzahl"
+            app:layout_constraintHorizontal_bias="0.043"
+            app:layout_constraintStart_toStartOf="@+id/rv_personenanzahl"
+            app:layout_constraintTop_toBottomOf="@+id/rv_personenanzahl" />
+
+        <TextView
+            android:id="@+id/tv_time_aktuell_selected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/calendarView"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/calendarView"
+            app:layout_constraintTop_toBottomOf="@+id/calendarView" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_personenanzahl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_Personalzahl_title"
+            tools:listitem="@layout/personenanzahl_item" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_uhrzeiten_vorschläge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintEnd_toEndOf="@+id/tv_time_aktuell_selected"
+            app:layout_constraintHorizontal_bias="0.075"
+            app:layout_constraintStart_toStartOf="@+id/tv_time_aktuell_selected"
+            app:layout_constraintTop_toBottomOf="@+id/tv_time_aktuell_selected"
+            tools:listitem="@layout/uhrzeit_vorschlag_item" />
+
+        <Button
+            android:id="@+id/btn_tisch_reservieren"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="18dp"
+            android:backgroundTint="#FD774C"
+            android:text="Tisch Reservieren"
+            android:textColor="#22100A"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.529"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout6"
+            app:strokeColor="#5C5C5C"
+            app:strokeWidth="1dp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout6"
+            android:layout_width="359dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintEnd_toEndOf="@+id/textView6"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textView6"
+            app:layout_constraintTop_toBottomOf="@+id/textView6">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_bemerkung"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Schreib hier..." />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Bemerkung(Optional):"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rv_uhrzeiten_vorschläge" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

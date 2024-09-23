@@ -41,13 +41,23 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val selectedTime: LiveData<String>
         get() = _selectedTime
 
+    fun addSnapshotListenerForCurrentUser(){
+        firestore.addSnapshotListenerForCurrentUser()
+    }
+
+    fun snapShotListenerForReservation(){
+        firestore.snapShotListenerForReservation()
+    }
+    fun deleteReservation(reservationId:String){
+        firestore.deleteReservation(reservationId)
+    }
     fun getDataUser(){
         firestore.getDataUser()
 
     }
 
     fun getReservations(reservationId: String){
-        firestore.getData(reservationId)
+        firestore.getDataReservation(reservationId)
     }
 
 

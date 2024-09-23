@@ -48,7 +48,6 @@ class FirestoreRepository(val context: Context) {
 
 
     fun updateReservation(){
-weiter machen!!
         resRef = db.collection("reservation").document(auth.currentUser?.uid ?: "").collection("reservierung").document("${reservation.value?.reservationId}")
         resRef?.get()?.addOnSuccessListener {
             it.data?.let {
@@ -104,7 +103,7 @@ weiter machen!!
         }
     }
 
-    private fun addSnapshotListenerForCurrentUser() {
+     fun addSnapshotListenerForCurrentUser() {
         userRef = db.collection("users").document(auth.currentUser!!.uid)
         userRef?.addSnapshotListener { value, error ->
             if (error == null && value != null && value.exists()) {
@@ -116,7 +115,7 @@ weiter machen!!
         }
     }
 
-    fun getData(reservierungsId: String){
+    fun getDataReservation(reservierungsId: String){
         db.collection("reservation").document(auth.currentUser!!.uid).collection("reservierung").document(reservierungsId)
             .get().addOnSuccessListener {
                 val reservation = it.toObject(Reservation::class.java)
@@ -126,7 +125,7 @@ weiter machen!!
             }
 
     }
-    private fun snapShotListenerForReservation(){
+     fun snapShotListenerForReservation(){
         colRef = db.collection("reservation").document(auth.currentUser!!.uid).collection("reservierung")
         colRef?.addSnapshotListener { value, error ->
             if (error == null && value != null) {
@@ -167,6 +166,15 @@ weiter machen!!
         }
     }
 
+    fun deleteReservation(reservationId: String){
+        val userId = auth.currentUser?.uid
+        if (userId != null) {
+            userRef = db.collection("reservation").document(userId).collection("reservierung").document(reservationId)
+            userRef?.delete()?.addOnSuccessListener {
+                Log.d("Firestore", "userRef: $userRef")
+            }
+        }
+    }
 
     fun deleteUser() {
         val userId = auth.currentUser?.uid
@@ -174,6 +182,10 @@ weiter machen!!
             userRef = db.collection("users").document(userId)
             userRef?.delete()?.addOnSuccessListener {
                 Log.d("Firestore", "userRef: $userRef")
+
+                // Die untere Zeile, löscht alle die Reservierungen vom User!
+                userRef = db.collection("reservation").document(userId)
+                userRef?.delete()?.addOnSuccessListener {Log.d("Firestore", "Reservierungen vom user wurden auch gelöscht!")}
                 auth.currentUser?.delete()
                     ?.addOnSuccessListener {
                         Toast.makeText(context, "Benutzer gelöscht", Toast.LENGTH_SHORT)
@@ -235,6 +247,11 @@ weiter machen!!
             auth.currentUser?.delete()
         }
         _currentUser.value = null
+         userRef  = null
+         colRef = null
+         userCol = null
+         resRef = null
+
         auth.signOut()
     }
 

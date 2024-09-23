@@ -27,6 +27,7 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
+import java.util.Calendar
 
 class ReservationFragment : Fragment() {
 
@@ -36,6 +37,7 @@ class ReservationFragment : Fragment() {
     private var zeit: String = ""
     private var personenNumber: Int = 0
     private lateinit var currentDate: String
+    var dayOfWeek : Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -73,7 +75,7 @@ class ReservationFragment : Fragment() {
         val binding = vb
         if (binding is FragmentReservationBinding) {
             val loadTime = viewModel.ReservationDatasources.loadTimes(
-                12,
+                16,
                 22
             )
             val currentTime = LocalDateTime.now()
@@ -102,8 +104,15 @@ class ReservationFragment : Fragment() {
             }
             binding.calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
                 currentDate = "$dayOfMonth.$month.$year"
+
+                val calendar = Calendar.getInstance()
+                calendar.set(year, month, dayOfMonth)
+                dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK)
+                Log.d("Calendar", "Selected day of the week: $dayOfWeek")
+
                 binding.reservationTitleDatum.text = currentDate
             }
+
             binding.btnTischReservieren.setOnClickListener {
 
                 if (personenNumber != 0&&zeit != "") {

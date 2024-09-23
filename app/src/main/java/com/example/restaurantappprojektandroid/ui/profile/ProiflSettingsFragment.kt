@@ -1,6 +1,7 @@
 package com.example.restaurantappprojektandroid.ui.profile
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,6 +28,7 @@ class ProiflSettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.getDataUser()
 
         vb.btnSave.setOnClickListener {
             if (vb.etBenutzernameSettings.text.toString()
@@ -42,15 +44,23 @@ class ProiflSettingsFragment : Fragment() {
 
         }
 
-        viewModel.userRef?.addSnapshotListener { snapshot, error ->
-            if (snapshot != null && snapshot.exists()) {
-                val user = snapshot.toObject(User::class.java)
+//        viewModel.userRef?.addSnapshotListener { snapshot, error ->
+//            if (snapshot != null && snapshot.exists()) {
+//                val user = snapshot.toObject(User::class.java)
+//
+//                vb.etBenutzernameSettings.setText(user?.vorname)
+//                vb.etPasswordSettings.setText(user?.nachname)
+//
+//            }
+//        }
 
-                vb.etBenutzernameSettings.setText(user?.vorname)
-                vb.etPasswordSettings.setText(user?.nachname)
+        viewModel.userData.observe(viewLifecycleOwner){
+            Log.d("ProfilSettings", "userData: $it")
+            vb.etBenutzernameSettings.setText(it?.vorname)
+            vb.etPasswordSettings.setText(it?.nachname)
 
-            }
         }
+
         viewModel.currentUser.observe(viewLifecycleOwner) {
             if (it == null) {
                 (requireActivity() as MainActivity).bottomNavigation.visibility = View.INVISIBLE

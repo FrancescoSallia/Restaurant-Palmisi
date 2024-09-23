@@ -48,6 +48,8 @@ class ProfilFragment : Fragment() {
                     viewModel.logOut()
                 }
             }else if (it != null) {
+                viewModel.snapShotListenerForReservation()
+
                 loggedUser()
             } else {
                 (requireActivity() as MainActivity).bottomNavigation.visibility = View.INVISIBLE

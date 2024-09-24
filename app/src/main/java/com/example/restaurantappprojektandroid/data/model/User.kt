@@ -7,6 +7,6 @@ data class User(
     var id: String = "",
     val vorname: String  = "",
     val nachname: String = "",
-    val likedGerichteIds: MutableList<String> = mutableListOf(),
+//    val likedGerichteIds: MutableList<String> = mutableListOf(),
     val likedGerichte: MutableList<Meal> = mutableListOf()
 )

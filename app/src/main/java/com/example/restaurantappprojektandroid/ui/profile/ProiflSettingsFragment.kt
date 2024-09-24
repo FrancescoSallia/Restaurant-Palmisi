@@ -44,16 +44,6 @@ class ProiflSettingsFragment : Fragment() {
 
         }
 
-//        viewModel.userRef?.addSnapshotListener { snapshot, error ->
-//            if (snapshot != null && snapshot.exists()) {
-//                val user = snapshot.toObject(User::class.java)
-//
-//                vb.etBenutzernameSettings.setText(user?.vorname)
-//                vb.etPasswordSettings.setText(user?.nachname)
-//
-//            }
-//        }
-
         viewModel.userData.observe(viewLifecycleOwner){
             Log.d("ProfilSettings", "userData: $it")
             vb.etBenutzernameSettings.setText(it?.vorname)

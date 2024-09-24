@@ -5,7 +5,6 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.restaurantappprojektandroid.data.FirestoreRepository
 import com.example.restaurantappprojektandroid.data.datasource.ReservationDatasource
 import com.example.restaurantappprojektandroid.data.model.Meal
 import com.example.restaurantappprojektandroid.data.model.Reservation
@@ -17,21 +16,18 @@ import kotlinx.coroutines.launch
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     //
-    private val repository = Repository(MealdbApi)
+    private val repository = Repository(MealdbApi, application)
     val ReservationDatasources = ReservationDatasource()
 
-    private var firestore = FirestoreRepository(getApplication())
-    val userRef = firestore.userRef
+    val currentUser = repository.currentUser
 
-    val currentUser = firestore.currentUser
+    val likedMeals = repository.likedMeals
 
-    val likedMeals = firestore.likedMeals
+    val reservationsList = repository.reservationsList
 
-    val reservationsList = firestore.reservationsList
+    val reservation = repository.reservation
 
-    val reservation = firestore.reservation
-
-    val userData = firestore.userData
+    val userData = repository.userData
 
     private val _selectedPersonNumber = MutableLiveData<Int>(1)
     val selectedPersonNumber: LiveData<Int>
@@ -42,30 +38,30 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         get() = _selectedTime
 
     fun updateReservation(kommentarGast: String){
-        firestore.updateReservation(kommentarGast)
+        repository.updateReservation(kommentarGast)
     }
     fun addSnapshotListenerForCurrentUser(){
-        firestore.addSnapshotListenerForCurrentUser()
+        repository.getLikedMeals()
     }
 
     fun snapShotListenerForReservation(){
-        firestore.snapShotListenerForReservation()
+        repository.snapShotListenerForReservation()
     }
     fun deleteReservation(reservationId:String){
-        firestore.deleteReservation(reservationId)
+        repository.deleteReservation(reservationId)
     }
     fun getDataUser(){
-        firestore.getDataUser()
+        repository.getDataUser()
 
     }
 
     fun getReservations(reservationId: String){
-        firestore.getDataReservation(reservationId)
+        repository.getDataReservation(reservationId)
     }
 
 
     fun postReservation(reservation: Reservation) {
-        firestore.postUserReservation(reservation)
+        repository.postUserReservation(reservation)
     }
 
     fun selectedPersonNumber(anzahl:Int):Int{
@@ -90,34 +86,33 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun updateUser(vorname: String, nachname: String) {
 
-        firestore.updateUser(vorname, nachname)
+        repository.updateUser(vorname, nachname)
     }
 
     fun deleteUser() {
-        firestore.deleteUser()
+        repository.deleteUser()
     }
 
 
     fun logIn(email: String, password: String, onSuccess: () -> Unit, onFailure: () -> Unit) {
-        firestore.logIn(email, password, onSuccess, onFailure)
+        repository.logIn(email, password, onSuccess, onFailure)
     }
 
 
     fun logOut() {
-        firestore.logOut()
+        repository.logOut()
     }
 
     fun registration(Email: String, password: String, vorname: String, nachname: String) {
-        firestore.registration(Email, password, vorname, nachname)
+        repository.registration(Email, password, vorname, nachname)
     }
 
     fun continueAsGuest() {
-        firestore.continueAsGuest()
+        repository.continueAsGuest()
     }
     //Firebase ENDE!!
 
     var selectedMealID = ""
-    var recyclerViewPosition = 0
 
 
     val repositoryCategory = repository.category
@@ -137,6 +132,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
         viewModelScope.launch {
 
+            repository.getLikedMeals()
             repository.getMealsByCategory(categorieName)
         }
     }
@@ -159,11 +155,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
 
     fun addToFavorites(meal: Meal) {
-        firestore.addToFavorites(meal)
-    }
-
-    fun removeFromFavorites(meal: Meal) {
-        firestore.removeFromFavorites(meal)
+        repository.addToFavorites(meal)
     }
 
 

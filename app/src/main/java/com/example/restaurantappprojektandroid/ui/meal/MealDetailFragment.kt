@@ -1,6 +1,7 @@
 package com.example.restaurantappprojektandroid.ui.meal
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +16,6 @@ import com.example.restuarantprojektapp.databinding.FragmentMealDetailBinding
 class MealDetailFragment : Fragment() {
     private lateinit var vb: FragmentMealDetailBinding
     private val viewModel: MainViewModel by activityViewModels()
-    private var isLiked = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,37 +37,33 @@ class MealDetailFragment : Fragment() {
             vb.ivHearth.visibility = View.INVISIBLE
         }
 
-        viewModel.likedMeals.observe(viewLifecycleOwner) { userLikedMeals ->
-            var findMeal = userLikedMeals.find { it.idMeal == viewModel.selectedMealID}
+//        viewModel.likedMeals.observe(viewLifecycleOwner) { userLikedMeals ->
+//            var findMeal = userLikedMeals.find { it.idMeal == viewModel.selectedMealID }
+//            vb.ivHearth.load(if (findMeal != null) R.drawable.save else R.drawable.heart)
+//
+//        }
 
-            vb.ivHearth.load(if (findMeal != null) R.drawable.save else R.drawable.heart)
+        viewModel.repositoryMeals.observe(viewLifecycleOwner) { meals: List<Meal> ->
 
-        }
+            var meal = meals.find { it.idMeal == viewModel.selectedMealID }
 
-        viewModel.repositoryMealDetail.observe(viewLifecycleOwner) { meals: List<Meal> ->
-            val meal = meals.first()
+            if (meal != null) {
+                vb.ivHearth.load(if (meal.liked) R.drawable.save else R.drawable.heart)
 
+                vb.ivMealDetail.load(meal.mealImg)
+                vb.tvMealDetailTitle.text = meal.mealName
+                vb.tvPreisDetail.text = meal.priceasString
 
-            vb.ivMealDetail.load(meal.mealImg)
-            vb.tvMealDetailTitle.text = meal.mealName
-            vb.tvPreisDetail.text = meal.priceasString
-
-            vb.ivHearth.setOnClickListener {
-                handleFavoriteMealState(isLiked, meal)
-                vb.ivHearth.load(if (isLiked) R.drawable.save else R.drawable.heart)
-                //es buggt noch wenn man im gelikten Zustand im Detailfragment reingeht und auf like klickt wiederholt !!
-                isLiked = !isLiked
+                vb.ivHearth.setOnClickListener {
+                    Log.i("meal", meal.toString())
+                    meal.liked = !meal.liked
+                    viewModel.addToFavorites(meal)
+                    vb.ivHearth.load(if (meal.liked) R.drawable.save else R.drawable.heart)
+                    //es buggt noch wenn man im gelikten Zustand im Detailfragment reingeht und auf like klickt wiederholt !!
+                }
             }
         }
     }
 
-    private fun handleFavoriteMealState(isLikedfromUser: Boolean, meal: Meal) {
-        if (isLikedfromUser) {
-            viewModel.removeFromFavorites(meal)
-        } else {
-            viewModel.addToFavorites(meal)
-        }
 
-
-    }
 }

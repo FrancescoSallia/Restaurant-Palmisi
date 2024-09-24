@@ -42,23 +42,18 @@ class MealAdapter(
 
             val meal = dataset[position]
 
-            var likedMeal = viewModel.likedMeals.value?.find { it.idMeal == meal.idMeal }
-            var isLiked = likedMeal != null
-            holder.binding.likeButton.load(if (isLiked) R.drawable.save else R.drawable.heart)
+
+            holder.binding.likeButton.load(if (meal.liked) R.drawable.save else R.drawable.heart)
             holder.binding.itemName.text = meal.mealName
             holder.binding.itemImage.load(meal.mealImg)
             holder.binding.itemPrice.text = meal.price.toString() + "€"
 
             holder.binding.likeButton.setOnClickListener {
 
-                if (isLiked) {
-                    viewModel.removeFromFavorites(meal)
-                } else {
-                    viewModel.addToFavorites(meal)
+                meal.liked = !meal.liked
+                holder.binding.likeButton.load(if (meal.liked) R.drawable.save else R.drawable.heart)
+                viewModel.addToFavorites(meal)
 
-                }
-                isLiked = !isLiked
-                holder.binding.likeButton.load(if (isLiked) R.drawable.save else R.drawable.heart)
             }
 
             holder.itemView.setOnClickListener {

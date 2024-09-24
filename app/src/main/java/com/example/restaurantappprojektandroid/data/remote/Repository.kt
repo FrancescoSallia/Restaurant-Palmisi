@@ -1,14 +1,18 @@
 package com.example.restaurantappprojektandroid.data.remote
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.restaurantappprojektandroid.data.FirestoreRepository
 import com.example.restaurantappprojektandroid.data.model.Category
 import com.example.restaurantappprojektandroid.data.model.Meal
+import com.example.restaurantappprojektandroid.data.model.Reservation
+import okhttp3.internal.notify
 
-class Repository(private val api: MealdbApi) {
+class Repository(private val api: MealdbApi, context:Context) {
 
-
+    //region Firebase
     private val _categorie = MutableLiveData<List<Category>>()
     val category: LiveData<List<Category>>
         get() = _categorie
@@ -26,6 +30,82 @@ class Repository(private val api: MealdbApi) {
         get() = _searchMeal
 
 
+    private val firestore = FirestoreRepository(context)
+
+    val currentUser = firestore.currentUser
+
+    val likedMeals = firestore.likedMeals
+
+    val reservationsList = firestore.reservationsList
+
+    val reservation = firestore.reservation
+
+    val userData = firestore.userData
+
+    //endregion
+
+    //region Firebase functions
+    fun updateReservation(kommentarGast: String){
+        firestore.updateReservation(kommentarGast)
+    }
+    fun getLikedMeals(){
+        firestore.getLikedMeals()
+    }
+
+    fun snapShotListenerForReservation(){
+        firestore.snapShotListenerForReservation()
+    }
+    fun deleteReservation(reservationId:String){
+        firestore.deleteReservation(reservationId)
+    }
+    fun getDataUser(){
+        firestore.getDataUser()
+    }
+
+    fun getDataReservation(reservationId: String){
+        firestore.getDataReservation(reservationId)
+    }
+
+    fun postUserReservation(reservation: Reservation) {
+        firestore.postUserReservation(reservation)
+    }
+
+    fun updateUser(vorname: String, nachname: String) {
+
+        firestore.updateUser(vorname, nachname)
+    }
+
+    fun deleteUser() {
+        firestore.deleteUser()
+    }
+
+
+    fun logIn(email: String, password: String, onSuccess: () -> Unit, onFailure: () -> Unit) {
+        firestore.logIn(email, password, onSuccess, onFailure)
+    }
+
+
+    fun logOut() {
+        firestore.logOut()
+    }
+
+    fun registration(Email: String, password: String, vorname: String, nachname: String) {
+        firestore.registration(Email, password, vorname, nachname)
+    }
+
+    fun continueAsGuest() {
+        firestore.continueAsGuest()
+    }
+
+    fun addToFavorites(meal: Meal) {
+        firestore.addToFavorites(meal)
+    }
+
+
+    //endregion
+
+
+//region Api and Retofit functions
     suspend fun getCategories(){
         try {
             val result = MealdbApi.retrofitService.getCategories()
@@ -38,7 +118,14 @@ class Repository(private val api: MealdbApi) {
     suspend fun getMealsByCategory(categorieName: String) {
         try {
             val result = MealdbApi.retrofitService.getMealsByCategory(categorieName)
+            result.meals.forEach { meal ->
+                var likedMeal = likedMeals.value?.find { it.idMeal == meal.idMeal }
+                if (likedMeal != null) {
+                    meal.liked = likedMeal.liked
+                }
+            }
             _meals.postValue(result.meals)
+
         } catch (e: Exception) {
             Log.i("INFO", "schau im Repository nach bei getMealsByCategory : $e")
         }
@@ -53,15 +140,21 @@ class Repository(private val api: MealdbApi) {
             }
     }
 
-
     suspend fun searchMeal(search: String) {
         try {
             val result = MealdbApi.retrofitService.searchMeal(search)
-            _searchMeal.postValue(result.meals)
+            result.meals.forEach { meal ->
+                var likedMeal = likedMeals.value?.find { it.idMeal == meal.idMeal }
+                if (likedMeal != null) {
+                    meal.liked = likedMeal.liked
+                }
+            }
+            _meals.postValue(result.meals)
         } catch (e: Exception) {
             Log.i("INFO", "schau im Repository nach bei getMealBySearch : $e")
         }
     }
+    //endregion
 
 
 

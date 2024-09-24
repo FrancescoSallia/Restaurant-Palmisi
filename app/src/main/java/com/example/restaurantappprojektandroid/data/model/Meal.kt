@@ -8,6 +8,7 @@ data class Meal(
     var mealName: String = "",
     @Json(name = "strMealThumb")
     var mealImg: String = "",
+    var liked: Boolean = false
 
 ) {
 
@@ -28,6 +29,7 @@ data class Meal(
             "idMeal" to idMeal,
             "mealName" to mealName,
             "mealImg" to mealImg,
+            "liked" to liked
         )
     }
 }

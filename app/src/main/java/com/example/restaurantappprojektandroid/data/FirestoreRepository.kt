@@ -45,13 +45,11 @@ class FirestoreRepository(val context: Context) {
     var resRef: DocumentReference? = null
 
 
-
-das updaten vom kommentarGast funktioniert noch nicht!!
     fun updateReservation(kommentarGast: String) {
         resRef = db.collection("reservation").document(auth.currentUser?.uid ?: "")
             .collection("reservierung").document("${reservation.value?.reservationId}")
         resRef?.update(
-            "kommentarGast",kommentarGast
+            "kommentarGast", kommentarGast
         )
     }
 
@@ -97,21 +95,25 @@ das updaten vom kommentarGast funktioniert noch nicht!!
     init {
         if (auth.currentUser != null) {
             Log.d("DEBUG", "User is logged in: ${auth.currentUser?.uid}")
-            addSnapshotListenerForCurrentUser()
+            getLikedMeals()
             snapShotListenerForReservation()
         }
     }
 
-     fun addSnapshotListenerForCurrentUser() {
-        userRef = db.collection("users").document(auth.currentUser!!.uid)
-        userRef?.addSnapshotListener { value, error ->
-            if (error == null && value != null && value.exists()) {
-                val user = value.toObject(User::class.java)
-                if (user != null) {
-                    _likedMeals.postValue(user.likedGerichte)
-                }
-            }
-        }
+     fun getLikedMeals() {
+       try {
+           userRef = db.collection("users").document(auth.currentUser!!.uid)
+           userRef?.addSnapshotListener { value, error ->
+               if (error == null && value != null && value.exists()) {
+                   val user = value.toObject(User::class.java)
+                   if (user != null) {
+                       _likedMeals.postValue(user.likedGerichte)
+                   }
+               }
+           }
+       } catch (e: Exception) {
+           Log.e("FirestoreRepository", "Error fetching liked meals: ${e.message}")
+       }
     }
 
     fun getDataReservation(reservierungsId: String){
@@ -144,8 +146,10 @@ das updaten vom kommentarGast funktioniert noch nicht!!
     fun updateUser(vorname: String, nachname: String) {
         if (auth.currentUser?.uid != null) {
             userRef?.update(
-                "vorname", vorname,
-                "nachname", nachname
+                "vorname",
+                vorname,
+                "nachname" ,
+                nachname
             )?.addOnSuccessListener {
                 Log.d("Firestore", "Benutzerdaten erfolgreich aktualisiert")
                 Toast.makeText(context, "Benutzerdaten aktualisiert", Toast.LENGTH_SHORT)
@@ -191,9 +195,9 @@ das updaten vom kommentarGast funktioniert noch nicht!!
                             .show()
                         logOut()
                     }
-                    ?.addOnFailureListener {
+                    ?.addOnFailureListener { error ->
 
-                        Log.d("Firestore", "im FirestoreRepository ,fehler beim Löschen des Benutzers -> userId: $userId")
+                        Log.d("Firestore", "Fehler beim Löschen des Benutzers: $error")
 
                         Toast.makeText(
                             context,
@@ -232,7 +236,7 @@ das updaten vom kommentarGast funktioniert noch nicht!!
             .addOnCompleteListener {
                 if (it.isSuccessful) {
                     _currentUser.postValue(it.result.user)
-                    addSnapshotListenerForCurrentUser()
+                    getLikedMeals()
                     onSuccess()
                 } else {
                     onFailure()
@@ -260,7 +264,7 @@ das updaten vom kommentarGast funktioniert noch nicht!!
             if (newUser.isSuccessful) {
 
                 _currentUser.value = newUser.result.user
-                addSnapshotListenerForCurrentUser()
+                getLikedMeals()
                 postDokument(createUser(vorname, nachname))
 
             } else {
@@ -276,31 +280,36 @@ das updaten vom kommentarGast funktioniert noch nicht!!
     }
 
     fun addToFavorites(meal: Meal) {
-        if (!likedMeals.value!!.contains(meal)) {
-            likedMeals.value?.add(meal)
-            updateMealFromFirestore()
+        Log.d("Firestore", "addToFavorites: $meal")
+        try {
+                if (!likedMeals.value!!.contains(meal) && meal.liked) {
+                    likedMeals.value?.add(meal)
+                    updateMealFromFirestore()
+                    Log.d("Firestore", "likedMeal.value: ${likedMeals.value}")
+                } else {
+                    likedMeals.value?.removeIf { it.idMeal == meal.idMeal }
+                    updateMealFromFirestore()
+                }
+
+        }catch (e: Exception) {
+            Log.d("Firestore", "error : $e")
         }
+
     }
-
-
-    fun removeFromFavorites(meal: Meal) {
-
-        likedMeals.value?.remove(meal)
-        updateMealFromFirestore()
-    }
-
 
     private fun updateMealFromFirestore() {
 
         var newMap = mutableListOf<Map<String, Any>>()
 
         likedMeals.value?.forEach {
+            Log.d("Firestore", "meal: $it")
+
             newMap.add(it.toMap())
         }
         var upToDate = mapOf(
             "likedGerichte" to newMap,
         )
-        db.collection("users").document(auth.currentUser!!.uid).set(upToDate)
+        db.collection("users").document(auth.currentUser!!.uid).update(upToDate)
 
     }
 

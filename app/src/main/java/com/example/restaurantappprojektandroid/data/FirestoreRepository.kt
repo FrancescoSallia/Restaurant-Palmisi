@@ -1,6 +1,7 @@
 package com.example.restaurantappprojektandroid.data
 
 import android.content.Context
+import android.net.Uri
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.LiveData
@@ -38,11 +39,39 @@ class FirestoreRepository(val context: Context) {
     val userData: LiveData<User>
         get() = _userData
 
+    private val _profilPicture = MutableLiveData<String?>()
+    val profilPicture: LiveData<String?>
+        get() = _profilPicture
+
     private val db = Firebase.firestore
     var userRef : DocumentReference? = null
     var colRef: CollectionReference? = null
     var userCol : CollectionReference? = null
     var resRef: DocumentReference? = null
+
+
+    fun addProfilPicture(imageUri: Uri) {
+
+        userRef = db.collection("users").document(auth.currentUser?.uid ?: "")
+        userRef?.update(
+            "profilPicture", imageUri)?.addOnSuccessListener {
+
+                _profilPicture.value = imageUri.toString()
+                Toast.makeText(
+                    context,
+                    "Profilbild wurde erfolgreich aktualisiert",
+                    Toast.LENGTH_SHORT
+                ).show()
+        }?.addOnFailureListener {
+
+            Toast.makeText(
+                context,
+                "Profilbild konnte nicht aktualisiert werden",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+        }
+
 
 
     fun updateReservation(kommentarGast: String) {

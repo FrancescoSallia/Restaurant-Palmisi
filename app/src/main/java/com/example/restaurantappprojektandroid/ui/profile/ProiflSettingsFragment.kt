@@ -19,16 +19,15 @@ import com.example.restuarantprojektapp.databinding.FragmentProiflSettingsBindin
 class ProiflSettingsFragment : Fragment() {
     private lateinit var vb: FragmentProiflSettingsBinding
     private val viewModel: MainViewModel by activityViewModels()
+    private var profilBild: Uri? = null
 
     // diese funktion ist für die Bildauswahl zuständig (Profilbild)
     private val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         uri?.let {
-            // Setze das ausgewählte Bild in das ImageView
-            vb.ivProfilPic.setImageURI(it)
 
-            // Hier könnten Sie den Code zum Hochladen des Bildes hinzufügen
-            // Zum Beispiel:
-            // viewModel.uploadProfilePicture(it)
+            profilBild = it
+
+             viewModel.addProfilPicture(profilBild!!)
         }
     }
 
@@ -45,15 +44,23 @@ class ProiflSettingsFragment : Fragment() {
 
         viewModel.getDataUser()
 
+        viewModel.profilPicture.observe(viewLifecycleOwner) {
+            if (it != null) {
+                vb.ivProfilPic.setImageURI(Uri.parse(it.toString()))
+            }
+        }
+
         // funktion um die Bildauswahl zu starten
         fun openGallery() {
              getContent.launch("image/*")
+
         }
 
         vb.ivProfilPic.setOnClickListener {
 
             openGallery()
         }
+
 
 
 

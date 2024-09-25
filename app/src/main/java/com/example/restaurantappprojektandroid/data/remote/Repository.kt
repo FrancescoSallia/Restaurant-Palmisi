@@ -1,6 +1,7 @@
 package com.example.restaurantappprojektandroid.data.remote
 
 import android.content.Context
+import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -42,9 +43,22 @@ class Repository(private val api: MealdbApi, context:Context) {
 
     val userData = firestore.userData
 
+    val profilPicture = firestore.profilPicture
+
     //endregion
 
     //region Firebase functions
+
+
+
+    fun addProfilPicture(uri: Uri){
+
+        firestore.addProfilPicture(uri)
+    }
+
+
+
+
     fun updateReservation(kommentarGast: String){
         firestore.updateReservation(kommentarGast)
     }

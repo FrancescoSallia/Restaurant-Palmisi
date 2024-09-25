@@ -1,6 +1,7 @@
 package com.example.restaurantappprojektandroid.ui
 
 import android.app.Application
+import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -29,6 +30,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     val userData = repository.userData
 
+    val profilPicture = repository.profilPicture
+
     private val _selectedPersonNumber = MutableLiveData<Int>(1)
     val selectedPersonNumber: LiveData<Int>
         get() = _selectedPersonNumber
@@ -36,6 +39,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val _selectedTime = MutableLiveData<String>()
     val selectedTime: LiveData<String>
         get() = _selectedTime
+
+
+
+    fun addProfilPicture(uri:Uri){
+        repository.addProfilPicture(uri)
+    }
 
     fun updateReservation(kommentarGast: String){
         repository.updateReservation(kommentarGast)

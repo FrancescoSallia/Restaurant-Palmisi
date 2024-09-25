@@ -24,5 +24,11 @@
         <item name="android:color">#E4702C17</item>
     </style>
 
+    <style name="circle">
+        <item name="cornerSize">50%</item>
+        <item name="strokeWidth">10dp</item>
+        <item name="strokeColor">#FF5722</item>
+    </style>
+
 
 </resources>

@@ -20,7 +20,6 @@ class ProiflSettingsFragment : Fragment() {
     private val viewModel: MainViewModel by activityViewModels()
     private var profilBild: Uri? = null
 
-    das mit dem bild hochladen muss noch erledigt werden!!
 
     // diese funktion ist für die Bildauswahl zuständig (Profilbild)
     private val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
@@ -78,7 +77,7 @@ class ProiflSettingsFragment : Fragment() {
 
         }
 
-        vb.ivProfilPic.setOnClickListener {
+        vb.btnFloatingCamera.setOnClickListener {
 
             openGallery()
         }

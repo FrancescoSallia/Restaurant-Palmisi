@@ -73,16 +73,17 @@
                 android:hint="Nachname" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iv_profil_pic"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
             android:layout_marginTop="36dp"
             android:background="@drawable/profilbild_circle"
             app:layout_constraintEnd_toEndOf="@+id/tv_Settings_title"
             app:layout_constraintStart_toStartOf="@+id/tv_Settings_title"
             app:layout_constraintTop_toBottomOf="@+id/tv_Settings_title"
-            tools:src="@drawable/profil" />
+            app:shapeAppearanceOverlay="@style/circle"
+            tools:src="@tools:sample/avatars" />
 
         <Button
             android:id="@+id/btn_kontolöschen"
@@ -108,6 +109,17 @@
             app:layout_constraintEnd_toEndOf="@+id/btn_save"
             app:layout_constraintStart_toStartOf="@+id/btn_save"
             app:layout_constraintTop_toBottomOf="parent" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_floating_camera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="2dp"
+            android:clickable="true"
+            android:src="@drawable/baseline_photo_camera_24"
+            app:backgroundTint="#FF5722"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_profil_pic"
+            app:layout_constraintEnd_toEndOf="@+id/iv_profil_pic" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

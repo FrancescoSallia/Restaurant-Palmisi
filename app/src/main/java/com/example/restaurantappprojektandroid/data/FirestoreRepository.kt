@@ -4,6 +4,7 @@ import android.content.Context
 import android.net.Uri
 import android.util.Log
 import android.widget.Toast
+import androidx.core.net.toUri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.restaurantappprojektandroid.data.model.Meal
@@ -49,7 +50,7 @@ class FirestoreRepository(val context: Context) {
     var userCol : CollectionReference? = null
     var resRef: DocumentReference? = null
 
-//
+
 //    fun updateProfilPicture(profilBild: Uri) {
 //        userRef = db.collection("users").document(auth.currentUser?.uid ?: "")
 //        userRef?.update(
@@ -70,12 +71,12 @@ class FirestoreRepository(val context: Context) {
         userRef?.update(
             "profilPicture", imageUri)?.addOnSuccessListener {
 
-                _profilPicture.value = imageUri.toString()
-                Toast.makeText(
-                    context,
-                    "Profilbild wurde erfolgreich aktualisiert",
-                    Toast.LENGTH_SHORT
-                ).show()
+            _profilPicture.value = imageUri.toString()
+            Toast.makeText(
+                context,
+                "Profilbild wurde erfolgreich aktualisiert",
+                Toast.LENGTH_SHORT
+            ).show()
         }?.addOnFailureListener {
 
             Toast.makeText(
@@ -84,7 +85,8 @@ class FirestoreRepository(val context: Context) {
                 Toast.LENGTH_SHORT
             ).show()
         }
-        }
+    }
+
 
 
 

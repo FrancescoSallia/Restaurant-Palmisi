@@ -1,6 +1,5 @@
 package com.example.restaurantappprojektandroid.ui.profile
 
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -8,11 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.restaurantappprojektandroid.MainActivity
-import com.example.restaurantappprojektandroid.data.model.User
 import com.example.restaurantappprojektandroid.ui.MainViewModel
 import com.example.restuarantprojektapp.databinding.FragmentProiflSettingsBinding
 
@@ -21,13 +20,30 @@ class ProiflSettingsFragment : Fragment() {
     private val viewModel: MainViewModel by activityViewModels()
     private var profilBild: Uri? = null
 
+    das mit dem bild hochladen muss noch erledigt werden!!
+
     // diese funktion ist für die Bildauswahl zuständig (Profilbild)
     private val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-        uri?.let {
+        uri?.let { uri->
+            Log.d("ProfilSettings", "let funktion: $uri")
 
-            profilBild = it
 
-             viewModel.addProfilPicture(profilBild!!)
+            profilBild = uri
+//            viewModel.userData.observe(viewLifecycleOwner){ user ->
+//
+//                profilBild = user.profilbild?.toUri()
+//
+//
+//            }
+
+            viewModel.userData.observe(viewLifecycleOwner) {
+                viewModel.addProfilPicture(profilBild!!)
+
+                vb.ivProfilPic.setImageURI(profilBild)
+                Log.d("ProfilSettings", "observe: $profilBild")
+
+            }
+
         }
     }
 
@@ -35,18 +51,24 @@ class ProiflSettingsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        viewModel.getDataUser()
         vb = FragmentProiflSettingsBinding.inflate(inflater, container, false)
         return vb.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         viewModel.getDataUser()
+
+
 
         viewModel.profilPicture.observe(viewLifecycleOwner) {
             if (it != null) {
                 vb.ivProfilPic.setImageURI(Uri.parse(it.toString()))
+                Log.d("ProfilSettings", "userData: ${it}")
+                profilBild = it.toUri()
+                Log.d("ProfilSettings", "uri profilbild: ${it}")
+
             }
         }
 

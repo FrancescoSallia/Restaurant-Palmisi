@@ -34,7 +34,6 @@ class ReservationAdapter(
         val reservation = dataset[position]
         val datum = reservation.datum
 
-        holder.vb.tvReservationId.text = "ReservierungsID: ${reservation.reservationId}"
         holder.vb.tvPersonanzahl.text = "Personen: ${reservation.gaeste}"
         holder.vb.tvWann.text =  "Wann: ${datum}"
         holder.vb.ivRandomImg.setImageResource(reservation.imgId)

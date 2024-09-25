@@ -78,8 +78,7 @@ class ProfilFragment : Fragment() {
             }
 
             viewModel.reservationsList.observe(viewLifecycleOwner) {
-                binding.rvReservationItem.adapter = ReservationAdapter(it.reversed(), viewModel)
-                Log.d("TAG", "reservationsList: ${it.reversed()}")
+                binding.rvReservationItem.adapter = ReservationAdapter(it.sortedBy { it.reservationId.reversed() }, viewModel)
             }
         }
 

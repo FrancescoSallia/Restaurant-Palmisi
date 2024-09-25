@@ -50,14 +50,14 @@ class Repository(private val api: MealdbApi, context:Context) {
     //region Firebase functions
 
 
+//    fun updateProfilPicture(profilBild: Uri) {
+//        firestore.updateProfilPicture(profilBild)
+//    }
 
     fun addProfilPicture(uri: Uri){
 
         firestore.addProfilPicture(uri)
     }
-
-
-
 
     fun updateReservation(kommentarGast: String){
         firestore.updateReservation(kommentarGast)
@@ -168,6 +168,8 @@ class Repository(private val api: MealdbApi, context:Context) {
             Log.i("INFO", "schau im Repository nach bei getMealBySearch : $e")
         }
     }
+
+
     //endregion
 
 

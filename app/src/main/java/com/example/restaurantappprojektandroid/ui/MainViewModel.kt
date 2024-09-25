@@ -41,6 +41,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         get() = _selectedTime
 
 
+//    fun updateProfilPicture(profilBild: Uri) {
+//        repository.updateProfilPicture(profilBild)
+//    }
 
     fun addProfilPicture(uri:Uri){
         repository.addProfilPicture(uri)
@@ -166,6 +169,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun addToFavorites(meal: Meal) {
         repository.addToFavorites(meal)
     }
+
+
 
 
 }

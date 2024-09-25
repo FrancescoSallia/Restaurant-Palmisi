@@ -38,10 +38,10 @@ class ProiflSettingsFragment : Fragment() {
             viewModel.userData.observe(viewLifecycleOwner) {
                 viewModel.addProfilPicture(profilBild!!)
 
-                vb.ivProfilPic.setImageURI(profilBild)
                 Log.d("ProfilSettings", "observe: $profilBild")
 
             }
+            vb.ivProfilPic.setImageURI(profilBild)
 
         }
     }
@@ -83,9 +83,6 @@ class ProiflSettingsFragment : Fragment() {
         }
 
 
-
-
-
         vb.btnSave.setOnClickListener {
             if (vb.etBenutzernameSettings.text.toString()
                     .isNotEmpty() || vb.etPasswordSettings.text.toString().isNotEmpty()
@@ -95,6 +92,7 @@ class ProiflSettingsFragment : Fragment() {
                 val nachname = vb.etPasswordSettings.text.toString()
 
                 viewModel.updateUser(vorname, nachname)
+//                viewModel.updateProfilPicture(profilBild!!)
                 findNavController().navigate(ProiflSettingsFragmentDirections.actionProiflSettingsFragmentToProfilFragment())
             }
 

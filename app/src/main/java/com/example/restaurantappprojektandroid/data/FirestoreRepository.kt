@@ -49,6 +49,20 @@ class FirestoreRepository(val context: Context) {
     var userCol : CollectionReference? = null
     var resRef: DocumentReference? = null
 
+//
+//    fun updateProfilPicture(profilBild: Uri) {
+//        userRef = db.collection("users").document(auth.currentUser?.uid ?: "")
+//        userRef?.update(
+//            "profilPicture", profilBild
+//        )?.addOnSuccessListener {
+//            _profilPicture.value = profilBild.toString()
+//            Toast.makeText(
+//                context,
+//                "Profilbild wurde erfolgreich geändert",
+//                Toast.LENGTH_SHORT
+//            ).show()
+//        }
+//    }
 
     fun addProfilPicture(imageUri: Uri) {
 
@@ -341,5 +355,7 @@ class FirestoreRepository(val context: Context) {
         db.collection("users").document(auth.currentUser!!.uid).update(upToDate)
 
     }
+
+
 
 }

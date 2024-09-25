@@ -1,10 +1,13 @@
 package com.example.restaurantappprojektandroid.ui.profile
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -16,6 +19,18 @@ import com.example.restuarantprojektapp.databinding.FragmentProiflSettingsBindin
 class ProiflSettingsFragment : Fragment() {
     private lateinit var vb: FragmentProiflSettingsBinding
     private val viewModel: MainViewModel by activityViewModels()
+
+    // diese funktion ist für die Bildauswahl zuständig (Profilbild)
+    private val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+        uri?.let {
+            // Setze das ausgewählte Bild in das ImageView
+            vb.ivProfilPic.setImageURI(it)
+
+            // Hier könnten Sie den Code zum Hochladen des Bildes hinzufügen
+            // Zum Beispiel:
+            // viewModel.uploadProfilePicture(it)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,6 +44,19 @@ class ProiflSettingsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.getDataUser()
+
+        // funktion um die Bildauswahl zu starten
+        fun openGallery() {
+             getContent.launch("image/*")
+        }
+
+        vb.ivProfilPic.setOnClickListener {
+
+            openGallery()
+        }
+
+
+
 
         vb.btnSave.setOnClickListener {
             if (vb.etBenutzernameSettings.text.toString()

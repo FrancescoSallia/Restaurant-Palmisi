@@ -16,6 +16,8 @@ import com.example.restuarantprojektapp.databinding.FragmentReservationDetailBin
 class ReservationDetailFragment : Fragment() {
     private lateinit var vb: FragmentReservationDetailBinding
     private val viewModel: MainViewModel by activityViewModels()
+    private var bemerkung = ""
+
 
 
     override fun onCreateView(
@@ -42,13 +44,17 @@ class ReservationDetailFragment : Fragment() {
             vb.tvUhrzeitReservationDetail.text = reservation.datum
 
             //den value vom kommentarGast raus nehmen und anzeigen lassen!!
-            var  bemerkung = reservation.kommentarGast
+             bemerkung = reservation.kommentarGast
             if (bemerkung.isNullOrEmpty()){
 
-                vb.etBemerkungDetailText.hint = "Schreib hier dein Text..."
+                vb.etBemerkungDetailText.hint = bemerkung
+                Log.d("ReservationDetailFragment", "bemerkung: $bemerkung")
+
 
             }else{
-                vb.etBemerkungDetailText.hint = bemerkung
+                vb.etBemerkungDetailText.setHint(bemerkung)
+                Log.d("ReservationDetailFragment", "else bemerkung: $bemerkung")
+
 
 
             }
@@ -58,12 +64,21 @@ class ReservationDetailFragment : Fragment() {
 
             }
             vb.btnSaveReservation.setOnClickListener {
+                var kommentar = vb.etBemerkungDetailText
 
-                viewModel.updateReservation(bemerkung)
-                findNavController().navigateUp()
+                if (kommentar.hint.toString().isNotEmpty()&& kommentar.text.toString().isNotEmpty()) {
+
+                    vb.etBemerkungDetailText.setHint(kommentar.hint.toString())
+                    viewModel.updateReservation(kommentar.text.toString())
+                    findNavController().navigateUp()
+
+                }else{
+                    findNavController().navigateUp()
+                }
+
+
             }
         }
-
 
     }
 

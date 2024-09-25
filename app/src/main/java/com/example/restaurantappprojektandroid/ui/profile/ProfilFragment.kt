@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
@@ -66,6 +67,13 @@ class ProfilFragment : Fragment() {
             Log.d("TAG", "currentUser: ${viewModel.currentUser}")
             viewModel.likedMeals.observe(viewLifecycleOwner) {
                 binding.rvFavorite.adapter = FavoriteAdapter(it.reversed(),viewModel)
+            }
+
+
+            // Diese funktion ist für das Profilbild zuständig falls ein profilbild vorhanden ist, funktioniert noch nicht!
+            viewModel.userData.observe(viewLifecycleOwner) {
+
+                binding.ivProfilPicProfil.setImageURI(it?.profilbild?.toUri())
             }
 
 

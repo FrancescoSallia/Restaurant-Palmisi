@@ -10,6 +10,7 @@ import androidx.core.net.toUri
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
+import coil.load
 import com.example.restaurantappprojektandroid.MainActivity
 import com.example.restaurantappprojektandroid.ui.adapter.FavoriteAdapter
 import com.example.restaurantappprojektandroid.ui.MainViewModel
@@ -27,6 +28,7 @@ class ProfilFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        viewModel.getDataUser()
         vb = if(viewModel.currentUser.value?.isAnonymous == true) {
             Log.e("PROFIL", "is true")
             FragmentAnonymUserProfilBinding.inflate(layoutInflater)
@@ -73,7 +75,7 @@ class ProfilFragment : Fragment() {
             // Diese funktion ist für das Profilbild zuständig falls ein profilbild vorhanden ist, funktioniert noch nicht!
             viewModel.userData.observe(viewLifecycleOwner) {
 
-                binding.ivProfilPicProfil.setImageURI(it?.profilbild?.toUri())
+                binding.ivProfilPicProfil.load(it.profilePicture)
             }
 
 

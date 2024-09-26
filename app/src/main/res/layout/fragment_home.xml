@@ -48,14 +48,15 @@
             app:layout_constraintTop_toBottomOf="@+id/shapeableImageView" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_angeboteTitle"
+            android:id="@+id/rv_mittagsTisch"
             android:layout_width="332dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:background="@drawable/neuigkeiten_shape"
             app:layout_constraintEnd_toEndOf="@+id/tv_angebot_title"
             app:layout_constraintHorizontal_bias="0.502"
-            app:layoutManager=""
+            app:layoutManager="com.google.android.material.carousel.CarouselLayoutManager"
+            android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="@+id/tv_angebot_title"
             app:layout_constraintTop_toBottomOf="@+id/tv_angebot_title" />
 
@@ -78,10 +79,10 @@
             android:layout_marginTop="24dp"
             android:text="𝐕𝐞𝐫𝐚𝐧𝐬𝐭𝐚𝐥𝐭𝐮𝐧𝐠𝐞𝐧"
             android:textSize="18dp"
-            app:layout_constraintEnd_toEndOf="@+id/rv_angeboteTitle"
+            app:layout_constraintEnd_toEndOf="@+id/rv_mittagsTisch"
             app:layout_constraintHorizontal_bias="0.495"
-            app:layout_constraintStart_toStartOf="@+id/rv_angeboteTitle"
-            app:layout_constraintTop_toBottomOf="@+id/rv_angeboteTitle" />
+            app:layout_constraintStart_toStartOf="@+id/rv_mittagsTisch"
+            app:layout_constraintTop_toBottomOf="@+id/rv_mittagsTisch" />
 
         <TextView
             android:id="@+id/tv_info_urlaub"

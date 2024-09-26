@@ -30,5 +30,11 @@
         <item name="strokeColor">#FF5722</item>
     </style>
 
+    <style name="CarouselShapeAppearance">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+
+
 
 </resources>

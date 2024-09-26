@@ -11,6 +11,7 @@ import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import coil.load
 import com.example.restaurantappprojektandroid.MainActivity
 import com.example.restaurantappprojektandroid.ui.MainViewModel
 import com.example.restuarantprojektapp.databinding.FragmentProiflSettingsBinding
@@ -28,6 +29,8 @@ class ProiflSettingsFragment : Fragment() {
 
 
             profilBild = uri
+            viewModel.uploadImage(profilBild!!)
+
 //            viewModel.userData.observe(viewLifecycleOwner){ user ->
 //
 //                profilBild = user.profilbild?.toUri()
@@ -36,7 +39,6 @@ class ProiflSettingsFragment : Fragment() {
 //            }
 
             viewModel.userData.observe(viewLifecycleOwner) {
-                viewModel.addProfilPicture(profilBild!!)
 
                 Log.d("ProfilSettings", "observe: $profilBild")
 
@@ -57,7 +59,7 @@ class ProiflSettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getDataUser()
+//        viewModel.getDataUser()
 
 
 
@@ -87,7 +89,6 @@ class ProiflSettingsFragment : Fragment() {
             if (vb.etBenutzernameSettings.text.toString()
                     .isNotEmpty() || vb.etPasswordSettings.text.toString().isNotEmpty()
             ) {
-
                 val vorname = vb.etBenutzernameSettings.text.toString()
                 val nachname = vb.etPasswordSettings.text.toString()
 
@@ -102,6 +103,7 @@ class ProiflSettingsFragment : Fragment() {
             Log.d("ProfilSettings", "userData: $it")
             vb.etBenutzernameSettings.setText(it?.vorname)
             vb.etPasswordSettings.setText(it?.nachname)
+            vb.ivProfilPic.load(it.profilePicture)
 
         }
 

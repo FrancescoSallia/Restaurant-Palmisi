@@ -16,6 +16,7 @@ import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 
 class FirestoreRepository(val context: Context) {
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
@@ -45,6 +46,8 @@ class FirestoreRepository(val context: Context) {
         get() = _profilPicture
 
     private val db = Firebase.firestore
+    private val storage = Firebase.storage
+    var storageRef = storage.reference
     var userRef : DocumentReference? = null
     var colRef: CollectionReference? = null
     var userCol : CollectionReference? = null
@@ -64,6 +67,18 @@ class FirestoreRepository(val context: Context) {
 //            ).show()
 //        }
 //    }
+
+    fun uploadImage(uri: Uri) {
+        val imageRef = storageRef.child("images/${auth.currentUser!!.uid}//profilePic")
+        val uploadTask = imageRef.putFile(uri)
+        uploadTask.addOnCompleteListener {
+            imageRef.downloadUrl.addOnCompleteListener {
+                if (it.isSuccessful) {
+                    userRef?.update("profilePicture", it.result)
+                }
+            }
+        }
+    }
 
     fun addProfilPicture(imageUri: Uri) {
 

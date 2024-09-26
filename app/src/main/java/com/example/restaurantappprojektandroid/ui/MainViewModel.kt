@@ -45,6 +45,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 //        repository.updateProfilPicture(profilBild)
 //    }
 
+    fun uploadImage(uri: Uri){
+        repository.uploadImage(uri)
+    }
+
     fun addProfilPicture(uri:Uri){
         repository.addProfilPicture(uri)
     }

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.restaurantappprojektandroid.MainActivity
 import com.example.restuarantprojektapp.databinding.FragmentHomeBinding
+import com.google.android.material.carousel.CarouselSnapHelper
 
 
 class HomeFragment : Fragment() {
@@ -26,6 +27,11 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        vb.rvMittagsTisch.setHasFixedSize(true)
+        CarouselSnapHelper().attachToRecyclerView(vb.rvMittagsTisch)
+
+//        vb.rvMittagsTisch.adapter = TODO()
 
 
 

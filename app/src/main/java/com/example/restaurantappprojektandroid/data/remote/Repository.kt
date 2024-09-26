@@ -53,6 +53,9 @@ class Repository(private val api: MealdbApi, context:Context) {
 //    fun updateProfilPicture(profilBild: Uri) {
 //        firestore.updateProfilPicture(profilBild)
 //    }
+    fun uploadImage(uri: Uri){
+        firestore.uploadImage(uri)
+    }
 
     fun addProfilPicture(uri: Uri){
 

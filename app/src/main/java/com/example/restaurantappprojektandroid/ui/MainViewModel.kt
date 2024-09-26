@@ -41,25 +41,16 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         get() = _selectedTime
 
 
-//    fun updateProfilPicture(profilBild: Uri) {
-//        repository.updateProfilPicture(profilBild)
-//    }
-
     fun uploadImage(uri: Uri){
         repository.uploadImage(uri)
-    }
-
-    fun addProfilPicture(uri:Uri){
-        repository.addProfilPicture(uri)
     }
 
     fun updateReservation(kommentarGast: String){
         repository.updateReservation(kommentarGast)
     }
-    fun addSnapshotListenerForCurrentUser(){
-        repository.getLikedMeals()
-    }
-
+//    fun addSnapshotListenerForCurrentUser(){
+//        repository.getLikedMeals()
+//    }
     fun snapShotListenerForReservation(){
         repository.snapShotListenerForReservation()
     }

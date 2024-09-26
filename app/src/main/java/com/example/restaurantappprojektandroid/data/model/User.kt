@@ -8,6 +8,5 @@ data class User(
     val vorname: String  = "",
     val nachname: String = "",
     val likedGerichte: MutableList<Meal> = mutableListOf(),
-//    val profilbild:String? = "",
     val profilePicture:String? = ""
 )

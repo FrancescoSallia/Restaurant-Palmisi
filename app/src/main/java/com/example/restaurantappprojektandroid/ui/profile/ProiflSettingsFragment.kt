@@ -59,9 +59,6 @@ class ProiflSettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        viewModel.getDataUser()
-
-
 
         viewModel.profilPicture.observe(viewLifecycleOwner) {
             if (it != null) {
@@ -84,7 +81,6 @@ class ProiflSettingsFragment : Fragment() {
             openGallery()
         }
 
-
         vb.btnSave.setOnClickListener {
             if (vb.etBenutzernameSettings.text.toString()
                     .isNotEmpty() || vb.etPasswordSettings.text.toString().isNotEmpty()
@@ -93,7 +89,6 @@ class ProiflSettingsFragment : Fragment() {
                 val nachname = vb.etPasswordSettings.text.toString()
 
                 viewModel.updateUser(vorname, nachname)
-//                viewModel.updateProfilPicture(profilBild!!)
                 findNavController().navigate(ProiflSettingsFragmentDirections.actionProiflSettingsFragmentToProfilFragment())
             }
 

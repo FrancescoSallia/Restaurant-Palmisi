@@ -54,20 +54,6 @@ class FirestoreRepository(val context: Context) {
     var resRef: DocumentReference? = null
 
 
-//    fun updateProfilPicture(profilBild: Uri) {
-//        userRef = db.collection("users").document(auth.currentUser?.uid ?: "")
-//        userRef?.update(
-//            "profilPicture", profilBild
-//        )?.addOnSuccessListener {
-//            _profilPicture.value = profilBild.toString()
-//            Toast.makeText(
-//                context,
-//                "Profilbild wurde erfolgreich geändert",
-//                Toast.LENGTH_SHORT
-//            ).show()
-//        }
-//    }
-
     fun uploadImage(uri: Uri) {
         val imageRef = storageRef.child("images/${auth.currentUser!!.uid}//profilePic")
         val uploadTask = imageRef.putFile(uri)
@@ -79,31 +65,6 @@ class FirestoreRepository(val context: Context) {
             }
         }
     }
-
-    fun addProfilPicture(imageUri: Uri) {
-
-        userRef = db.collection("users").document(auth.currentUser?.uid ?: "")
-        userRef?.update(
-            "profilPicture", imageUri)?.addOnSuccessListener {
-
-            _profilPicture.value = imageUri.toString()
-            Toast.makeText(
-                context,
-                "Profilbild wurde erfolgreich aktualisiert",
-                Toast.LENGTH_SHORT
-            ).show()
-        }?.addOnFailureListener {
-
-            Toast.makeText(
-                context,
-                "Profilbild konnte nicht aktualisiert werden",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
-    }
-
-
-
 
     fun updateReservation(kommentarGast: String) {
         resRef = db.collection("reservation").document(auth.currentUser?.uid ?: "")

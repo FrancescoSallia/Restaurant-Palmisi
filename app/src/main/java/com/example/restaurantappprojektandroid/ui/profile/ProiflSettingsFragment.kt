@@ -25,23 +25,13 @@ class ProiflSettingsFragment : Fragment() {
     // diese funktion ist für die Bildauswahl zuständig (Profilbild)
     private val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         uri?.let { uri->
-            Log.d("ProfilSettings", "let funktion: $uri")
-
 
             profilBild = uri
             viewModel.uploadImage(profilBild!!)
 
-//            viewModel.userData.observe(viewLifecycleOwner){ user ->
-//
-//                profilBild = user.profilbild?.toUri()
-//
-//
-//            }
-
             viewModel.userData.observe(viewLifecycleOwner) {
 
-                Log.d("ProfilSettings", "observe: $profilBild")
-
+                vb.ivProfilPic.load(it.profilePicture)
             }
             vb.ivProfilPic.setImageURI(profilBild)
 
@@ -60,15 +50,15 @@ class ProiflSettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.profilPicture.observe(viewLifecycleOwner) {
-            if (it != null) {
-                vb.ivProfilPic.setImageURI(Uri.parse(it.toString()))
-                Log.d("ProfilSettings", "userData: ${it}")
-                profilBild = it.toUri()
-                Log.d("ProfilSettings", "uri profilbild: ${it}")
-
-            }
-        }
+//        viewModel.profilPicture.observe(viewLifecycleOwner) {
+//            if (it != null) {
+//                vb.ivProfilPic.setImageURI(Uri.parse(it.toString()))
+//                Log.d("ProfilSettings", "userData: ${it}")
+//                profilBild = it.toUri()
+//                Log.d("ProfilSettings", "uri profilbild: ${it}")
+//
+//            }
+//        }
 
         // funktion um die Bildauswahl zu starten
         fun openGallery() {
@@ -90,6 +80,7 @@ class ProiflSettingsFragment : Fragment() {
 
                 viewModel.updateUser(vorname, nachname)
                 findNavController().navigate(ProiflSettingsFragmentDirections.actionProiflSettingsFragmentToProfilFragment())
+                viewModel.getDataUser()
             }
 
         }

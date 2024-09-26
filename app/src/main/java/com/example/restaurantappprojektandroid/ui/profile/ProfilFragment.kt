@@ -42,6 +42,7 @@ class ProfilFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.getDataUser()
 
         viewModel.currentUser.observe(viewLifecycleOwner) {
             Log.e("PROFILE", it.toString())
@@ -60,7 +61,6 @@ class ProfilFragment : Fragment() {
                 findNavController().navigate(R.id.logInFragment)
             }
         }
-
     }
 
     private fun loggedUser() {
@@ -70,7 +70,6 @@ class ProfilFragment : Fragment() {
             viewModel.likedMeals.observe(viewLifecycleOwner) {
                 binding.rvFavorite.adapter = FavoriteAdapter(it.reversed(),viewModel)
             }
-
 
             // Diese funktion ist für das Profilbild zuständig falls ein profilbild vorhanden ist, funktioniert noch nicht!
             viewModel.userData.observe(viewLifecycleOwner) {

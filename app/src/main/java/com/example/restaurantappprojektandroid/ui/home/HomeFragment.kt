@@ -31,7 +31,7 @@ class HomeFragment : Fragment() {
         vb.rvMittagsTisch.setHasFixedSize(true)
         CarouselSnapHelper().attachToRecyclerView(vb.rvMittagsTisch)
 
-//        vb.rvMittagsTisch.adapter = TODO()
+        vb.rvMittagsTisch.adapter = TODO()
 
 
 

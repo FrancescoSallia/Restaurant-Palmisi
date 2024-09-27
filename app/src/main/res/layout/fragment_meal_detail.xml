@@ -98,5 +98,15 @@
             android:text="TextView"
             app:layout_constraintStart_toStartOf="@+id/iv_mealDetail"
             app:layout_constraintTop_toBottomOf="@+id/iv_mealDetail" />
+
+        <ImageView
+            android:id="@+id/iv_arrow_back_"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="34dp"
+            android:src="@drawable/baseline_arrow_back_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

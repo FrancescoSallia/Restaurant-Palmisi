@@ -5,18 +5,25 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.GridLayoutAnimationController
+import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.RecyclerView
 import com.example.restaurantappprojektandroid.MainActivity
+import com.example.restaurantappprojektandroid.ui.MainViewModel
+import com.example.restaurantappprojektandroid.ui.adapter.MittagstischAdapter
 import com.example.restuarantprojektapp.databinding.FragmentHomeBinding
 import com.google.android.material.carousel.CarouselSnapHelper
 
 
 class HomeFragment : Fragment() {
   private  lateinit var vb:FragmentHomeBinding
+  private val viewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        viewModel.getDataUser()
         vb = FragmentHomeBinding.inflate(inflater, container, false)
 
         //BottomNavigationBar einblenden auf Visible
@@ -31,7 +38,9 @@ class HomeFragment : Fragment() {
         vb.rvMittagsTisch.setHasFixedSize(true)
         CarouselSnapHelper().attachToRecyclerView(vb.rvMittagsTisch)
 
-        vb.rvMittagsTisch.adapter = TODO()
+        viewModel.repositoryMeals.observe(viewLifecycleOwner) {
+            vb.rvMittagsTisch.adapter = MittagstischAdapter(it, viewModel)
+        }
 
 
 

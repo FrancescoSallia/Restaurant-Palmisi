@@ -49,16 +49,17 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_mittagsTisch"
-            android:layout_width="332dp"
+            android:layout_width="385dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:background="@drawable/neuigkeiten_shape"
+            android:orientation="horizontal"
+            app:layoutManager="com.google.android.material.carousel.CarouselLayoutManager"
             app:layout_constraintEnd_toEndOf="@+id/tv_angebot_title"
             app:layout_constraintHorizontal_bias="0.502"
-            app:layoutManager="com.google.android.material.carousel.CarouselLayoutManager"
-            android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="@+id/tv_angebot_title"
-            app:layout_constraintTop_toBottomOf="@+id/tv_angebot_title" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_angebot_title"
+            tools:listitem="@layout/mealmenu_item" />
 
         <TextView
             android:id="@+id/tv_angebot_title"

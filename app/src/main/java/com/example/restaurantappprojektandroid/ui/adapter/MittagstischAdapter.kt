@@ -2,11 +2,13 @@ package com.example.restaurantappprojektandroid.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.restaurantappprojektandroid.data.model.Category
 import com.example.restaurantappprojektandroid.data.model.Meal
 import com.example.restaurantappprojektandroid.ui.MainViewModel
+import com.example.restuarantprojektapp.R
 import com.example.restuarantprojektapp.databinding.MittagstischItemBinding
 
 class MittagstischAdapter(
@@ -36,6 +38,9 @@ class MittagstischAdapter(
 
         holder.itemView.setOnClickListener {
 
+            viewModel.setSelectedMealId(meal.idMeal)
+
+            holder.itemView.findNavController().navigate(R.id.mealDetailFragment)
 
         }
 

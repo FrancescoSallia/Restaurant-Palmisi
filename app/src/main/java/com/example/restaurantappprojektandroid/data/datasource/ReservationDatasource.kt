@@ -40,4 +40,32 @@ class ReservationDatasource() {
       )
 
     }
+
+    // Liste der Allergene
+    private val allergeneList = listOf(
+        "Gluten = G",
+        "Laktose = L",
+        "Erdnüsse = E",
+        "Soja = S",
+        "Fisch = F",
+        "Schalentiere = B",
+        "Baumnüsse = W",
+        "Sellerie = M",
+        "Senf = SF",
+        "Sesamsamen = U",
+        "Sulfite = P",
+        "Lupinen = Q",
+        "Weichtiere = O",
+        "Ei = K",
+        "Milch = D"
+    )
+
+
+
+    fun loadAllergene(): List<String> {
+        val allergeneList = listOf("G", "L", "E", "F", "S", "B", "W", "M", "SF", "U", "P", "Q", "O","K","D")
+        val numberOfAllergenes = (3..4).random() // Zufällig 3 oder 4
+        return allergeneList.shuffled().take(numberOfAllergenes)
+    }
+
 }

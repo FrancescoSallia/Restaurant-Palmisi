@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import coil.load
+import com.example.restaurantappprojektandroid.data.datasource.ReservationDatasource
 import com.example.restaurantappprojektandroid.data.model.Meal
 import com.example.restaurantappprojektandroid.ui.MainViewModel
 import com.example.restuarantprojektapp.R
@@ -37,12 +38,6 @@ class MealDetailFragment : Fragment() {
             vb.ivHearth.visibility = View.INVISIBLE
         }
 
-//        viewModel.likedMeals.observe(viewLifecycleOwner) { userLikedMeals ->
-//            var findMeal = userLikedMeals.find { it.idMeal == viewModel.selectedMealID }
-//            vb.ivHearth.load(if (findMeal != null) R.drawable.save else R.drawable.heart)
-//
-//        }
-
         viewModel.repositoryMeals.observe(viewLifecycleOwner) { meals: List<Meal> ->
 
             var meal = meals.find { it.idMeal == viewModel.selectedMealID }
@@ -59,10 +54,11 @@ class MealDetailFragment : Fragment() {
                     meal.liked = !meal.liked
                     viewModel.addToFavorites(meal)
                     vb.ivHearth.load(if (meal.liked) R.drawable.save else R.drawable.heart)
-                    //es buggt noch wenn man im gelikten Zustand im Detailfragment reingeht und auf like klickt wiederholt !!
                 }
             }
         }
+
+        vb.tvAllergenen.text = ReservationDatasource().loadAllergene().toString()
     }
 
 

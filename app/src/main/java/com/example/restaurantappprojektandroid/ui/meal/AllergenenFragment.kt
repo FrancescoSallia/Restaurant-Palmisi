@@ -25,7 +25,10 @@ class AllergenenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        vb.ivArrowBack.findNavController().navigateUp()
+        vb.ivArrowBack.setOnClickListener {
+
+            vb.ivArrowBack.findNavController().navigateUp()
+        }
 
     }
 }

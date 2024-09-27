@@ -63,10 +63,8 @@ class MealDetailFragment : Fragment() {
         vb.tvAllergenen.text = AllergenDatasource().loadAllergene().toString()
 
         vb.btnAllergenen.setOnClickListener {
-            findNavController().navigate(MealDetailFragmentDirections.actionMealDetailFragmentToAllergenenFragment2())
+            findNavController().navigate(R.id.allergenenFragment)
         }
-
-
 
 
     }

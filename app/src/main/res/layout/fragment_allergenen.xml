@@ -15,6 +15,7 @@
             android:layout_height="561dp"
             android:layout_marginTop="100dp"
             android:layout_marginEnd="5dp"
+            android:layout_marginBottom="40dp"
             android:padding="16dp"
             android:stretchColumns="*"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -25,119 +26,142 @@
             app:layout_constraintVertical_bias="0.5">
 
             <TableRow
-                android:background="#CCCCCC"
+                android:background="#E1FD906E"
                 android:padding="5dp">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textSize="16sp"
                     android:text="Allergen"
+                    android:textColor="#363535"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:text="        Kürzel"
+                    android:textColor="#363535"
                     android:textSize="16sp"
-                    android:text="Kürzel"
                     android:textStyle="bold" />
             </TableRow>
 
             <TableRow android:padding="5dp">
 
-                <TextView android:text="Gluten"
+                <TextView
+                    android:text="Gluten"
                     android:textSize="16sp" />
 
-                <TextView android:text="G"
-                    android:textSize="16sp" />
-            </TableRow>
-
-            <TableRow android:padding="5dp">
-
-                <TextView android:text="Laktose"
-                    android:textSize="16sp" />
-
-                <TextView android:text="L"
+                <TextView
+                    android:text="G"
                     android:textSize="16sp" />
             </TableRow>
 
             <TableRow android:padding="5dp">
 
-                <TextView android:text="Erdnüsse"
+                <TextView
+                    android:text="Laktose"
                     android:textSize="16sp" />
 
-                <TextView android:text="E"
-                    android:textSize="16sp" />
-            </TableRow>
-
-            <TableRow android:padding="5dp">
-
-                <TextView android:text="Soja"
-                    android:textSize="16sp" />
-
-                <TextView android:text="S"
+                <TextView
+                    android:text="L"
                     android:textSize="16sp" />
             </TableRow>
 
             <TableRow android:padding="5dp">
 
-                <TextView android:text="Fisch"
+                <TextView
+                    android:text="Erdnüsse"
                     android:textSize="16sp" />
 
-                <TextView android:text="F"
-                    android:textSize="16sp" />
-            </TableRow>
-
-            <TableRow android:padding="5dp">
-
-                <TextView android:text="Schalentiere"
-                    android:textSize="16sp" />
-
-                <TextView android:text="B"
+                <TextView
+                    android:text="E"
                     android:textSize="16sp" />
             </TableRow>
 
             <TableRow android:padding="5dp">
 
-                <TextView android:text="Baumnüsse"
+                <TextView
+                    android:text="Soja"
                     android:textSize="16sp" />
 
-                <TextView android:text="W"
-                    android:textSize="16sp" />
-            </TableRow>
-
-            <TableRow android:padding="5dp">
-
-                <TextView android:text="Sellerie"
-                    android:textSize="16sp" />
-
-                <TextView android:text="M"
+                <TextView
+                    android:text="S"
                     android:textSize="16sp" />
             </TableRow>
 
             <TableRow android:padding="5dp">
 
-                <TextView android:text="Senf"
+                <TextView
+                    android:text="Fisch"
                     android:textSize="16sp" />
 
-                <TextView android:text="SF"
-                    android:textSize="16sp" />
-            </TableRow>
-
-            <TableRow android:padding="5dp">
-
-                <TextView android:text="Sesamsamen"
-                    android:textSize="16sp" />
-
-                <TextView android:text="U"
+                <TextView
+                    android:text="F"
                     android:textSize="16sp" />
             </TableRow>
 
             <TableRow android:padding="5dp">
 
-                <TextView android:text="Sulfite"
+                <TextView
+                    android:text="Schalentiere"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:text="B"
+                    android:textSize="16sp" />
+            </TableRow>
+
+            <TableRow android:padding="5dp">
+
+                <TextView
+                    android:text="Baumnüsse"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:text="W"
+                    android:textSize="16sp" />
+            </TableRow>
+
+            <TableRow android:padding="5dp">
+
+                <TextView
+                    android:text="Sellerie"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:text="M"
+                    android:textSize="16sp" />
+            </TableRow>
+
+            <TableRow android:padding="5dp">
+
+                <TextView
+                    android:text="Senf"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:text="SF"
+                    android:textSize="16sp" />
+            </TableRow>
+
+            <TableRow android:padding="5dp">
+
+                <TextView
+                    android:text="Sesamsamen"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:text="U"
+                    android:textSize="16sp" />
+            </TableRow>
+
+            <TableRow android:padding="5dp">
+
+                <TextView
+                    android:text="Sulfite"
                     android:textSize="16sp" />
 
                 <TextView
@@ -147,7 +171,8 @@
 
             <TableRow android:padding="5dp">
 
-                <TextView android:text="Lupinen"
+                <TextView
+                    android:text="Lupinen"
                     android:textSize="16sp" />
 
                 <TextView
@@ -157,7 +182,8 @@
 
             <TableRow android:padding="5dp">
 
-                <TextView android:text="Weichtiere"
+                <TextView
+                    android:text="Weichtiere"
                     android:textSize="16sp" />
 
                 <TextView
@@ -167,7 +193,8 @@
 
             <TableRow android:padding="5dp">
 
-                <TextView android:text="Ei"
+                <TextView
+                    android:text="Ei"
                     android:textSize="16sp" />
 
                 <TextView
@@ -177,7 +204,8 @@
 
             <TableRow android:padding="5dp">
 
-                <TextView android:text="Milch"
+                <TextView
+                    android:text="Milch"
                     android:textSize="16sp" />
 
                 <TextView
@@ -186,5 +214,16 @@
             </TableRow>
 
         </TableLayout>
+
+        <ImageView
+            android:id="@+id/iv_arrow_back"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/baseline_arrow_back_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

@@ -7,7 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import coil.load
+import com.example.restaurantappprojektandroid.data.datasource.AllergenDatasource
 import com.example.restaurantappprojektandroid.data.datasource.ReservationDatasource
 import com.example.restaurantappprojektandroid.data.model.Meal
 import com.example.restaurantappprojektandroid.ui.MainViewModel
@@ -58,7 +60,15 @@ class MealDetailFragment : Fragment() {
             }
         }
 
-        vb.tvAllergenen.text = ReservationDatasource().loadAllergene().toString()
+        vb.tvAllergenen.text = AllergenDatasource().loadAllergene().toString()
+
+        vb.btnAllergenen.setOnClickListener {
+            findNavController().navigate(MealDetailFragmentDirections.actionMealDetailFragmentToAllergenenFragment2())
+        }
+
+
+
+
     }
 
 

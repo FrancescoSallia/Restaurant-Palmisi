@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.example.restaurantappprojektandroid.data.model.Category
 import com.example.restaurantappprojektandroid.data.model.Meal
 import com.example.restaurantappprojektandroid.ui.MainViewModel
 import com.example.restuarantprojektapp.databinding.MittagstischItemBinding
@@ -26,11 +27,18 @@ class MittagstischAdapter(
     }
 
     override fun onBindViewHolder(holder: MittagstischViewHolder, position: Int) {
-
         val meal = dataset[position]
+
 
         holder.binding.itemPic.load(meal.mealImg)
         holder.binding.itemName.text = meal.mealName
         holder.binding.itemPrice.text = meal.price.toString() + "€"
+
+        holder.itemView.setOnClickListener {
+
+
+        }
+
+
     }
 }

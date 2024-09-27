@@ -138,7 +138,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun getMealsByCategory(categorieName: String) {
 
         viewModelScope.launch {
-
             repository.getLikedMeals()
             repository.getMealsByCategory(categorieName)
         }

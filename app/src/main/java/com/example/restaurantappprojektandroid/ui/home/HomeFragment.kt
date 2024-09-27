@@ -24,6 +24,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         viewModel.getDataUser()
+        viewModel.getCategories()
         vb = FragmentHomeBinding.inflate(inflater, container, false)
 
         //BottomNavigationBar einblenden auf Visible
@@ -39,6 +40,7 @@ class HomeFragment : Fragment() {
         CarouselSnapHelper().attachToRecyclerView(vb.rvMittagsTisch)
 
         viewModel.repositoryMeals.observe(viewLifecycleOwner) {
+//            viewModel.getMealsByCategory("Italian")
             vb.rvMittagsTisch.adapter = MittagstischAdapter(it, viewModel)
         }
 

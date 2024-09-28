@@ -103,6 +103,10 @@ class ProiflSettingsFragment : Fragment() {
             viewModel.deleteUser()
         }
 
+        vb.ivBackArrow.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
     }
 }
 

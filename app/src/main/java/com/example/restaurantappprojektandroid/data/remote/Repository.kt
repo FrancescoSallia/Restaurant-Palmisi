@@ -49,6 +49,9 @@ class Repository(private val api: MealdbApi, context:Context) {
 
     //region Firebase functions
 
+    fun resetPassword(email: String){
+        firestore.resetPassword(email)
+    }
 
     fun uploadImage(uri: Uri){
         firestore.uploadImage(uri)

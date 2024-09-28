@@ -91,6 +91,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         getMealsByCategory("Beef")
     }
 
+    fun resetPassword(email: String){
+        repository.resetPassword(email)
+    }
+
     fun updateUser(vorname: String, nachname: String) {
 
         repository.updateUser(vorname, nachname)

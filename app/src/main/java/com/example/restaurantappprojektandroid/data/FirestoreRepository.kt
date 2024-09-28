@@ -54,6 +54,22 @@ class FirestoreRepository(val context: Context) {
     var resRef: DocumentReference? = null
 
 
+    fun resetPassword(email: String) {
+
+        auth.sendPasswordResetEmail(email)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(context, "Password reset email sent", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(
+                        context,
+                        "Failed to send password reset email",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+    }
+
     fun uploadImage(uri: Uri) {
         val imageRef = storageRef.child("images/${auth.currentUser!!.uid}//profilePic")
         val uploadTask = imageRef.putFile(uri)

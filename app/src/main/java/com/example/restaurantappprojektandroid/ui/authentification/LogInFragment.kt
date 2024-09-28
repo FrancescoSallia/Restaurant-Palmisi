@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.restaurantappprojektandroid.ui.MainViewModel
+import com.example.restuarantprojektapp.R
 import com.example.restuarantprojektapp.databinding.FragmentLogInBinding
 
 //schau es dir hier an!!!!
@@ -35,6 +36,10 @@ class LogInFragment : Fragment() {
             if (it != null) {
                 findNavController().navigate(LogInFragmentDirections.actionLogInFragmentToHomeFragment())
             }
+        }
+
+        vb.tvPasswortVergessen.setOnClickListener {
+            findNavController().navigate(LogInFragmentDirections.actionLogInFragmentToPasswortVergessenFragment())
         }
 
         vb.btnLogIn.setOnClickListener {
@@ -84,4 +89,6 @@ class LogInFragment : Fragment() {
             Toast.LENGTH_SHORT
         ).show()
     }
+
+
 }

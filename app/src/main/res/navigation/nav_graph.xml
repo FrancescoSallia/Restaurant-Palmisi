@@ -80,6 +80,9 @@
         <action
             android:id="@+id/action_logInFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_logInFragment_to_passwortVergessenFragment"
+            app:destination="@id/passwortVergessenFragment" />
     </fragment>
     <fragment
         android:id="@+id/registrierenFragment"
@@ -104,4 +107,13 @@
         android:id="@+id/allergenenFragment"
         android:name="com.example.restaurantappprojektandroid.ui.meal.AllergenenFragment"
         android:label="AllergenenFragment" />
+    <fragment
+        android:id="@+id/passwortVergessenFragment"
+        android:name="com.example.restaurantappprojektandroid.ui.authentification.PasswortVergessenFragment"
+        android:label="fragment_passwort_vergessen"
+        tools:layout="@layout/fragment_passwort_vergessen" >
+        <action
+            android:id="@+id/action_passwortVergessenFragment_to_logInFragment"
+            app:destination="@id/logInFragment" />
+    </fragment>
 </navigation>

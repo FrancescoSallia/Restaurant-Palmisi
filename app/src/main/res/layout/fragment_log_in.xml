@@ -4,7 +4,8 @@
     android:id="@+id/frameLayout5"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.restaurantappprojektandroid.ui.authentification.LogInFragment" >
+    android:elevation="50dp"
+    tools:context="com.example.restaurantappprojektandroid.ui.authentification.LogInFragment">
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animationView"

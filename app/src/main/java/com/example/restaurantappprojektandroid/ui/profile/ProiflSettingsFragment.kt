@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -49,16 +48,6 @@ class ProiflSettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-//        viewModel.profilPicture.observe(viewLifecycleOwner) {
-//            if (it != null) {
-//                vb.ivProfilPic.setImageURI(Uri.parse(it.toString()))
-//                Log.d("ProfilSettings", "userData: ${it}")
-//                profilBild = it.toUri()
-//                Log.d("ProfilSettings", "uri profilbild: ${it}")
-//
-//            }
-//        }
 
         // funktion um die Bildauswahl zu starten
         fun openGallery() {

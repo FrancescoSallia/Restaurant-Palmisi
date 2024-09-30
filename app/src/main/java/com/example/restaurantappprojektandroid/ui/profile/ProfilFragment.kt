@@ -87,7 +87,7 @@ class ProfilFragment : Fragment() {
             }
 
             viewModel.reservationsList.observe(viewLifecycleOwner) {
-                binding.rvReservationItem.adapter = ReservationAdapter(it.sortedBy { it.reservationId.reversed() }, viewModel)
+                binding.rvReservationItem.adapter = ReservationAdapter(it.sortedBy { it.reservationId.reversed() }, viewModel,requireContext())
             }
         }
 

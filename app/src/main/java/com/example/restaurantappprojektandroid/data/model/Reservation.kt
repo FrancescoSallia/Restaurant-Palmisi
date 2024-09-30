@@ -1,22 +1,28 @@
 package com.example.restaurantappprojektandroid.data.model
 
-import com.google.firebase.Timestamp
+import android.content.Context
+import android.graphics.Color
+import com.example.restuarantprojektapp.R
 import com.google.firebase.firestore.DocumentId
-import java.time.LocalDateTime
-import java.time.ZoneId
-import java.time.format.DateTimeFormatter
-import java.util.Date
+import kotlin.random.Random
 
 data class Reservation(
     @DocumentId
     val reservationId: String = "",
     val datum: String = "",
-    val gaeste :Int = 0,
+    val gaeste: Int = 0,
     val kommentarGast: String = "",
-    val imgId : Int = 0
-)
+    val imgId: Int = 0,
+    val approved: Boolean = Random.nextBoolean()
+) {
+    fun getApprovedReservation(context: Context): ReservationItem {
+        return if (approved) {
+            ReservationItem("Bestätigt",context.getColor(R.color.green))
+        } else {
+            ReservationItem("in Bearbeitung", Color.RED)
+        }
+    }
 
-{
 
 //    val datumFormatiert :String
 //    get() = datum.format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"))
@@ -37,5 +43,12 @@ data class Reservation(
 //            "kommentarGast" to kommentarGast
 //        )
 //    }
+
+}
+
+class ReservationItem(
+    val name:String,
+    val color: Int
+){
 
 }

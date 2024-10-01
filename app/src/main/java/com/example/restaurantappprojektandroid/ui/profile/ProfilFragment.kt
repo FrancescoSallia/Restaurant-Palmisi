@@ -29,6 +29,7 @@ class ProfilFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         viewModel.getDataUser()
+        (requireActivity()as MainActivity).bottomNavigation.visibility = View.VISIBLE
         vb = if(viewModel.currentUser.value?.isAnonymous == true) {
             Log.e("PROFIL", "is true")
             FragmentAnonymUserProfilBinding.inflate(layoutInflater)
@@ -70,7 +71,6 @@ class ProfilFragment : Fragment() {
             viewModel.likedMeals.observe(viewLifecycleOwner) {
                 binding.rvFavorite.adapter = FavoriteAdapter(it.reversed(),viewModel)
             }
-
             // Diese funktion ist für das Profilbild zuständig falls ein profilbild vorhanden ist, funktioniert noch nicht!
             viewModel.userData.observe(viewLifecycleOwner) {
 

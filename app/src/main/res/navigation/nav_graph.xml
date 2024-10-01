@@ -121,7 +121,7 @@
     </fragment>
     <fragment
         android:id="@+id/allReservationListFragment"
-        android:name="com.example.restaurantappprojektandroid.ui.profile.AllReservationListFragment"
+        android:name="com.example.restaurantappprojektandroid.ui.profile.AllReservationsAndFavoritesListFragment"
         android:label="fragment_all_reservation_list"
         tools:layout="@layout/fragment_all_reservation_list" >
         <action

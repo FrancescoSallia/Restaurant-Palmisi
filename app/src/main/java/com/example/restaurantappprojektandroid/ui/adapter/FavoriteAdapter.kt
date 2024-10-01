@@ -30,17 +30,15 @@ class FavoriteAdapter(
 
         val meal = dataset[position]
 
-
         Log.d("TAG", "onBindViewHolder: ${viewModel.likedMeals.value}")
         holder.binding.tvFavoriteName.text = meal.mealName
         holder.binding.tvFavoritePrice.text = meal.price.toString()+ "€"
         holder.binding.ivFavoriteProfil.load(meal.mealImg)
 
         holder.itemView.setOnClickListener {
+            Log.d("Favorite", "MealId: ${meal.idMeal},mealName: ${meal.mealName}")
         viewModel.setSelectedMealId(meal.idMeal)
-
-        val navController = holder.itemView.findNavController()
-        navController.navigate(R.id.mealDetailFragment)
+        holder.itemView.findNavController().navigate(R.id.mealDetailFragment)
     }
 
 }

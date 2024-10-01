@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.navigateUp
+import com.example.restaurantappprojektandroid.MainActivity
 import com.example.restaurantappprojektandroid.ui.MainViewModel
 import com.example.restuarantprojektapp.R
 import com.example.restuarantprojektapp.databinding.FragmentReservationDetailBinding
@@ -23,6 +24,7 @@ class ReservationDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        (requireActivity()as MainActivity).bottomNavigation.visibility = View.GONE
         vb = FragmentReservationDetailBinding.inflate(inflater, container, false)
         return vb.root
     }
@@ -31,6 +33,7 @@ class ReservationDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         vb.ivArrowBack.setOnClickListener {
+            (requireActivity()as MainActivity).bottomNavigation.visibility = View.VISIBLE
             findNavController().navigateUp()
         }
         viewModel.reservation.observe(viewLifecycleOwner) { reservation ->

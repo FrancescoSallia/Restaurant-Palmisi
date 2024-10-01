@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.fragment.app.activityViewModels
+import com.example.restaurantappprojektandroid.MainActivity
 import com.example.restaurantappprojektandroid.ui.adapter.KategorieAdapter
 import com.example.restaurantappprojektandroid.ui.adapter.MealAdapter
 import com.example.restaurantappprojektandroid.ui.MainViewModel

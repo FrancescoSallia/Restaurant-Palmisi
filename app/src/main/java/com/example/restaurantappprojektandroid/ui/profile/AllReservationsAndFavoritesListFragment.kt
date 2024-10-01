@@ -16,7 +16,7 @@ import com.example.restaurantappprojektandroid.ui.adapter.FavoriteAdapter
 import com.example.restaurantappprojektandroid.ui.adapter.ReservationAdapter
 import com.example.restuarantprojektapp.databinding.FragmentAllReservationListBinding
 
-class AllReservationListFragment : Fragment() {
+class AllReservationsAndFavoritesListFragment : Fragment() {
     private lateinit var vb: FragmentAllReservationListBinding
     private val viewModel: MainViewModel by activityViewModels()
 

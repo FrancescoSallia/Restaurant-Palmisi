@@ -4,7 +4,7 @@
     android:id="@+id/frameLayout10"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.restaurantappprojektandroid.ui.profile.AllReservationListFragment" >
+    tools:context="com.example.restaurantappprojektandroid.ui.profile.AllReservationsAndFavoritesListFragment" >
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_all_reservationList"

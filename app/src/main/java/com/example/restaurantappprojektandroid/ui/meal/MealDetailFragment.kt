@@ -24,9 +24,7 @@ class MealDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         viewModel.getMealById()
-
         vb = FragmentMealDetailBinding.inflate(inflater, container, false)
         return vb.root
     }
@@ -39,7 +37,7 @@ class MealDetailFragment : Fragment() {
 
             vb.ivHearth.visibility = View.INVISIBLE
         }
-
+        //repositoryMealDetail funktioniert , ersetze es mit repositoryMeals, die likes funktionieren hingegen nicht!
         viewModel.repositoryMeals.observe(viewLifecycleOwner) { meals: List<Meal> ->
 
             var meal = meals.find { it.idMeal == viewModel.selectedMealID }
@@ -50,6 +48,7 @@ class MealDetailFragment : Fragment() {
                 vb.ivMealDetail.load(meal.mealImg)
                 vb.tvMealDetailTitle.text = meal.mealName
                 vb.tvPreisDetail.text = meal.priceasString
+                Log.d("Favorite", " mealDetail : ${vb.tvMealDetailTitle.text}")
 
                 vb.ivHearth.setOnClickListener {
                     Log.i("meal", meal.toString())
@@ -65,7 +64,6 @@ class MealDetailFragment : Fragment() {
         vb.ivArrowBack.setOnClickListener {
             findNavController().navigateUp()
         }
-
         vb.btnAllergenen.setOnClickListener {
             findNavController().navigate(R.id.allergenenFragment)
         }

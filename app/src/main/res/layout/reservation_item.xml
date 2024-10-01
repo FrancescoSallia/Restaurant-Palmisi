@@ -18,6 +18,7 @@
             android:id="@+id/iv_random_img"
             android:layout_width="match_parent"
             android:layout_height="132dp"
+            android:layout_marginEnd="8dp"
             android:scaleType="centerCrop"
             android:src="@drawable/restaurant_reservation_pic_one"
             app:layout_constraintEnd_toEndOf="parent"
@@ -27,7 +28,7 @@
             app:shapeAppearanceOverlay="@style/Restaurant_BilderRahmen_shape_style" />
 
         <TextView
-            android:id="@+id/tv_personanzahl"
+            android:id="@+id/tv_personanzahl_"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -38,10 +39,11 @@
             app:layout_constraintTop_toBottomOf="@+id/iv_random_img" />
 
         <TextView
-            android:id="@+id/tv_bestätigung"
+            android:id="@+id/tv_bestätigung_"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="44dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
             android:text="Bestätigt"
             android:textColor="#4CAF50"
             android:textSize="16sp"
@@ -50,7 +52,7 @@
             app:layout_constraintTop_toBottomOf="@+id/iv_random_img" />
 
         <TextView
-            android:id="@+id/tv_wann"
+            android:id="@+id/tv_wann_"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -58,7 +60,7 @@
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_personanzahl" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_personanzahl_" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

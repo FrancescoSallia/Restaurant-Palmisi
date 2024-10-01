@@ -19,7 +19,6 @@ class ReservationDetailFragment : Fragment() {
     private var bemerkung = ""
 
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,7 +30,9 @@ class ReservationDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        vb.ivArrowBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
         viewModel.reservation.observe(viewLifecycleOwner) { reservation ->
 
             val vorname = viewModel.userData.value?.vorname
@@ -44,42 +45,32 @@ class ReservationDetailFragment : Fragment() {
             vb.tvUhrzeitReservationDetail.text = reservation.datum
 
             //den value vom kommentarGast raus nehmen und anzeigen lassen!!
-             bemerkung = reservation.kommentarGast
-            if (bemerkung.isNullOrEmpty()){
+            bemerkung = reservation.kommentarGast
 
+            if (bemerkung.isNullOrEmpty()) {
                 vb.etBemerkungDetailText.hint = bemerkung
                 Log.d("ReservationDetailFragment", "bemerkung: $bemerkung")
-
-
-            }else{
+            } else {
                 vb.etBemerkungDetailText.setHint(bemerkung)
                 Log.d("ReservationDetailFragment", "else bemerkung: $bemerkung")
-
-
-
             }
             vb.btnTischStornieren.setOnClickListener {
                 viewModel.deleteReservation(reservation.reservationId)
                 findNavController().navigateUp()
-
             }
             vb.btnSaveReservation.setOnClickListener {
                 var kommentar = vb.etBemerkungDetailText
 
-                if (kommentar.hint.toString().isNotEmpty()&& kommentar.text.toString().isNotEmpty()) {
-
+                if (kommentar.hint.toString().isNotEmpty() && kommentar.text.toString()
+                        .isNotEmpty()
+                ) {
                     vb.etBemerkungDetailText.setHint(kommentar.hint.toString())
                     viewModel.updateReservation(kommentar.text.toString())
                     findNavController().navigateUp()
-
-                }else{
+                } else {
                     findNavController().navigateUp()
                 }
-
-
             }
         }
-
     }
-
 }

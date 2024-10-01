@@ -74,9 +74,9 @@ class ProfilFragment : Fragment() {
             // Diese funktion ist für das Profilbild zuständig falls ein profilbild vorhanden ist, funktioniert noch nicht!
             viewModel.userData.observe(viewLifecycleOwner) {
 
-                binding.ivProfilPicProfil.load(it.profilePicture)
+            binding.ivProfilPicProfil.load(it.profilePicture)
+                binding.tvProfilNameTitle.text = it.vorname + " " + it.nachname
             }
-
 
             binding.btnAusloggen.setOnClickListener {
                 viewModel.logOut()
@@ -89,8 +89,14 @@ class ProfilFragment : Fragment() {
             viewModel.reservationsList.observe(viewLifecycleOwner) {
                 binding.rvReservationItem.adapter = ReservationAdapter(it.sortedBy { it.reservationId.reversed() }, viewModel,requireContext())
             }
+            
+            binding.tvMehrReservation.setOnClickListener {
+                (requireActivity() as MainActivity).bottomNavigation.visibility = View.GONE
+                findNavController().navigate(ProfilFragmentDirections.actionProfilFragmentToAllReservationListFragment())
+            }
+            binding.tvMehrFavorite.setOnClickListener {
+                // TODO:  
+            }
         }
-
-
     }
 }

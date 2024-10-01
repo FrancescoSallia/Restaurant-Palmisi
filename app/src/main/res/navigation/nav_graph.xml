@@ -56,6 +56,9 @@
         <action
             android:id="@+id/action_profilFragment_to_logInFragment"
             app:destination="@id/logInFragment" />
+        <action
+            android:id="@+id/action_profilFragment_to_allReservationListFragment"
+            app:destination="@id/allReservationListFragment" />
     </fragment>
     <fragment
         android:id="@+id/proiflSettingsFragment"
@@ -115,5 +118,14 @@
         <action
             android:id="@+id/action_passwortVergessenFragment_to_logInFragment"
             app:destination="@id/logInFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/allReservationListFragment"
+        android:name="com.example.restaurantappprojektandroid.ui.profile.AllReservationListFragment"
+        android:label="fragment_all_reservation_list"
+        tools:layout="@layout/fragment_all_reservation_list" >
+        <action
+            android:id="@+id/action_allReservationListFragment_to_profilFragment"
+            app:destination="@id/profilFragment" />
     </fragment>
 </navigation>

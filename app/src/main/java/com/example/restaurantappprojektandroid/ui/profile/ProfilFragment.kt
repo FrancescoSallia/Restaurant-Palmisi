@@ -63,7 +63,9 @@ class ProfilFragment : Fragment() {
             }
         }
     }
+fun anderefunktion(){
 
+}
     private fun loggedUser() {
         val binding = vb
         if(binding is FragmentProfilBinding) {

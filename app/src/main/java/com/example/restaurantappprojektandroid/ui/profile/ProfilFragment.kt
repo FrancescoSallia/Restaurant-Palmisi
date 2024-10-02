@@ -63,7 +63,9 @@ class ProfilFragment : Fragment() {
             }
         }
     }
-
+fun diedie():String{
+    return "die"
+}
     private fun loggedUser() {
         val binding = vb
         if(binding is FragmentProfilBinding) {

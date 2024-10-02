@@ -82,6 +82,7 @@ class ProfilFragment : Fragment() {
                 viewModel.logOut()
             }
 
+
             binding.btnProfilSetting.setOnClickListener {
                 findNavController().navigate(ProfilFragmentDirections.actionProfilFragmentToProiflSettingsFragment())
             }

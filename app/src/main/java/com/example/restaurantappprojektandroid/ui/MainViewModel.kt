@@ -40,29 +40,36 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val selectedTime: LiveData<String>
         get() = _selectedTime
 
+    private val _selectedMeal = MutableLiveData<Meal>()
+    val selectedMeal: LiveData<Meal>
+        get() = _selectedMeal
 
-    fun uploadImage(uri: Uri){
+
+    fun uploadImage(uri: Uri) {
         repository.uploadImage(uri)
     }
 
-    fun updateReservation(kommentarGast: String){
+    fun updateReservation(kommentarGast: String) {
         repository.updateReservation(kommentarGast)
     }
-//    fun addSnapshotListenerForCurrentUser(){
+
+    //    fun addSnapshotListenerForCurrentUser(){
 //        repository.getLikedMeals()
 //    }
-    fun snapShotListenerForReservation(){
+    fun snapShotListenerForReservation() {
         repository.snapShotListenerForReservation()
     }
-    fun deleteReservation(reservationId:String){
+
+    fun deleteReservation(reservationId: String) {
         repository.deleteReservation(reservationId)
     }
-    fun getDataUser(){
+
+    fun getDataUser() {
         repository.getDataUser()
 
     }
 
-    fun getReservations(reservationId: String){
+    fun getReservations(reservationId: String) {
         repository.getDataReservation(reservationId)
     }
 
@@ -71,14 +78,14 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         repository.postUserReservation(reservation)
     }
 
-    fun selectedPersonNumber(anzahl:Int):Int{
+    fun selectedPersonNumber(anzahl: Int): Int {
 
         val wert = anzahl
         _selectedPersonNumber.postValue(wert)
         return wert
     }
 
-    fun selectedTime(time:String):String{
+    fun selectedTime(time: String): String {
 
         val zeit = time
         _selectedTime.postValue(zeit)
@@ -86,12 +93,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
 
-
     init {
         getMealsByCategory("Beef")
     }
 
-    fun resetPassword(email: String){
+    fun resetPassword(email: String) {
         repository.resetPassword(email)
     }
 
@@ -123,7 +129,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
     //Firebase ENDE!!
 
-    var selectedMealID = ""
+//    var selectedMealID = ""
 
 
     val repositoryCategory = repository.category
@@ -147,28 +153,20 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun getMealById() {
-        viewModelScope.launch {
-            repository.getMealById(selectedMealID)
-        }
-    }
-
     fun searchMeal(mealName: String) {
         viewModelScope.launch {
             repository.searchMeal(mealName)
         }
     }
 
-    fun setSelectedMealId(mealId: String) {
-        selectedMealID = mealId
+    fun setSelectedMealId(meal: Meal) {
+        _selectedMeal.value = meal
     }
 
 
     fun addToFavorites(meal: Meal) {
         repository.addToFavorites(meal)
     }
-
-
 
 
 }

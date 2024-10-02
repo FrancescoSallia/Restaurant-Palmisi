@@ -15,10 +15,11 @@ class FavoriteAdapter(
     private val dataset: List<Meal>,
     private val viewModel: MainViewModel
 ) : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>() {
-    inner class FavoriteViewHolder(val binding: FavoritedItemBinding) :RecyclerView.ViewHolder(binding.root)
+    inner class FavoriteViewHolder(val binding: FavoritedItemBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteViewHolder {
-       var vb = FavoritedItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        var vb = FavoritedItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return FavoriteViewHolder(vb)
     }
 
@@ -32,16 +33,17 @@ class FavoriteAdapter(
 
         Log.d("TAG", "onBindViewHolder: ${viewModel.likedMeals.value}")
         holder.binding.tvFavoriteName.text = meal.mealName
-        holder.binding.tvFavoritePrice.text = meal.price.toString()+ "€"
+        holder.binding.tvFavoritePrice.text = meal.price.toString() + "€"
         holder.binding.ivFavoriteProfil.load(meal.mealImg)
 
         holder.itemView.setOnClickListener {
             Log.d("Favorite", "MealId: ${meal.idMeal},mealName: ${meal.mealName}")
-        viewModel.setSelectedMealId(meal.idMeal)
-        holder.itemView.findNavController().navigate(R.id.mealDetailFragment)
-    }
+            viewModel.setSelectedMealId(meal)
 
-}
+            holder.itemView.findNavController().navigate(R.id.mealDetailFragment)
+        }
+
+    }
 }
 
 

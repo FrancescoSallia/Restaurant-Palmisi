@@ -58,7 +58,7 @@ class MealAdapter(
 
             holder.itemView.setOnClickListener {
 
-                viewModel.setSelectedMealId(meal.idMeal)
+                viewModel.setSelectedMealId(meal)
 
                 val navController = holder.itemView.findNavController()
                 navController.navigate(R.id.mealDetailFragment)

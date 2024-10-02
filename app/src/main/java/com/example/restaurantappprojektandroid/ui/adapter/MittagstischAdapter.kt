@@ -38,7 +38,7 @@ class MittagstischAdapter(
 
         holder.itemView.setOnClickListener {
 
-            viewModel.setSelectedMealId(meal.idMeal)
+            viewModel.setSelectedMealId(meal)
 
             holder.itemView.findNavController().navigate(R.id.mealDetailFragment)
 

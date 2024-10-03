@@ -77,6 +77,41 @@ class FirestoreRepository(val context: Context) {
             }
         }
     }
+    fun removeProfileImage() {
+        val user = auth.currentUser
+        if (user != null) {
+            val imageRef = storageRef.child("images/${user.uid}/profilePic")
+
+            // Löschen des Bildes aus dem Storage
+            imageRef.delete().addOnCompleteListener { deleteTask ->
+                if (deleteTask.isSuccessful) {
+                    // Wenn das Bild erfolgreich gelöscht wurde, aktualisieren Sie die Benutzerdaten
+                    userRef?.update("profilePicture", null)
+                        ?.addOnSuccessListener {
+                            // Erfolgreiche Aktualisierung der Benutzerdaten
+                            Toast.makeText(
+                                context,
+                                "Profilbild erfolgreich entfernt",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                        ?.addOnFailureListener { e ->
+                            // Fehler bei der Aktualisierung der Benutzerdaten
+                           Toast.makeText(
+                               context,
+                               "Fehler beim Entfernen des Profilbildes: ${e.message}",
+                               Toast.LENGTH_SHORT
+                           ).show()
+                        }
+                } else {
+                    // Fehler beim Löschen des Bildes
+                    println("Fehler beim Löschen des Profilbildes: ${deleteTask.exception?.message}")
+                }
+            }
+        } else {
+            println("Kein Benutzer angemeldet")
+        }
+    }
 
     fun updateReservation(kommentarGast: String) {
         resRef = db.collection("reservation").document(auth.currentUser?.uid ?: "")

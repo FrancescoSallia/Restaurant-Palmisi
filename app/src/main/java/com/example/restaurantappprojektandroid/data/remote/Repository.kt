@@ -22,9 +22,9 @@ class Repository(private val api: MealdbApi, context:Context) {
     val meals : LiveData<List<Meal>>
         get() = _meals
 
-    private val _mealDetail = MutableLiveData<List<Meal>>()
-    val mealDetail: LiveData<List<Meal>>
-        get() = _mealDetail
+//    private val _mealDetail = MutableLiveData<List<Meal>>()
+//    val mealDetail: LiveData<List<Meal>>
+//        get() = _mealDetail
 
     private val _searchMeal = MutableLiveData<List<Meal>>()
     val searchMeal: LiveData<List<Meal>>
@@ -47,6 +47,9 @@ class Repository(private val api: MealdbApi, context:Context) {
     //endregion
 
     //region Firebase functions
+    fun removeProfileImage(){
+        firestore.removeProfileImage()
+    }
 
     fun resetPassword(email: String){
         firestore.resetPassword(email)
@@ -142,14 +145,14 @@ class Repository(private val api: MealdbApi, context:Context) {
         }
     }
 
-    suspend fun getMealById(mealId: String) {
-        try {
-            val result = MealdbApi.retrofitService.getMealById(mealId)
-            _mealDetail.postValue(result.meals)
-        }catch(e: Exception) {
-                Log.i("INFO", "schau im Repository nach bei getMealById : $e")
-            }
-    }
+//    suspend fun getMealById(mealId: String) {
+//        try {
+//            val result = MealdbApi.retrofitService.getMealById(mealId)
+//            _mealDetail.postValue(result.meals)
+//        }catch(e: Exception) {
+//                Log.i("INFO", "schau im Repository nach bei getMealById : $e")
+//            }
+//    }
 
     suspend fun searchMeal(search: String) {
         try {

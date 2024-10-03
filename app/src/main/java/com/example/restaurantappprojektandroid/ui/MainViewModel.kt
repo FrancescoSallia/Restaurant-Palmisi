@@ -92,6 +92,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         getMealsByCategory("Beef")
     }
 
+    fun removeProfileImage(){
+        repository.removeProfileImage()
+    }
     fun resetPassword(email: String) {
         repository.resetPassword(email)
     }
@@ -129,7 +132,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     val repositoryCategory = repository.category
     val repositoryMeals = repository.meals
-    val repositoryMealDetail = repository.mealDetail
+//    val repositoryMealDetail = repository.mealDetail
     val repositorySearchMeal = repository.searchMeal
 
     fun getCategories() {

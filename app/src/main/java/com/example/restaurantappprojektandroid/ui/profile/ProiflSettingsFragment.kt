@@ -96,6 +96,10 @@ class ProiflSettingsFragment : Fragment() {
             findNavController().navigateUp()
         }
 
+        vb.btnProfilbildEntfernen.setOnClickListener {
+            viewModel.removeProfileImage()
+            vb.ivProfilPic.load(null)
+        }
     }
 }
 

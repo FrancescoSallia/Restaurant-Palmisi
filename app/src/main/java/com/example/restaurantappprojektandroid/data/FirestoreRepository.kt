@@ -41,10 +41,6 @@ class FirestoreRepository(val context: Context) {
     val userData: LiveData<User>
         get() = _userData
 
-    private val _profilPicture = MutableLiveData<String?>()
-    val profilPicture: LiveData<String?>
-        get() = _profilPicture
-
     private val db = Firebase.firestore
     private val storage = Firebase.storage
     var storageRef = storage.reference

@@ -2,18 +2,17 @@ package com.example.restaurantappprojektandroid.ui.profile
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.net.toUri
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import coil.load
 import com.example.restaurantappprojektandroid.MainActivity
-import com.example.restaurantappprojektandroid.ui.adapter.FavoriteAdapter
 import com.example.restaurantappprojektandroid.ui.MainViewModel
+import com.example.restaurantappprojektandroid.ui.adapter.FavoriteAdapter
 import com.example.restaurantappprojektandroid.ui.adapter.ReservationAdapter
 import com.example.restuarantprojektapp.R
 import com.example.restuarantprojektapp.databinding.FragmentAnonymUserProfilBinding
@@ -63,9 +62,6 @@ class ProfilFragment : Fragment() {
             }
         }
     }
-fun diedie():String{
-    return "die"
-}
     private fun loggedUser() {
         val binding = vb
         if(binding is FragmentProfilBinding) {
@@ -96,9 +92,6 @@ fun diedie():String{
             binding.tvMehrReservation.setOnClickListener {
                 (requireActivity() as MainActivity).bottomNavigation.visibility = View.GONE
                 findNavController().navigate(ProfilFragmentDirections.actionProfilFragmentToAllReservationListFragment())
-            }
-            binding.tvMehrFavorite.setOnClickListener {
-                // TODO:  
             }
         }
     }

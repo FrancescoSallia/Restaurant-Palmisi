@@ -43,7 +43,6 @@ class Repository(private val api: MealdbApi, context:Context) {
 
     val userData = firestore.userData
 
-    val profilPicture = firestore.profilPicture
 
     //endregion
 

@@ -30,8 +30,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     val userData = repository.userData
 
-    val profilPicture = repository.profilPicture
-
     private val _selectedPersonNumber = MutableLiveData<Int>(1)
     val selectedPersonNumber: LiveData<Int>
         get() = _selectedPersonNumber
@@ -53,9 +51,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         repository.updateReservation(kommentarGast)
     }
 
-    //    fun addSnapshotListenerForCurrentUser(){
-//        repository.getLikedMeals()
-//    }
     fun snapShotListenerForReservation() {
         repository.snapShotListenerForReservation()
     }

@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:backgroundTint="#0663EB"
-            android:text="Save"
+            android:text="Speichern"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="@+id/btn_kontolöschen"
             app:layout_constraintHorizontal_bias="0.0"

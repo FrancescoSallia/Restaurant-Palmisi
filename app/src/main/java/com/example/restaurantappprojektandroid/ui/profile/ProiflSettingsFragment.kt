@@ -22,36 +22,44 @@ class ProiflSettingsFragment : Fragment() {
 
 
     // diese funktion ist für die Bildauswahl zuständig (Profilbild)
-    private val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-        uri?.let { uri->
+    private val getContent =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+            uri?.let { uri ->
 
-            profilBild = uri
-            viewModel.uploadImage(profilBild!!)
+                profilBild = uri
+                viewModel.uploadImage(profilBild!!)
 
-            viewModel.userData.observe(viewLifecycleOwner) {
+                viewModel.userData.observe(viewLifecycleOwner) {
 
-                vb.ivProfilPic.load(it.profilePicture)
+                    vb.ivProfilPic.load(it.profilePicture)
+                }
+                vb.ivProfilPic.setImageURI(profilBild)
             }
-            vb.ivProfilPic.setImageURI(profilBild)
-
         }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel.getDataUser()
         vb = FragmentProiflSettingsBinding.inflate(inflater, container, false)
         return vb.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.getDataUser()
+
+        viewModel.userData.observe(viewLifecycleOwner) {
+            Log.d("ProfilSettings", "userData: $it")
+            vb.etBenutzernameSettings.setText(it?.vorname)
+            vb.etPasswordSettings.setText(it?.nachname)
+            vb.ivProfilPic.load(it.profilePicture)
+
+        }
 
         // funktion um die Bildauswahl zu starten
         fun openGallery() {
-             getContent.launch("image/*")
+            getContent.launch("image/*")
 
         }
 
@@ -59,7 +67,6 @@ class ProiflSettingsFragment : Fragment() {
 
             openGallery()
         }
-
         vb.btnSave.setOnClickListener {
             if (vb.etBenutzernameSettings.text.toString()
                     .isNotEmpty() || vb.etPasswordSettings.text.toString().isNotEmpty()
@@ -71,35 +78,24 @@ class ProiflSettingsFragment : Fragment() {
                 findNavController().navigate(ProiflSettingsFragmentDirections.actionProiflSettingsFragmentToProfilFragment())
                 viewModel.getDataUser()
             }
-
-        }
-
-        viewModel.userData.observe(viewLifecycleOwner){
-            Log.d("ProfilSettings", "userData: $it")
-            vb.etBenutzernameSettings.setText(it?.vorname)
-            vb.etPasswordSettings.setText(it?.nachname)
-            vb.ivProfilPic.load(it.profilePicture)
-
-        }
-
-        viewModel.currentUser.observe(viewLifecycleOwner) {
-            if (it == null) {
-                (requireActivity() as MainActivity).bottomNavigation.visibility = View.INVISIBLE
-                findNavController().navigate(ProiflSettingsFragmentDirections.actionProiflSettingsFragmentToLogInFragment())
+            viewModel.currentUser.observe(viewLifecycleOwner) {
+                if (it == null) {
+                    (requireActivity() as MainActivity).bottomNavigation.visibility = View.INVISIBLE
+                    findNavController().navigate(ProiflSettingsFragmentDirections.actionProiflSettingsFragmentToLogInFragment())
+                }
+            }
+            vb.btnKontolSchen.setOnClickListener {
+                viewModel.deleteUser()
             }
         }
-        vb.btnKontolSchen.setOnClickListener {
-            viewModel.deleteUser()
-        }
-
         vb.ivBackArrow.setOnClickListener {
             findNavController().navigateUp()
         }
-
         vb.btnProfilbildEntfernen.setOnClickListener {
             viewModel.removeProfileImage()
             vb.ivProfilPic.load(null)
         }
     }
 }
+
 

@@ -269,7 +269,6 @@ class FirestoreRepository(val context: Context) {
             }
     }
 
-
     fun deleteUser() {
         val userId = auth.currentUser?.uid
         if (userId != null) {

@@ -26,6 +26,12 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class.java) {
+        kotlinOptions {
+            freeCompilerArgs = freeCompilerArgs + listOf()
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -36,11 +42,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
     buildFeatures {
         viewBinding = true
@@ -49,35 +55,32 @@ android {
 
 dependencies {
 
-    val retrofitVersion = "2.9.0"
-    val roomVersion = "2.6.0"
-
 
     //Retrofit und Moshi
-    implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
-    implementation("com.squareup.retrofit2:converter-moshi:$retrofitVersion")
-    implementation("com.squareup.moshi:moshi-kotlin:1.15.0")
+    implementation(libs.retrofit)
+    implementation(libs.converter.moshi)
+    implementation(libs.moshi.kotlin)
 
     // Coil
-    implementation("io.coil-kt:coil:2.7.0")
+    implementation(libs.coil)
 
     //Room
-    implementation("androidx.room:room-runtime:$roomVersion")
-    kapt("androidx.room:room-compiler:$roomVersion")
-    implementation("androidx.room:room-ktx:$roomVersion")
+    implementation(libs.androidx.room.runtime)
+    kapt(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
 
     //Logger
-    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+    implementation(libs.logging.interceptor)
 
     //Glide -> Gift Image Loader
-    implementation("com.github.bumptech.glide:glide:4.12.0")
+    implementation(libs.glide)
 
     //Lotties GIF
-    implementation("com.airbnb.android:lottie:6.1.0")
+    implementation(libs.lottie)
 
     //Firebase
-    implementation(platform("com.google.firebase:firebase-bom:33.2.0"))
-    implementation("com.google.firebase:firebase-analytics")
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
 
     implementation(libs.firebase.auth.ktx)
     implementation(libs.firebase.database.ktx)
@@ -85,16 +88,16 @@ dependencies {
     implementation(libs.androidx.legacy.support.v4)
 
   //Firebase Cloud
-    implementation ("com.google.firebase:firebase-firestore-ktx")
+    implementation (libs.firebase.firestore.ktx)
 
     //Firebase Storage
-    implementation("com.google.firebase:firebase-storage")
+    implementation(libs.firebase.storage)
 
     //RecyclerView
-    implementation("androidx.recyclerview:recyclerview:1.3.2")
+    implementation(libs.androidx.recyclerview)
 
 // Material Design ShapeableImageView (Titelbild)
-    implementation ("com.google.android.material:material:1.5.0")
+    implementation (libs.material.v150)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

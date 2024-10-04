@@ -30,9 +30,6 @@ class ProiflSettingsFragment : Fragment() {
             uri?.let { uri ->
                 profilBild = uri
                 viewModel.uploadImage(profilBild!!)
-                viewModel.userData.observe(viewLifecycleOwner) {
-                    vb.ivProfilPic.load(it.profilePicture)
-                }
                 vb.ivProfilPic.setImageURI(profilBild)
             }
         }

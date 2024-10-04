@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import coil.load
+import coil.transform.CircleCropTransformation
 import com.example.restaurantappprojektandroid.MainActivity
 import com.example.restaurantappprojektandroid.ui.MainViewModel
 import com.example.restaurantappprojektandroid.ui.adapter.FavoriteAdapter
@@ -74,7 +75,11 @@ class ProfilFragment : Fragment() {
             // Diese funktion ist für das Profilbild zuständig falls ein profilbild vorhanden ist, funktioniert noch nicht!
             viewModel.userData.observe(viewLifecycleOwner) {
 
-            binding.ivProfilPicProfil.load(it.profilePicture)
+                binding.ivProfilPicProfil.load(it.profilePicture) {
+                    crossfade(true)
+                    placeholder(R.drawable.profil)
+                    transformations(CircleCropTransformation())
+                }
                 binding.tvProfilNameTitle.text = it.vorname + " " + it.nachname
             }
 

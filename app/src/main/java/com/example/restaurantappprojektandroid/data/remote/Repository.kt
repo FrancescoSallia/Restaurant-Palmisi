@@ -44,6 +44,8 @@ class Repository(private val api: MealdbApi, context:Context) {
     val userData = firestore.userData
 
 
+    val userRef = firestore.userRef
+
     //endregion
 
     //region Firebase functions

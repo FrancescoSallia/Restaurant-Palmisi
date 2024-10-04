@@ -24,17 +24,13 @@ class ProiflSettingsFragment : Fragment() {
     private val viewModel: MainViewModel by activityViewModels()
     private var profilBild: Uri? = null
 
-
     // diese funktion ist für die Bildauswahl zuständig (Profilbild)
     private val getContent =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
             uri?.let { uri ->
-
                 profilBild = uri
                 viewModel.uploadImage(profilBild!!)
-
                 viewModel.userData.observe(viewLifecycleOwner) {
-
                     vb.ivProfilPic.load(it.profilePicture)
                 }
                 vb.ivProfilPic.setImageURI(profilBild)
@@ -69,20 +65,18 @@ class ProiflSettingsFragment : Fragment() {
                 placeholder(R.drawable.profil)
                 transformations(CircleCropTransformation())
             }
-
         }
 
         // funktion um die Bildauswahl zu starten
         fun openGallery() {
             getContent.launch("image/*")
-
         }
 
         vb.btnFloatingCamera.setOnClickListener {
-
             openGallery()
             viewModel.getDataUser()
         }
+
         vb.btnSave.setOnClickListener {
             if (vb.etBenutzernameSettings.text.toString()
                     .isNotEmpty() || vb.etPasswordSettings.text.toString().isNotEmpty()
@@ -94,38 +88,23 @@ class ProiflSettingsFragment : Fragment() {
                 findNavController().navigate(ProiflSettingsFragmentDirections.actionProiflSettingsFragmentToProfilFragment())
                 viewModel.getDataUser()
             }
-
         }
 
         vb.btnKontolSchen.setOnClickListener {
             viewModel.deleteUser()
-//            viewModel.logOut()
-
+            viewModel.logOut()
         }
-
-
-
 
         vb.ivBackArrow.setOnClickListener {
             findNavController().navigateUp()
         }
+
         vb.btnProfilbildEntfernen.setOnClickListener {
             viewModel.removeProfileImage()
             vb.ivProfilPic.load(null){
                 placeholder(R.drawable.profil)
             }
         }
-    }
-    //den lade-kreis anzeigen
-    private fun showLoadingIndicator() {
-        vb.loadingIndicator.visibility = View.VISIBLE
-        vb.btnKontolSchen.isEnabled = false
-
-    }
-    //den lade-kreis ausblenden
-    private fun hideLoadingIndicator() {
-        vb.loadingIndicator.visibility = View.GONE
-        vb.btnKontolSchen.isEnabled = true
     }
 }
 

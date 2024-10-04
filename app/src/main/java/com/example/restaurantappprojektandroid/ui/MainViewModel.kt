@@ -30,6 +30,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     val userData = repository.userData
 
+    val userRef = repository.userRef
+
     private val _selectedPersonNumber = MutableLiveData<Int>(1)
     val selectedPersonNumber: LiveData<Int>
         get() = _selectedPersonNumber

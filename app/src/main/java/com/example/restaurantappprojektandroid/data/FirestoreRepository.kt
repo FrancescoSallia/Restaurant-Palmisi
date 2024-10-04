@@ -247,21 +247,33 @@ class FirestoreRepository(val context: Context) {
         }
     }
 
+   private fun deleteAllReservationsForCurrentUser(userId: String) {
+        resRef = db.collection("reservation").document(userId)
+        resRef?.delete()?.addOnSuccessListener {Log.d("Firestore", "Reservierungen vom user wurden auch gelöscht!")}
+            ?.addOnFailureListener {
+                Log.e(
+                    "Firestore",
+                    "Fehler beim Löschen der Reservierungen",
+                    it
+                )
+            }
+    }
+
+
     fun deleteUser() {
         val userId = auth.currentUser?.uid
         if (userId != null) {
+            deleteAllReservationsForCurrentUser(userId)
             userRef = db.collection("users").document(userId)
             userRef?.delete()?.addOnSuccessListener {
                 Log.d("Firestore", "userRef: $userRef")
 
                 // Die untere Zeile, löscht alle die Reservierungen vom User!
-                userRef = db.collection("reservation").document(userId)
-                userRef?.delete()?.addOnSuccessListener {Log.d("Firestore", "Reservierungen vom user wurden auch gelöscht!")}
                 auth.currentUser?.delete()
                     ?.addOnSuccessListener {
                         Toast.makeText(context, "Benutzer gelöscht", Toast.LENGTH_SHORT)
                             .show()
-                        logOut()
+//                        logOut()
                     }
                     ?.addOnFailureListener { error ->
 

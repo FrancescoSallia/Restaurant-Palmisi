@@ -2,6 +2,8 @@ package com.example.restaurantappprojektandroid.ui.profile
 
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,8 +13,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import coil.load
+import coil.transform.CircleCropTransformation
 import com.example.restaurantappprojektandroid.MainActivity
 import com.example.restaurantappprojektandroid.ui.MainViewModel
+import com.example.restuarantprojektapp.R
 import com.example.restuarantprojektapp.databinding.FragmentProiflSettingsBinding
 
 class ProiflSettingsFragment : Fragment() {
@@ -49,11 +53,22 @@ class ProiflSettingsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getDataUser()
 
+        viewModel.currentUser.observe(viewLifecycleOwner) {
+            if (it == null) {
+                (requireActivity() as MainActivity).bottomNavigation.visibility = View.INVISIBLE
+                findNavController().navigate(ProiflSettingsFragmentDirections.actionProiflSettingsFragmentToLogInFragment())
+            }
+        }
+
         viewModel.userData.observe(viewLifecycleOwner) {
             Log.d("ProfilSettings", "userData: $it")
             vb.etBenutzernameSettings.setText(it?.vorname)
             vb.etPasswordSettings.setText(it?.nachname)
-            vb.ivProfilPic.load(it.profilePicture)
+            vb.ivProfilPic.load(it.profilePicture) {
+                crossfade(true)
+                placeholder(R.drawable.profil)
+                transformations(CircleCropTransformation())
+            }
 
         }
 
@@ -66,6 +81,7 @@ class ProiflSettingsFragment : Fragment() {
         vb.btnFloatingCamera.setOnClickListener {
 
             openGallery()
+            viewModel.getDataUser()
         }
         vb.btnSave.setOnClickListener {
             if (vb.etBenutzernameSettings.text.toString()
@@ -78,23 +94,38 @@ class ProiflSettingsFragment : Fragment() {
                 findNavController().navigate(ProiflSettingsFragmentDirections.actionProiflSettingsFragmentToProfilFragment())
                 viewModel.getDataUser()
             }
-            viewModel.currentUser.observe(viewLifecycleOwner) {
-                if (it == null) {
-                    (requireActivity() as MainActivity).bottomNavigation.visibility = View.INVISIBLE
-                    findNavController().navigate(ProiflSettingsFragmentDirections.actionProiflSettingsFragmentToLogInFragment())
-                }
-            }
-            vb.btnKontolSchen.setOnClickListener {
-                viewModel.deleteUser()
-            }
+
         }
+
+        vb.btnKontolSchen.setOnClickListener {
+            viewModel.deleteUser()
+//            viewModel.logOut()
+
+        }
+
+
+
+
         vb.ivBackArrow.setOnClickListener {
             findNavController().navigateUp()
         }
         vb.btnProfilbildEntfernen.setOnClickListener {
             viewModel.removeProfileImage()
-            vb.ivProfilPic.load(null)
+            vb.ivProfilPic.load(null){
+                placeholder(R.drawable.profil)
+            }
         }
+    }
+    //den lade-kreis anzeigen
+    private fun showLoadingIndicator() {
+        vb.loadingIndicator.visibility = View.VISIBLE
+        vb.btnKontolSchen.isEnabled = false
+
+    }
+    //den lade-kreis ausblenden
+    private fun hideLoadingIndicator() {
+        vb.loadingIndicator.visibility = View.GONE
+        vb.btnKontolSchen.isEnabled = true
     }
 }
 

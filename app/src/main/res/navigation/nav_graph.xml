@@ -71,6 +71,9 @@
         <action
             android:id="@+id/action_proiflSettingsFragment_to_logInFragment"
             app:destination="@id/logInFragment" />
+        <action
+            android:id="@+id/action_proiflSettingsFragment_to_logInFragment2"
+            app:destination="@id/logInFragment" />
     </fragment>
     <fragment
         android:id="@+id/logInFragment"

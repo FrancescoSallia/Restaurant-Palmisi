@@ -44,6 +44,8 @@ class ProfilFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getDataUser()
 
+
+
         viewModel.currentUser.observe(viewLifecycleOwner) {
             Log.e("PROFILE", it.toString())
 

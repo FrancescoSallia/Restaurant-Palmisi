@@ -275,12 +275,18 @@ class FirestoreRepository(val context: Context) {
         if (userId != null) {
             deleteAllReservationsForCurrentUser(userId)
             deleteProfileRefForCurrentUser(userId)
+            deleteProfileStoragePicture(userId)
             deleteFirebaseCurrentUser()
         } else {
             Toast
                 .makeText(context, "Kein angemeldeter Benutzer", Toast.LENGTH_SHORT)
                 .show()
         }
+    }
+
+    private fun deleteProfileStoragePicture(userId: String?) {
+        val imageRef = storageRef.child("images/${userId}/profilePic")
+        imageRef.delete()
     }
 
     private fun deleteProfileRefForCurrentUser(userId: String) {

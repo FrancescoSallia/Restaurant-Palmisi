@@ -46,6 +46,7 @@ class ProiflSettingsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getDataUser()
 
+
         viewModel.currentUser.observe(viewLifecycleOwner) {
             if (it == null) {
                 (requireActivity() as MainActivity).bottomNavigation.visibility = View.INVISIBLE

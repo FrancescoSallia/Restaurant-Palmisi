@@ -65,6 +65,7 @@ class ProiflSettingsFragment : Fragment() {
             }
         }
 
+
         // funktion um die Bildauswahl zu starten
         fun openGallery() {
             getContent.launch("image/*")

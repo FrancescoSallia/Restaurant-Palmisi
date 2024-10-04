@@ -53,6 +53,7 @@ class ProiflSettingsFragment : Fragment() {
             }
         }
 
+
         viewModel.userData.observe(viewLifecycleOwner) {
             Log.d("ProfilSettings", "userData: $it")
             vb.etBenutzernameSettings.setText(it?.vorname)

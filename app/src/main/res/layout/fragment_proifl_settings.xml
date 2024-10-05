@@ -41,7 +41,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout"
-            android:layout_width="265dp"
+            android:layout_width="300dp"
             android:layout_height="61dp"
             android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="@+id/iv_profil_pic"
@@ -58,8 +58,8 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout4"
-            android:layout_width="265dp"
-            android:layout_height="63dp"
+            android:layout_width="300dp"
+            android:layout_height="61dp"
             android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
             app:layout_constraintHorizontal_bias="0.0"
@@ -90,7 +90,7 @@
             android:id="@+id/btn_kontolöschen"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="50dp"
             android:backgroundTint="#FF0000"
             android:text="Konto Löschen"
             android:textSize="16sp"

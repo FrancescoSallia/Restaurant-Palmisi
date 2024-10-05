@@ -44,9 +44,6 @@ class ProfilFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //viewModel.getDataUser()
-
-
-
         viewModel.currentUser.observe(viewLifecycleOwner) {
             Log.e("PROFILE", it.toString())
 
@@ -72,9 +69,8 @@ class ProfilFragment : Fragment() {
             viewModel.likedMeals.observe(viewLifecycleOwner) {
                 binding.rvFavorite.adapter = FavoriteAdapter(it.reversed(),viewModel)
             }
-            // Diese funktion ist für das Profilbild zuständig falls ein profilbild vorhanden ist, funktioniert noch nicht!
+            // Diese funktion ist für das Profilbild zuständig falls ein profilbild vorhanden ist
             viewModel.userData.observe(viewLifecycleOwner) {
-
                 binding.ivProfilPicProfil.load(it.profilePicture) {
                     crossfade(true)
                     placeholder(R.drawable.profil)
@@ -86,16 +82,12 @@ class ProfilFragment : Fragment() {
             binding.btnAusloggen.setOnClickListener {
                 viewModel.logOut()
             }
-
-
             binding.btnProfilSetting.setOnClickListener {
                 findNavController().navigate(ProfilFragmentDirections.actionProfilFragmentToProiflSettingsFragment())
             }
-
             viewModel.reservationsList.observe(viewLifecycleOwner) {
                 binding.rvReservationItem.adapter = ReservationAdapter(it.sortedBy { it.reservationId.reversed() }, viewModel,requireContext())
             }
-            
             binding.tvMehrReservation.setOnClickListener {
                 (requireActivity() as MainActivity).bottomNavigation.visibility = View.GONE
                 findNavController().navigate(ProfilFragmentDirections.actionProfilFragmentToAllReservationListFragment())

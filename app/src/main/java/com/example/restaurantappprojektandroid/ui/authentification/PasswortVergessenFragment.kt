@@ -32,8 +32,8 @@ class PasswortVergessenFragment : Fragment() {
 
             val email = vb.etEmail.text.toString()
 
-                Toast.makeText(requireContext(), "Email wurde versendet", Toast.LENGTH_SHORT).show()
-                    viewModel.resetPassword(email)
+            if (email.isNotEmpty())
+             viewModel.resetPassword(email)
 
         }
 

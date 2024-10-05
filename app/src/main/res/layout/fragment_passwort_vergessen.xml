@@ -10,12 +10,11 @@
         android:id="@+id/textInputLayout7"
         android:layout_width="320dp"
         android:layout_height="66dp"
-        android:layout_marginTop="300dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_passwort_zurücksetzen"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.55">
+        app:layout_constraintTop_toBottomOf="@+id/lottieAnimationView">
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_email_"
             android:layout_width="match_parent"
@@ -24,19 +23,20 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.airbnb.lottie.LottieAnimationView
-        android:layout_width="202dp"
-        android:layout_height="179dp"
+        android:id="@+id/lottieAnimationView"
+        android:layout_width="479dp"
+        android:layout_height="293dp"
         android:layout_marginStart="130dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="131dp"
         android:layout_marginBottom="36dp"
-        android:src="@drawable/login_animation"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
-        app:lottie_loop="true">
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/login">
 
     </com.airbnb.lottie.LottieAnimationView>
 
@@ -45,7 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="106dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="107dp"
         android:backgroundTint="#B6333434"
         android:text="Passwort zurücksetzen"

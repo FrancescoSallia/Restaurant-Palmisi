@@ -17,8 +17,7 @@ import com.google.android.gms.tasks.Task
 class RegistrierenFragment : Fragment() {
     private lateinit var vb: FragmentRegistrierenBinding
     private val viewModel: MainViewModel by activityViewModels()
-    private var deleteAnonymUser : Task<Void>? = null
-
+//    private var deleteAnonymUser : Task<Void>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,7 +27,6 @@ class RegistrierenFragment : Fragment() {
 
         //Damit die Navigationbar nicht angezeigt wird unten, beim wechseln vom Reservation -> Registrieren Fragment !!Gone lässt die stelle komlett frei, stat es nur unsichtbar zu machen!
         (requireActivity() as MainActivity).bottomNavigation.visibility = View.GONE
-
         return vb.root
     }
 
@@ -40,34 +38,22 @@ class RegistrierenFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         loggedUser()
-
     }
 
     private fun loggedUser(){
 
         viewModel.currentUser.observe(viewLifecycleOwner) {
-
             if (it?.isAnonymous == true){
                 viewModel.logOut()
-
             }else if (it != null){
                 findNavController().navigate(R.id.homeFragment)
             }
-
-            vb.btnRegistrierenRegistrieren.setOnClickListener {
-
-                registrationSuccess()
-
-//        findNavController().navigate(RegistrierenFragmentDirections.actionRegistrierenFragmentToHomeFragment())
-
-            }
-
+        vb.btnRegistrierenRegistrieren.setOnClickListener {
+            registrationSuccess()
+         }
         }
-
     }
-
 
     fun registrationSuccess() {
         val vorname = vb.etVornameRegistrieren.text.toString()
@@ -79,11 +65,8 @@ class RegistrierenFragment : Fragment() {
 
         if (benutzername.isNotEmpty() && firstPasswort.isNotEmpty() && vorname.isNotEmpty() && nachname.isNotEmpty() && firstPasswort == secondPasswort) {
             viewModel.registration(benutzername, firstPasswort, vorname, nachname)
-
         }else if(firstPasswort != secondPasswort){
-
             Toast.makeText(requireContext(),"Passwort stimmt nicht überein!",Toast.LENGTH_SHORT).show()
-
         }else{
             Toast.makeText(requireContext(),"Fülle alle Felder aus!",Toast.LENGTH_SHORT).show()
         }

@@ -54,11 +54,11 @@ class FirestoreRepository(val context: Context) {
         auth.sendPasswordResetEmail(email)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(context, "Password reset email sent", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Email wurde versendet", Toast.LENGTH_SHORT).show()
                 } else {
                     Toast.makeText(
                         context,
-                        "Failed to send password reset email",
+                        "Email konnte nicht versendet werden",
                         Toast.LENGTH_SHORT
                     ).show()
                 }

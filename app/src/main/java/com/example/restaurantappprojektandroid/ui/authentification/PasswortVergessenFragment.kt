@@ -30,36 +30,11 @@ class PasswortVergessenFragment : Fragment() {
 
         vb.btnPasswortZurCksetzen.setOnClickListener {
 
-
             val email = vb.etEmail.text.toString()
-            val newPassword = vb.etNeuesPasswort.text.toString()
-            val newPasswordRepeat = vb.etNeuesPasswortWiederholen.text.toString()
 
-            fun showToast(message: String) {
-                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-            }
-            when {
-                email.isEmpty() -> {
-                    Log.i("PasswortVergessenFragment","email -> $email")
-                    showToast("Bitte geben Sie Ihre E-Mail-Adresse ein")
-                }
-
-                newPassword.isEmpty() || newPasswordRepeat.isEmpty() -> {
-                    showToast("Bitte füllen Sie alle Passwortfelder aus")
-                }
-
-                newPassword.length < 6 -> {
-                    showToast("Das Passwort muss mindestens 6 Zeichen lang sein")
-                }
-
-                newPassword != newPasswordRepeat -> {
-                    showToast("Die Passwörter stimmen nicht überein")
-                }
-
-                else -> {
+                Toast.makeText(requireContext(), "Email wurde versendet", Toast.LENGTH_SHORT).show()
                     viewModel.resetPassword(email)
-                }
-            }
+
         }
 
         vb.ivArrowBack.setOnClickListener {

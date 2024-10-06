@@ -23,7 +23,6 @@ class ProfilFragment : Fragment() {
     private lateinit var vb: ViewBinding
     private val viewModel: MainViewModel by activityViewModels()
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,29 +30,21 @@ class ProfilFragment : Fragment() {
         viewModel.getDataUser()
         (requireActivity()as MainActivity).bottomNavigation.visibility = View.VISIBLE
         vb = if(viewModel.currentUser.value?.isAnonymous == true) {
-            Log.e("PROFIL", "is true")
             FragmentAnonymUserProfilBinding.inflate(layoutInflater)
         } else {
-            Log.e("PROFIL", "is false")
-
             FragmentProfilBinding.inflate(layoutInflater)
         }
         return vb.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //viewModel.getDataUser()
         viewModel.currentUser.observe(viewLifecycleOwner) {
-            Log.e("PROFILE", it.toString())
-
             if (it?.isAnonymous == true) {
                 (vb as? FragmentAnonymUserProfilBinding)?.btnAlsGastAbmelden?.setOnClickListener {
                     viewModel.logOut()
                 }
             }else if (it != null) {
                 viewModel.snapShotListenerForReservation()
-
                 loggedUser()
             } else {
                 (requireActivity() as MainActivity).bottomNavigation.visibility = View.INVISIBLE
@@ -65,7 +56,6 @@ class ProfilFragment : Fragment() {
     private fun loggedUser() {
         val binding = vb
         if(binding is FragmentProfilBinding) {
-            Log.d("TAG", "currentUser: ${viewModel.currentUser}")
             viewModel.likedMeals.observe(viewLifecycleOwner) {
                 binding.rvFavorite.adapter = FavoriteAdapter(it.reversed(),viewModel)
             }
@@ -78,7 +68,6 @@ class ProfilFragment : Fragment() {
                 }
                 binding.tvProfilNameTitle.text = it.vorname + " " + it.nachname
             }
-
             binding.btnAusloggen.setOnClickListener {
                 viewModel.logOut()
             }

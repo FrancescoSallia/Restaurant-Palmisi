@@ -9,9 +9,8 @@ import com.example.restaurantappprojektandroid.data.FirestoreRepository
 import com.example.restaurantappprojektandroid.data.model.Category
 import com.example.restaurantappprojektandroid.data.model.Meal
 import com.example.restaurantappprojektandroid.data.model.Reservation
-import okhttp3.internal.notify
 
-class Repository(private val api: MealdbApi, context:Context) {
+class Repository(private val api: MealdbApi, context: Context) {
 
     //region Firebase
     private val _categorie = MutableLiveData<List<Category>>()
@@ -19,12 +18,8 @@ class Repository(private val api: MealdbApi, context:Context) {
         get() = _categorie
 
     private val _meals = MutableLiveData<List<Meal>>()
-    val meals : LiveData<List<Meal>>
+    val meals: LiveData<List<Meal>>
         get() = _meals
-
-//    private val _mealDetail = MutableLiveData<List<Meal>>()
-//    val mealDetail: LiveData<List<Meal>>
-//        get() = _mealDetail
 
     private val _searchMeal = MutableLiveData<List<Meal>>()
     val searchMeal: LiveData<List<Meal>>
@@ -49,36 +44,39 @@ class Repository(private val api: MealdbApi, context:Context) {
     //endregion
 
     //region Firebase functions
-    fun removeProfileImage(){
+    fun removeProfileImage() {
         firestore.removeProfileImage()
     }
 
-    fun resetPassword(email: String){
+    fun resetPassword(email: String) {
         firestore.resetPassword(email)
     }
 
-    fun uploadImage(uri: Uri){
+    fun uploadImage(uri: Uri) {
         firestore.uploadImage(uri)
     }
 
-    fun updateReservation(kommentarGast: String){
+    fun updateReservation(kommentarGast: String) {
         firestore.updateReservation(kommentarGast)
     }
-    fun getLikedMeals(){
+
+    fun getLikedMeals() {
         firestore.getLikedMeals()
     }
 
-    fun snapShotListenerForReservation(){
+    fun snapShotListenerForReservation() {
         firestore.snapShotListenerForReservation()
     }
-    fun deleteReservation(reservationId:String){
+
+    fun deleteReservation(reservationId: String) {
         firestore.deleteReservation(reservationId)
     }
-    fun getDataUser(){
+
+    fun getDataUser() {
         firestore.getDataUser()
     }
 
-    fun getDataReservation(reservationId: String){
+    fun getDataReservation(reservationId: String) {
         firestore.getDataReservation(reservationId)
     }
 
@@ -121,13 +119,13 @@ class Repository(private val api: MealdbApi, context:Context) {
     //endregion
 
 
-//region Api and Retofit functions
-    suspend fun getCategories(){
+    //region Api and Retofit functions
+    suspend fun getCategories() {
         try {
             val result = MealdbApi.retrofitService.getCategories()
             _categorie.postValue(result.categories)
         } catch (e: Exception) {
-            Log.i("INFO","schau im Repository nach bei getCategories")
+            Log.i("INFO", "schau im Repository nach bei getCategories")
         }
     }
 
@@ -147,15 +145,6 @@ class Repository(private val api: MealdbApi, context:Context) {
         }
     }
 
-//    suspend fun getMealById(mealId: String) {
-//        try {
-//            val result = MealdbApi.retrofitService.getMealById(mealId)
-//            _mealDetail.postValue(result.meals)
-//        }catch(e: Exception) {
-//                Log.i("INFO", "schau im Repository nach bei getMealById : $e")
-//            }
-//    }
-
     suspend fun searchMeal(search: String) {
         try {
             val result = MealdbApi.retrofitService.searchMeal(search)
@@ -173,7 +162,6 @@ class Repository(private val api: MealdbApi, context:Context) {
 
 
     //endregion
-
 
 
 }

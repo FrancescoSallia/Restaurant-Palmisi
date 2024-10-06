@@ -16,7 +16,6 @@ import android.os.Looper
 class LogoFragment : Fragment() {
   private lateinit var vb: FragmentLogoBinding
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -24,7 +23,6 @@ class LogoFragment : Fragment() {
         vb = FragmentLogoBinding.inflate(inflater, container, false)
         return vb.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -38,7 +36,5 @@ class LogoFragment : Fragment() {
         Handler(Looper.getMainLooper()).postDelayed({
             findNavController().navigate(LogoFragmentDirections.actionLogoFragmentToLogInFragment())
         }, 3000)
-
-
     }
 }

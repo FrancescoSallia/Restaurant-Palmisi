@@ -17,7 +17,6 @@ import com.google.android.gms.tasks.Task
 class RegistrierenFragment : Fragment() {
     private lateinit var vb: FragmentRegistrierenBinding
     private val viewModel: MainViewModel by activityViewModels()
-//    private var deleteAnonymUser : Task<Void>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,26 +34,22 @@ class RegistrierenFragment : Fragment() {
         // Navigationbar wieder einblenden wenn man zurück navigiert
         (requireActivity() as MainActivity).bottomNavigation.visibility = View.VISIBLE
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         loggedUser()
     }
-
-    private fun loggedUser(){
-
+    private fun loggedUser() {
         viewModel.currentUser.observe(viewLifecycleOwner) {
-            if (it?.isAnonymous == true){
+            if (it?.isAnonymous == true) {
                 viewModel.logOut()
-            }else if (it != null){
+            } else if (it != null) {
                 findNavController().navigate(R.id.homeFragment)
             }
-        vb.btnRegistrierenRegistrieren.setOnClickListener {
-            registrationSuccess()
-         }
+            vb.btnRegistrierenRegistrieren.setOnClickListener {
+                registrationSuccess()
+            }
         }
     }
-
     fun registrationSuccess() {
         val vorname = vb.etVornameRegistrieren.text.toString()
         val nachname = vb.etNachnameRegistrieren.text.toString()
@@ -65,10 +60,11 @@ class RegistrierenFragment : Fragment() {
 
         if (benutzername.isNotEmpty() && firstPasswort.isNotEmpty() && vorname.isNotEmpty() && nachname.isNotEmpty() && firstPasswort == secondPasswort) {
             viewModel.registration(benutzername, firstPasswort, vorname, nachname)
-        }else if(firstPasswort != secondPasswort){
-            Toast.makeText(requireContext(),"Passwort stimmt nicht überein!",Toast.LENGTH_SHORT).show()
-        }else{
-            Toast.makeText(requireContext(),"Fülle alle Felder aus!",Toast.LENGTH_SHORT).show()
+        } else if (firstPasswort != secondPasswort) {
+            Toast.makeText(requireContext(), "Passwort stimmt nicht überein!", Toast.LENGTH_SHORT)
+                .show()
+        } else {
+            Toast.makeText(requireContext(), "Fülle alle Felder aus!", Toast.LENGTH_SHORT).show()
         }
     }
 }

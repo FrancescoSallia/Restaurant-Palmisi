@@ -1,16 +1,15 @@
 package com.example.restaurantappprojektandroid.ui.meal
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.example.restaurantappprojektandroid.MainActivity
+import com.example.restaurantappprojektandroid.ui.MainViewModel
 import com.example.restaurantappprojektandroid.ui.adapter.KategorieAdapter
 import com.example.restaurantappprojektandroid.ui.adapter.MealAdapter
-import com.example.restaurantappprojektandroid.ui.MainViewModel
 import com.example.restuarantprojektapp.databinding.FragmentSpeisekartenBinding
 
 class SpeisekartenFragment : Fragment() {
@@ -24,11 +23,8 @@ class SpeisekartenFragment : Fragment() {
         vb = FragmentSpeisekartenBinding.inflate(inflater, container, false)
         return vb.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
         viewModel.getCategories()
 
         vb.searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -38,29 +34,22 @@ class SpeisekartenFragment : Fragment() {
                 }
                 return true
             }
-
             override fun onQueryTextChange(newText: String?): Boolean {
                 newText?.let {
                     viewModel.searchMeal(it)
                 }
                 return true
             }
-        })
-
-
+        }
+        )
         viewModel.repositoryCategory.observe(viewLifecycleOwner) {
             vb.rvKategorie.adapter = KategorieAdapter(it, viewModel)
         }
-
         viewModel.repositoryMeals.observe(viewLifecycleOwner) {
             vb.rvGerichtListe.adapter = MealAdapter(it, viewModel)
-
         }
-
         viewModel.repositorySearchMeal.observe(viewLifecycleOwner) {
             vb.rvGerichtListe.adapter = MealAdapter(it, viewModel)
-
         }
-
     }
 }

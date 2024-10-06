@@ -32,21 +32,14 @@ class HomeFragment : Fragment() {
 
         return vb.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        //Die Carousel-Funktion
         vb.rvMittagsTisch.setHasFixedSize(true)
         CarouselSnapHelper().attachToRecyclerView(vb.rvMittagsTisch)
 
         viewModel.repositoryMeals.observe(viewLifecycleOwner) {
-//            viewModel.getMealsByCategory("Italian")
             vb.rvMittagsTisch.adapter = MittagstischAdapter(it, viewModel)
         }
-
-
-
-
-
     }
 }

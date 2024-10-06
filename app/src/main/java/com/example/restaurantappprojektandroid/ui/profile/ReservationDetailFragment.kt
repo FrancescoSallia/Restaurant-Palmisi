@@ -2,16 +2,14 @@ package com.example.restaurantappprojektandroid.ui.profile
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.navigateUp
 import com.example.restaurantappprojektandroid.MainActivity
 import com.example.restaurantappprojektandroid.ui.MainViewModel
-import com.example.restuarantprojektapp.R
 import com.example.restuarantprojektapp.databinding.FragmentReservationDetailBinding
 
 class ReservationDetailFragment : Fragment() {
@@ -28,7 +26,6 @@ class ReservationDetailFragment : Fragment() {
         vb = FragmentReservationDetailBinding.inflate(inflater, container, false)
         return vb.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -37,7 +34,6 @@ class ReservationDetailFragment : Fragment() {
             findNavController().navigateUp()
         }
         viewModel.reservation.observe(viewLifecycleOwner) { reservation ->
-
             val vorname = viewModel.userData.value?.vorname
             val nachname = viewModel.userData.value?.nachname
 
@@ -52,10 +48,8 @@ class ReservationDetailFragment : Fragment() {
 
             if (bemerkung.isNullOrEmpty()) {
                 vb.etBemerkungDetailText.hint = bemerkung
-                Log.d("ReservationDetailFragment", "bemerkung: $bemerkung")
             } else {
                 vb.etBemerkungDetailText.setHint(bemerkung)
-                Log.d("ReservationDetailFragment", "else bemerkung: $bemerkung")
             }
             vb.btnTischStornieren.setOnClickListener {
                 viewModel.deleteReservation(reservation.reservationId)
@@ -63,7 +57,6 @@ class ReservationDetailFragment : Fragment() {
             }
             vb.btnSaveReservation.setOnClickListener {
                 var kommentar = vb.etBemerkungDetailText
-
                 if (kommentar.hint.toString().isNotEmpty() && kommentar.text.toString()
                         .isNotEmpty()
                 ) {

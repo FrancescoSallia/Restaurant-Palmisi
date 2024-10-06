@@ -2,8 +2,6 @@ package com.example.restaurantappprojektandroid.ui.profile
 
 import android.net.Uri
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -33,7 +31,6 @@ class ProiflSettingsFragment : Fragment() {
                 vb.ivProfilPic.setImageURI(profilBild)
             }
         }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,19 +38,15 @@ class ProiflSettingsFragment : Fragment() {
         vb = FragmentProiflSettingsBinding.inflate(inflater, container, false)
         return vb.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getDataUser()
-
         viewModel.currentUser.observe(viewLifecycleOwner) {
             if (it == null) {
                 (requireActivity() as MainActivity).bottomNavigation.visibility = View.INVISIBLE
                 findNavController().navigate(ProiflSettingsFragmentDirections.actionProiflSettingsFragmentToLogInFragment())
             }
         }
-
-
         viewModel.userData.observe(viewLifecycleOwner) {
             Log.d("ProfilSettings", "userData: $it")
             vb.etBenutzernameSettings.setText(it?.vorname)
@@ -69,34 +62,28 @@ class ProiflSettingsFragment : Fragment() {
         fun openGallery() {
             getContent.launch("image/*")
         }
-
         vb.btnFloatingCamera.setOnClickListener {
             openGallery()
             viewModel.getDataUser()
         }
-
         vb.btnSave.setOnClickListener {
             if (vb.etBenutzernameSettings.text.toString()
                     .isNotEmpty() || vb.etPasswordSettings.text.toString().isNotEmpty()
             ) {
                 val vorname = vb.etBenutzernameSettings.text.toString()
                 val nachname = vb.etPasswordSettings.text.toString()
-
                 viewModel.updateUser(vorname, nachname)
                 findNavController().navigate(ProiflSettingsFragmentDirections.actionProiflSettingsFragmentToProfilFragment())
                 viewModel.getDataUser()
             }
         }
-
         vb.btnKontolSchen.setOnClickListener {
             viewModel.deleteUser()
             viewModel.logOut()
         }
-
         vb.ivBackArrow.setOnClickListener {
             findNavController().navigateUp()
         }
-
         vb.btnProfilbildEntfernen.setOnClickListener {
             viewModel.removeProfileImage()
             vb.ivProfilPic.load(null){

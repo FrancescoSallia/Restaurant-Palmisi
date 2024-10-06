@@ -1,12 +1,8 @@
 package com.example.restaurantappprojektandroid
 
-import android.graphics.Color
 import android.os.Bundle
-import android.view.LayoutInflater
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.restuarantprojektapp.R
@@ -23,9 +19,7 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
 
          vb = ActivityMainBinding.inflate(layoutInflater)
-
         setContentView(vb.root)
-
         bottomNavigation = vb.bottomNav
         bottomNavigation.setItemIconTintList(null)
 
@@ -41,9 +35,5 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
-
-
     }
-
-
 }

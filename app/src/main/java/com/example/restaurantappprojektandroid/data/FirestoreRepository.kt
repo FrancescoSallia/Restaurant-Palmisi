@@ -123,14 +123,11 @@ class FirestoreRepository(val context: Context) {
 
     fun getDataUser() {
         userCol = db.collection("users")
-        Log.i("FirestoreRepo", "-> ${auth.currentUser?.uid}")
 
         userCol?.document(auth.currentUser?.uid ?: "")?.get()?.addOnSuccessListener {
-            Log.i("FirestoreRepo", "Daten wurden geladen $it")
 
             if (it != null && it.exists()) {
                 val user = it.toObject(User::class.java)
-                Log.e("USER", user.toString())
                 _userData.value = user!!
             }
 
@@ -141,7 +138,6 @@ class FirestoreRepository(val context: Context) {
     }
 
     fun postUserReservation(reservation: Reservation) {
-        Log.i("FirestoreRepo", "Reservation wird gespeichert: -> $reservation")
         colRef =
             db.collection("reservation").document(auth.currentUser!!.uid).collection("reservierung")
         colRef?.add(reservation)
@@ -165,7 +161,6 @@ class FirestoreRepository(val context: Context) {
     init {
         if (auth.currentUser != null) {
             userRef = db.collection("users").document(auth.currentUser!!.uid)
-            Log.d("DEBUG", "User is logged in: ${auth.currentUser?.uid}")
             getLikedMeals()
             snapShotListenerForReservation()
         }
@@ -183,7 +178,6 @@ class FirestoreRepository(val context: Context) {
                 }
             }
         } catch (e: Exception) {
-            Log.e("FirestoreRepository", "Error fetching liked meals: ${e.message}")
         }
     }
 
@@ -196,7 +190,6 @@ class FirestoreRepository(val context: Context) {
                     _reservation.postValue(reservation!!)
                 }
             }
-
     }
 
     fun snapShotListenerForReservation() {
@@ -225,11 +218,9 @@ class FirestoreRepository(val context: Context) {
                 "nachname",
                 nachname
             )?.addOnSuccessListener {
-                Log.d("Firestore", "Benutzerdaten erfolgreich aktualisiert")
                 Toast.makeText(context, "Benutzerdaten aktualisiert", Toast.LENGTH_SHORT)
                     .show()
             }?.addOnFailureListener { e ->
-                Log.w("Firestore", "Fehler beim Actualising der Benutzerdaten", e)
                 Toast.makeText(
                     context,
                     "Fehler beim Aktualisieren der Daten",
@@ -237,35 +228,47 @@ class FirestoreRepository(val context: Context) {
                 ).show()
             }
         } else {
-            Log.w("Firestore", "Kein angemeldeter Benutzer gefunden")
             Toast.makeText(context, "Kein angemeldeter Benutzer", Toast.LENGTH_SHORT)
                 .show()
         }
     }
-
     fun deleteReservation(reservationId: String) {
         val userId = auth.currentUser?.uid
         if (userId != null) {
             userRef = db.collection("reservation").document(userId).collection("reservierung")
                 .document(reservationId)
             userRef?.delete()?.addOnSuccessListener {
-                Log.d("Firestore", "userRef: $userRef")
+                Toast.makeText(
+                    context,
+                    "Reservierung erfolgreich storniert",Toast.LENGTH_SHORT
+                ).show()
+            }?.addOnFailureListener {
+                Toast.makeText(
+                    context,
+                    "Reservation konnte nicht storniert werden",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
-
     private fun deleteAllReservationsForCurrentUser(userId: String) {
         db.collection("reservation").document(userId).collection("reservierung")
             .get().addOnSuccessListener { snapshot ->
                 snapshot.documents.forEach {
                     it.reference.delete().addOnSuccessListener {
-                        Log.d("Firestore", "Reservierungen vom user wurden auch gelöscht!")
+                        Toast.makeText(
+                            context,
+                            "Alle Reservierungen wurden erfolgreich gelöscht",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }.addOnFailureListener {
-                        Log.e("Firestore", "Fehler beim Löschen der Reservierungen", it)
+                        Toast.makeText(
+                            context,
+                            "Fehler beim Löschen der Reservierungen",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
-            }.addOnFailureListener {
-                Log.e("Firestore", "Fehler beim Löschen der Reservierungen", it)
             }
     }
 
@@ -300,9 +303,6 @@ class FirestoreRepository(val context: Context) {
                     .show()
             }
             ?.addOnFailureListener { error ->
-
-                Log.d("Firestore", "Fehler beim Löschen des Benutzers: $error")
-
                 Toast.makeText(
                     context,
                     "Fehler beim Löschen des Benutzers",
@@ -315,22 +315,14 @@ class FirestoreRepository(val context: Context) {
     private fun postDokument(user: User) {
         userRef?.set(user)?.addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                Log.d("Firestore", "Dokument erstellt -> ID : ${task.result}")
                 Toast.makeText(context, "Dokument erstellt", Toast.LENGTH_SHORT).show()
             } else {
-                Log.d(
-                    "Firestore",
-                    "Dokument nicht erstellt, schau in ViewModel -> ID : ${task.result}"
-                )
-
-                Toast.makeText(context, "Fehler beim erstellen", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Fehler beim erstellen vom Dokument", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-
     fun logIn(email: String, password: String, onSuccess: () -> Unit, onFailure: () -> Unit) {
-
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener {
                 if (it.isSuccessful) {
@@ -358,14 +350,11 @@ class FirestoreRepository(val context: Context) {
     }
 
     fun registration(Email: String, password: String, vorname: String, nachname: String) {
-
         auth.createUserWithEmailAndPassword(Email, password).addOnCompleteListener { newUser ->
             if (newUser.isSuccessful) {
-
                 _currentUser.value = newUser.result.user
                 getLikedMeals()
                 postDokument(createUser(vorname, nachname))
-
             } else {
                 Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
             }
@@ -379,7 +368,6 @@ class FirestoreRepository(val context: Context) {
     }
 
     fun addToFavorites(meal: Meal) {
-        Log.d("Firestore", "addToFavorites: $meal")
         try {
             if (!likedMeals.value!!.contains(meal) && meal.liked) {
                 likedMeals.value?.add(meal)
@@ -389,28 +377,19 @@ class FirestoreRepository(val context: Context) {
                 likedMeals.value?.removeIf { it.idMeal == meal.idMeal }
                 updateMealFromFirestore()
             }
-
         } catch (e: Exception) {
             Log.d("Firestore", "error : $e")
         }
-
     }
 
     private fun updateMealFromFirestore() {
-
         var newMap = mutableListOf<Map<String, Any>>()
-
         likedMeals.value?.forEach {
-            Log.d("Firestore", "meal: $it")
-
             newMap.add(it.toMap())
         }
         var upToDate = mapOf(
             "likedGerichte" to newMap,
         )
         db.collection("users").document(auth.currentUser!!.uid).update(upToDate)
-
     }
-
-
 }

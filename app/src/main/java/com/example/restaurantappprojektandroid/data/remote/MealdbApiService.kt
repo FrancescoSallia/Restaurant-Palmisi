@@ -32,7 +32,6 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface MealdbApiService {
-
     @GET("categories.php")
     suspend fun getCategories(): CategorieResponse
 
@@ -44,8 +43,6 @@ interface MealdbApiService {
 
     @GET("search.php")
     suspend fun searchMeal(@Query("s") mealName: String): MealResponse
-
-
 }
 
 object MealdbApi {

@@ -22,13 +22,10 @@ class FavoriteAdapter(
         var vb = FavoritedItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return FavoriteViewHolder(vb)
     }
-
     override fun getItemCount(): Int {
         return dataset.size
     }
-
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
-
         val meal = dataset[position]
 
         Log.d("TAG", "onBindViewHolder: ${viewModel.likedMeals.value}")
@@ -39,10 +36,8 @@ class FavoriteAdapter(
         holder.itemView.setOnClickListener {
             Log.d("Favorite", "MealId: ${meal.idMeal},mealName: ${meal.mealName}")
             viewModel.setSelectedMealId(meal)
-
             holder.itemView.findNavController().navigate(R.id.mealDetailFragment)
         }
-
     }
 }
 

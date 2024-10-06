@@ -13,7 +13,6 @@ import com.example.restuarantprojektapp.databinding.FragmentAnonymUserReservatio
 
 class AnonymUserReservationFragment : Fragment() {
     private lateinit var vb: FragmentAnonymUserReservationBinding
-    private val viewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,14 +21,11 @@ class AnonymUserReservationFragment : Fragment() {
         vb = FragmentAnonymUserReservationBinding.inflate(inflater, container, false)
         return vb.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         vb.button.setOnClickListener {
             findNavController().navigate(R.id.registrierenFragment)
         }
-
-
     }
 }

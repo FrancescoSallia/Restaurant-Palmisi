@@ -25,8 +25,6 @@ class LogInFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        val test = findNavController().currentBackStack.value
-//        Log.e("LOGIN", test.toString())
         viewModel.currentUser.observe(viewLifecycleOwner) {
             if (it != null) {
                 findNavController().navigate(LogInFragmentDirections.actionLogInFragmentToHomeFragment())
@@ -48,20 +46,22 @@ class LogInFragment : Fragment() {
                         failureToast()
                     }
                 )
-            } else{
-                Toast.makeText(requireActivity(),"Füll die Felder aus", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(requireActivity(), "Füll die Felder aus", Toast.LENGTH_SHORT).show()
             }
         }
         vb.btnRegistrieren.setOnClickListener {
             findNavController()
-                .navigate(LogInFragmentDirections
-                    .actionLogInFragmentToRegistrierenFragment()
+                .navigate(
+                    LogInFragmentDirections
+                        .actionLogInFragmentToRegistrierenFragment()
                 )
         }
         vb.btnContinueAsGast.setOnClickListener {
             viewModel.continueAsGuest()
         }
     }
+
     fun failureToast() {
         Toast.makeText(
             context,
@@ -69,6 +69,7 @@ class LogInFragment : Fragment() {
             Toast.LENGTH_SHORT
         ).show()
     }
+
     fun successToast() {
         Toast.makeText(
             context,

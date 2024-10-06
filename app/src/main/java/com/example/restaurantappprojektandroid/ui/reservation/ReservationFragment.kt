@@ -1,19 +1,15 @@
 package com.example.restaurantappprojektandroid.ui.reservation
 
 import android.app.AlertDialog
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.viewbinding.ViewBinding
-import com.example.restaurantappprojektandroid.MainActivity
 import com.example.restaurantappprojektandroid.data.datasource.ReservationDatasource
 import com.example.restaurantappprojektandroid.data.model.Reservation
 import com.example.restaurantappprojektandroid.ui.MainViewModel
@@ -22,15 +18,11 @@ import com.example.restaurantappprojektandroid.ui.adapter.UhrzeitenVorschlägeAd
 import com.example.restuarantprojektapp.R
 import com.example.restuarantprojektapp.databinding.FragmentAnonymUserReservationBinding
 import com.example.restuarantprojektapp.databinding.FragmentReservationBinding
-import com.google.android.material.navigation.NavigationBarMenu
-import java.time.LocalDate
 import java.time.LocalDateTime
-import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 import java.util.Calendar
 
 class ReservationFragment : Fragment() {
-
     private lateinit var vb: ViewBinding
     private val viewModel: MainViewModel by activityViewModels()
 
@@ -51,7 +43,6 @@ class ReservationFragment : Fragment() {
         }
         return vb.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.currentUser.observe(viewLifecycleOwner) {
@@ -63,14 +54,12 @@ class ReservationFragment : Fragment() {
             } else if(it != null){
                 registeredUserView()
             }else {
-//                (requireActivity() as MainActivity).bottomNavigation.visibility = View.INVISIBLE
                 findNavController().popBackStack()
                 findNavController().popBackStack()
                 findNavController().navigate(R.id.reservationFragment)
             }
         }
     }
-
     fun registeredUserView() {
         val binding = vb
         if (binding is FragmentReservationBinding) {
@@ -92,7 +81,6 @@ class ReservationFragment : Fragment() {
                 loadTime,
                 viewModel
             )
-
             viewModel.selectedTime.observe(viewLifecycleOwner) {
                 zeit = it
             }
@@ -106,13 +94,10 @@ class ReservationFragment : Fragment() {
                 calendar.set(year, month, dayOfMonth)
                 dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK)
                 Log.d("Calendar", "Selected day of the week: $dayOfWeek")
-
                 binding.tvTimeAktuellSelected.text = currentDate
             }
-
             binding.btnTischReservieren.setOnClickListener {
                 var bemerkung = binding.etBemerkung.text.toString()
-
                 if (personenNumber != 0 && zeit != "") {
                     val builder = AlertDialog.Builder(requireContext())
 //                    var bemerkungUser = R.id.alertEditText.toString()
@@ -126,10 +111,7 @@ class ReservationFragment : Fragment() {
           
                 """
                     )
-
                     builder.setPositiveButton("OK") { dialog, _ ->
-
-
                         var newTime = "$currentDate    $zeit"
                         var newReservation = Reservation(
                             "",
@@ -141,17 +123,13 @@ class ReservationFragment : Fragment() {
                         )
                         viewModel.postReservation(newReservation)
                         dialog.dismiss()
-
                     }
                     builder.setNegativeButton("Abbrechen") { dialog, _ ->
                         dialog.dismiss()
                     }
                     builder.show()
-
                 }
-
             }
         }
-
     }
 }

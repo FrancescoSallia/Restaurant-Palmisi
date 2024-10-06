@@ -12,7 +12,7 @@ import com.example.restuarantprojektapp.R
 import com.example.restuarantprojektapp.databinding.ReservationItemBinding
 
 class ReservationAdapter(
-    val dataset: List<Reservation>,
+    private val dataset: List<Reservation>,
     val viewModel: MainViewModel,
     val context: Context
 ) : RecyclerView.Adapter<ReservationAdapter.ReservationViewHolder>() {
@@ -25,13 +25,10 @@ class ReservationAdapter(
             ReservationItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ReservationViewHolder(vb)
     }
-
     override fun getItemCount(): Int {
         return dataset.size
     }
-
     override fun onBindViewHolder(holder: ReservationViewHolder, position: Int) {
-
         val reservation = dataset[position]
         val datum = reservation.datum
 
@@ -40,13 +37,11 @@ class ReservationAdapter(
         holder.vb.tvBestTigung.text = reservation.getApprovedReservation(context).name
         holder.vb.tvBestTigung.setTextColor(reservation.getApprovedReservation(context).color)
         holder.vb.ivRandomImg.setImageResource(reservation.imgId)
-
         holder.itemView.setOnClickListener {
             viewModel.getDataUser()
             viewModel.getReservations(reservation.reservationId)
             val navController = holder.itemView.findNavController()
             navController.navigate(R.id.reservationDetailFragment)
         }
-
     }
 }

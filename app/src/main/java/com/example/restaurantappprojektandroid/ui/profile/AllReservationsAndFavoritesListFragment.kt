@@ -40,24 +40,17 @@ class AllReservationsAndFavoritesListFragment : Fragment() {
             (requireActivity() as MainActivity).bottomNavigation.visibility = View.VISIBLE
             findNavController().navigateUp()
         }
-
         vb.btnReservationList.setOnClickListener {
-
             setupReservationList()
             vb.btnFavoritesList.setBackgroundColor(Color.parseColor("#FFA2A3A5"))
             vb.btnReservationList.setBackgroundColor(Color.parseColor("#333434"))
-
-
         }
-
         vb.btnFavoritesList.setOnClickListener {
             setupFavoritesList()
             vb.btnReservationList.setBackgroundColor(Color.parseColor("#FFA2A3A5"))
             vb.btnFavoritesList.setBackgroundColor(Color.parseColor("#333434"))
-
         }
     }
-
     // Anpassung der layouts zu LinearLayout
     private fun setupReservationList() {
         vb.rvAllReservationList.layoutParams.width = LayoutParams.WRAP_CONTENT

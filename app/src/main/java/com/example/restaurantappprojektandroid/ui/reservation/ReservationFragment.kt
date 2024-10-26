@@ -109,7 +109,7 @@ class ReservationFragment : Fragment() {
             Wann: $zeit
             Bemerkung: $bemerkung
           
-          
+         
                 """
                     )
                     builder.setPositiveButton("OK") { dialog, _ ->

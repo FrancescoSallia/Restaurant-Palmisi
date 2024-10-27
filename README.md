@@ -19,8 +19,7 @@ Füge hier einige repräsentative Designs deiner App ein (z.B. aus Figma)
   <img src="./img/android_template_app_03.png" width="200">
 </p>
 -->
-![logoscreenfürcanva](https://github.com/user-attachments/assets/57994f0b-e6b6-4c35-8e1b-643f704480a6)
-![Homescreenfürcanva](https://github.com/user-attachments/assets/3b3cb06a-11ac-4d1a-aba4-6b1f2f464791)
+![logoscreenfürcanva](https://github.com/user-attachments/assets/57994f0b-e6b6-4c35-8e1b-643f704480a6)   ![Homescreenfürcanva](https://github.com/user-attachments/assets/3b3cb06a-11ac-4d1a-aba4-6b1f2f464791)
 ![speisekartescreenfürcanva](https://github.com/user-attachments/assets/a8a1928b-81e4-4404-adda-bf22825da181)
 ![reservierscreenfürcanva](https://github.com/user-attachments/assets/a908e450-ca54-42ca-9a2c-84cde5b6c288)
 ![Profilscreen](https://github.com/user-attachments/assets/0e05203d-95b9-46a0-bbe2-ddd3ee716840)

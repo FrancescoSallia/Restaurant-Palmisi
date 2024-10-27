@@ -1,8 +1,8 @@
 <!--[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/LJ-RdF5R)-->
 
-Restaurant Palmisi
+<h1>Restaurant Palmisi</h1>
 
-Essen gehen war noch nie so einfach.
+<h3>Essen gehen war noch nie so einfach.</h3>
 
 Meine App ist die perfekte Lösung für Restaurants, die ihren Gästen ein noch besseres Erlebnis bieten möchten. Gäste können unkompliziert reservieren und ihre Favoriten speichern. Das Servicepersonal profitiert von einer übersichtlichen Übersicht und kann sich ganz auf den Service konzentrieren. Im Gegensatz zu anderen Apps verzichten wir auf störende Werbung und kostenpflichtige Abos.
 <br>

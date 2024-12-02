@@ -65,9 +65,10 @@ dependencies {
     implementation(libs.coil)
 
     //Room
-    implementation(libs.androidx.room.runtime)
-    kapt(libs.androidx.room.compiler)
-    implementation(libs.androidx.room.ktx)
+//    implementation(libs.androidx.room.runtime)
+//    implementation(libs.androidx.lifecycle.viewmodel.android)
+//    kapt(libs.androidx.room.compiler)
+//    implementation(libs.androidx.room.ktx)
 
     //Logger
     implementation(libs.logging.interceptor)

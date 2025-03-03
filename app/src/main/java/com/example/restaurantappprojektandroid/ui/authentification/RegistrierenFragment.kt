@@ -32,7 +32,7 @@ class RegistrierenFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         // Navigationbar wieder einblenden wenn man zurück navigiert
-        (requireActivity() as MainActivity).bottomNavigation.visibility = View.VISIBLE
+        (requireActivity() as MainActivity).bottomNavigation.visibility = View.INVISIBLE
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -70,6 +70,7 @@ class ProiflSettingsFragment : Fragment() {
             openGallery()
             viewModel.getDataUser()
         }
+
         // Bild beim Start laden
         var localImageUri = viewModel.loadLocalImage(requireContext())
         localImageUri?.let {

@@ -1,18 +1,17 @@
 package com.example.restaurantappprojektandroid.ui.authentification
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.restaurantappprojektandroid.MainActivity
 import com.example.restaurantappprojektandroid.ui.MainViewModel
 import com.example.restuarantprojektapp.R
 import com.example.restuarantprojektapp.databinding.FragmentRegistrierenBinding
-import com.google.android.gms.tasks.Task
 
 class RegistrierenFragment : Fragment() {
     private lateinit var vb: FragmentRegistrierenBinding
@@ -32,7 +31,7 @@ class RegistrierenFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         // Navigationbar wieder einblenden wenn man zurück navigiert
-        (requireActivity() as MainActivity).bottomNavigation.visibility = View.VISIBLE
+        (requireActivity() as MainActivity).bottomNavigation.visibility = View.INVISIBLE
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

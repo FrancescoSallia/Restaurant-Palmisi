@@ -1,7 +1,9 @@
 package com.example.restaurantappprojektandroid.ui
 
 import android.app.Application
+import android.content.Context
 import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -12,6 +14,8 @@ import com.example.restaurantappprojektandroid.data.model.Reservation
 import com.example.restaurantappprojektandroid.data.remote.MealdbApi
 import com.example.restaurantappprojektandroid.data.remote.Repository
 import kotlinx.coroutines.launch
+import java.io.File
+import java.io.FileOutputStream
 
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
@@ -39,9 +43,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val selectedMeal: LiveData<Meal>
         get() = _selectedMeal
 
-    fun uploadImage(uri: Uri) {
-        repository.uploadImage(uri)
-    }
+//    fun uploadImage(uri: Uri) {
+//        repository.uploadImage(uri)
+//    }
     fun updateReservation(kommentarGast: String) {
         repository.updateReservation(kommentarGast)
     }
@@ -73,15 +77,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     init {
         getMealsByCategory("Beef")
     }
-    fun removeProfileImage(){
-        repository.removeProfileImage()
-    }
+//    fun removeProfileImage(){
+//        repository.removeProfileImage()
+//    }
     fun resetPassword(email: String) {
         repository.resetPassword(email)
     }
-    fun updateUser(vorname: String, nachname: String) {
+    fun updateUser(vorname: String, nachname: String, profilPicture: Uri? = null) {
 
-        repository.updateUser(vorname, nachname)
+        repository.updateUser(vorname, nachname, profilPicture)
     }
     fun deleteUser() {
         repository.deleteUser()
@@ -125,6 +129,47 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
     fun addToFavorites(meal: Meal) {
         repository.addToFavorites(meal)
+    }
+
+    // Funktion zum Speichern des Bildes lokal
+    fun saveImageLocally(context: Context, imageUri: Uri) {
+        try {
+            val file = File(context.filesDir, "profilbild.jpg")
+            val inputStream = context.contentResolver.openInputStream(imageUri)
+            val outputStream = FileOutputStream(file)
+
+            inputStream?.copyTo(outputStream)
+            inputStream?.close()
+            outputStream.close()
+
+            Log.d("Image Save", "Image saved successfully")
+        } catch (e: Exception) {
+            Log.e("Image Save Error", "Error saving image: ${e.message}")
+        }
+    }
+    // Funktion zum Entfernen des Bildes lokal
+    fun removeLocalImage(context: Context) {
+        val file = File(context.filesDir, "profilbild.jpg")
+        if (file.exists()) {
+            val deleted = file.delete()
+            if (deleted) {
+                Log.d("Image Removal", "Profile image deleted successfully")
+            } else {
+                Log.d("Image Removal", "Failed to delete profile image")
+            }
+        } else {
+            Log.d("Image Removal", "No profile image found to delete")
+        }
+    }
+
+    // Funktion zum Laden des Bildes
+    fun loadLocalImage(context: Context): Uri? {
+        val file = File(context.filesDir, "profilbild.jpg")
+        return if (file.exists()) {
+            Uri.fromFile(file)
+        } else {
+            null
+        }
     }
 }
 

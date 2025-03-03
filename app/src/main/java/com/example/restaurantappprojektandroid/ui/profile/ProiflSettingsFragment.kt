@@ -16,6 +16,8 @@ import com.example.restaurantappprojektandroid.MainActivity
 import com.example.restaurantappprojektandroid.ui.MainViewModel
 import com.example.restuarantprojektapp.R
 import com.example.restuarantprojektapp.databinding.FragmentProiflSettingsBinding
+import java.io.File
+import java.io.FileOutputStream
 
 class ProiflSettingsFragment : Fragment() {
     private lateinit var vb: FragmentProiflSettingsBinding
@@ -25,10 +27,12 @@ class ProiflSettingsFragment : Fragment() {
     // diese funktion ist für die Bildauswahl zuständig (Profilbild)
     private val getContent =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-            uri?.let { uri ->
-                profilBild = uri
-                viewModel.uploadImage(profilBild!!)
-                vb.ivProfilPic.setImageURI(profilBild)
+            uri?.let {
+                Log.d("Image URI", "Selected Image URI: $uri") // Überprüfe die Uri
+                profilBild = it
+               // viewModel.uploadImage(profilBild!!)
+                viewModel.saveImageLocally(requireContext(), it) // Bild über ViewModel speichern
+                vb.ivProfilPic.setImageURI(it)
             }
         }
     override fun onCreateView(
@@ -66,13 +70,23 @@ class ProiflSettingsFragment : Fragment() {
             openGallery()
             viewModel.getDataUser()
         }
+        // Bild beim Start laden
+        var localImageUri = viewModel.loadLocalImage(requireContext())
+        localImageUri?.let {
+            profilBild = localImageUri
+            vb.ivProfilPic.setImageURI(profilBild)
+        } ?: run {
+            Log.d("Image Load", "No local image found")
+        }
+
         vb.btnSave.setOnClickListener {
             if (vb.etBenutzernameSettings.text.toString()
                     .isNotEmpty() || vb.etPasswordSettings.text.toString().isNotEmpty()
             ) {
                 val vorname = vb.etBenutzernameSettings.text.toString()
                 val nachname = vb.etPasswordSettings.text.toString()
-                viewModel.updateUser(vorname, nachname)
+                viewModel.updateUser(vorname, nachname, if (profilBild != null) profilBild else null)
+                vb.ivProfilPic.setImageURI(profilBild)
                 findNavController().navigate(ProiflSettingsFragmentDirections.actionProiflSettingsFragmentToProfilFragment())
                 viewModel.getDataUser()
             }
@@ -85,12 +99,14 @@ class ProiflSettingsFragment : Fragment() {
             findNavController().navigateUp()
         }
         vb.btnProfilbildEntfernen.setOnClickListener {
-            viewModel.removeProfileImage()
-            vb.ivProfilPic.load(null){
+            viewModel.removeLocalImage(requireContext()) // Lokale Datei löschen
+            localImageUri = null
+            profilBild = null
+            vb.ivProfilPic.setImageURI(null)
+            vb.ivProfilPic.load(null) {
                 placeholder(R.drawable.profil)
             }
-        }
-    }
+        }    }
 }
 
 

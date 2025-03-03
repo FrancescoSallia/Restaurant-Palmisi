@@ -42,8 +42,8 @@ class FirestoreRepository(val context: Context) {
         get() = _userData
 
     private val db = Firebase.firestore
-    private val storage = Firebase.storage
-    var storageRef = storage.reference
+    //private val storage = Firebase.storage
+   // var storageRef = storage.reference
     var userRef: DocumentReference? = null
     var colRef: CollectionReference? = null
     var userCol: CollectionReference? = null
@@ -65,53 +65,53 @@ class FirestoreRepository(val context: Context) {
             }
     }
 
-    fun uploadImage(uri: Uri) {
-        val imageRef = storageRef.child("images/${auth.currentUser!!.uid}//profilePic")
-        val uploadTask = imageRef.putFile(uri)
-        uploadTask.addOnCompleteListener {
-            imageRef.downloadUrl.addOnCompleteListener {
-                if (it.isSuccessful) {
-                    userRef?.update("profilePicture", it.result)
-                }
-            }
-        }
-    }
+//    fun uploadImage(uri: Uri) {
+//        val imageRef = storageRef.child("images/${auth.currentUser!!.uid}//profilePic")
+//        val uploadTask = imageRef.putFile(uri)
+//        uploadTask.addOnCompleteListener {
+//            imageRef.downloadUrl.addOnCompleteListener {
+//                if (it.isSuccessful) {
+//                    userRef?.update("profilePicture", it.result)
+//                }
+//            }
+//        }
+//    }
 
-    fun removeProfileImage() {
-        val user = auth.currentUser
-        if (user != null) {
-            val imageRef = storageRef.child("images/${user.uid}/profilePic")
-
-            // Löschen des Bildes aus dem Storage
-            imageRef.delete().addOnCompleteListener { deleteTask ->
-                if (deleteTask.isSuccessful) {
-                    // Wenn das Bild erfolgreich gelöscht wurde, aktualisieren Sie die Benutzerdaten
-                    userRef?.update("profilePicture", null)
-                        ?.addOnSuccessListener {
-                            // Erfolgreiche Aktualisierung der Benutzerdaten
-                            Toast.makeText(
-                                context,
-                                "Profilbild erfolgreich entfernt",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                        ?.addOnFailureListener { e ->
-                            // Fehler bei der Aktualisierung der Benutzerdaten
-                            Toast.makeText(
-                                context,
-                                "Fehler beim Entfernen des Profilbildes: ${e.message}",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                } else {
-                    // Fehler beim Löschen des Bildes
-                    println("Fehler beim Löschen des Profilbildes: ${deleteTask.exception?.message}")
-                }
-            }
-        } else {
-            println("Kein Benutzer angemeldet")
-        }
-    }
+//    fun removeProfileImage() {
+//        val user = auth.currentUser
+//        if (user != null) {
+//            val imageRef = storageRef.child("images/${user.uid}/profilePic")
+//
+//            // Löschen des Bildes aus dem Storage
+//            imageRef.delete().addOnCompleteListener { deleteTask ->
+//                if (deleteTask.isSuccessful) {
+//                    // Wenn das Bild erfolgreich gelöscht wurde, aktualisieren Sie die Benutzerdaten
+//                    userRef?.update("profilePicture", null)
+//                        ?.addOnSuccessListener {
+//                            // Erfolgreiche Aktualisierung der Benutzerdaten
+//                            Toast.makeText(
+//                                context,
+//                                "Profilbild erfolgreich entfernt",
+//                                Toast.LENGTH_SHORT
+//                            ).show()
+//                        }
+//                        ?.addOnFailureListener { e ->
+//                            // Fehler bei der Aktualisierung der Benutzerdaten
+//                            Toast.makeText(
+//                                context,
+//                                "Fehler beim Entfernen des Profilbildes: ${e.message}",
+//                                Toast.LENGTH_SHORT
+//                            ).show()
+//                        }
+//                } else {
+//                    // Fehler beim Löschen des Bildes
+//                    println("Fehler beim Löschen des Profilbildes: ${deleteTask.exception?.message}")
+//                }
+//            }
+//        } else {
+//            println("Kein Benutzer angemeldet")
+//        }
+//    }
 
     fun updateReservation(kommentarGast: String) {
         resRef = db.collection("reservation").document(auth.currentUser?.uid ?: "")
@@ -210,13 +210,15 @@ class FirestoreRepository(val context: Context) {
         return User(vorname = vorname, nachname = nachname)
     }
 
-    fun updateUser(vorname: String, nachname: String) {
+    fun updateUser(vorname: String, nachname: String, profilPicture: Uri? = null) {
         if (auth.currentUser?.uid != null) {
             userRef?.update(
                 "vorname",
                 vorname,
                 "nachname",
-                nachname
+                nachname,
+                "profilePicture",
+                profilPicture
             )?.addOnSuccessListener {
                 Toast.makeText(context, "Benutzerdaten aktualisiert", Toast.LENGTH_SHORT)
                     .show()
@@ -277,7 +279,7 @@ class FirestoreRepository(val context: Context) {
         if (userId != null) {
             deleteAllReservationsForCurrentUser(userId)
             deleteProfileRefForCurrentUser(userId)
-            deleteProfileStoragePicture(userId)
+            //deleteProfileStoragePicture(userId)
             deleteFirebaseCurrentUser()
         } else {
             Toast
@@ -286,10 +288,10 @@ class FirestoreRepository(val context: Context) {
         }
     }
 
-    private fun deleteProfileStoragePicture(userId: String?) {
-        val imageRef = storageRef.child("images/${userId}/profilePic")
-        imageRef.delete()
-    }
+//    private fun deleteProfileStoragePicture(userId: String?) {
+//        val imageRef = storageRef.child("images/${userId}/profilePic")
+//        imageRef.delete()
+//    }
 
     private fun deleteProfileRefForCurrentUser(userId: String) {
         userRef = db.collection("users").document(userId)

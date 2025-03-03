@@ -44,17 +44,17 @@ class Repository(private val api: MealdbApi, context: Context) {
     //endregion
 
     //region Firebase functions
-    fun removeProfileImage() {
-        firestore.removeProfileImage()
-    }
+//    fun removeProfileImage() {
+//        firestore.removeProfileImage()
+//    }
 
     fun resetPassword(email: String) {
         firestore.resetPassword(email)
     }
 
-    fun uploadImage(uri: Uri) {
-        firestore.uploadImage(uri)
-    }
+//    fun uploadImage(uri: Uri) {
+//        firestore.uploadImage(uri)
+//    }
 
     fun updateReservation(kommentarGast: String) {
         firestore.updateReservation(kommentarGast)
@@ -84,9 +84,9 @@ class Repository(private val api: MealdbApi, context: Context) {
         firestore.postUserReservation(reservation)
     }
 
-    fun updateUser(vorname: String, nachname: String) {
+    fun updateUser(vorname: String, nachname: String, profilPicture : Uri? = null) {
 
-        firestore.updateUser(vorname, nachname)
+        firestore.updateUser(vorname, nachname, profilPicture)
     }
 
     fun deleteUser() {

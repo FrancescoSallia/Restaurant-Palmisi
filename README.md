@@ -56,7 +56,6 @@ API Calls:
 
 Dependencies/Repositories:
 - Retrofit 2.9.0 - Für Netzwerkoperationen
-- Firebase Storage 20.3.0 - Für remote Datenbankverwaltung
 - Lottie 6.1.0 - Für GIF'S
 - Logging Interceptor 4.11.0 - Für den Ablauf von Anwendungen zu protokollieren
 

@@ -30,8 +30,11 @@ class RegistrierenFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        // Navigationbar wieder einblenden wenn man zurück navigiert
-        (requireActivity() as MainActivity).bottomNavigation.visibility = View.INVISIBLE
+        // BottomNav NUR anzeigen, wenn der User eingeloggt ist (nicht anonym)
+        val user = viewModel.currentUser.value
+        if (user != null && !user.isAnonymous) {
+            (requireActivity() as MainActivity).bottomNavigation.visibility = View.VISIBLE
+        }
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

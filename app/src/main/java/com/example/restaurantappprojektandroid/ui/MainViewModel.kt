@@ -131,51 +131,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun addToFavorites(meal: Meal) {
         repository.addToFavorites(meal)
     }
-//
-//    // Funktion zum Speichern des Bildes lokal
-//    fun saveImageLocally(context: Context, imageUri: Uri) {
-//        try {
-//            val file = File(context.filesDir, "profilbild.jpg")
-//            val inputStream = context.contentResolver.openInputStream(imageUri)
-//            val outputStream = FileOutputStream(file)
-//
-//            inputStream?.copyTo(outputStream)
-//            inputStream?.close()
-//            outputStream.close()
-//
-//            Log.d("Image Save", "Image saved successfully")
-//        } catch (e: Exception) {
-//            Log.e("Image Save Error", "Error saving image: ${e.message}")
-//        }
-//    }
-//    // Funktion zum Entfernen des Bildes lokal
-//    fun removeLocalImage(context: Context) {
-//        val file = File(context.filesDir, "profilbild.jpg")
-//        if (file.exists()) {
-//            val deleted = file.delete()
-//            if (deleted) {
-//                Log.d("Image Removal", "Profile image deleted successfully")
-//            } else {
-//                Log.d("Image Removal", "Failed to delete profile image")
-//            }
-//        } else {
-//            Log.d("Image Removal", "No profile image found to delete")
-//        }
-//    }
-//
-//    // Funktion zum Laden des Bildes
-//    fun loadLocalImage(context: Context): Uri? {
-//        val file = File(context.filesDir, "profilbild.jpg")
-//        return if (file.exists()) {
-//            Uri.fromFile(file)
-//        } else {
-//            null
-//        }
-//    }
 
-
-
-
+    // Profilbild local abspeichern
     fun saveImageLocally(context: Context, uri: Uri): Uri? {
         val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return null
         return try {
@@ -192,12 +149,14 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    // Laden des localen gespeicherten Profilbild
     fun loadLocalImage(context: Context): Uri? {
         val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return null
         val file = File(context.filesDir, "profilbild_${userId}.jpg")
         return if (file.exists()) Uri.fromFile(file) else null
     }
 
+    // Local gespeicherte Profilbild
     fun removeLocalImage(context: Context) {
         val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
         val file = File(context.filesDir, "profilbild_${userId}.jpg")

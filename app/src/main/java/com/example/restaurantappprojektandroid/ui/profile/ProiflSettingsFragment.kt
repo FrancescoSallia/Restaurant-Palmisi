@@ -1,5 +1,6 @@
 package com.example.restaurantappprojektandroid.ui.profile
 
+import android.app.AlertDialog
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -83,10 +84,31 @@ class ProiflSettingsFragment : Fragment() {
             }
         }
 
+//        // Konto löschen
+//        vb.btnKontolSchen.setOnClickListener {
+//            viewModel.deleteUser()
+//            viewModel.logOut()
+//        }
+
         // Konto löschen
         vb.btnKontolSchen.setOnClickListener {
-            viewModel.deleteUser()
-            viewModel.logOut()
+
+            val builder = AlertDialog.Builder(requireContext())
+            builder.setTitle("Account löschen?")
+            builder.setMessage(
+                """
+                    Möchtest du wirklich dein Account löschen?
+                """.trimIndent()
+            )
+            builder.setPositiveButton("Ja") { dialog, _ ->
+                viewModel.deleteUser()
+                viewModel.logOut()
+                dialog.dismiss()
+            }
+            builder.setNegativeButton("Nein") { dialog, _ ->
+                dialog.dismiss()
+            }
+            builder.show()
         }
 
         // Zurück

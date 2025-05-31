@@ -54,7 +54,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         repository.snapShotListenerForReservation()
     }
     fun deleteReservation(reservationId: String) {
-        repository.deleteReservation(reservationId)
+        viewModelScope.launch {
+            repository.deleteReservation(reservationId)
+        }
     }
     fun getDataUser() {
         repository.getDataUser()
@@ -85,8 +87,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         repository.resetPassword(email)
     }
     fun updateUser(vorname: String, nachname: String, profilPicture: Uri? = null) {
-
-        repository.updateUser(vorname, nachname, profilPicture)
+        viewModelScope.launch {
+            repository.updateUser(vorname, nachname, profilPicture)
+        }
     }
     fun deleteUser() {
         viewModelScope.launch {

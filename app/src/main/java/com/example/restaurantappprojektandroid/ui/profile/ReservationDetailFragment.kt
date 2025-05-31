@@ -34,6 +34,7 @@ class ReservationDetailFragment : Fragment() {
             findNavController().navigateUp()
         }
         viewModel.reservation.observe(viewLifecycleOwner) { reservation ->
+
             val vorname = viewModel.userData.value?.vorname
             val nachname = viewModel.userData.value?.nachname
 

@@ -113,13 +113,46 @@ class FirestoreRepository(val context: Context) {
 //        }
 //    }
 
+
+
+
+
+
+
+
+//    fun updateReservation(kommentarGast: String) {
+//        resRef = db.collection("reservation").document(auth.currentUser?.uid ?: "")
+//            .collection("reservierung").document("${reservation.value?.reservationId}")
+//        resRef?.update(
+//            "kommentarGast", kommentarGast
+//        )
+//    }
+
     fun updateReservation(kommentarGast: String) {
-        resRef = db.collection("reservation").document(auth.currentUser?.uid ?: "")
-            .collection("reservierung").document("${reservation.value?.reservationId}")
-        resRef?.update(
-            "kommentarGast", kommentarGast
-        )
+        val userId = auth.currentUser?.uid ?: return
+        val resId = reservation.value?.reservationId ?: return
+
+        val resRef = db.collection("reservation").document(userId)
+            .collection("reservierung").document(resId)
+
+        resRef.get().addOnSuccessListener { doc ->
+            if (doc.exists()) {
+                resRef.update("kommentarGast", kommentarGast)
+                    .addOnFailureListener {
+                        Log.e("error", "Fehler beim Update: $it")
+                    }
+            } else {
+                Log.w("error", "Reservierung nicht gefunden – ID war vermutlich veraltet: $resId")
+            }
+        }.addOnFailureListener {
+            Log.e("error", "Fehler beim Zugriff auf die Reservierung: $it")
+        }
     }
+
+
+
+
+
 
     fun getDataUser() {
         userCol = db.collection("users")
@@ -132,7 +165,7 @@ class FirestoreRepository(val context: Context) {
             }
 
         }?.addOnFailureListener {
-            Toast.makeText(context, "Fehler beim Laden der Daten vom User", Toast.LENGTH_SHORT)
+            Toast.makeText(context, "Fehler beim Laden deiner Daten", Toast.LENGTH_SHORT)
                 .show()
         }
     }
@@ -142,13 +175,13 @@ class FirestoreRepository(val context: Context) {
             db.collection("reservation").document(auth.currentUser!!.uid).collection("reservierung")
         colRef?.add(reservation)
             ?.addOnSuccessListener {
-                Toast.makeText(context, "Reservation erfolgreich gespeichert", Toast.LENGTH_SHORT)
+                Toast.makeText(context, "Reservierung Erfolgreich", Toast.LENGTH_SHORT)
                     .show()
             }
             ?.addOnFailureListener {
                 Toast.makeText(
                     context,
-                    "Reservation konnte nicht gespeichert werden",
+                    "Fehler beim Reservieren",
                     Toast.LENGTH_SHORT
                 ).show()
             }
@@ -220,9 +253,11 @@ class FirestoreRepository(val context: Context) {
                 "profilePicture",
                 profilPicture
             )?.addOnSuccessListener {
-                Toast.makeText(context, "Benutzerdaten aktualisiert", Toast.LENGTH_SHORT)
+                Toast.makeText(context, "Deine Daten wurden aktualisiert", Toast.LENGTH_SHORT)
                     .show()
             }?.addOnFailureListener { e ->
+                Log.e("error", "Error update data: $e")
+
                 Toast.makeText(
                     context,
                     "Fehler beim Aktualisieren der Daten",
@@ -244,7 +279,9 @@ class FirestoreRepository(val context: Context) {
                     context,
                     "Reservierung erfolgreich storniert",Toast.LENGTH_SHORT
                 ).show()
-            }?.addOnFailureListener {
+            }?.addOnFailureListener { e ->
+                Log.e("error", "Error deleting Reservation: $e")
+
                 Toast.makeText(
                     context,
                     "Reservation konnte nicht storniert werden",
@@ -263,7 +300,9 @@ class FirestoreRepository(val context: Context) {
                             "Alle Reservierungen wurden erfolgreich gelöscht",
                             Toast.LENGTH_SHORT
                         ).show()
-                    }.addOnFailureListener {
+                    }.addOnFailureListener { e ->
+                        Log.e("error", "Error delete Reservation: $e")
+
                         Toast.makeText(
                             context,
                             "Fehler beim Löschen der Reservierungen",
@@ -305,6 +344,7 @@ class FirestoreRepository(val context: Context) {
                     .show()
             }
             ?.addOnFailureListener { error ->
+                Log.e("error", "Error deleting user: $error")
                 Toast.makeText(
                     context,
                     "Fehler beim Löschen des Accounts",

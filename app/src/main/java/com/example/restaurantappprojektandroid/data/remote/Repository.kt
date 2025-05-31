@@ -85,7 +85,6 @@ class Repository(private val api: MealdbApi, context: Context) {
     }
 
     fun updateUser(vorname: String, nachname: String, profilPicture : Uri? = null) {
-
         firestore.updateUser(vorname, nachname, profilPicture)
     }
 

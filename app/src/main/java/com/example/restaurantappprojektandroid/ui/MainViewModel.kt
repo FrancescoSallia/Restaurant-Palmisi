@@ -100,7 +100,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         repository.logIn(email, password, onSuccess, onFailure)
     }
     fun logOut() {
-        repository.logOut()
+        viewModelScope.launch {
+            repository.logOut()
+        }
     }
     fun registration(Email: String, password: String, vorname: String, nachname: String) {
         repository.registration(Email, password, vorname, nachname)

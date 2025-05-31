@@ -124,7 +124,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
     fun searchMeal(mealName: String) {
         viewModelScope.launch {
-            Log.d("MainViewModel", "Suche für: $mealName")
+            repository.searchMeal(mealName)
         }
     }
     fun setSelectedMealId(meal: Meal) {

@@ -301,13 +301,13 @@ class FirestoreRepository(val context: Context) {
     private fun deleteFirebaseCurrentUser() {
         auth.currentUser?.delete()
             ?.addOnSuccessListener {
-                Toast.makeText(context, "Benutzer gelöscht", Toast.LENGTH_SHORT)
+                Toast.makeText(context, "Account gelöscht", Toast.LENGTH_SHORT)
                     .show()
             }
             ?.addOnFailureListener { error ->
                 Toast.makeText(
                     context,
-                    "Fehler beim Löschen des Benutzers",
+                    "Fehler beim Löschen des Accounts",
                     Toast.LENGTH_SHORT
                 ).show()
             }
@@ -317,9 +317,9 @@ class FirestoreRepository(val context: Context) {
     private fun postDokument(user: User) {
         userRef?.set(user)?.addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                Toast.makeText(context, "Dokument erstellt", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Erfolgreich Registriert", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(context, "Fehler beim erstellen vom Dokument", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Fehler beim Registrieren", Toast.LENGTH_SHORT).show()
             }
         }
     }

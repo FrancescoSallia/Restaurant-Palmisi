@@ -97,6 +97,7 @@ class ReservationFragment : Fragment() {
                 binding.tvTimeAktuellSelected.text = currentDate
             }
             binding.btnTischReservieren.setOnClickListener {
+
                 var bemerkung = binding.etBemerkung.text.toString()
                 if (personenNumber != 0 && zeit != "") {
                     val builder = AlertDialog.Builder(requireContext())
@@ -124,6 +125,7 @@ class ReservationFragment : Fragment() {
                         )
                         viewModel.postReservation(newReservation)
                         dialog.dismiss()
+                        binding.etBemerkung.text?.clear()
                     }
                     builder.setNegativeButton("Abbrechen") { dialog, _ ->
                         dialog.dismiss()

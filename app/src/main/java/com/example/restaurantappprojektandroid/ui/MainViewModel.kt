@@ -89,7 +89,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         repository.updateUser(vorname, nachname, profilPicture)
     }
     fun deleteUser() {
-        repository.deleteUser()
+        viewModelScope.launch {
+            repository.deleteUser()
+        }
     }
     fun logIn(email: String, password: String, onSuccess: () -> Unit, onFailure: () -> Unit) {
         repository.logIn(email, password, onSuccess, onFailure)
@@ -122,7 +124,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
     fun searchMeal(mealName: String) {
         viewModelScope.launch {
-            repository.searchMeal(mealName)
+            Log.d("MainViewModel", "Suche für: $mealName")
         }
     }
     fun setSelectedMealId(meal: Meal) {

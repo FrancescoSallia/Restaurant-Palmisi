@@ -22,7 +22,7 @@ import java.io.FileOutputStream
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     //
-    private val repository = Repository(MealdbApi, application)
+    private val repository = Repository(application)
     val ReservationDatasources = ReservationDatasource()
 
     val currentUser = repository.currentUser

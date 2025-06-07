@@ -10,7 +10,7 @@ import com.example.restaurantappprojektandroid.data.model.Category
 import com.example.restaurantappprojektandroid.data.model.Meal
 import com.example.restaurantappprojektandroid.data.model.Reservation
 
-class Repository(private val api: MealdbApi, context: Context) {
+class Repository(context: Context) { 
 
     //region Firebase
     private val _categorie = MutableLiveData<List<Category>>()
@@ -124,7 +124,7 @@ class Repository(private val api: MealdbApi, context: Context) {
             val result = MealdbApi.retrofitService.getCategories()
             _categorie.postValue(result.categories)
         } catch (e: Exception) {
-            Log.i("INFO", "schau im Repository nach bei getCategories")
+            Log.e("INFO", "schau im Repository nach bei getCategories")
         }
     }
 
@@ -140,7 +140,7 @@ class Repository(private val api: MealdbApi, context: Context) {
             _meals.postValue(result.meals)
 
         } catch (e: Exception) {
-            Log.i("INFO", "schau im Repository nach bei getMealsByCategory : $e")
+            Log.e("INFO", "schau im Repository nach bei getMealsByCategory : $e")
         }
     }
 
@@ -155,7 +155,7 @@ class Repository(private val api: MealdbApi, context: Context) {
             }
             _meals.postValue(result.meals)
         } catch (e: Exception) {
-            Log.i("INFO", "schau im Repository nach bei getMealBySearch : $e")
+            Log.e("INFO", "schau im Repository nach bei getMealBySearch : $e")
         }
     }
 

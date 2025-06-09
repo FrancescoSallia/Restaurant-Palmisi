@@ -124,7 +124,7 @@ class Repository(context: Context) {
             val result = MealdbApi.retrofitService.getCategories()
             _categorie.postValue(result.categories)
         } catch (e: Exception) {
-            Log.e("INFO", "schau im Repository nach bei getCategories")
+            Log.e("error", "schau im Repository nach bei getCategories")
         }
     }
 
@@ -140,7 +140,7 @@ class Repository(context: Context) {
             _meals.postValue(result.meals)
 
         } catch (e: Exception) {
-            Log.e("INFO", "schau im Repository nach bei getMealsByCategory : $e")
+            Log.e("error", "schau im Repository nach bei getMealsByCategory : $e")
         }
     }
 
@@ -155,7 +155,7 @@ class Repository(context: Context) {
             }
             _meals.postValue(result.meals)
         } catch (e: Exception) {
-            Log.e("INFO", "schau im Repository nach bei getMealBySearch : $e")
+            Log.e("error", "schau im Repository nach bei getMealBySearch : $e")
         }
     }
 

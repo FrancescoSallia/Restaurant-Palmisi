@@ -211,6 +211,7 @@ class FirestoreRepository(val context: Context) {
                 }
             }
         } catch (e: Exception) {
+            Log.e("error", "Error getLikedMeals: $e")
         }
     }
 
@@ -420,7 +421,7 @@ class FirestoreRepository(val context: Context) {
                 updateMealFromFirestore()
             }
         } catch (e: Exception) {
-            Log.d("Firestore", "error : $e")
+            Log.e("Firestore", "error : $e")
         }
     }
 

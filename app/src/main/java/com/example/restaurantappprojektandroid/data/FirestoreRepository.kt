@@ -151,9 +151,6 @@ class FirestoreRepository(val context: Context) {
 
 
 
-
-
-
     fun getDataUser() {
         userCol = db.collection("users")
 
@@ -245,18 +242,21 @@ class FirestoreRepository(val context: Context) {
     }
 
     fun updateUser(vorname: String, nachname: String, profilPicture: Uri? = null) {
-        if (auth.currentUser?.uid != null) {
-            userRef?.update(
+        val userId = auth.currentUser?.uid
+        if (userId != null) {
+            val userRef = db.collection("users").document(userId) // <- neu holen die referenz damit man die frischen daten hat nach dem löschen von einer reservierung zum beisoiel.
+//        if (auth.currentUser?.uid != null) {
+            userRef.update(
                 "vorname",
                 vorname,
                 "nachname",
                 nachname,
                 "profilePicture",
                 profilPicture
-            )?.addOnSuccessListener {
+            ).addOnSuccessListener {
                 Toast.makeText(context, "Deine Daten wurden aktualisiert", Toast.LENGTH_SHORT)
                     .show()
-            }?.addOnFailureListener { e ->
+            }.addOnFailureListener { e ->
                 Log.e("error", "Error update data: $e")
 
                 Toast.makeText(

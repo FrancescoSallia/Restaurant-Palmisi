@@ -14,6 +14,7 @@ import com.example.restaurantappprojektandroid.data.model.Reservation
 import com.example.restaurantappprojektandroid.data.remote.MealdbApi
 import com.example.restaurantappprojektandroid.data.remote.Repository
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream
@@ -98,6 +99,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
     fun logIn(email: String, password: String, onSuccess: () -> Unit, onFailure: () -> Unit) {
         repository.logIn(email, password, onSuccess, onFailure)
+    }
+    fun reAuthentification(email: String, password: String) {
+        viewModelScope.launch {
+            repository.reAuthentification(email, password)
+        }
+    }
+    fun getLikedMeals() {
+        viewModelScope.launch {
+        }
     }
     fun logOut() {
         viewModelScope.launch {

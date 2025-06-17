@@ -4,19 +4,19 @@ import android.content.Context
 import android.net.Uri
 import android.util.Log
 import android.widget.Toast
-import androidx.core.net.toUri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.restaurantappprojektandroid.data.model.Meal
 import com.example.restaurantappprojektandroid.data.model.Reservation
 import com.example.restaurantappprojektandroid.data.model.User
+import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
+import kotlinx.coroutines.delay
 
 class FirestoreRepository(val context: Context) {
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
@@ -316,6 +316,7 @@ class FirestoreRepository(val context: Context) {
 
     fun deleteUser() {
         val userId = auth.currentUser?.uid
+        Log.i("success", "deleteUser called with userId: $userId")
         if (userId != null) {
             deleteAllReservationsForCurrentUser(userId)
             deleteProfileRefForCurrentUser(userId)
@@ -323,7 +324,7 @@ class FirestoreRepository(val context: Context) {
             deleteFirebaseCurrentUser()
         } else {
             Toast
-                .makeText(context, "Kein angemeldeter Benutzer", Toast.LENGTH_SHORT)
+                .makeText(context, "Kein angemeldeter User", Toast.LENGTH_SHORT)
                 .show()
         }
     }
@@ -377,6 +378,23 @@ class FirestoreRepository(val context: Context) {
                 }
             }
     }
+
+
+    fun reAuthentification(email: String, password: String) {
+        val credential = EmailAuthProvider.getCredential(email, password)
+        auth.currentUser?.reauthenticate(credential)
+            ?.addOnSuccessListener {
+                Log.i("success", "Erfolgreich Re-Authentifiziert")
+//                deleteUser()
+//                logOut()
+            }
+            ?.addOnFailureListener { error ->
+                Toast.makeText(context, "Passwort ist falsch oder ungültig", Toast.LENGTH_SHORT).show()
+                Log.e("error", "Fehler bei Re-Authentifizierung: $error")
+            }
+    }
+
+
 
     fun logOut() {
         //falls der user anonym ist, dann wird der user gelöscht beim ausloggen

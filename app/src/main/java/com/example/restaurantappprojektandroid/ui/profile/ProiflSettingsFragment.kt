@@ -3,9 +3,12 @@ package com.example.restaurantappprojektandroid.ui.profile
 import android.app.AlertDialog
 import android.net.Uri
 import android.os.Bundle
+import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -55,17 +58,32 @@ class ProiflSettingsFragment : Fragment() {
         viewModel.userData.observe(viewLifecycleOwner) {
             vb.etBenutzernameSettings.setText(it?.vorname)
             vb.etPasswordSettings.setText(it?.nachname)
-//            vb.ivProfilPic.load(it?.profilePicture) {
-//                placeholder(R.drawable.profil)
-//                transformations(CircleCropTransformation())
-//            }
+
+            val profilePic = it.profilePicture
+            if (profilePic.isNullOrEmpty()) {
+                vb.ivProfilPic.load(R.drawable.profil) {
+                    crossfade(true)
+                    transformations(CircleCropTransformation())
+                }
+            } else {
+                vb.ivProfilPic.load(profilePic) {
+                    crossfade(true)
+                    placeholder(R.drawable.profil)
+                    transformations(CircleCropTransformation())
+                }
+            }
         }
 
         // Bild beim Start laden
         val localImageUri = viewModel.loadLocalImage(requireContext())
         localImageUri?.let {
             profilBild = it
-            vb.ivProfilPic.setImageURI(it)
+//            vb.ivProfilPic.setImageURI(it)
+            vb.ivProfilPic.load(it) {
+                placeholder(R.drawable.profil)
+//                transformations(CircleCropTransformation())
+                crossfade(true)
+            }
         }
 
         // Galerie öffnen
@@ -93,6 +111,7 @@ class ProiflSettingsFragment : Fragment() {
         // Konto löschen
         vb.btnKontolSchen.setOnClickListener {
 
+//            showReAuthentificationDialog()
             val builder = AlertDialog.Builder(requireContext())
             builder.setTitle("Account löschen?")
             builder.setMessage(
@@ -125,6 +144,33 @@ class ProiflSettingsFragment : Fragment() {
                 placeholder(R.drawable.profil)
             }
         }
+    }
+
+
+    //TODO: WIP - Der User muss sich noch mal Authentifizieren um das Konto zu löschen!
+    private fun showReAuthentificationDialog() {
+        val input = EditText(requireContext())
+        input.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+
+        AlertDialog.Builder(requireContext())
+            .setTitle("Passwort bestätigen")
+            .setMessage("Gib dein aktuelles Passwort ein, um das Konto zu löschen:")
+            .setView(input)
+            .setPositiveButton("Bestätigen") { dialog, _ ->
+                val password = input.text.toString()
+                val email = viewModel.currentUser.value?.email
+
+                if (!email.isNullOrEmpty()) {
+                    viewModel.reAuthentification(email, password)
+                } else {
+                    Toast.makeText(requireContext(), "E-Mail nicht gefunden", Toast.LENGTH_SHORT).show()
+                }
+
+                input.text.clear()
+                dialog.dismiss()
+            }
+            .setNegativeButton("Abbrechen", null)
+            .show()
     }
 }
 

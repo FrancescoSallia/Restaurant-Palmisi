@@ -88,7 +88,7 @@ class ReservationFragment : Fragment() {
                 personenNumber = it
             }
             binding.calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
-                currentDate = "$dayOfMonth.$month.$year"
+                currentDate = "$dayOfMonth.${month + 1}.$year"
 
                 val calendar = Calendar.getInstance()
                 calendar.set(year, month, dayOfMonth)

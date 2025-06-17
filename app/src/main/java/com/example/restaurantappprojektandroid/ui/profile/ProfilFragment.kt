@@ -61,10 +61,18 @@ class ProfilFragment : Fragment() {
             }
             // Diese funktion ist für das Profilbild zuständig falls ein profilbild vorhanden ist
             viewModel.userData.observe(viewLifecycleOwner) {
-                binding.ivProfilPicProfil.load(it.profilePicture) {
-                    crossfade(true)
-                    placeholder(R.drawable.profil)
-                    transformations(CircleCropTransformation())
+                val profilePic = it.profilePicture
+                if (profilePic.isNullOrEmpty()) {
+                    binding.ivProfilPicProfil.load(R.drawable.profil) {
+                        crossfade(true)
+                        transformations(CircleCropTransformation())
+                    }
+                } else {
+                    binding.ivProfilPicProfil.load(profilePic) {
+                        crossfade(true)
+                        placeholder(R.drawable.profil)
+                        transformations(CircleCropTransformation())
+                    }
                 }
                 binding.tvProfilNameTitle.text = it.vorname + " " + it.nachname
             }

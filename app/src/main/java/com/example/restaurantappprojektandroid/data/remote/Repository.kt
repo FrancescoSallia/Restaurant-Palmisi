@@ -92,11 +92,13 @@ class Repository(context: Context) {
         firestore.deleteUser()
     }
 
-
     fun logIn(email: String, password: String, onSuccess: () -> Unit, onFailure: () -> Unit) {
         firestore.logIn(email, password, onSuccess, onFailure)
     }
 
+    fun reAuthentification(email: String, password: String) {
+        firestore.reAuthentification(email, password)
+    }
 
     fun logOut() {
         firestore.logOut()

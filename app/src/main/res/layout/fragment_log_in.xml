@@ -61,7 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:backgroundTint="#989595"
+        android:backgroundTint="#3A3939"
         android:text="Registrieren"
         app:layout_constraintEnd_toEndOf="@+id/btn_continue_as_gast"
         app:layout_constraintHorizontal_bias="0.0"

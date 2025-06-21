@@ -60,9 +60,6 @@ Dependencies/Repositories:
 - Logging Interceptor 4.11.0 - Für den Ablauf von Anwendungen zu protokollieren
 
 <!--Ausblick:-->
-Issue 1 (Bug):
-
-Derzeit treten sporadische Probleme beim Hochladen und Entfernen von Bildern für Speisekarten auf. Dies erschwert die Aktualisierung der Speisekarten und führt zu einer suboptimalen Benutzererfahrung.
 
 Issue 2 (Feature):
 

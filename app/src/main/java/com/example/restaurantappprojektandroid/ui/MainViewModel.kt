@@ -46,21 +46,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val selectedMeal: LiveData<Meal>
         get() = _selectedMeal
 
-    private val _isSuccess = MutableLiveData<Boolean>(false)
-    val isSuccess: LiveData<Boolean>
-        get() = _isSuccess
-
-
-
-
-    fun isSuccessFull(bool: Boolean): Boolean {
-        return if (bool) {
-            _isSuccess.value == true
-        } else {
-            _isSuccess.value == false
-        }
-    }
-
     fun updateReservation(kommentarGast: String) {
         repository.updateReservation(kommentarGast)
     }

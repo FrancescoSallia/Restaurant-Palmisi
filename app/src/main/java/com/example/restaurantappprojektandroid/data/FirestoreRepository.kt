@@ -67,63 +67,6 @@ class FirestoreRepository(val context: Context) {
             }
     }
 
-//    fun uploadImage(uri: Uri) {
-//        val imageRef = storageRef.child("images/${auth.currentUser!!.uid}//profilePic")
-//        val uploadTask = imageRef.putFile(uri)
-//        uploadTask.addOnCompleteListener {
-//            imageRef.downloadUrl.addOnCompleteListener {
-//                if (it.isSuccessful) {
-//                    userRef?.update("profilePicture", it.result)
-//                }
-//            }
-//        }
-//    }
-
-//    fun removeProfileImage() {
-//        val user = auth.currentUser
-//        if (user != null) {
-//            val imageRef = storageRef.child("images/${user.uid}/profilePic")
-//
-//            // Löschen des Bildes aus dem Storage
-//            imageRef.delete().addOnCompleteListener { deleteTask ->
-//                if (deleteTask.isSuccessful) {
-//                    // Wenn das Bild erfolgreich gelöscht wurde, aktualisieren Sie die Benutzerdaten
-//                    userRef?.update("profilePicture", null)
-//                        ?.addOnSuccessListener {
-//                            // Erfolgreiche Aktualisierung der Benutzerdaten
-//                            Toast.makeText(
-//                                context,
-//                                "Profilbild erfolgreich entfernt",
-//                                Toast.LENGTH_SHORT
-//                            ).show()
-//                        }
-//                        ?.addOnFailureListener { e ->
-//                            // Fehler bei der Aktualisierung der Benutzerdaten
-//                            Toast.makeText(
-//                                context,
-//                                "Fehler beim Entfernen des Profilbildes: ${e.message}",
-//                                Toast.LENGTH_SHORT
-//                            ).show()
-//                        }
-//                } else {
-//                    // Fehler beim Löschen des Bildes
-//                    println("Fehler beim Löschen des Profilbildes: ${deleteTask.exception?.message}")
-//                }
-//            }
-//        } else {
-//            println("Kein Benutzer angemeldet")
-//        }
-//    }
-
-
-//    fun updateReservation(kommentarGast: String) {
-//        resRef = db.collection("reservation").document(auth.currentUser?.uid ?: "")
-//            .collection("reservierung").document("${reservation.value?.reservationId}")
-//        resRef?.update(
-//            "kommentarGast", kommentarGast
-//        )
-//    }
-
     fun updateReservation(kommentarGast: String) {
         val userId = auth.currentUser?.uid ?: return
         val resId = reservation.value?.reservationId ?: return
@@ -289,25 +232,6 @@ class FirestoreRepository(val context: Context) {
         }
     }
 
-//    private fun deleteAllReservationsForCurrentUser(userId: String) {
-//        db.collection("reservation").document(userId).collection("reservierung")
-//            .get().addOnSuccessListener { snapshot ->
-//                snapshot.documents.forEach {
-//                    it.reference.delete().addOnSuccessListener {
-//                        Toast.makeText(
-//                            context,
-//                            "Alle Reservierungen wurden erfolgreich gelöscht",
-//                            Toast.LENGTH_SHORT
-//                        ).show()
-//                    }.addOnSuccessListener { success ->
-//                        Log.i("success", "succesDeleteAllReservationForCurrentUser: $success")
-//                    }.addOnFailureListener { e ->
-//                        Log.e("error", "Fehler beim Löschen der Reservierungen: $e")
-//                    }
-//                }
-//            }
-//    }
-
     fun deleteUser(onComplete: () -> Unit) {
         val userId = auth.currentUser?.uid
         if (userId == null) {
@@ -325,11 +249,6 @@ class FirestoreRepository(val context: Context) {
             }
         }
     }
-
-
-
-
-
 
     private fun deleteAllReservationsForCurrentUser(userId: String, onComplete: () -> Unit) {
         db.collection("reservation").document(userId).collection("reservierung")
@@ -371,7 +290,6 @@ class FirestoreRepository(val context: Context) {
             onComplete()
         }
     }
-
     private fun deleteFirebaseCurrentUser(onComplete: () -> Unit) {
         auth.currentUser?.delete()
             ?.addOnSuccessListener {
@@ -384,40 +302,6 @@ class FirestoreRepository(val context: Context) {
                 onComplete()
             }
     }
-
-
-
-
-
-
-
-//    private fun deleteProfileStoragePicture(userId: String?) {
-//        val imageRef = storageRef.child("images/${userId}/profilePic")
-//        imageRef.delete()
-//    }
-
-//    private fun deleteProfileRefForCurrentUser(userId: String) {
-//        userRef = db.collection("users").document(userId)
-//        userRef?.delete()?.addOnSuccessListener {
-//            Log.d("Firestore", "userRef: $userRef")
-//        }
-//    }
-//
-//    private fun deleteFirebaseCurrentUser() {
-//        auth.currentUser?.delete()
-//            ?.addOnSuccessListener {
-//                Toast.makeText(context, "Account gelöscht", Toast.LENGTH_SHORT)
-//                    .show()
-//            }
-//            ?.addOnFailureListener { error ->
-//                Log.e("error", "Error deleting user: $error")
-//                Toast.makeText(
-//                    context,
-//                    "Fehler beim Löschen des Accounts",
-//                    Toast.LENGTH_SHORT
-//                ).show()
-//            }
-//    }
 
     //ein User speichern in die datenbank
     private fun postDokument(user: User) {
@@ -442,25 +326,6 @@ class FirestoreRepository(val context: Context) {
                 }
             }
     }
-
-
-//    fun reAuthentification(email: String, password: String, success: () -> Unit, onFailure: (Exception) -> Unit) {
-//        val credential = EmailAuthProvider.getCredential(email, password)
-//        auth.currentUser?.reauthenticate(credential)
-//            ?.addOnSuccessListener {
-//                Log.i("success", "Erfolgreich Re-Authentifiziert")
-//                deleteUser()
-//                logOut()
-//                success
-//            }
-//            ?.addOnFailureListener { error ->
-//                Toast.makeText(context, "Passwort ist falsch oder ungültig", Toast.LENGTH_SHORT).show()
-//                Log.e("error", "Fehler bei Re-Authentifizierung: $error")
-//                onFailure
-//            }
-//    }
-
-
     fun reAuthentification(
         email: String,
         password: String,
@@ -478,18 +343,14 @@ class FirestoreRepository(val context: Context) {
         user.reauthenticate(credential)
             .addOnSuccessListener {
                 Log.i("success", "Erfolgreich Re-Authentifiziert")
-//                deleteUser()  // 🔒 jetzt sicher!
-//                logOut()
-                success()      // ✅ korrekt aufrufen
+                success()
             }
             .addOnFailureListener { error ->
                 Toast.makeText(context, "Passwort ist falsch oder ungültig", Toast.LENGTH_SHORT).show()
                 Log.e("error", "Fehler bei Re-Authentifizierung: $error")
-                onFailure(error)  // ✅ korrekt aufrufen
+                onFailure(error)
             }
     }
-
-
 
     fun logOut(onComplete: () -> Unit) {
         //falls der user anonym ist, dann wird der user gelöscht beim ausloggen
@@ -501,6 +362,7 @@ class FirestoreRepository(val context: Context) {
         colRef = null
         userCol = null
         resRef = null
+        _likedMeals.value
 
         auth.signOut()
         onComplete()
@@ -538,7 +400,6 @@ class FirestoreRepository(val context: Context) {
             Log.e("Firestore", "error : $e")
         }
     }
-
     private fun updateMealFromFirestore() {
         var newMap = mutableListOf<Map<String, Any>>()
         likedMeals.value?.forEach {

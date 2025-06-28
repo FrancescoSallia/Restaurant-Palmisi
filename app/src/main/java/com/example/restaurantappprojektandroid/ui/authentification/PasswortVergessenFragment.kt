@@ -66,26 +66,23 @@ class PasswortVergessenFragment : Fragment() {
             vb.btnPasswortZurCksetzen.setOnClickListener {
                 val passwort = vb.etEmail.text.toString()
                 val userEmail = viewModel.currentUser.value?.email
-                viewModel.isSuccessFull(true)
-
 
                 if (userEmail != null && passwort.isNotEmpty()) {
                     viewModel.reAuthentification(
                         userEmail,
                         passwort,
                         success = {
-                            viewModel.deleteUser(){
+                            viewModel.deleteUser {
                                 findNavController().navigate(
                                     PasswortVergessenFragmentDirections.actionPasswortVergessenFragmentToLogInFragment()
                                 )
                             }
-
-                            Toast.makeText(
-                                requireContext(),
-                                "Erfolgreich Re-Authentifiziert und Account gelöscht",
-                                Toast.LENGTH_SHORT
-                            )
-                                .show()
+//                            Toast.makeText(
+//                                requireContext(),
+//                                "Erfolgreich Re-Authentifiziert und Account gelöscht",
+//                                Toast.LENGTH_SHORT
+//                            )
+//                                .show()
                         },
                         onFailure = { exception ->
                             Toast.makeText(

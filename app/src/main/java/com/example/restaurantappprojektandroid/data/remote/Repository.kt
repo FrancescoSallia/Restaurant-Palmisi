@@ -88,20 +88,20 @@ class Repository(context: Context) {
         firestore.updateUser(vorname, nachname, profilPicture)
     }
 
-    fun deleteUser() {
-        firestore.deleteUser()
+    fun deleteUser(onComplete: () -> Unit) {
+        firestore.deleteUser(onComplete)
     }
 
     fun logIn(email: String, password: String, onSuccess: () -> Unit, onFailure: () -> Unit) {
         firestore.logIn(email, password, onSuccess, onFailure)
     }
 
-    fun reAuthentification(email: String, password: String) {
-        firestore.reAuthentification(email, password)
+    fun reAuthentification(email: String, password: String, success: () -> Unit, onFailure: (Exception) -> Unit) {
+        firestore.reAuthentification(email, password, success, onFailure)
     }
 
-    fun logOut() {
-        firestore.logOut()
+    fun logOut(onComplete: () -> Unit) {
+        firestore.logOut(onComplete)
     }
 
     fun registration(Email: String, password: String, vorname: String, nachname: String) {

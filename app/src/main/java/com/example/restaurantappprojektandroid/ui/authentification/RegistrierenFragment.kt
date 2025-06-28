@@ -43,7 +43,7 @@ class RegistrierenFragment : Fragment() {
     private fun loggedUser() {
         viewModel.currentUser.observe(viewLifecycleOwner) {
             if (it?.isAnonymous == true) {
-                viewModel.logOut()
+                viewModel.logOut(){}
             } else if (it != null) {
                 findNavController().navigate(R.id.homeFragment)
             }

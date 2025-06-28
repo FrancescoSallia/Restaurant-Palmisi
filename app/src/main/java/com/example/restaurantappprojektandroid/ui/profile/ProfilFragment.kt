@@ -41,7 +41,7 @@ class ProfilFragment : Fragment() {
         viewModel.currentUser.observe(viewLifecycleOwner) {
             if (it?.isAnonymous == true) {
                 (vb as? FragmentAnonymUserProfilBinding)?.btnAlsGastAbmelden?.setOnClickListener {
-                    viewModel.logOut()
+                    viewModel.logOut(){}
                 }
             }else if (it != null) {
                 viewModel.snapShotListenerForReservation()
@@ -77,7 +77,7 @@ class ProfilFragment : Fragment() {
                 binding.tvProfilNameTitle.text = it.vorname + " " + it.nachname
             }
             binding.btnAusloggen.setOnClickListener {
-                viewModel.logOut()
+                viewModel.logOut(){}
             }
             binding.btnProfilSetting.setOnClickListener {
                 findNavController().navigate(ProfilFragmentDirections.actionProfilFragmentToProiflSettingsFragment())

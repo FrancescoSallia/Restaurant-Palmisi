@@ -74,6 +74,9 @@
         <action
             android:id="@+id/action_proiflSettingsFragment_to_logInFragment2"
             app:destination="@id/logInFragment" />
+        <action
+            android:id="@+id/action_proiflSettingsFragment_to_passwortVergessenFragment"
+            app:destination="@id/passwortVergessenFragment" />
     </fragment>
     <fragment
         android:id="@+id/logInFragment"
@@ -124,6 +127,13 @@
         <action
             android:id="@+id/action_passwortVergessenFragment_to_logInFragment"
             app:destination="@id/logInFragment" />
+        <action
+            android:id="@+id/action_passwortVergessenFragment_to_proiflSettingsFragment"
+            app:destination="@id/proiflSettingsFragment" />
+        <argument
+            android:name="userEmail"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/allReservationListFragment"

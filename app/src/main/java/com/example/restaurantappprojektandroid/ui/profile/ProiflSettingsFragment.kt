@@ -1,14 +1,10 @@
 package com.example.restaurantappprojektandroid.ui.profile
 
-import android.app.AlertDialog
 import android.net.Uri
 import android.os.Bundle
-import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -103,29 +99,6 @@ class ProiflSettingsFragment : Fragment() {
             }
         }
 
-
-        // Konto löschen
-//        vb.btnKontolSchen.setOnClickListener {
-//
-////            showReAuthentificationDialog()
-//            val builder = AlertDialog.Builder(requireContext())
-//            builder.setTitle("Account löschen?")
-//            builder.setMessage(
-//                """
-//                    Möchtest du wirklich dein Account löschen?
-//                """.trimIndent()
-//            )
-//            builder.setPositiveButton("Ja") { dialog, _ ->
-//                viewModel.deleteUser()
-//                viewModel.logOut()
-//                dialog.dismiss()
-//            }
-//            builder.setNegativeButton("Nein") { dialog, _ ->
-//                dialog.dismiss()
-//            }
-//            builder.show()
-//        }
-
         vb.btnKontolSchen.setOnClickListener {
 
             findNavController().navigate(ProiflSettingsFragmentDirections.actionProiflSettingsFragmentToPasswortVergessenFragment(viewModel.currentUser.value?.email.toString()))
@@ -146,39 +119,5 @@ class ProiflSettingsFragment : Fragment() {
             }
         }
     }
-
-//
-//    //TODO: WIP - Der User muss sich noch mal Authentifizieren um das Konto zu löschen!
-//    private fun showReAuthentificationDialog() {
-//        val input = EditText(requireContext())
-//        input.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-//
-//        AlertDialog.Builder(requireContext())
-//            .setTitle("Passwort bestätigen")
-//            .setMessage("Gib dein aktuelles Passwort ein, um das Konto zu löschen:")
-//            .setView(input)
-//            .setPositiveButton("Bestätigen") { dialog, _ ->
-//                val password = input.text.toString()
-//                val email = viewModel.currentUser.value?.email
-//
-//                if (!email.isNullOrEmpty()) {
-//                    viewModel.reAuthentification(email, password,
-//                        success = {
-//                            Toast.makeText(requireContext(),"Erfolgreich Re-Authentifiziert und Account gelöscht", Toast.LENGTH_SHORT ).show()
-//                        },
-//                        onFailure = { exeption ->
-//                            Toast.makeText(requireContext(),"Error: ${exeption.message}", Toast.LENGTH_SHORT ).show()
-//                        }
-//                    )
-//                } else {
-//                    Toast.makeText(requireContext(), "E-Mail nicht gefunden", Toast.LENGTH_SHORT).show()
-//                }
-//
-//                input.text.clear()
-//                dialog.dismiss()
-//            }
-//            .setNegativeButton("Abbrechen", null)
-//            .show()
-//    }
 }
 

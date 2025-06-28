@@ -16,6 +16,7 @@ import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.awaitCancellation
 import kotlinx.coroutines.delay
 
 class FirestoreRepository(val context: Context) {
@@ -42,8 +43,9 @@ class FirestoreRepository(val context: Context) {
         get() = _userData
 
     private val db = Firebase.firestore
+
     //private val storage = Firebase.storage
-   // var storageRef = storage.reference
+    // var storageRef = storage.reference
     var userRef: DocumentReference? = null
     var colRef: CollectionReference? = null
     var userCol: CollectionReference? = null
@@ -114,12 +116,6 @@ class FirestoreRepository(val context: Context) {
 //    }
 
 
-
-
-
-
-
-
 //    fun updateReservation(kommentarGast: String) {
 //        resRef = db.collection("reservation").document(auth.currentUser?.uid ?: "")
 //            .collection("reservierung").document("${reservation.value?.reservationId}")
@@ -148,7 +144,6 @@ class FirestoreRepository(val context: Context) {
             Log.e("error", "Fehler beim Zugriff auf die Reservierung: $it")
         }
     }
-
 
 
     fun getDataUser() {
@@ -244,7 +239,8 @@ class FirestoreRepository(val context: Context) {
     fun updateUser(vorname: String, nachname: String, profilPicture: Uri? = null) {
         val userId = auth.currentUser?.uid
         if (userId != null) {
-            val userRef = db.collection("users").document(userId) // <- neu holen die referenz damit man die frischen daten hat nach dem löschen von einer reservierung zum beisoiel.
+            val userRef = db.collection("users")
+                .document(userId) // <- neu holen die referenz damit man die frischen daten hat nach dem löschen von einer reservierung zum beisoiel.
 //        if (auth.currentUser?.uid != null) {
             userRef.update(
                 "vorname",
@@ -270,6 +266,7 @@ class FirestoreRepository(val context: Context) {
                 .show()
         }
     }
+
     fun deleteReservation(reservationId: String) {
         val userId = auth.currentUser?.uid
         if (userId != null) {
@@ -278,7 +275,7 @@ class FirestoreRepository(val context: Context) {
             userRef?.delete()?.addOnSuccessListener {
                 Toast.makeText(
                     context,
-                    "Reservierung erfolgreich storniert",Toast.LENGTH_SHORT
+                    "Reservierung erfolgreich storniert", Toast.LENGTH_SHORT
                 ).show()
             }?.addOnFailureListener { e ->
                 Log.e("error", "Error deleting Reservation: $e")
@@ -291,69 +288,136 @@ class FirestoreRepository(val context: Context) {
             }
         }
     }
-    private fun deleteAllReservationsForCurrentUser(userId: String) {
-        db.collection("reservation").document(userId).collection("reservierung")
-            .get().addOnSuccessListener { snapshot ->
-                snapshot.documents.forEach {
-                    it.reference.delete().addOnSuccessListener {
-                        Toast.makeText(
-                            context,
-                            "Alle Reservierungen wurden erfolgreich gelöscht",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }.addOnFailureListener { e ->
-                        Log.e("error", "Error delete Reservation: $e")
 
-                        Toast.makeText(
-                            context,
-                            "Fehler beim Löschen der Reservierungen",
-                            Toast.LENGTH_SHORT
-                        ).show()
+//    private fun deleteAllReservationsForCurrentUser(userId: String) {
+//        db.collection("reservation").document(userId).collection("reservierung")
+//            .get().addOnSuccessListener { snapshot ->
+//                snapshot.documents.forEach {
+//                    it.reference.delete().addOnSuccessListener {
+//                        Toast.makeText(
+//                            context,
+//                            "Alle Reservierungen wurden erfolgreich gelöscht",
+//                            Toast.LENGTH_SHORT
+//                        ).show()
+//                    }.addOnSuccessListener { success ->
+//                        Log.i("success", "succesDeleteAllReservationForCurrentUser: $success")
+//                    }.addOnFailureListener { e ->
+//                        Log.e("error", "Fehler beim Löschen der Reservierungen: $e")
+//                    }
+//                }
+//            }
+//    }
+
+    fun deleteUser(onComplete: () -> Unit) {
+        val userId = auth.currentUser?.uid
+        if (userId == null) {
+            Toast.makeText(context, "Kein angemeldeter Benutzer", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        deleteAllReservationsForCurrentUser(userId) {
+            deleteProfileRefForCurrentUser(userId) {
+                deleteFirebaseCurrentUser {
+                    logOut {
+                        onComplete()
                     }
                 }
             }
-    }
-
-    fun deleteUser() {
-        val userId = auth.currentUser?.uid
-        Log.i("success", "deleteUser called with userId: $userId")
-        if (userId != null) {
-            deleteAllReservationsForCurrentUser(userId)
-            deleteProfileRefForCurrentUser(userId)
-            //deleteProfileStoragePicture(userId)
-            deleteFirebaseCurrentUser()
-        } else {
-            Toast
-                .makeText(context, "Kein angemeldeter User", Toast.LENGTH_SHORT)
-                .show()
         }
     }
+
+
+
+
+
+
+    private fun deleteAllReservationsForCurrentUser(userId: String, onComplete: () -> Unit) {
+        db.collection("reservation").document(userId).collection("reservierung")
+            .get().addOnSuccessListener { snapshot ->
+                val docs = snapshot.documents
+                if (docs.isEmpty()) {
+                    onComplete()
+                    return@addOnSuccessListener
+                }
+
+                var deletedCount = 0
+                for (doc in docs) {
+                    doc.reference.delete().addOnSuccessListener {
+                        deletedCount++
+                        if (deletedCount == docs.size) {
+                            onComplete()
+                        }
+                    }.addOnFailureListener {
+                        Log.e("error", "Fehler beim Löschen: $it")
+                        deletedCount++
+                        if (deletedCount == docs.size) {
+                            onComplete()
+                        }
+                    }
+                }
+            }.addOnFailureListener {
+                Log.e("error", "Fehler beim Lesen der Reservierungen: $it")
+                onComplete()
+            }
+    }
+
+    private fun deleteProfileRefForCurrentUser(userId: String, onComplete: () -> Unit) {
+        val ref = db.collection("users").document(userId)
+        ref.delete().addOnSuccessListener {
+            Log.d("Firestore", "User-Dokument gelöscht")
+            onComplete()
+        }.addOnFailureListener {
+            Log.e("Firestore", "Fehler beim Löschen: $it")
+            onComplete()
+        }
+    }
+
+    private fun deleteFirebaseCurrentUser(onComplete: () -> Unit) {
+        auth.currentUser?.delete()
+            ?.addOnSuccessListener {
+                Toast.makeText(context, "Account gelöscht", Toast.LENGTH_SHORT).show()
+                onComplete()
+            }
+            ?.addOnFailureListener { error ->
+                Log.e("error", "Fehler beim Löschen des Accounts: $error")
+                Toast.makeText(context, "Fehler beim Löschen des Accounts", Toast.LENGTH_SHORT).show()
+                onComplete()
+            }
+    }
+
+
+
+
+
+
 
 //    private fun deleteProfileStoragePicture(userId: String?) {
 //        val imageRef = storageRef.child("images/${userId}/profilePic")
 //        imageRef.delete()
 //    }
 
-    private fun deleteProfileRefForCurrentUser(userId: String) {
-        userRef = db.collection("users").document(userId)
-        userRef?.delete()?.addOnSuccessListener { Log.d("Firestore", "userRef: $userRef") }
-    }
-
-    private fun deleteFirebaseCurrentUser() {
-        auth.currentUser?.delete()
-            ?.addOnSuccessListener {
-                Toast.makeText(context, "Account gelöscht", Toast.LENGTH_SHORT)
-                    .show()
-            }
-            ?.addOnFailureListener { error ->
-                Log.e("error", "Error deleting user: $error")
-                Toast.makeText(
-                    context,
-                    "Fehler beim Löschen des Accounts",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-    }
+//    private fun deleteProfileRefForCurrentUser(userId: String) {
+//        userRef = db.collection("users").document(userId)
+//        userRef?.delete()?.addOnSuccessListener {
+//            Log.d("Firestore", "userRef: $userRef")
+//        }
+//    }
+//
+//    private fun deleteFirebaseCurrentUser() {
+//        auth.currentUser?.delete()
+//            ?.addOnSuccessListener {
+//                Toast.makeText(context, "Account gelöscht", Toast.LENGTH_SHORT)
+//                    .show()
+//            }
+//            ?.addOnFailureListener { error ->
+//                Log.e("error", "Error deleting user: $error")
+//                Toast.makeText(
+//                    context,
+//                    "Fehler beim Löschen des Accounts",
+//                    Toast.LENGTH_SHORT
+//                ).show()
+//            }
+//    }
 
     //ein User speichern in die datenbank
     private fun postDokument(user: User) {
@@ -380,23 +444,54 @@ class FirestoreRepository(val context: Context) {
     }
 
 
-    fun reAuthentification(email: String, password: String) {
-        val credential = EmailAuthProvider.getCredential(email, password)
-        auth.currentUser?.reauthenticate(credential)
-            ?.addOnSuccessListener {
-                Log.i("success", "Erfolgreich Re-Authentifiziert")
+//    fun reAuthentification(email: String, password: String, success: () -> Unit, onFailure: (Exception) -> Unit) {
+//        val credential = EmailAuthProvider.getCredential(email, password)
+//        auth.currentUser?.reauthenticate(credential)
+//            ?.addOnSuccessListener {
+//                Log.i("success", "Erfolgreich Re-Authentifiziert")
 //                deleteUser()
 //                logOut()
+//                success
+//            }
+//            ?.addOnFailureListener { error ->
+//                Toast.makeText(context, "Passwort ist falsch oder ungültig", Toast.LENGTH_SHORT).show()
+//                Log.e("error", "Fehler bei Re-Authentifizierung: $error")
+//                onFailure
+//            }
+//    }
+
+
+    fun reAuthentification(
+        email: String,
+        password: String,
+        success: () -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        val credential = EmailAuthProvider.getCredential(email, password)
+        val user = auth.currentUser
+
+        if (user == null) {
+            onFailure(Exception("Kein angemeldeter Benutzer"))
+            return
+        }
+
+        user.reauthenticate(credential)
+            .addOnSuccessListener {
+                Log.i("success", "Erfolgreich Re-Authentifiziert")
+//                deleteUser()  // 🔒 jetzt sicher!
+//                logOut()
+                success()      // ✅ korrekt aufrufen
             }
-            ?.addOnFailureListener { error ->
+            .addOnFailureListener { error ->
                 Toast.makeText(context, "Passwort ist falsch oder ungültig", Toast.LENGTH_SHORT).show()
                 Log.e("error", "Fehler bei Re-Authentifizierung: $error")
+                onFailure(error)  // ✅ korrekt aufrufen
             }
     }
 
 
 
-    fun logOut() {
+    fun logOut(onComplete: () -> Unit) {
         //falls der user anonym ist, dann wird der user gelöscht beim ausloggen
         if (auth.currentUser?.isAnonymous == true) {
             auth.currentUser?.delete()
@@ -408,6 +503,7 @@ class FirestoreRepository(val context: Context) {
         resRef = null
 
         auth.signOut()
+        onComplete()
     }
 
     fun registration(Email: String, password: String, vorname: String, nachname: String) {

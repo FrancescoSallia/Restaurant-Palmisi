@@ -31,7 +31,7 @@ class LogInFragment : Fragment() {
             }
         }
         vb.tvPasswortVergessen.setOnClickListener {
-            findNavController().navigate(LogInFragmentDirections.actionLogInFragmentToPasswortVergessenFragment())
+            findNavController().navigate(LogInFragmentDirections.actionLogInFragmentToPasswortVergessenFragment(null))
         }
         vb.btnLogIn.setOnClickListener {
             val email = vb.etBenutzername.text.toString()

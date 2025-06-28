@@ -25,7 +25,7 @@ class AnonymUserProfilFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         vb.btnAlsGastAbmelden.setOnClickListener {
             (requireActivity() as MainActivity).bottomNavigation.visibility = View.GONE
-            viewModel.logOut()
+            viewModel.logOut(){}
         }
     }
 }

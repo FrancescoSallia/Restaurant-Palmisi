@@ -14,6 +14,7 @@ import com.example.restaurantappprojektandroid.data.model.Reservation
 import com.example.restaurantappprojektandroid.data.remote.MealdbApi
 import com.example.restaurantappprojektandroid.data.remote.Repository
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.awaitCancellation
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.io.File
@@ -45,9 +46,21 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val selectedMeal: LiveData<Meal>
         get() = _selectedMeal
 
-//    fun uploadImage(uri: Uri) {
-//        repository.uploadImage(uri)
-//    }
+    private val _isSuccess = MutableLiveData<Boolean>(false)
+    val isSuccess: LiveData<Boolean>
+        get() = _isSuccess
+
+
+
+
+    fun isSuccessFull(bool: Boolean): Boolean {
+        return if (bool) {
+            _isSuccess.value == true
+        } else {
+            _isSuccess.value == false
+        }
+    }
+
     fun updateReservation(kommentarGast: String) {
         repository.updateReservation(kommentarGast)
     }
@@ -92,26 +105,26 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             repository.updateUser(vorname, nachname, profilPicture)
         }
     }
-    fun deleteUser() {
+    fun deleteUser(onComplete: () -> Unit) {
         viewModelScope.launch {
-            repository.deleteUser()
+            repository.deleteUser(onComplete)
         }
     }
     fun logIn(email: String, password: String, onSuccess: () -> Unit, onFailure: () -> Unit) {
         repository.logIn(email, password, onSuccess, onFailure)
     }
-    fun reAuthentification(email: String, password: String) {
+    fun reAuthentification(email: String, password: String, success: () -> Unit, onFailure: (Exception) -> Unit) {
         viewModelScope.launch {
-            repository.reAuthentification(email, password)
+            repository.reAuthentification(email, password, success, onFailure)
         }
     }
     fun getLikedMeals() {
         viewModelScope.launch {
         }
     }
-    fun logOut() {
+    fun logOut(onComplete: () -> Unit) {
         viewModelScope.launch {
-            repository.logOut()
+            repository.logOut(onComplete)
         }
     }
     fun registration(Email: String, password: String, vorname: String, nachname: String) {

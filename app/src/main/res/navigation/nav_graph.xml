@@ -30,8 +30,9 @@
         android:label="SpeisekartenFragment">
         <action
             android:id="@+id/action_speisekartenFragment2_to_mealDetailFragment"
-            app:enterAnim="@anim/slide_out_left"
-            app:destination="@id/mealDetailFragment" />
+            app:destination="@id/mealDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
     </fragment>
     <fragment
         android:id="@+id/reservationFragment"

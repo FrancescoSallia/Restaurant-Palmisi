@@ -3,7 +3,6 @@ package com.example.restaurantappprojektandroid.ui
 import android.app.Application
 import android.content.Context
 import android.net.Uri
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,11 +10,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.restaurantappprojektandroid.data.datasource.ReservationDatasource
 import com.example.restaurantappprojektandroid.data.model.Meal
 import com.example.restaurantappprojektandroid.data.model.Reservation
-import com.example.restaurantappprojektandroid.data.remote.MealdbApi
-import com.example.restaurantappprojektandroid.data.remote.Repository
+import com.example.restaurantappprojektandroid.data.remote.MainRepository
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.coroutines.awaitCancellation
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream
@@ -24,7 +20,7 @@ import java.io.FileOutputStream
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     //
-    private val repository = Repository(application)
+    private val repository = MainRepository(application)
     val ReservationDatasources = ReservationDatasource()
 
     val currentUser = repository.currentUser

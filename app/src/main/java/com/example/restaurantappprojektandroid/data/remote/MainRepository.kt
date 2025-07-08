@@ -10,7 +10,7 @@ import com.example.restaurantappprojektandroid.data.model.Category
 import com.example.restaurantappprojektandroid.data.model.Meal
 import com.example.restaurantappprojektandroid.data.model.Reservation
 
-class Repository(context: Context) {
+class MainRepository(context: Context) {
     //region Firebase
     private val _categorie = MutableLiveData<List<Category>>()
     val category: LiveData<List<Category>>

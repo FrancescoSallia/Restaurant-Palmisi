@@ -71,12 +71,12 @@ dependencies {
     implementation(libs.lottie)
 
     // Firebase (über BOM = Bill of Materials)
-    implementation(platform(libs.firebase.bom))      // Zentrale Versionsverwaltung für Firebase
+    implementation(platform(libs.firebase.bom))   // Zentrale Versionsverwaltung für Firebase
+    implementation(libs.firebase.firestore.ktx)     // Firestore Kotlin-Erweiterungen
     implementation(libs.firebase.analytics)         // Firebase Analytics
     implementation(libs.firebase.auth.ktx)          // Firebase Authentication
     implementation(libs.firebase.database.ktx)      // Echtzeitdatenbank
     implementation(libs.firebase.firestore)         // Firestore Datenbank
-    implementation(libs.firebase.firestore.ktx)     // Firestore Kotlin-Erweiterungen
     implementation(libs.firebase.storage)           // Firebase Storage für z.B. Bilder
 
     // Legacy Support für alte Android-Komponenten
@@ -95,7 +95,9 @@ dependencies {
     implementation(libs.androidx.activity)                 // Activity-Komponenten
     implementation(libs.androidx.constraintlayout)         // ConstraintLayout für flexible UI-Layouts
     implementation(libs.androidx.navigation.fragment.ktx)  // Jetpack Navigation – Fragment
-    implementation(libs.androidx.navigation.ui.ktx)        // Jetpack Navigation – UI-Bindings
+    implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.navigation.fragment.ktx)
+    implementation(libs.navigation.ui.ktx)        // Jetpack Navigation – UI-Bindings
 
     // Test-Bibliotheken
     testImplementation(libs.junit)                         // Unit-Testing

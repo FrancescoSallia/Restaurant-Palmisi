@@ -9,15 +9,13 @@ import androidx.lifecycle.MutableLiveData
 import com.example.restaurantappprojektandroid.data.model.Meal
 import com.example.restaurantappprojektandroid.data.model.Reservation
 import com.example.restaurantappprojektandroid.data.model.User
+import com.google.firebase.Firebase
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.awaitCancellation
-import kotlinx.coroutines.delay
+import com.google.firebase.firestore.firestore
 
 class FirestoreRepository(val context: Context) {
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()

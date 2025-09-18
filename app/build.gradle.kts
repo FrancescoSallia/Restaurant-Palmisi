@@ -70,14 +70,23 @@ dependencies {
     // Lottie: für animierte JSON-Grafiken (z.B. Lade-Animationen)
     implementation(libs.lottie)
 
-    // Firebase (über BOM = Bill of Materials)
-    implementation(platform(libs.firebase.bom))   // Zentrale Versionsverwaltung für Firebase
-    implementation(libs.firebase.firestore.ktx)     // Firestore Kotlin-Erweiterungen
-    implementation(libs.firebase.analytics)         // Firebase Analytics
-    implementation(libs.firebase.auth.ktx)          // Firebase Authentication
-    implementation(libs.firebase.database.ktx)      // Echtzeitdatenbank
-    implementation(libs.firebase.firestore)         // Firestore Datenbank
-    implementation(libs.firebase.storage)           // Firebase Storage für z.B. Bilder
+    // Firebase BOM – verwaltet alle Versionen
+    implementation(platform("com.google.firebase:firebase-bom:33.4.0"))
+
+    // Firestore
+    implementation("com.google.firebase:firebase-firestore-ktx")
+
+    // Analytics
+    implementation("com.google.firebase:firebase-analytics")
+
+    // Auth
+    implementation("com.google.firebase:firebase-auth-ktx")
+
+    // Realtime Database
+    implementation("com.google.firebase:firebase-database-ktx")
+
+    // Storage
+    implementation("com.google.firebase:firebase-storage")
 
     // Legacy Support für alte Android-Komponenten
     implementation(libs.androidx.legacy.support.v4)
